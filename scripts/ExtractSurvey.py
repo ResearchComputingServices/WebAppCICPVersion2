@@ -3,6 +3,7 @@ import json
 
 from scripts.Utils import *
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable
+from WebAppCICPVersion2 import settings
 
 ##################################################################################################################################
 # Extracts the survey data from the JSON file and returns it in a SurveyTable object
@@ -57,8 +58,12 @@ def ExtractQuestionDataFromJSON(surveyJSON,survey):
 
 def ExtractSurveyMain():
 
-     # open the english language JSON file
-    englishJSONFilePath = os.path.join(baseDir, dataDirPath, TEST_SURVEY_ID, questionEnglishJSONFileName)  
+    # open the english language JSON file
+    englishJSONFilePath = os.path.join( settings.BASE_DIR, 
+                                        settings.DATA_DIR_PATH, 
+                                        settings.TEST_SURVEY_ID, 
+                                        settings.QUESTION_ENGLISH_JSON_FILENAME)
+        
     englishSurveyJSON= ''
     with open(englishJSONFilePath) as f:
         englishSurveyJSON = json.load(f)

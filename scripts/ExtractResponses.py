@@ -3,6 +3,7 @@ import json
 
 from scripts.Utils import *
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
+from WebAppCICPVersion2 import settings
 
 ##################################################################################################################################
 # 
@@ -91,7 +92,7 @@ def  HandleChoiceResponse(question, user, responseValue,recodeValue, textFlag):
 ##################################################################################################################################
 def ExtractResponseDataFromJSON(responseDataJSON):
 
-    surveyID = GetSurveyID(TEST_SURVEY_ID)
+    surveyID = GetSurveyID(settings.TEST_SURVEY_ID)
 
     for response in responseDataJSON['responses']:
         
@@ -135,8 +136,11 @@ def ExtractResponseDataFromJSON(responseDataJSON):
 ##################################################################################################################################
 
 def run(*args):
-     # open the english language JSON file
-    responseJSONFilePath = os.path.join(baseDir, dataDirPath, TEST_SURVEY_ID,responseDataJSONFileName)
+    # open the english language JSON file
+    responseJSONFilePath = os.path.join(settings.BASE_DIR, 
+                                        settings.DATA_DIR_PATH, 
+                                        settings.TEST_SURVEY_ID, 
+                                        settings.RESPONSE_DATA_JSON_FILENAME)
    
     responseDataJSON= ''
     with open(responseJSONFilePath) as f:

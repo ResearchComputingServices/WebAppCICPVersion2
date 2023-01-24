@@ -3,3 +3,4 @@ Data/
 WebAppCICPVersion2/__pycache__/
 InteractiveDB/__pycache__/
 InteractiveDB/migrations/__pycache__/
+scripts/__pycache__/

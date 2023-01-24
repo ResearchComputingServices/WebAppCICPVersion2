@@ -15,6 +15,16 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DATA_DIR_PATH = 'Data'
+QUESTION_ENGLISH_JSON_FILENAME = 'surveyQuestionsEnglish.json'
+QUESTION_FRENCH_JSON_FILENAME = 'surveyQuestionsFrench.json'
+RESPONSE_DATA_JSON_FILENAME = 'responseFile.json'
+USER_DATA_FILENAME = 'userData.csv'
+
+#TEST_SURVEY_ID = "SV_8epSb35vMSlpwea"
+TEST_SURVEY_ID = "SV_4PKhCR2n0Hw6xbo"
+#TEST_SURVEY_ID = "SV_aYnUZN7y2nQhXJc" # PASS
+#TEST_SURVEY_ID = 'SV_0eMEVIZkeSbKyjk' # PASS
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/

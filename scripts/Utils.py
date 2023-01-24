@@ -1,14 +1,5 @@
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
 
-dataDirPath = 'Data'
-questionEnglishJSONFileName = 'surveyQuestionsEnglish.json'
-questionFrenchJSONFileName = 'surveyQuestionsFrench.json'
-responseDataJSONFileName = 'responseFile.json'
-
-
-# ToDo: change this to automatically connect the corret base directory
-baseDir = '/home/nickshiell/Documents/WebAppCICP/WebAppCICP'
-
 RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'ResponseSet',
                                 'IPAddress',
@@ -25,10 +16,7 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'Consent',
                                 'ExternalDataReference']
 
-#TEST_SURVEY_ID = "SV_8epSb35vMSlpwea"
-TEST_SURVEY_ID = "SV_4PKhCR2n0Hw6xbo"
-#TEST_SURVEY_ID = "SV_aYnUZN7y2nQhXJc" # PASS
-#TEST_SURVEY_ID = 'SV_0eMEVIZkeSbKyjk' # PASS
+
 
 ##################################################################################################################################
 # 
