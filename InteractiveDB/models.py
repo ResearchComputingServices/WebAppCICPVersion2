@@ -9,7 +9,7 @@ class SurveyTable(models.Model):
     # Fields/Attributes
     qualtricsSurveyID = models.CharField(max_length=30)
     releaseDate = models.DateField()
-    accessedDate = models.DateField(null=True)
+    accessedDate = models.DateField(null=True,blank=True)
        
     def __str__(self):
         return f"id: {self.surveyID} surveyID: {self.qualtricsSurveyID} date: {self.releaseDate}"
