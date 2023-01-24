@@ -21,13 +21,14 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetQuestion(surveyID,questionName):
-    questionQuerySet = QuestionTable.objects.filter(surveyID=surveyID, questionName=questionName)
+def GetQuestion(aSurvey,questionName):
+    
+    questionQuerySet = QuestionTable.objects.filter(surveyID=aSurvey, questionName=questionName)
         
     if len(questionQuerySet) == 1:
         return questionQuerySet.first()
     else:
-        print('[ERROR]: questionName is not unique: ', surveyID, questionName)
+        print('[ERROR]: GetQuestion: questionName is not unique: ', aSurvey, questionName)
 
 ##################################################################################################################################
 # 
@@ -41,14 +42,13 @@ def GetSurveyQuestionsFromDB(qualtricsSurveyID):
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetSurveyID(qualtricSurveyID):
+def GetSurvey(qualtricSurveyID):
     surveyQuerySet = SurveyTable.objects.filter(qualtricsSurveyID=qualtricSurveyID)
     
-    surveyID = -1
-    
+    survey = None
     if len(surveyQuerySet) == 1:
-        surveyID = surveyQuerySet.first().surveyID
+        survey = surveyQuerySet.first()
     else:
-        print('[ERROR]: qualtricsSurveyID is not unique: ', qualtricSurveyID, len(surveyQuerySet))
+        print('[ERROR]: GetSurvey: qualtricsSurveyID is not unique: ', qualtricSurveyID, len(surveyQuerySet))
     
-    return surveyID
+    return survey

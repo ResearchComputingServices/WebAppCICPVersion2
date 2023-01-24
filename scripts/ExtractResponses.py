@@ -90,9 +90,7 @@ def  HandleChoiceResponse(question, user, responseValue,recodeValue, textFlag):
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def ExtractResponseDataFromJSON(responseDataJSON):
-
-    surveyID = GetSurveyID(settings.TEST_SURVEY_ID)
+def ExtractResponseDataFromJSON(responseDataJSON, aSurvey):
 
     for response in responseDataJSON['responses']:
         
@@ -120,7 +118,7 @@ def ExtractResponseDataFromJSON(responseDataJSON):
                 continue
             
             questionName, recodeValue, textFlag = InterpretResponseKey(responseKey)
-            question = GetQuestion(surveyID,questionName)
+            question = GetQuestion(aSurvey,questionName)
             
             userResponse = ''
             if recodeValue == -1:
@@ -129,21 +127,34 @@ def ExtractResponseDataFromJSON(responseDataJSON):
                 userResponse = HandleChoiceResponse(question, user, responseValue, recodeValue, textFlag)
 
             userResponse.save()    
-         
-         
-##################################################################################################################################
-# 
-##################################################################################################################################
 
-def run(*args):
-    # open the english language JSON file
-    responseJSONFilePath = os.path.join(settings.BASE_DIR, 
-                                        settings.DATA_DIR_PATH, 
-                                        settings.TEST_SURVEY_ID, 
-                                        settings.RESPONSE_DATA_JSON_FILENAME)
-   
+##################################################################################################################################
+# Main function 
+##################################################################################################################################  
+def ExtractResponsesMain(aSurvey=None):    
+    
+    responseJSONFilePath =  ''
+    if aSurvey != None:
+        responseJSONFilePath = os.path.join(settings.BASE_DIR, 
+                                            settings.DATA_DIR_PATH, 
+                                            aSurvey.qualtricsSurveyID, 
+                                            settings.RESPONSE_DATA_JSON_FILENAME)
+    else:
+        print('[ERROR]: ExtractResponsesMain: no surveyID given')
+        return
+    
     responseDataJSON= ''
     with open(responseJSONFilePath) as f:
         responseDataJSON = json.load(f)
 
-    ExtractResponseDataFromJSON(responseDataJSON)
+    ExtractResponseDataFromJSON(responseDataJSON, aSurvey) 
+    
+    # ToDo: this should only return true if the retrieval process worked
+    return True  
+         
+##################################################################################################################################
+# This function always the script to be tested using the Django runscript formalism
+##################################################################################################################################
+
+def run(*args):
+   ExtractResponsesMain(settings.TEST_SURVEY_ID) 

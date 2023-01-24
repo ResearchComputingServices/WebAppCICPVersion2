@@ -22,9 +22,9 @@ RESPONSE_DATA_JSON_FILENAME = 'responseFile.json'
 USER_DATA_FILENAME = 'userData.csv'
 
 #TEST_SURVEY_ID = "SV_8epSb35vMSlpwea"
-TEST_SURVEY_ID = "SV_4PKhCR2n0Hw6xbo"
-#TEST_SURVEY_ID = "SV_aYnUZN7y2nQhXJc" # PASS
-#TEST_SURVEY_ID = 'SV_0eMEVIZkeSbKyjk' # PASS
+TEST_SURVEY_ID = "SV_4PKhCR2n0Hw6xbo"   # 
+#TEST_SURVEY_ID = "SV_aYnUZN7y2nQhXJc"  # 
+#TEST_SURVEY_ID = 'SV_0eMEVIZkeSbKyjk'  # 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -133,3 +133,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+QUATRICS_API = {
+    #Specific to each account
+    'api_token': "sWArU3xit6H1SbAYGzC1MPdornLOKQJLAWKIfzmU",
+
+    #Specific to each curvey
+    #data_center = org_id.datacenter_id
+    'data_center': "carletonu.ca1"
+}

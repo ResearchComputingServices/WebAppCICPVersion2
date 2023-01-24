@@ -1,5 +1,6 @@
 from scripts.Utils import *
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
+from WebAppCICPVersion2 import settings
 
 ##################################################################################################################################
 # 
@@ -7,7 +8,7 @@ from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTa
 
 def run(*args):
         
-    surveyQuestions = GetSurveyQuestionsFromDB(TEST_SURVEY_ID)
+    surveyQuestions = GetSurveyQuestionsFromDB(settings.TEST_SURVEY_ID)
     
     for question in surveyQuestions:
         print(question)

@@ -6,7 +6,7 @@ import json
 import math
 import pandas as pd
 
-from scripts.Util import *
+from scripts.Utils import *
 from WebAppCICPVersion2 import settings
 
 ##################################################################################################################################
@@ -104,29 +104,43 @@ def FetchSurveyReponsesJSON(surveyID,
 # Main function 
 ##################################################################################################################################  
 
-def FetchDataMain(surveyID):
+def FetchDataMain(aSurvey):
 
     # Define the file paths for all the files which will be download from the Qualtics website
-    englishJSONFilePath = os.path.join(settings.BASE_DIR, dataDirPath, questionEnglishJSONFileName)
-    frenchJSONFilePath = os.path.join(settings.BASE_DIR, dataDirPath, questionFrenchJSONFileName) 
-    responseJSONFilePath = os.path.join(settings.BASE_DIR, dataDirPath, responseJSONFileName) 
-    outputPath =  os.path.join(settings.BASE_DIR, dataDirPath) 
+    englishJSONFilePath = os.path.join( settings.BASE_DIR, 
+                                        settings.DATA_DIR_PATH, 
+                                        aSurvey.qualtricsSurveyID, 
+                                        settings.QUESTION_ENGLISH_JSON_FILENAME)
+    frenchJSONFilePath = os.path.join(  settings.BASE_DIR, 
+                                        settings.DATA_DIR_PATH, 
+                                        aSurvey.qualtricsSurveyID, 
+                                        settings.QUESTION_FRENCH_JSON_FILENAME)
+    responseJSONFilePath = os.path.join(settings.BASE_DIR, 
+                                        settings.DATA_DIR_PATH, 
+                                        aSurvey.qualtricsSurveyID, 
+                                        settings.RESPONSE_DATA_JSON_FILENAME)
+    
+    # ToDo: This could be defined before the other paths and than used in their construction
+    outputPath =  os.path.join(settings.BASE_DIR, 
+                               settings.DATA_DIR_PATH,
+                               aSurvey.qualtricsSurveyID)
 
+    print(outputPath)
     # create the output folder if it does not exist already
     if not os.path.exists(outputPath):
         os.makedirs(outputPath)
 
     # # Fetch the survey question data from the Qualtric website
     print('FetchSurveyQuestionsJSON')
-    FetchSurveyQuestionsJSON(   surveyID,
+    FetchSurveyQuestionsJSON(   aSurvey.qualtricsSurveyID,
                                 englishJSONFilePath)
     
     print('FetchSurveyTranslationSON')
-    FetchSurveyTranslationJSON( surveyID,
+    FetchSurveyTranslationJSON( aSurvey.qualtricsSurveyID,
                                 frenchJSONFilePath)
 
     # Fetch the survey response data from the Qualtric website
     print('FetchSurveyReponsesJSON')
-    FetchSurveyReponsesJSON(surveyID,
+    FetchSurveyReponsesJSON(aSurvey.qualtricsSurveyID,
                             outputPath,
                             responseJSONFilePath)

@@ -7,20 +7,21 @@ from WebAppCICPVersion2 import settings
 
 ##################################################################################################################################
 # Extracts the survey data from the JSON file and returns it in a SurveyTable object
+# This function is no longer needed...I think...
 ##################################################################################################################################
-def ExtractSurveyDataFromJSON(surveyJSON):
-    survey = SurveyTable()
+# def ExtractSurveyDataFromJSON(surveyJSON):
+#     survey = SurveyTable()
 
-    # Get the survey ID 
-    survey.qualtricsSurveyID = surveyJSON['result']['id']
+#     # Get the survey ID 
+#     survey.qualtricsSurveyID = surveyJSON['result']['id']
     
-    # Get the creation date
-    # Format example 2022-08-25T20:24:37Z
-    survey.releaseDate = surveyJSON['result']['creationDate'][:10]  
+#     # Get the creation date
+#     # Format example 2022-08-25T20:24:37Z
+#     survey.releaseDate = surveyJSON['result']['creationDate'][:10]  
     
-    survey.save()
+#     survey.save()
         
-    return survey
+#     return survey
 
 ##################################################################################################################################
 # This function extracts the required data from the english version of the survey file
@@ -56,22 +57,38 @@ def ExtractQuestionDataFromJSON(surveyJSON,survey):
 # Main function 
 ##################################################################################################################################  
 
-def ExtractSurveyMain():
+def ExtractSurveyMain(aSurvey=None):
 
-    # open the english language JSON file
-    englishJSONFilePath = os.path.join( settings.BASE_DIR, 
-                                        settings.DATA_DIR_PATH, 
-                                        settings.TEST_SURVEY_ID, 
-                                        settings.QUESTION_ENGLISH_JSON_FILENAME)
-        
-    englishSurveyJSON= ''
-    with open(englishJSONFilePath) as f:
-        englishSurveyJSON = json.load(f)
+    successFlag = False
 
-    survey = ExtractSurveyDataFromJSON(englishSurveyJSON)
-    ExtractQuestionDataFromJSON(englishSurveyJSON, survey)
+    if aSurvey == None:
+        print('[ERROR]: could not retrieve survey from DB: None')
+        successFlag = False
+    else:
+        # open the english language JSON file
+        englishJSONFilePath =  ''
+        if aSurvey != None:
+            englishJSONFilePath = os.path.join( settings.BASE_DIR, 
+                                                settings.DATA_DIR_PATH, 
+                                                aSurvey.qualtricsSurveyID, 
+                                                settings.QUESTION_ENGLISH_JSON_FILENAME)            
+            englishSurveyJSON= ''
+            with open(englishJSONFilePath) as f:
+                englishSurveyJSON = json.load(f)
+
+            ExtractQuestionDataFromJSON(englishSurveyJSON, aSurvey)
+            successFlag = True
+        else:
+            print('[ERROR]: ExtractSurveyMain: no surveyID given')
+            successFlag = False
+    
+    return successFlag
         
+################################################################################################################################## 
+# This function always the script to be tested using the Django runscript formalism
 ################################################################################################################################## 
 
 def run(*args):
-    ExtractSurveyMain()
+    aSurvey = SurveyTable()
+    aSurvey.qualtricsSurveyID = settings.TEST_SURVEY_ID
+    ExtractSurveyMain(aSurvey)
