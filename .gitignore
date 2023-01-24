@@ -2,3 +2,4 @@ db.sqlite3
 Data/
 WebAppCICPVersion2/__pycache__/
 InteractiveDB/__pycache__/
+InteractiveDB/migrations/__pycache__/
