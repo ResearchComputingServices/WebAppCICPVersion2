@@ -1,12 +1,19 @@
-# Run the server:
+# Instructions for Servers
+
+ - [Instructions to install on an Ubuntu Linux server](server_install.md)
+ - *Instructions to update code on an Ubuntu Linux server*
+
+# Instructions for Development
+
+## Run the server:
 
 `python manage.py runserver`
 
-# Create a super user:
+## Create a super user:
 
 `python manage.py createsuperuser`
 
-# Update the DB:
+## Update the DB:
 
 `python manage.py makemigrations` *stages the updates for the database with new models/tables*
 
@@ -15,7 +22,7 @@
 `python manage.py migrate` *apply the staged updates*
 
 
-# Remove the DB:
+## Remove the DB:
 
 During development if you need to start the DB over from scratch do the following:
 
