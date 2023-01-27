@@ -1,7 +1,7 @@
 # Instructions for Servers
 
  - [Instructions to install on an Ubuntu Linux server](server_install.md)
- - *Instructions to update code on an Ubuntu Linux server*
+ - [Instructions to update code on an Ubuntu Linux server](server_update.md)
 
 # Instructions for Development
 
