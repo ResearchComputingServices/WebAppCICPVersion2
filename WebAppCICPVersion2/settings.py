@@ -21,7 +21,7 @@ QUESTION_FRENCH_JSON_FILENAME = 'surveyQuestionsFrench.json'
 RESPONSE_DATA_JSON_FILENAME = 'responseFile.json'
 USER_DATA_FILENAME = 'userData.csv'
 
-#TEST_SURVEY_ID = "SV_8epSb35vMSlpwea"
+#TEST_SURVEY_ID = "SV_8epSb35vMSlpwea"  # Test Survey 8 questions
 TEST_SURVEY_ID = "SV_4PKhCR2n0Hw6xbo"   # 
 #TEST_SURVEY_ID = "SV_aYnUZN7y2nQhXJc"  # 
 #TEST_SURVEY_ID = 'SV_0eMEVIZkeSbKyjk'  # 
