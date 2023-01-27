@@ -1,4 +1,10 @@
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
+from dataclasses import dataclass, field
+from typing import List, Dict
+
+##################################################################################################################################
+# 
+##################################################################################################################################
 
 RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'ResponseSet',
@@ -16,8 +22,26 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'Consent',
                                 'ExternalDataReference']
 
+##################################################################################################################################
+# This dataClass contains all the values which the user wants to filter on
+# it should be created by the viewer and passed to the controller
+##################################################################################################################################
 
-
+@dataclass
+class FrontEndQuery:
+    
+    # Filter on Survey
+    date: str = None
+    
+    # Filter on Question
+    questionThemes: List = field(default_factory=lambda: [])  
+    
+    # Filter on User
+    locations: List = field(default_factory=lambda: []) 
+    organizationSizes: List = field(default_factory=lambda: []) 
+    languagePreference: List = field(default_factory=lambda: []) 
+    fieldOfWork: List = field(default_factory=lambda: []) 
+ 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
@@ -35,7 +59,7 @@ def GetQuestion(aSurvey,questionName):
 ##################################################################################################################################
 def GetSurveyQuestionsFromDB(qualtricsSurveyID):
     survey = SurveyTable.objects.filter(qualtricsSurveyID=qualtricsSurveyID).first()
-    surveyQuestions = QuestionTable.objects.filter(surveyID=survey.surveyID) 
+    surveyQuestions = QuestionTable.objects.filter(surveyID=survey.id) 
 
     return surveyQuestions
 
