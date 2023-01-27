@@ -24,27 +24,28 @@ def GetSize(numberOfEmployees):
 # 
 ##################################################################################################################################  
 def GetProvineAcronym(provinceName):
+    provinceName = provinceName.strip()
     acronym = ''
     
-    if(provinceName == 'Québec'or provinceName == 'QC'):
+    if provinceName == 'Québec'or provinceName == 'QC':
         acronym = 'QC'
-    elif(provinceName == 'New Brunswick'):
+    elif provinceName == 'New Brunswick':
         acronym = 'NB'
-    elif(provinceName == 'Ontario' or provinceName == 'Ontario (ON)' or provinceName == 'ON'):
+    elif provinceName == 'Ontario' or provinceName == 'Ontario (ON)' or provinceName == 'ON':
         acronym = 'ON'
-    elif(provinceName == 'British Columbia' or provinceName == 'BC' ):
+    elif provinceName == 'British Columbia' or provinceName == 'BC':
             acronym = 'BC'
-    elif(provinceName == 'Manitoba'or provinceName == 'MB'):
+    elif provinceName == 'Manitoba'or provinceName == 'MB':
             acronym = 'MB'
-    elif(provinceName == 'Nova Scotia'or provinceName == 'NS'):
+    elif provinceName == 'Nova Scotia'or provinceName == 'NS':
             acronym = 'NS'
-    elif(provinceName == 'Saskatchewan'or provinceName == 'SK'):
+    elif provinceName == 'Saskatchewan'or provinceName == 'SK':
             acronym = 'SK'
-    elif(provinceName == 'Alberta'or provinceName == 'AB'):
+    elif provinceName == 'Alberta'or provinceName == 'AB':
             acronym = 'AB'
-    elif(provinceName == 'Prince Edward Island'or provinceName == 'PE'):
+    elif provinceName == 'Prince Edward Island'or provinceName == 'PE':
             acronym = 'PE'
-    elif(provinceName == 'Yukon'):
+    elif provinceName == 'Yukon':
             acronym = 'YK'
     else:
         acronym = 'Unknown'

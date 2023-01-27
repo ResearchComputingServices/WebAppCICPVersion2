@@ -8,7 +8,4 @@ python3 manage.py migrate
 echo "Extracting User Data"
 python3 manage.py runscript ExtractUserData
 
-echo "Extracting Survey Data"
-python3 manage.py runscript ExtractSurvey
-
 python3 manage.py createsuperuser

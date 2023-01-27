@@ -2,22 +2,17 @@ from django.db import models
 
 # on_delete defines what to do with the current table if the foreign key is deleted
 
-class SurveyTable(models.Model):
-    # Primary Key
-    surveyID = models.AutoField(primary_key=True, unique=True)
-    
+class SurveyTable(models.Model):    
     # Fields/Attributes
     qualtricsSurveyID = models.CharField(max_length=30)
     releaseDate = models.DateField()
     accessedDate = models.DateField(null=True,blank=True)
        
     def __str__(self):
-        return f"id: {self.surveyID} surveyID: {self.qualtricsSurveyID} date: {self.releaseDate}"
+        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} date: {self.releaseDate}"
     
             
 class QuestionTable(models.Model):
-    # Primary Key
-    questionID = models.AutoField(primary_key=True, unique=True)
     
     # Foreign Keys
     surveyID = models.ForeignKey(SurveyTable,on_delete=models.CASCADE)
@@ -26,14 +21,13 @@ class QuestionTable(models.Model):
     questionType = models.CharField(max_length=30) # Mutliple choice, Rank Order, Slider, True/False, Open Text
     questionName = models.CharField(max_length=30) # This is a name attached to a question by Qualtrics
     questionTextEnglish = models.TextField()
-    questionTextFrench = models.TextField()  
+    questionTextFrench = models.TextField() 
+    questionTheme = models.TextField() 
     
     def __str__(self):
         return f"Question: \n name: {self.questionName} \n type: {self.questionType} \n text: {self.questionTextEnglish} "   
     
 class ChoiceTable(models.Model):
-    # Primary Key
-    choiceID = models.AutoField(primary_key=True, unique=True)
     
     # Foreign Keys
     questionID = models.ForeignKey(QuestionTable, on_delete=models.CASCADE)
@@ -48,8 +42,6 @@ class ChoiceTable(models.Model):
     
     
 class UserTable(models.Model):
-    # Primary Key
-    userID = models.AutoField(primary_key=True, unique=True)
     
     # Fields/Attributes
     externalDataReference = models.CharField(max_length=15)
@@ -58,9 +50,10 @@ class UserTable(models.Model):
     domain = models.CharField(max_length=30)
     languagePreference = models.CharField(max_length=2)   #EN, FR
 
+    def __str__(self):
+         return f"User: \n id: {self.id}\n ref#: {self.externalDataReference}\n prv: {self.province}"
+
 class UserResponseTable(models.Model):
-    # Primary Key
-    responseID = models.AutoField(primary_key=True, unique=True)
     
     # Foreign Keys
     userID = models.ForeignKey(UserTable, on_delete=models.DO_NOTHING)
@@ -75,6 +68,6 @@ class UserResponseTable(models.Model):
     
     def __str__(self):
         if self.choiceID != None:
-            return f"UserRespoinse: \nuserID: {self.userID.userID} \nrecode: {self.choiceID.recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
+            return f"UserResponse: \nuserID: {self.userID.id} \nrecode: {self.choiceID.recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
         else:
-            return f"UserRespoinse: \nuserID: {self.userID.userID} \nanswerText: {self.answerText} \n" 
+            return f"UserResponse: \nuserID: {self.userID.id} \nanswerText: {self.answerText} \n" 

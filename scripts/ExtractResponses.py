@@ -56,12 +56,13 @@ def HandleFreeTextResponse(question, user, responseValue):
 # 
 ##################################################################################################################################
 def  HandleChoiceResponse(question, user, responseValue,recodeValue, textFlag):
-    choice = ChoiceTable.objects.filter(questionID=question.questionID,
-                                            recode=recodeValue).first()
+    
+    choice = ChoiceTable.objects.filter(questionID=question.id,
+                                        recode=recodeValue).first()
                 
-    userResponseQuery = UserResponseTable.objects.filter(userID=user.userID,
-                                                            questionID=question.questionID,
-                                                            choiceID=choice.choiceID)
+    userResponseQuery = UserResponseTable.objects.filter(userID=user.id,
+                                                            questionID=question.id,
+                                                            choiceID=choice.id)
     userResponse = ''
     if len(userResponseQuery) == 0:
         userResponse = UserResponseTable()
