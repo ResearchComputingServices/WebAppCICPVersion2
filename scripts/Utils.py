@@ -6,6 +6,15 @@ from typing import List, Dict
 # 
 ##################################################################################################################################
 
+# Question Types
+OPEN_TEXT_QUESTION =        'TE'
+MULTIPLE_CHOICE_QUESTION =  'MC'
+SLIDER_QUESTION =           'Slider'
+MATRIX_QUESTION =           'Matrix'
+RANK_ORDER_QUESTION =       'RO'
+
+# These are the key:value pairs which are removed from the response JSON file to make it easier to 
+# extract the responses
 RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'ResponseSet',
                                 'IPAddress',
@@ -76,3 +85,26 @@ def GetSurvey(qualtricSurveyID):
         print('[ERROR]: GetSurvey: qualtricsSurveyID is not unique: ', qualtricSurveyID, len(surveyQuerySet))
     
     return survey
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+def GetUser(externalRefNum):
+    userQuerySet = UserTable.objects.filter(externalDataReference=externalRefNum)
+    user = None
+    if len(userQuerySet) == 1:
+        user = userQuerySet.first()      
+    else:    
+        ##########################################################
+        # Remove this could after development
+        # replace it with code to handle a user doesnt exist
+        user = UserTable()
+        user.externalDataReference = externalRefNum
+        user.province = 'AB'
+        user.size = 'small'
+        user.domain = 'other'
+        user.languagePreference = 'EN'
+        user.save()
+        ##########################################################
+
+    return user

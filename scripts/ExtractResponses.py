@@ -12,7 +12,8 @@ def RemoveMetaDataFromResponse(response):
     userResponseDict = response
     
     for key in RESPONSE_KEYS_TO_REMOVE_LIST:
-        userResponseDict.pop(key)
+        if key in userResponseDict:
+            userResponseDict.pop(key)
     
     return userResponseDict
 
@@ -23,22 +24,26 @@ def InterpretResponseKey(responseKey):
     tokens = responseKey.split('_')
     
     questionName = ''
-    recodeValue = ''
+    recodeValue = -1
     textFlag = False
     
-    if len(tokens) == 1:
-        questionName = tokens[0]
-        recodeValue = -1    
-    elif len(tokens) == 2:
-        questionName = tokens[0]
-        recodeValue = tokens[1]
-    elif len(tokens) == 3:
-        questionName = tokens[0]
-        recodeValue = tokens[1]
+    # the first token in the reponse key is always the "questionName"
+    questionName = tokens[0]
+    
+    # the "TEXT" identifier can be in either the 2nd or 3rd location
+    if 'TEXT' in tokens:
         textFlag = True
-    else:
-        print("[ERROR] InterpretResponseKey: Unknown responseKey format: ", responseKey)
         
+    # the "recode" identifier can be in either the 2nd or 3rd location
+    if len(tokens) == 2:
+        if tokens[1].isnumeric():
+            recodeValue = tokens[1]
+    
+    # for some question types the responsekey is only 2 items long
+    if len(tokens) == 3:
+        if tokens[2].isnumeric():
+            recodeValue = tokens[2]
+                
     return questionName, recodeValue, textFlag
 
 ##################################################################################################################################
@@ -56,6 +61,11 @@ def HandleFreeTextResponse(question, user, responseValue):
 # 
 ##################################################################################################################################
 def  HandleChoiceResponse(question, user, responseValue,recodeValue, textFlag):
+    print(question)
+    print(user)
+    print(responseValue)
+    print(recodeValue)
+    print(textFlag)
     
     choice = ChoiceTable.objects.filter(questionID=question.id,
                                         recode=recodeValue).first()
@@ -63,7 +73,7 @@ def  HandleChoiceResponse(question, user, responseValue,recodeValue, textFlag):
     userResponseQuery = UserResponseTable.objects.filter(userID=user.id,
                                                             questionID=question.id,
                                                             choiceID=choice.id)
-    userResponse = ''
+    userResponse = None
     if len(userResponseQuery) == 0:
         userResponse = UserResponseTable()
         userResponse.userID = user
@@ -93,18 +103,12 @@ def  HandleChoiceResponse(question, user, responseValue,recodeValue, textFlag):
 ##################################################################################################################################
 def ExtractResponseDataFromJSON(responseDataJSON, aSurvey):
 
+    
     for response in responseDataJSON['responses']:
         
         # the externalReferenceNumber is used to connect the response to a user in the UserTable
         externalRefNum = response['ExternalDataReference']   
-        
-        # ToDo: Move this to a function called GetUser
-        userQuerySet = UserTable.objects.filter(externalDataReference=externalRefNum)
-        user = ''
-        if len(userQuerySet) == 1:
-            user = userQuerySet.first()      
-        else:    
-            continue
+        user = GetUser(externalRefNum)      
         
         # remove all the "meta" data from the response so that all that is left is the answer data
         userResponseDict = RemoveMetaDataFromResponse(response)          
@@ -121,7 +125,7 @@ def ExtractResponseDataFromJSON(responseDataJSON, aSurvey):
             questionName, recodeValue, textFlag = InterpretResponseKey(responseKey)
             question = GetQuestion(aSurvey,questionName)
             
-            userResponse = ''
+            userResponse = None
             if recodeValue == -1:
                 userResponse = HandleFreeTextResponse(question, user, responseValue)
             else:

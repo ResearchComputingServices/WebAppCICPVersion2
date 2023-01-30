@@ -6,28 +6,10 @@ from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable
 from WebAppCICPVersion2 import settings
 
 ##################################################################################################################################
-# Extracts the survey data from the JSON file and returns it in a SurveyTable object
-# This function is no longer needed...I think...
-##################################################################################################################################
-# def ExtractSurveyDataFromJSON(surveyJSON):
-#     survey = SurveyTable()
-
-#     # Get the survey ID 
-#     survey.qualtricsSurveyID = surveyJSON['result']['id']
-    
-#     # Get the creation date
-#     # Format example 2022-08-25T20:24:37Z
-#     survey.releaseDate = surveyJSON['result']['creationDate'][:10]  
-    
-#     survey.save()
-        
-#     return survey
-
-##################################################################################################################################
 # This function extracts the required data from the english version of the survey file
 # the extracted data is stored in Question Objects which are in turn stored in a list
 ##################################################################################################################################
-def ExtractQuestionDataFromJSON(surveyJSON,survey):
+def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
      
     # loop over the questions data in the JSON file
     for qDictID in surveyJSON['result']['questions']:          
@@ -35,24 +17,61 @@ def ExtractQuestionDataFromJSON(surveyJSON,survey):
         qDict = surveyJSON['result']['questions'][qDictID]
         
         question = QuestionTable()
-        question.surveyID = survey
+        question.surveyID = aSurvey
         question.questionType = qDict['questionType']['type']       
         question.questionName = qDict['questionName']
         question.questionTextEnglish = qDict['questionText']
-        question.save()
-                
-        if 'choices' in qDict:
-            for cDictID in qDict['choices']:
-                
-                cDict = qDict['choices'][cDictID]
-                
-                choice = ChoiceTable()
-                
-                choice.questionID = question
-                choice.recode = cDict['recode']
-                choice.choiceTextEnglish = cDict['choiceText']
-                choice.save()
+        question.parentQuestionID = None
+        question.save()        
         
+        if question.questionType == OPEN_TEXT_QUESTION:
+            choice = ChoiceTable()    
+            choice.questionID = question
+            choice.recode = -1
+            choice.choiceTextEnglish = None
+            choice.save() 
+            
+        elif question.questionType == MATRIX_QUESTION:
+            if 'subQuestions' in qDict:
+                for subQDictID in qDict['subQuestions']:
+                    # Get direct access to the sub question dictionary
+                    subQDict = qDict['subQuestions'][subQDictID]
+                    
+                    # Use data from the sub question dictionary and the question dictionary
+                    # to create an entry in the QuestionTable for the sub question
+                    subQuestion = QuestionTable()
+                    subQuestion.surveyID = aSurvey
+                    subQuestion.questionType = qDict['questionType']['type']       
+                    subQuestion.questionName = qDict['questionName']
+                    subQuestion.questionTextEnglish = subQDict['choiceText']
+                    subQuestion.parentQuestionID = question
+                    
+                    subQuestion.save()
+                    
+                    if 'choices' in qDict:
+                        for cDictID in qDict['choices']:
+                            
+                            cDict = qDict['choices'][cDictID]
+                            
+                            choice = ChoiceTable()
+                            
+                            choice.questionID = subQuestion
+                            choice.recode = cDict['recode']
+                            choice.choiceTextEnglish = cDict['choiceText']
+                            choice.save()  
+        else:
+            if 'choices' in qDict:
+                for cDictID in qDict['choices']:
+                    
+                    cDict = qDict['choices'][cDictID]
+                    
+                    choice = ChoiceTable()
+                    
+                    choice.questionID = question
+                    choice.recode = cDict['recode']
+                    choice.choiceTextEnglish = cDict['choiceText']
+                    choice.save()   
+                        
 ##################################################################################################################################
 # Main function 
 ##################################################################################################################################  
