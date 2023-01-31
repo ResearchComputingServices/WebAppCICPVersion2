@@ -12,122 +12,270 @@ def RemoveMetaDataFromResponse(response):
     userResponseDict = response
     
     for key in RESPONSE_KEYS_TO_REMOVE_LIST:
-        userResponseDict.pop(key)
+        if key in userResponseDict:
+            userResponseDict.pop(key)
     
     return userResponseDict
 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def InterpretResponseKey(responseKey):
-    tokens = responseKey.split('_')
+def GetResponsesToQuestion(userResponses, currentQuestionName):
     
-    questionName = ''
-    recodeValue = ''
-    textFlag = False
-    
-    if len(tokens) == 1:
-        questionName = tokens[0]
-        recodeValue = -1    
-    elif len(tokens) == 2:
-        questionName = tokens[0]
-        recodeValue = tokens[1]
-    elif len(tokens) == 3:
-        questionName = tokens[0]
-        recodeValue = tokens[1]
-        textFlag = True
-    else:
-        print("[ERROR] InterpretResponseKey: Unknown responseKey format: ", responseKey)
-        
-    return questionName, recodeValue, textFlag
+    listOfResponsesToQuestion = []
+
+    for response in userResponses:
+        tokens = response.split('_')
+ 
+        if currentQuestionName in tokens:
+            listOfResponsesToQuestion.append(response)
+       
+    return listOfResponsesToQuestion
 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def HandleFreeTextResponse(question, user, responseValue):
-    userResponse = UserResponseTable()
-    userResponse.userID = user
-    userResponse.questionID = question  
-    userResponse.answerText = responseValue
-
-    return userResponse  
-
-##################################################################################################################################
-# 
-##################################################################################################################################
-def  HandleChoiceResponse(question, user, responseValue,recodeValue, textFlag):
+def GetUserResponse(user = None, question = None, choice = None):
+    userResponse = None
     
-    choice = ChoiceTable.objects.filter(questionID=question.id,
-                                        recode=recodeValue).first()
-                
-    userResponseQuery = UserResponseTable.objects.filter(userID=user.id,
-                                                            questionID=question.id,
-                                                            choiceID=choice.id)
-    userResponse = ''
-    if len(userResponseQuery) == 0:
+    userResponseQuerySet = UserResponseTable.objects.filter(userID = user,
+                                                            questionID = question,
+                                                            choiceID = choice)
+    
+    if len(userResponseQuerySet) == 1:
+        userResponse = userResponseQuerySet.first()
+    elif len(userResponseQuerySet) == 0:
         userResponse = UserResponseTable()
+        
         userResponse.userID = user
-        userResponse.questionID = question
+        userResponse.questionID = question  
         userResponse.choiceID = choice
         
-        # if the text flag is true than the text for the answer is in the responseValue
-        if textFlag:
-            userResponse.answerText = responseValue
-        # if not than the response text is in the choice
-        else:
-            userResponse.answerValue = responseValue
-        
     else:
-        userResponse = userResponseQuery.first()
-        # if the text flag is true than the text for the answer is in the responseValue
-        if textFlag:
-            userResponse.answerText = responseValue
-        # if not than the response text is in the choice
-        else:
-            userResponse.answerValue = responseValue 
+        print('[WARNING]: multiple user responses to question...')    
     
-    return userResponse 
-    
+    return userResponse
+
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def ExtractResponseDataFromJSON(responseDataJSON, aSurvey):
+def GetRecodeFromResponseKey(responseKey):
+    tokens = responseKey.split('_')   
+    recodeValue = -1
 
-    for response in responseDataJSON['responses']:
+    if len(tokens) == 2 and 'TEXT' not in tokens:
+        recodeValue = tokens[1]
+
+    if len(tokens) == 3:
+        recodeValue = tokens[1]
+                
+    return recodeValue
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+def GetChoiceEntity(question, responseKey):
+    recodeValue = GetRecodeFromResponseKey(responseKey)
+    
+    choice = None
+    
+    choiceQuerySet = ChoiceTable.objects.filter(recode=recodeValue,
+                                                questionID=question)
+    
+    if len(choiceQuerySet) == 1:
+        choice = choiceQuerySet.first()
+    
+    return choice
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+def ExtractTextQuestionResponse(question, userResponsesList):
+
+    # the userResponses object is a dictionary of responses to questions    
+    for userResponses in userResponsesList:
+   
+        externalRefNum = userResponses[EXTERNAL_REF_KEY]
+        user = GetUser(externalRefNum) 
         
-        # the externalReferenceNumber is used to connect the response to a user in the UserTable
-        externalRefNum = response['ExternalDataReference']   
-        
-        # ToDo: Move this to a function called GetUser
-        userQuerySet = UserTable.objects.filter(externalDataReference=externalRefNum)
-        user = ''
-        if len(userQuerySet) == 1:
-            user = userQuerySet.first()      
-        else:    
-            continue
-        
-        # remove all the "meta" data from the response so that all that is left is the answer data
-        userResponseDict = RemoveMetaDataFromResponse(response)          
-       
-        # loop over the responses
-        # responses are handle differently depending on the values recieved from the InterpretResonseKey function
-        for responseKey in userResponseDict:
-            responseValue = userResponseDict[responseKey]
+        userResponse2CurQ = GetResponsesToQuestion(userResponses, question.questionName)
+               
+        for response in userResponse2CurQ:
             
-            # Skip blank responses
+            responseValue = userResponses[response]
             if responseValue == '':
                 continue
             
-            questionName, recodeValue, textFlag = InterpretResponseKey(responseKey)
-            question = GetQuestion(aSurvey,questionName)
-            
-            userResponse = ''
-            if recodeValue == -1:
-                userResponse = HandleFreeTextResponse(question, user, responseValue)
-            else:
-                userResponse = HandleChoiceResponse(question, user, responseValue, recodeValue, textFlag)
+            userResponse = GetUserResponse(user, question)
+            userResponse.answerText = responseValue
+            userResponse.save()
+        
+##################################################################################################################################
+# 
+##################################################################################################################################
+def ExtractMultipleChoiceQuestionResponse(question, userResponsesList):
 
-            userResponse.save()    
+    # the userResponses object is a dictionary of responses to questions    
+    for userResponses in userResponsesList:
+   
+        externalRefNum = userResponses[EXTERNAL_REF_KEY]
+        user = GetUser(externalRefNum) 
+        
+        userResponse2CurQ = GetResponsesToQuestion(userResponses, question.questionName)
+               
+        for responseKey in userResponse2CurQ:
+            responseValue = userResponses[responseKey]
+            if responseValue == '':
+                continue
+                        
+            choice = GetChoiceEntity(question, responseKey)
+            
+            userResponse = GetUserResponse(user, question, choice)
+                           
+            if "TEXT" in responseKey:
+                userResponse.answerText = responseValue
+            else:
+                userResponse.answerValue = responseValue
+
+            userResponse.save()
+        
+##################################################################################################################################
+# 
+##################################################################################################################################
+def ExtractSliderQuestionResponse(question, userResponsesList):
+        
+    # the userResponses object is a dictionary of responses to questions    
+    for userResponses in userResponsesList:
+   
+        externalRefNum = userResponses[EXTERNAL_REF_KEY]
+        user = GetUser(externalRefNum) 
+        
+        userResponse2CurQ = GetResponsesToQuestion(userResponses, question.questionName)
+                
+        for responseKey in userResponse2CurQ:
+        
+            responseValue = userResponses[responseKey]
+            if responseValue == '':
+                continue
+                       
+            choice = GetChoiceEntity(question, responseKey)
+            
+            userResponse = GetUserResponse(user, question, choice)
+                         
+            if "TEXT" in responseKey:
+                userResponse.answerText = responseValue
+            else:
+                userResponse.answerValue = responseValue
+                
+            userResponse.save()
+        
+##################################################################################################################################
+# 
+##################################################################################################################################
+def ExtractMatrixQuestionResponse(question, userResponsesList):
+    
+    # Skip the base question
+    if question.parentQuestionID == None:
+        return   
+    
+    # the userResponses object is a dictionary of responses to questions                    
+    for userResponses in userResponsesList:
+
+        externalRefNum = userResponses[EXTERNAL_REF_KEY]
+        user = GetUser(externalRefNum) 
+        
+        userResponse2CurQ = GetResponsesToQuestion(userResponses, 
+                                                   question.questionName.split('_')[0])
+              
+        for responseKey in userResponse2CurQ:
+            
+            if responseKey != question.questionName:
+                continue
+                    
+            responseValue = userResponses[responseKey]
+        
+            if responseValue == '':
+                continue
+                   
+            choice = GetChoiceEntity(question, responseKey)
+            
+            userResponse = GetUserResponse(user, question, choice)
+                        
+            if "TEXT" in responseKey:
+                userResponse.answerText = responseValue
+            else:
+                userResponse.answerValue = responseValue
+            userResponse.save()
+
+        
+##################################################################################################################################
+# 
+##################################################################################################################################
+def ExtractRankOrderQuestionResponse(question, userResponsesList):
+    
+    # the userResponses object is a dictionary of responses to questions    
+    for userResponses in userResponsesList:
+        
+        externalRefNum = userResponses[EXTERNAL_REF_KEY]
+        user = GetUser(externalRefNum) 
+        
+        userResponse2CurQ = GetResponsesToQuestion(userResponses, question.questionName)
+                
+        for responseKey in userResponse2CurQ:
+        
+            responseValue = userResponses[responseKey]
+            if responseValue == '':
+                continue
+                       
+            choice = GetChoiceEntity(question, responseKey)
+            
+            userResponse = GetUserResponse(user, question, choice)
+                        
+            if "TEXT" in responseKey:
+                userResponse.answerText = responseValue
+            else:
+                userResponse.answerValue = responseValue
+            userResponse.save()       
+    
+##################################################################################################################################
+# 
+##################################################################################################################################
+def ExtractResponseDataFromJSON(userResponsesList, aSurvey):
+
+    currentSurveyQuestions = QuestionTable.objects.filter(surveyID=aSurvey)
+    
+    for question in currentSurveyQuestions:
+                
+        if question.questionType == OPEN_TEXT_QUESTION:
+            ExtractTextQuestionResponse(question, userResponsesList)  
+        
+        elif question.questionType == MULTIPLE_CHOICE_QUESTION:
+            ExtractMultipleChoiceQuestionResponse(question, userResponsesList)  
+        
+        elif question.questionType == SLIDER_QUESTION:
+            ExtractSliderQuestionResponse(question, userResponsesList)  
+        
+        elif question.questionType == MATRIX_QUESTION:
+            ExtractMatrixQuestionResponse(question, userResponsesList)  
+        
+        elif question.questionType == RANK_ORDER_QUESTION:
+            ExtractRankOrderQuestionResponse(question, userResponsesList)  
+        
+        else:
+            print('[Warning] Unknown question type:\n',question)
+                
+##################################################################################################################################
+# 
+##################################################################################################################################  
+def GetResponseListFromJSONData(responseDataJSON):
+    userResponsesList = []
+
+    for response in responseDataJSON['responses']:
+        userResponseDict = RemoveMetaDataFromResponse(response)
+        
+        userResponsesList.append(userResponseDict)
+
+    return userResponsesList
 
 ##################################################################################################################################
 # Main function 
@@ -148,7 +296,12 @@ def ExtractResponsesMain(aSurvey=None):
     with open(responseJSONFilePath) as f:
         responseDataJSON = json.load(f)
 
-    ExtractResponseDataFromJSON(responseDataJSON, aSurvey) 
+    # Get rid of all the metadata in the response dictionary and return it
+    # as a list of responses
+    userResponsesList = GetResponseListFromJSONData(responseDataJSON)
+
+
+    ExtractResponseDataFromJSON(userResponsesList, aSurvey) 
     
     # ToDo: this should only return true if the retrieval process worked
     return True  
@@ -158,4 +311,10 @@ def ExtractResponsesMain(aSurvey=None):
 ##################################################################################################################################
 
 def run(*args):
-   ExtractResponsesMain(settings.TEST_SURVEY_ID) 
+
+    surveyQuerySet = SurveyTable.objects.filter(qualtricsSurveyID = settings.TEST_SURVEY_ID)
+
+    if len(surveyQuerySet) == 1:
+        ExtractResponsesMain(surveyQuerySet.first()) 
+    else:
+        print('[Warning] no unique survey found with qualtricsSurveyID:', settings.TEST_SURVEY_ID)

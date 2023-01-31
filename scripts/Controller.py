@@ -55,9 +55,7 @@ def HandleFrontEndQuery(aQuery):
     
     questionQuerySet = GetQuestionQuerySet(aQuery)
     userQuerySet = GetUserQuerySet(aQuery)
-    
-    input()    
-    
+        
     qObject = Q()
     for q in questionQuerySet:
         for u in userQuerySet:

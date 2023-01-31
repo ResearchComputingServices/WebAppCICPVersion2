@@ -17,12 +17,20 @@ class QuestionTable(models.Model):
     # Foreign Keys
     surveyID = models.ForeignKey(SurveyTable,on_delete=models.CASCADE)
     
+    parentQuestionID = models.ForeignKey('self', 
+                                         on_delete=models.CASCADE, 
+                                         null=True,
+                                         blank=True)
+    
     # Fields/Attributes
     questionType = models.CharField(max_length=30) # Mutliple choice, Rank Order, Slider, True/False, Open Text
     questionName = models.CharField(max_length=30) # This is a name attached to a question by Qualtrics
+   
     questionTextEnglish = models.TextField()
     questionTextFrench = models.TextField() 
-    questionTheme = models.TextField() 
+   
+    questionThemeEnglish = models.TextField() 
+    questionThemeFrench = models.TextField() 
     
     def __str__(self):
         return f"Question: \n name: {self.questionName} \n type: {self.questionType} \n text: {self.questionTextEnglish} "   
@@ -34,12 +42,11 @@ class ChoiceTable(models.Model):
     
     # Fields/Attributes
     recode = models.IntegerField()
-    choiceTextEnglish = models.TextField()
-    choiceTextFrench = models.TextField()  
+    choiceTextEnglish = models.TextField(null=True, blank=True)
+    choiceTextFrench = models.TextField(null=True, blank=True)  
     
     def __str__(self):
         return f"choice: choiceText: {self.choiceTextEnglish} recode: {self.recode}" 
-    
     
 class UserTable(models.Model):
     
