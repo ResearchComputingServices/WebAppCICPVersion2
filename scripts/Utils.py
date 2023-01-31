@@ -1,7 +1,7 @@
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
 from dataclasses import dataclass, field
 from typing import List, Dict
-
+import random
 ##################################################################################################################################
 # 
 ##################################################################################################################################
@@ -12,6 +12,9 @@ MULTIPLE_CHOICE_QUESTION =  'MC'
 SLIDER_QUESTION =           'Slider'
 MATRIX_QUESTION =           'Matrix'
 RANK_ORDER_QUESTION =       'RO'
+
+
+EXTERNAL_REF_KEY = 'ExternalDataReference'
 
 # These are the key:value pairs which are removed from the response JSON file to make it easier to 
 # extract the responses
@@ -28,8 +31,7 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'LocationLatitude',
                                 'LocationLongitude',
                                 'LocationAccuracy',
-                                'Consent',
-                                'ExternalDataReference']
+                                'Consent']
 
 ##################################################################################################################################
 # This dataClass contains all the values which the user wants to filter on
@@ -90,6 +92,7 @@ def GetSurvey(qualtricSurveyID):
 # 
 ##################################################################################################################################
 def GetUser(externalRefNum):
+    
     userQuerySet = UserTable.objects.filter(externalDataReference=externalRefNum)
     user = None
     if len(userQuerySet) == 1:

@@ -33,6 +33,7 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
             
         elif question.questionType == MATRIX_QUESTION:
             if 'subQuestions' in qDict:
+                questionCounter = 0
                 for subQDictID in qDict['subQuestions']:
                     # Get direct access to the sub question dictionary
                     subQDict = qDict['subQuestions'][subQDictID]
@@ -42,7 +43,7 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
                     subQuestion = QuestionTable()
                     subQuestion.surveyID = aSurvey
                     subQuestion.questionType = qDict['questionType']['type']       
-                    subQuestion.questionName = qDict['questionName']
+                    subQuestion.questionName = qDict['questionName']+'_'+subQDict['recode']
                     subQuestion.questionTextEnglish = subQDict['choiceText']
                     subQuestion.parentQuestionID = question
                     
@@ -58,7 +59,9 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
                             choice.questionID = subQuestion
                             choice.recode = cDict['recode']
                             choice.choiceTextEnglish = cDict['choiceText']
-                            choice.save()  
+                            choice.save() 
+                    
+                    questionCounter = questionCounter + 1 
         else:
             if 'choices' in qDict:
                 for cDictID in qDict['choices']:
@@ -110,4 +113,6 @@ def ExtractSurveyMain(aSurvey=None):
 def run(*args):
     aSurvey = SurveyTable()
     aSurvey.qualtricsSurveyID = settings.TEST_SURVEY_ID
+    aSurvey.releaseDate = '2023-01-01'
+    aSurvey.save()
     ExtractSurveyMain(aSurvey)
