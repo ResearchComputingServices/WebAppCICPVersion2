@@ -2,6 +2,8 @@ from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTa
 from dataclasses import dataclass, field
 from typing import List, Dict
 import random
+import re 
+
 ##################################################################################################################################
 # 
 ##################################################################################################################################
@@ -52,6 +54,22 @@ class FrontEndQuery:
     organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
     fieldOfWork: List = field(default_factory=lambda: []) 
+ 
+##################################################################################################################################
+# This function removes any text in brackets and replaces special characeter codes with the actual character
+##################################################################################################################################
+
+def CleanText(text):
+    cleanedText = text
+    cleanedText= cleanedText.replace("\n","")
+    cleanedText = re.sub("[\[].*?[\]]", "", cleanedText)
+    cleanedText = re.sub("[\(].*?[\)]", "", cleanedText)
+    cleanedText = re.sub("[\<].*?[\>]", "", cleanedText)
+    cleanedText = cleanedText.replace('&rsquo;','\'')
+    cleanedText = cleanedText.replace('&lsquo;','\'')
+    cleanedText = cleanedText.replace('&#39;','\'')
+        
+    return cleanedText
  
 ##################################################################################################################################
 # 

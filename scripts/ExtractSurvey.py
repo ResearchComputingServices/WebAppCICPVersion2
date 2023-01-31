@@ -20,7 +20,7 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
         question.surveyID = aSurvey
         question.questionType = qDict['questionType']['type']       
         question.questionName = qDict['questionName']
-        question.questionTextEnglish = qDict['questionText']
+        question.questionTextEnglish = CleanText(qDict['questionText'])
         question.parentQuestionID = None
         question.save()        
         
@@ -44,7 +44,7 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
                     subQuestion.surveyID = aSurvey
                     subQuestion.questionType = qDict['questionType']['type']       
                     subQuestion.questionName = qDict['questionName']+'_'+subQDict['recode']
-                    subQuestion.questionTextEnglish = subQDict['choiceText']
+                    subQuestion.questionTextEnglish = CleanText(subQDict['choiceText'])
                     subQuestion.parentQuestionID = question
                     
                     subQuestion.save()
@@ -58,7 +58,7 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
                             
                             choice.questionID = subQuestion
                             choice.recode = cDict['recode']
-                            choice.choiceTextEnglish = cDict['choiceText']
+                            choice.choiceTextEnglish = CleanText(cDict['choiceText'])
                             choice.save() 
                     
                     questionCounter = questionCounter + 1 
@@ -72,7 +72,7 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
                     
                     choice.questionID = question
                     choice.recode = cDict['recode']
-                    choice.choiceTextEnglish = cDict['choiceText']
+                    choice.choiceTextEnglish = CleanText(cDict['choiceText'])
                     choice.save()   
                         
 ##################################################################################################################################
