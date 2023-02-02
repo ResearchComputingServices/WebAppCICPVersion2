@@ -1,8 +1,12 @@
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
+from WebAppCICPVersion2 import settings
+
 from dataclasses import dataclass, field
 from typing import List, Dict
 import random
 import re 
+import os
+import textwrap
 
 ##################################################################################################################################
 # 
@@ -34,6 +38,22 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'LocationLongitude',
                                 'LocationAccuracy',
                                 'Consent']
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+
+FIGURE_WIDTH_PX = 800
+FIGURE_HEIGHT_PX = 600
+
+PIE_CHART_HOLE_RADIUS = 0.5
+
+MAX_TITLE_LENGTH = 75
+
+
+FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regular.ttf')
+
+FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'tmpImages')
 
 ##################################################################################################################################
 # This dataClass contains all the values which the user wants to filter on
@@ -70,6 +90,77 @@ def CleanText(text):
     cleanedText = cleanedText.replace('&#39;','\'')
         
     return cleanedText
+ 
+##################################################################################################################################
+# This function ensures that the string passed as an agrument is less than MAX_LEGNTH. It does this by adding a line break 
+# to the string when it exceeds the length limit.
+##################################################################################################################################
+
+def WrapText(text, titleLength = MAX_TITLE_LENGTH):
+    
+    text = CleanText(text)
+    
+    tw = textwrap.TextWrapper(width=titleLength)
+    word_list = tw.wrap(text=text)
+            
+    newTitle = '<br>'.join(word_list)
+    
+    return newTitle    
+
+##################################################################################################################################
+# This function returns the numerical values of the max and min of the graphs range
+##################################################################################################################################
+
+def GetRange(allPositive, 
+             allNegative,
+             defaultMin = 0,
+             defaultMax = 10):
+    
+    xMin = defaultMin
+    xMax = defaultMax
+    
+    if allNegative:
+        xMin = -1*defaultMax
+        xMax = 0
+    elif not allPositive and not allPositive:
+        xMin = -1*defaultMax
+        xMax = defaultMax
+        
+    return xMin, xMax 
+
+##################################################################################################################################
+# This functions is a helper function for the CreateVerticalBarChart function. It takes the title string from the question 
+# DataClass and extracts from it the values and labels for the range of the figure.
+##################################################################################################################################
+
+def CreateLabels(titleText):
+    tickValues = []
+    tickLabels = []
+
+    # get the text in brackets
+    bracket = CleanText(titleText[titleText.find("(")+1:titleText.find(")")])
+    
+    bracketSplit = bracket.split(":", 1)
+    
+    if len(bracketSplit) < 2:
+        return tickValues, tickLabels
+    
+    # get a comma seperated list of the label value pairs
+    labelDictValues = bracketSplit[1]
+    
+    labelsSplit = labelDictValues.split(',')
+    
+    for item in labelsSplit:        
+        itemSplit = item.split(':')
+        if len(itemSplit) == 2:
+            tickValues.append(itemSplit[0])
+            tickLabels.append(itemSplit[1])
+        else:
+            tickValues.append(0)
+            tickLabels.append('')    
+        
+    return tickValues, tickLabels  
+ 
  
 ##################################################################################################################################
 # 
