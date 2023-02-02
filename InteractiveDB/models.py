@@ -78,3 +78,7 @@ class UserResponseTable(models.Model):
             return f"UserResponse: \nuserID: {self.userID.id} \nrecode: {self.choiceID.recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
         else:
             return f"UserResponse: \nuserID: {self.userID.id} \nanswerText: {self.answerText} \n" 
+    
+     # some of your models may have explicit ordering
+    class Meta:
+        ordering = ('questionID',)
