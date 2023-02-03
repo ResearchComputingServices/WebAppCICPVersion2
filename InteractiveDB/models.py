@@ -6,7 +6,7 @@ class SurveyTable(models.Model):
     # Fields/Attributes
     qualtricsSurveyID = models.CharField(max_length=30)
     releaseDate = models.DateField()
-    accessedDate = models.DateField(null=True,blank=True)
+    fetchedDate = models.DateField(null=True,blank=True)
        
     def __str__(self):
         return f"id: {self.id} surveyID: {self.qualtricsSurveyID} date: {self.releaseDate}"
@@ -33,7 +33,7 @@ class QuestionTable(models.Model):
     questionThemeFrench = models.TextField() 
     
     def __str__(self):
-        return f"Question: \n name: {self.questionName} \n type: {self.questionType} \n text: {self.questionTextEnglish} "   
+        return f"Question: \n id: {self.id} \n type: {self.questionType} \n text: {self.questionTextEnglish} "   
     
 class ChoiceTable(models.Model):
     
@@ -74,11 +74,12 @@ class UserResponseTable(models.Model):
     answerValue = models.TextField(null=True)
     
     def __str__(self):
+        recode = '-1'
         if self.choiceID != None:
-            return f"UserResponse: \nuserID: {self.userID.id} \nrecode: {self.choiceID.recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
-        else:
-            return f"UserResponse: \nuserID: {self.userID.id} \nanswerText: {self.answerText} \n" 
-    
+            recode = self.choiceID.recode
+            
+        return f"UserResponse: \nuserID: {self.userID.id} \nquestionID: {self.questionID.id} \nrecode: {recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
+        
      # some of your models may have explicit ordering
     class Meta:
         ordering = ('questionID',)

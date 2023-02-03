@@ -59,29 +59,32 @@ def GetUserResponse(user = None, question = None, choice = None):
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetRecodeFromResponseKey(responseKey):
+def GetRecodeFromResponseKey(responseKey,responseValue):
     tokens = responseKey.split('_')   
     recodeValue = -1
+
+    if len(tokens) == 1:
+        recodeValue = responseValue
 
     if len(tokens) == 2 and 'TEXT' not in tokens:
         recodeValue = tokens[1]
 
     if len(tokens) == 3:
         recodeValue = tokens[1]
-                
+                        
     return recodeValue
 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetChoiceEntity(question, responseKey):
-    recodeValue = GetRecodeFromResponseKey(responseKey)
+def GetChoiceEntity(question, responseKey, responseValue):
     
     choice = None
     
+    recodeValue = GetRecodeFromResponseKey(responseKey,responseValue)
+    
     choiceQuerySet = ChoiceTable.objects.filter(recode=recodeValue,
                                                 questionID=question)
-    
     if len(choiceQuerySet) == 1:
         choice = choiceQuerySet.first()
     
@@ -125,11 +128,12 @@ def ExtractMultipleChoiceQuestionResponse(question, userResponsesList):
                
         for responseKey in userResponse2CurQ:
             responseValue = userResponses[responseKey]
+            
             if responseValue == '':
                 continue
                         
-            choice = GetChoiceEntity(question, responseKey)
-            
+            choice = GetChoiceEntity(question, responseKey, responseValue)
+                                 
             userResponse = GetUserResponse(user, question, choice)
                            
             if "TEXT" in responseKey:
@@ -158,7 +162,7 @@ def ExtractSliderQuestionResponse(question, userResponsesList):
             if responseValue == '':
                 continue
                        
-            choice = GetChoiceEntity(question, responseKey)
+            choice = GetChoiceEntity(question, responseKey, responseValue)
             
             userResponse = GetUserResponse(user, question, choice)
                          
@@ -197,7 +201,7 @@ def ExtractMatrixQuestionResponse(question, userResponsesList):
             if responseValue == '':
                 continue
                    
-            choice = GetChoiceEntity(question, responseKey)
+            choice = GetChoiceEntity(question, responseKey, responseValue)
             
             userResponse = GetUserResponse(user, question, choice)
                         
@@ -227,7 +231,7 @@ def ExtractRankOrderQuestionResponse(question, userResponsesList):
             if responseValue == '':
                 continue
                        
-            choice = GetChoiceEntity(question, responseKey)
+            choice = GetChoiceEntity(question, responseKey, responseValue)
             
             userResponse = GetUserResponse(user, question, choice)
                         
@@ -299,7 +303,6 @@ def ExtractResponsesMain(aSurvey=None):
     # Get rid of all the metadata in the response dictionary and return it
     # as a list of responses
     userResponsesList = GetResponseListFromJSONData(responseDataJSON)
-
 
     ExtractResponseDataFromJSON(userResponsesList, aSurvey) 
     

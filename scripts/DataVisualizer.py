@@ -54,10 +54,8 @@ def VisualizeMultipleChoiceQuestion(question,
     
     title = ''
     if isEnglish:
-        print(question.questionTextEnglish)
         title = question.questionTextEnglish
     else:
-        print(question.questionTextFrench)
         title = question.questionTextFrench
         
     # Generate the responseDict (choiceID:average as the key:value pair) initially set the average to 0
@@ -76,6 +74,12 @@ def VisualizeMultipleChoiceQuestion(question,
     
     # fill the responseDict with the values in userResponses
     for response in userResponses:
+    
+        # if there is no choiceID associated with this response it means
+        # it is a free text response and will be handled seperately
+        if response.choiceID == None:
+            continue
+    
         key = ''
         if isEnglish:
             key = choiceQuerySet.filter(id=response.choiceID.id).first().choiceTextEnglish
@@ -91,7 +95,6 @@ def VisualizeMultipleChoiceQuestion(question,
     for key in responseDict.keys():
         if float(totalResponses) > 0:
             responseDict[key] = float(responseDict[key]) / float(totalResponses)   
-        print(key,':', responseDict[key])
     
     filename = str(uuid.uuid4()) 
     CreatePieChart(responseDict, 
@@ -111,10 +114,8 @@ def VisualizeSliderQuestion(question,
     
     title = ''
     if isEnglish:
-        print(question.questionTextEnglish)
         title = question.questionTextEnglish
     else:
-        print(question.questionTextFrench)
         title = question.questionTextFrench
     
     # Generate the responseDict (choiceID:average as the key:value pair)
@@ -150,8 +151,8 @@ def VisualizeSliderQuestion(question,
     # calculate the average        
     for key in responseDict.keys():
         if float(counter[key]) > 0:
-            responseDict[key] = float(responseDict[key]) / float(counter[key])   
-        
+            responseDict[key] = float(responseDict[key]) / float(counter[key]) 
+            
     filename = str(uuid.uuid4())
     CreateVerticalBarChart( responseDict, 
                             title,
@@ -280,7 +281,7 @@ def DetermineBarColours(values):
             else:
                 colourMap.append(black)
     
-    return allPositive, allNegative, colourMap
+    return colourMap
 
 ##################################################################################################################################
 #
@@ -289,31 +290,61 @@ def DetermineBarColours(values):
 def CreateVerticalBarChart( responseDict,
                             graphicTitle,
                             numberOfResponses,
-                            figureFilePath):
+                            figureFilePath,
+                            isEnglish = True):
    
     # Now that we have the extracted data we can create the graphic. 
     # the "values" and "names" are passed to the graphic object as lists    
     values = []
     names = []
-     
-    tickValues = []
-    tickLabels = []
-    #tickValues, tickLabels = CreateLabels(text)
-   
-    graphTitle = WrapText(graphicTitle)
-   
+
     # sort the incoming data and store it in lists which can be passed to ploly 
     responseDict_sorted = sorted(responseDict.items(), key=lambda x:x[1])
     responseDict_sorted.reverse()
     for item in responseDict_sorted:
         names.append(WrapText(item[0], 30))
-        values.append(item[1])
+        values.append(float(item[1]))
+
+    colourMap = DetermineBarColours(values)
+     
+    # Determine X-axis labels and range
+    tickValues = []
+    tickLabels = []
+    tickValues, tickLabels = CreateLabels(graphicTitle)
+   
+    xMin = 0
+    xMax = 0
+    if len(tickValues) >= 2:
+        xMin = min(tickValues)
+        xMax = max(tickValues)
+    else:
+        xMin = min(values)
+        xMax = max(values)
         
-    allPositive, allNegative, colourMap = DetermineBarColours(values)
-    
-    xMin, xMax = GetRange(allPositive, allNegative)
-       
-    df = pd.DataFrame(columns=['names',"values"])
+        if xMin > 0:
+            xMin = 0
+        if xMax < 0:
+            xMax = 0
+
+    # x-axis title
+    xAxisTitle = ''
+    if isEnglish:
+        xAxisTitle = 'Mean of the Responses '
+    else:
+        xAxisTitle = 'Moyenne des réponses'
+
+    # Annotation Text
+    annotationText = ''
+    if isEnglish:
+        annotationText = '# of Responses: '
+    else:
+        annotationText = '# de Réponses: '
+
+    # Get the title
+    graphTitle = WrapText(graphicTitle)
+      
+    # Start creating the graphic    
+    df = pd.DataFrame(columns=['names','values'])
     df['names'] = names
     df['values'] = values
     
@@ -345,7 +376,7 @@ def CreateVerticalBarChart( responseDict,
                         showticklabels=True, 
                         tickangle = -45, 
                         automargin =  True, 
-                        title='Mean of the Responses/Moyenne des réponses',
+                        title=xAxisTitle,
                         tickfont={'size': 15},
                         tickvals=tickValues,
                         ticktext=tickLabels)
@@ -357,12 +388,12 @@ def CreateVerticalBarChart( responseDict,
                         title='',
                         tickfont={'size': 15})                       
 
-    fig.add_annotation( text = '# /de réponses / of Responses: '+str(numberOfResponses), 
+    fig.add_annotation( text = annotationText +str(numberOfResponses), 
                         showarrow=False,
                         xref = 'paper',
                         yref = 'paper',
-                        x = -0.4,
-                        y = -0.1)
+                        x = 1.,
+                        y = 1.1)
 
     fig.write_image(figureFilePath,format='png',engine='kaleido')
     
@@ -460,8 +491,8 @@ def run(*arg):
     
     # create a front end query to get some data from the DB
     aQuery = FrontEndQuery()   
-    aQuery.date = '2023-12-08'
-    aQuery.locations = 'AB'
+    aQuery.date = '2023-01-01'
+    #aQuery.locations = 'AB'
 
     userResponseQuerySet = HandleFrontEndQuery(aQuery)
     

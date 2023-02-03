@@ -138,26 +138,19 @@ def CreateLabels(titleText):
     tickLabels = []
 
     # get the text in brackets
-    bracket = CleanText(titleText[titleText.find("(")+1:titleText.find(")")])
+    bracketText = CleanText(titleText[titleText.find("(")+1:titleText.find(")")])
+
+    # split it by comma
+    bracketTextSplit = bracketText.split(',')    
     
-    bracketSplit = bracket.split(":", 1)
-    
-    if len(bracketSplit) < 2:
-        return tickValues, tickLabels
-    
-    # get a comma seperated list of the label value pairs
-    labelDictValues = bracketSplit[1]
-    
-    labelsSplit = labelDictValues.split(',')
-    
-    for item in labelsSplit:        
-        itemSplit = item.split(':')
-        if len(itemSplit) == 2:
-            tickValues.append(itemSplit[0])
-            tickLabels.append(itemSplit[1])
-        else:
-            tickValues.append(0)
-            tickLabels.append('')    
+    if len(bracketTextSplit) != 0:
+        
+        # split each pair by colon
+        for pair in bracketTextSplit:
+            pairSplit = pair.split(':')
+            if len(pairSplit) == 2:
+                tickValues.append(float(pairSplit[0]))      
+                tickLabels.append(pairSplit[1])   
         
     return tickValues, tickLabels  
  
