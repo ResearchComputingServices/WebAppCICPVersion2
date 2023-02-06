@@ -14,6 +14,9 @@ from scripts.Utils import *
 from scripts.Controller import HandleFrontEndQuery
 
 ##################################################################################################################################
+#
+##################################################################################################################################
+
 def VisualizeOpenTextQuestion(question, userResponses):
     print('VisualizeOpenTextQuestion')    
    
@@ -31,19 +34,7 @@ def VisualizeOpenTextQuestion(question, userResponses):
     CreateWordCloud(allResponseText, os.path.join(FIGURE_FOLDER_PATH, filename), title)
         
 ##################################################################################################################################
-
-# def VisualizeOtherTextQuestion( question, figureFilePathBase):
-#     # Get text for wordcloud generation 
-#     responseText = ''
-#     for response in question.freeText:
-#         responseText += ' ' + response
-    
-#     responseTextEnglish = GetText(responseText, 'en')
-#     responseTextFrench = GetText(responseText,'fr')
-        
-#     CreateWordCloud(responseTextEnglish, figureFilePathBase + ENGLISH_FILE_SUFFIX,"Other Responses")
-#     CreateWordCloud(responseTextFrench, figureFilePathBase + FRENCH_FILE_SUFFIX,"Autres Réponses") 
-
+#
 ##################################################################################################################################
 
 def VisualizeMultipleChoiceQuestion(question, 
@@ -159,16 +150,135 @@ def VisualizeSliderQuestion(question,
                             totalResponses,  
                             os.path.join(FIGURE_FOLDER_PATH, filename))
      
+##################################################################################################################################
+#
+##################################################################################################################################
+def CreateSubQuestionResponseDict(listOfUserResponses):
+    subQResponseDict = {}
+    
+    for response in listOfUserResponses:
+        if response in subQResponseDict.keys():
+            subQResponseDict[response] += 1
+        else:
+            subQResponseDict[response] = 1
+    
+    return subQResponseDict
+
+def VisualizeMatrixQuestion(question, 
+                            userResponses,
+                            isEnglish = True): 
+    # only the Parent Matrix question should be included in the list to be visualized
+    if question.parentQuestionID != None:
+        return
+    
+    title = ''
+    if isEnglish:
+        title = question.questionTextEnglish
+    else:
+        title = question.questionTextFrench
+    
+    responseDict= {}
+            
+    # Get all the subquestions
+    subQuestionsQuerySet = QuestionTable.objects.filter(parentQuestionID=question)
+    
+    totalResponses = len(userResponses)
+    
+    for r in userResponses:
+        subQ = subQuestionsQuerySet.filter(id=r.questionID.id).first()
+        
+        if subQ.questionTextEnglish in responseDict.keys():
+            choice = ChoiceTable.objects.filter(questionID=subQ.id, recode = r.answerValue).first()
+            
+            responseDict[subQ.questionTextEnglish].append(choice.choiceTextEnglish)
+        else:
+            responseDict[subQ.questionTextEnglish] = []
+    
+    # need to turn the responseDict into a dictionary of dictionarys.
+    # first dictionary key value pair is subQustionText:dict_2
+    # the next dictionary (dict_2) has key:value pair responseText:count
+    finalResponseDicts = {}
+    for key in responseDict:
+       dict = CreateSubQuestionResponseDict(responseDict[key])
+       finalResponseDicts[key] = dict
+       
+    for key in finalResponseDicts.keys():
+        print(key,':', finalResponseDicts[key])
+    
+    filename = str(uuid.uuid4())
+    CreateStackedBarChart(finalResponseDicts, 
+                          title,
+                          totalResponses,  
+                          os.path.join(FIGURE_FOLDER_PATH, filename))
 
 ##################################################################################################################################
 #
 ##################################################################################################################################
 
-def CreateStackedBarChart( responseDict,
+def CreateStackedBarChart(  responseDict,
                             graphicTitle,
                             numberOfResponses,
-                            figureFilePath):
-    print('CreateStackedBarChart')
+                            figureFilePath,
+                            isEnglish = True):
+    
+    df = pd.DataFrame(columns=['subQ','response','value'])
+    
+    iRow = 0
+    for subQ in responseDict.keys():
+        for response in responseDict[subQ].keys():
+            value = responseDict[subQ][response]
+            
+            df.loc[iRow] = [subQ,response, value]
+            
+            iRow += 1
+    
+    colourMap = ['rgb(0,0,0)',
+                'rgb(233,28,36)',
+                'rgb(200,200,200)',
+                'rgb(242,121,126)',
+                'rgb(151,151,151)',
+                'rgb(145,14,19)',
+                'rgb(51,51,51)',
+                'rgb(185,44,49)']
+    
+    # Annotation Text
+    annotationText = ''
+    if isEnglish:
+        annotationText = '# of Responses: '+str(numberOfResponses)
+    else:
+        annotationText = '# de Réponses: '+str(numberOfResponses)
+
+    # Get the title
+    graphicTitle = WrapText(graphicTitle)       
+   
+    
+    # create the actual plot object
+    fig = px.bar(   df, 
+                    color="response", 
+                    y="subQ", 
+                    x="value", 
+                    title=graphicTitle,
+                    color_discrete_sequence=colourMap,
+                    orientation='h',
+                    width=FIGURE_WIDTH_PX,
+                    height=FIGURE_HEIGHT_PX)
+    
+    fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)      
+    
+    # update the layout of the figure
+    fig.update_layout(  font_family='Helvetica Now', 
+                        font_color="black",
+                        plot_bgcolor='rgb(232,232,232)',
+                        title_font={'size': 20})
+        
+    fig.add_annotation( text = annotationText, 
+                        showarrow=False,
+                        xref = 'paper',
+                        yref = 'paper',
+                        x = 1.,
+                        y = 1.1)
+
+    fig.write_image(figureFilePath,format='png',engine='kaleido')
 
 ##################################################################################################################################
 #
@@ -336,9 +446,9 @@ def CreateVerticalBarChart( responseDict,
     # Annotation Text
     annotationText = ''
     if isEnglish:
-        annotationText = '# of Responses: '
+        annotationText = '# of Responses: '+str(numberOfResponses)
     else:
-        annotationText = '# de Réponses: '
+        annotationText = '# de Réponses: '+str(numberOfResponses)
 
     # Get the title
     graphTitle = WrapText(graphicTitle)
@@ -388,7 +498,7 @@ def CreateVerticalBarChart( responseDict,
                         title='',
                         tickfont={'size': 15})                       
 
-    fig.add_annotation( text = annotationText +str(numberOfResponses), 
+    fig.add_annotation( text = annotationText, 
                         showarrow=False,
                         xref = 'paper',
                         yref = 'paper',
@@ -398,66 +508,28 @@ def CreateVerticalBarChart( responseDict,
     fig.write_image(figureFilePath,format='png',engine='kaleido')
     
 ##################################################################################################################################
-# def DataVizMain(report):
-    
-#     questionHandleDict ={   'Slider':VisualizeSliderQuestion,
-#                             'MC':VisualizeMultipleChoiceQuestion,
-#                             'TE':VisualizeOpenTextQuestion}
-        
-#     extractSurveyDataFilePath = os.path.join(settings.BASE_DIR, dataDirPath, extractSurveyData) 
-#     dateString = CreateDateString()
-#     figureOutputDirPath =  os.path.join(settings.BASE_DIR, dataDirPath,dateString) 
-
-#     surveyData = []
-#     with open(extractSurveyDataFilePath, 'rb') as f:
-#        surveyData = pickle.load(f)   
-
-#     if not os.path.exists(figureOutputDirPath):
-#         os.mkdir(figureOutputDirPath)
-
-#     figureCounter = 1
-#     figureFilenameList = []
-
-#     for question in surveyData:
-#         # Skip the conscent question
-#         if question.questionName == 'Consent': continue
-       
-#         if question.questionType['type'] not in questionHandleDict.keys():
-#             print('[ERROR]: Unknown question type: ', question.questionType['type'])
-#         else:             
-#             # Generate the file path and save it to the list
-#             figureFilePathBase = GenerateFigureFilePathBase(dateString,figureCounter,figureOutputDirPath)
-#             figureFilenameList.append(figureFilePathBase)
-#             figureCounter += 1 
-             
-#             # call the corresponding Question Handler to questionType
-#             questionHandleDict[question.questionType['type']](question,figureFilePathBase)
-        
-#             # generate a word cloud if there is a free text portion of the question
-#             if len(question.freeText) > 0:
-#                 figureFilePathBase = GenerateFigureFilePathBase(dateString,figureCounter,figureOutputDirPath)
-#                 figureFilenameList.append(figureFilePathBase)
-#                 figureCounter += 1 
-                
-#                 VisualizeOtherTextQuestion(question, figureFilePathBase)
-                        
-#     saveReport2Db(figureFilenameList, report)
-    
-##################################################################################################################################
-
-##################################################################################################################################
 # This function returns a list of unique questions from the userResponse QuerySet generated by a frontend query
 ##################################################################################################################################
 def GetListOfUniqueQuestions(userResponseQuerySet):
     questionList = []
     
+    # Get all the unique questions in the set of responses
     questionIDs = userResponseQuerySet.order_by().values_list('questionID').distinct()
     
+    # use the unique questionIDs to get a list of the questions
     for qID in questionIDs:
         questionQuerySet = QuestionTable.objects.filter(id=qID[0])
         
         if len(questionQuerySet) == 1:
-            questionList.append(questionQuerySet.first())
+            question = questionQuerySet.first()
+
+            # handle matrix questions differently because they have subQuestions    
+            if question.questionType == MATRIX_QUESTION:
+                parentQuestion = QuestionTable.objects.filter(id=question.parentQuestionID.id).first()
+                if parentQuestion not in questionList:
+                    questionList.append(parentQuestion) 
+            else:            
+                questionList.append(question)   
     
     return questionList
 
@@ -468,10 +540,19 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
     
     userResponseList = []
     
-    responsesToQuestion = userResponseQuerySet.filter(questionID=question.id)
+    if question.questionType == MATRIX_QUESTION:
+        subQuestionsQuerySet = QuestionTable.objects.filter(parentQuestionID=question)
+        
+        for subQuestion in subQuestionsQuerySet:
+            responsesToQuestion = userResponseQuerySet.filter(questionID=subQuestion.id)
     
-    for response in responsesToQuestion:
-        userResponseList.append(response)
+            for response in responsesToQuestion:
+                userResponseList.append(response)
+    else:
+        responsesToQuestion = userResponseQuerySet.filter(questionID=question.id)
+    
+        for response in responsesToQuestion:
+            userResponseList.append(response)
         
     return userResponseList
 
@@ -480,7 +561,8 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
 ##################################################################################################################################
 questionHandleDict ={   'Slider':VisualizeSliderQuestion,
                         'MC':VisualizeMultipleChoiceQuestion,
-                        'TE':VisualizeOpenTextQuestion}
+                        'TE':VisualizeOpenTextQuestion,
+                        'Matrix':VisualizeMatrixQuestion}
 
 def run(*arg):
     

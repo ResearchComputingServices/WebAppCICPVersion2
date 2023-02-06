@@ -44,7 +44,7 @@ def GetQuestionQuerySet(aQuery):
         qObject |= Q(surveyID=e.id)
       
     questionQuerySet = questionQuerySet.filter(qObject)
-   
+      
     return questionQuerySet
 
 ##################################################################################################################################
@@ -53,15 +53,20 @@ def GetQuestionQuerySet(aQuery):
 
 def HandleFrontEndQuery(aQuery):
     
+    # Get all questions that match the query
     questionQuerySet = GetQuestionQuerySet(aQuery)
+    
+    # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
-        
-    qObject = Q()
+    
+    # Create a queryObject that concatenates both user and questios with OR operations   
+    quereObject = Q()
     for q in questionQuerySet:
         for u in userQuerySet:
-            qObject |= Q(questionID=q.id, userID = u.id)
-        
-    userResponseQuerySet = UserResponseTable.objects.filter(qObject)
+            quereObject |= Q(questionID=q.id, userID = u.id)
+    
+    # Get all the userResponses that match the queryObject
+    userResponseQuerySet = UserResponseTable.objects.filter(quereObject)
     
     return userResponseQuerySet
     
