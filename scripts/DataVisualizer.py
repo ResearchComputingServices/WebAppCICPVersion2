@@ -17,10 +17,16 @@ from scripts.Controller import HandleFrontEndQuery
 #
 ##################################################################################################################################
 
-def VisualizeOpenTextQuestion(question, userResponses):
+def VisualizeOpenTextQuestion(question, 
+                              userResponses,
+                              isEnglish=True):
     print('VisualizeOpenTextQuestion')    
    
-    title = question.questionTextEnglish
+    title = ''
+    if isEnglish:
+        title = question.questionTextEnglish
+    else:
+        title = question.questionTextFrench
     
     filename = str(uuid.uuid4())
     
@@ -150,6 +156,31 @@ def VisualizeSliderQuestion(question,
                             totalResponses,  
                             os.path.join(FIGURE_FOLDER_PATH, filename))
 
+##################################################################################################################################
+#
+##################################################################################################################################
+def VisualizeTextGraphicQuestion(   question, 
+                                    userResponses,
+                                    isEnglish = True): 
+    print('VisualizeTextGraphicQuestion')
+    
+    title = ''
+    if isEnglish:
+        title = question.questionTextEnglish
+    else:
+        title = question.questionTextFrench
+        
+    # Get text for wordcloud generation 
+    allResponseText = ''
+    for response in userResponses:
+        responseText = response.answerText
+        if responseText != None and responseText != '':
+            allResponseText += ' ' + responseText
+    
+    
+    filename = str(uuid.uuid4())
+    CreateWordCloud(allResponseText, os.path.join(FIGURE_FOLDER_PATH, filename), title)
+    
 ##################################################################################################################################
 #
 ##################################################################################################################################
@@ -639,7 +670,8 @@ questionHandleDict ={   'Slider':VisualizeSliderQuestion,
                         'MC':VisualizeMultipleChoiceQuestion,
                         'TE':VisualizeOpenTextQuestion,
                         'Matrix':VisualizeMatrixQuestion,
-                        'RO':VisualizeRankOrderQuestion}
+                        'RO':VisualizeRankOrderQuestion,
+                        'DB':VisualizeTextGraphicQuestion}
 
 def run(*arg):
     

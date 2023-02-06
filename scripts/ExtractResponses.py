@@ -106,6 +106,7 @@ def ExtractTextQuestionResponse(question, userResponsesList):
         for response in userResponse2CurQ:
             
             responseValue = userResponses[response]
+            
             if responseValue == '':
                 continue
             
@@ -209,9 +210,32 @@ def ExtractMatrixQuestionResponse(question, userResponsesList):
                 userResponse.answerText = responseValue
             else:
                 userResponse.answerValue = responseValue
+                
             userResponse.save()
 
+##################################################################################################################################
+# 
+##################################################################################################################################
+def ExtractTextGraphicQuestionResponse(question, userResponsesList):
+
+    # the userResponses object is a dictionary of responses to questions    
+    for userResponses in userResponsesList:
+   
+        externalRefNum = userResponses[EXTERNAL_REF_KEY]
+        user = GetUser(externalRefNum) 
         
+        userResponse2CurQ = GetResponsesToQuestion(userResponses, question.questionName)
+               
+        for response in userResponse2CurQ:
+            
+            responseValue = userResponses[response]
+            if responseValue == '':
+                continue
+            
+            userResponse = GetUserResponse(user, question)
+            userResponse.answerText = responseValue
+            userResponse.save()
+                   
 ##################################################################################################################################
 # 
 ##################################################################################################################################
@@ -264,7 +288,10 @@ def ExtractResponseDataFromJSON(userResponsesList, aSurvey):
         
         elif question.questionType == RANK_ORDER_QUESTION:
             ExtractRankOrderQuestionResponse(question, userResponsesList)  
-        
+            
+        elif question.questionType == TEXT_GRAPHIC_QUESTION:
+            ExtractTextGraphicQuestionResponse(question, userResponsesList)     
+                
         else:
             print('[Warning] Unknown question type:\n',question)
                 

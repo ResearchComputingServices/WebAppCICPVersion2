@@ -18,7 +18,7 @@ MULTIPLE_CHOICE_QUESTION =  'MC'
 SLIDER_QUESTION =           'Slider'
 MATRIX_QUESTION =           'Matrix'
 RANK_ORDER_QUESTION =       'RO'
-
+TEXT_GRAPHIC_QUESTION =     'DB'
 
 EXTERNAL_REF_KEY = 'ExternalDataReference'
 
