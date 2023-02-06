@@ -22,6 +22,15 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
         question.questionName = qDict['questionName']
         question.questionTextEnglish = CleanText(qDict['questionText'])
         question.parentQuestionID = None
+        
+        # populate the questionTheme field 
+        questionLabelField = qDict['questionLabel']
+        questionLabelFieldSplit = questionLabelField.split('_')
+        if len(questionLabelFieldSplit) >= 1:
+            question.questionTheme = questionLabelFieldSplit[0]
+        else:
+            question.questionTheme = ''
+           
         question.save()        
         
         if question.questionType == OPEN_TEXT_QUESTION:

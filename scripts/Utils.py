@@ -20,6 +20,9 @@ MATRIX_QUESTION =           'Matrix'
 RANK_ORDER_QUESTION =       'RO'
 TEXT_GRAPHIC_QUESTION =     'DB'
 
+# Question Themes to skip
+SKIP_THEMES = ['Consent','CONSENT','skip','SKIP']
+
 EXTERNAL_REF_KEY = 'ExternalDataReference'
 
 # These are the key:value pairs which are removed from the response JSON file to make it easier to 

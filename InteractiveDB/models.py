@@ -23,17 +23,16 @@ class QuestionTable(models.Model):
                                          blank=True)
     
     # Fields/Attributes
-    questionType = models.CharField(max_length=30) # Mutliple choice, Rank Order, Slider, True/False, Open Text
+    questionType = models.CharField(max_length=30) # Mutliple choice, Rank Order, Slider, matrix, Open Text, text/graphic
     questionName = models.CharField(max_length=30) # This is a name attached to a question by Qualtrics
    
     questionTextEnglish = models.TextField()
     questionTextFrench = models.TextField() 
    
-    questionThemeEnglish = models.TextField() 
-    questionThemeFrench = models.TextField() 
-    
+    questionTheme = models.TextField() 
+   
     def __str__(self):
-        return f"Question: \n id: {self.id} \n type: {self.questionType} \n text: {self.questionTextEnglish} "   
+        return f"Question: \n id: {self.id} \n type: {self.questionType} \n theme: {self.questionThemeEnglish} \n text: {self.questionTextEnglish} "   
     
 class ChoiceTable(models.Model):
     
