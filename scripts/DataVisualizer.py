@@ -149,7 +149,83 @@ def VisualizeSliderQuestion(question,
                             title,
                             totalResponses,  
                             os.path.join(FIGURE_FOLDER_PATH, filename))
-     
+
+##################################################################################################################################
+#
+##################################################################################################################################
+def VisualizeRankOrderQuestion( question, 
+                                userResponses,
+                                isEnglish = True): 
+    
+    print('VisualizeRankOrderQuestion')
+    
+    # Generate the responseDict (choiceID:average as the key:value pair) initially set the average to 0
+    choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)
+    
+    # Get the title
+    title = ''
+    if isEnglish:
+        title = question.questionTextEnglish
+    else:
+        title = question.questionTextFrench
+    
+    totalResponses = len(userResponses)
+    
+    # Create the response dictionary
+    responseDict= {}
+    
+    for response in userResponses:
+        choice = choiceQuerySet.filter(id=response.choiceID.id).first()  
+        
+        choiceText = ''
+        if isEnglish:
+            choiceText = choice.choiceTextEnglish
+        else:
+            choiceText = choice.choiceTextFrench
+        
+        if choiceText in responseDict.keys():
+            responseDict[choiceText].append(response.answerValue)
+        else:
+            responseDict[choiceText] = []
+            
+    finalResponseDicts = {}
+    
+    for key in responseDict:
+        listOfRanks = responseDict[key]
+        
+        rankCount = {}
+        
+        for rank in listOfRanks:
+            if rank == '1':
+                if '1st' in rankCount.keys():
+                    rankCount['1st'] += 1
+                else:
+                    rankCount['1st'] = 0
+            elif rank == '2':
+                if '2nd' in rankCount.keys():
+                    rankCount['2nd'] += 1
+                else:
+                    rankCount['2nd'] = 0
+            elif rank == '3':
+                if '3rd' in rankCount.keys():
+                    rankCount['3rd'] += 1
+                else:
+                    rankCount['3rd'] = 0
+            else:
+                if '4th +' in rankCount.keys():
+                    rankCount['4th +'] += 1
+                else:
+                    rankCount['4th +'] = 0
+    
+        finalResponseDicts[key] = rankCount
+    
+    # send everything to the figure creator
+    filename = str(uuid.uuid4())
+    CreateStackedBarChart(finalResponseDicts, 
+                          title,
+                          totalResponses,  
+                          os.path.join(FIGURE_FOLDER_PATH, filename))
+    
 ##################################################################################################################################
 #
 ##################################################################################################################################
@@ -164,9 +240,12 @@ def CreateSubQuestionResponseDict(listOfUserResponses):
     
     return subQResponseDict
 
+##################################################################################################################################
+
 def VisualizeMatrixQuestion(question, 
                             userResponses,
                             isEnglish = True): 
+    
     # only the Parent Matrix question should be included in the list to be visualized
     if question.parentQuestionID != None:
         return
@@ -201,10 +280,7 @@ def VisualizeMatrixQuestion(question,
     for key in responseDict:
        dict = CreateSubQuestionResponseDict(responseDict[key])
        finalResponseDicts[key] = dict
-       
-    for key in finalResponseDicts.keys():
-        print(key,':', finalResponseDicts[key])
-    
+          
     filename = str(uuid.uuid4())
     CreateStackedBarChart(finalResponseDicts, 
                           title,
@@ -562,7 +638,8 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
 questionHandleDict ={   'Slider':VisualizeSliderQuestion,
                         'MC':VisualizeMultipleChoiceQuestion,
                         'TE':VisualizeOpenTextQuestion,
-                        'Matrix':VisualizeMatrixQuestion}
+                        'Matrix':VisualizeMatrixQuestion,
+                        'RO':VisualizeRankOrderQuestion}
 
 def run(*arg):
     
