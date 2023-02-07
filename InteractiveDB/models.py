@@ -31,8 +31,10 @@ class QuestionTable(models.Model):
    
     questionTheme = models.TextField() 
    
+    jsonKey = models.TextField() # used for matching with french survey file
+   
     def __str__(self):
-        return f"Question: \n id: {self.id} \n type: {self.questionType} \n theme: {self.questionThemeEnglish} \n text: {self.questionTextEnglish} "   
+        return f"Question: \n id: {self.id} \n type: {self.questionType} \n theme: {self.questionTheme} \n text: {self.questionTextEnglish} "   
     
 class ChoiceTable(models.Model):
     

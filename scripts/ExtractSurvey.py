@@ -9,7 +9,7 @@ from WebAppCICPVersion2 import settings
 # This function extracts the required data from the english version of the survey file
 # the extracted data is stored in Question Objects which are in turn stored in a list
 ##################################################################################################################################
-def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
+def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
      
     # loop over the questions data in the JSON file
     for qDictID in surveyJSON['result']['questions']:          
@@ -22,6 +22,7 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
         question.questionName = qDict['questionName']
         question.questionTextEnglish = CleanText(qDict['questionText'])
         question.parentQuestionID = None
+        question.jsonKey = qDictID
         
         # populate the questionTheme field 
         questionLabelField = qDict['questionLabel']
@@ -83,7 +84,67 @@ def ExtractQuestionDataFromJSON(surveyJSON,aSurvey):
                     choice.recode = cDict['recode']
                     choice.choiceTextEnglish = CleanText(cDict['choiceText'])
                     choice.save()   
-                        
+
+##################################################################################################################################
+# 
+##################################################################################################################################  
+def ExtractQuestionDataFromFrenchJSON(surveyJSON, aSurvey):                   
+    
+    frenchSurveyTextDict = surveyJSON['result']
+    
+    for key in frenchSurveyTextDict:
+       
+        keySplit = key.split('_')
+        
+        if 'QuestionText' in key:
+           
+            questionJSONKey = keySplit[0]
+            questionTextFrench = CleanText(frenchSurveyTextDict[key])
+            
+            question = QuestionTable.objects.filter(jsonKey = questionJSONKey, surveyID = aSurvey.id).first()
+            
+            question.questionTextFrench = questionTextFrench
+            
+            question.save()
+            
+        elif 'Choice' in key:
+            
+            questionJSONKey = keySplit[0]
+            recode = int(keySplit[1][6:])
+            
+            choiceTextFrench = CleanText(frenchSurveyTextDict[key])
+            
+            question = QuestionTable.objects.filter(jsonKey = questionJSONKey, surveyID = aSurvey.id).first()
+            choice = ChoiceTable.objects.filter(questionID = question.id, recode = recode).first()
+            
+            choice.choiceTextFrench = choiceTextFrench
+            
+            choice.save()    
+  
+##################################################################################################################################
+# Return a dictionary containing the contents of JSON file 
+##################################################################################################################################  
+def OpenSurveyJSONFile(qualtricsSurveyID, languageFlag):
+    
+    filename = ''
+    if languageFlag == 'EN':
+        filename = settings.QUESTION_ENGLISH_JSON_FILENAME
+    elif languageFlag == 'FR':
+        filename = settings.QUESTION_FRENCH_JSON_FILENAME
+    else:
+        print('[ERROR]: OpenSurveyJSONFile: Unknown LanguageFlag: ', languageFlag)
+        return None
+    
+    JSONFilePath = os.path.join(settings.BASE_DIR, 
+                                settings.DATA_DIR_PATH, 
+                                qualtricsSurveyID, 
+                                filename)            
+    surveyJSON = None
+    with open(JSONFilePath) as f:
+        surveyJSON = json.load(f)
+        
+    return surveyJSON
+    
 ##################################################################################################################################
 # Main function 
 ##################################################################################################################################  
@@ -97,17 +158,13 @@ def ExtractSurveyMain(aSurvey=None):
         successFlag = False
     else:
         # open the english language JSON file
-        englishJSONFilePath =  ''
         if aSurvey != None:
-            englishJSONFilePath = os.path.join( settings.BASE_DIR, 
-                                                settings.DATA_DIR_PATH, 
-                                                aSurvey.qualtricsSurveyID, 
-                                                settings.QUESTION_ENGLISH_JSON_FILENAME)            
-            englishSurveyJSON= ''
-            with open(englishJSONFilePath) as f:
-                englishSurveyJSON = json.load(f)
-
-            ExtractQuestionDataFromJSON(englishSurveyJSON, aSurvey)
+            englishSurveyJSON = OpenSurveyJSONFile(aSurvey.qualtricsSurveyID, 'EN')
+            ExtractQuestionDataFromEnglishJSON(englishSurveyJSON, aSurvey)
+            
+            frenchSurveyJSON = OpenSurveyJSONFile(aSurvey.qualtricsSurveyID, 'FR')
+            ExtractQuestionDataFromFrenchJSON(frenchSurveyJSON, aSurvey)
+            
             successFlag = True
         else:
             print('[ERROR]: ExtractSurveyMain: no surveyID given')
