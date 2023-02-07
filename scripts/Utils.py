@@ -21,7 +21,7 @@ RANK_ORDER_QUESTION =       'RO'
 TEXT_GRAPHIC_QUESTION =     'DB'
 
 # Question Themes to skip
-SKIP_THEMES = ['Consent','CONSENT','skip','SKIP']
+QUESTION_THEME_SKIP_LIST = ['Consent','CONSENT','skip','SKIP']
 
 EXTERNAL_REF_KEY = 'ExternalDataReference'
 
@@ -53,10 +53,11 @@ PIE_CHART_HOLE_RADIUS = 0.5
 
 MAX_TITLE_LENGTH = 75
 
-
 FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regular.ttf')
 
 FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'tmpImages')
+
+WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
 
 ##################################################################################################################################
 # This dataClass contains all the values which the user wants to filter on
@@ -86,7 +87,7 @@ def CleanText(text):
     cleanedText = text
     cleanedText= cleanedText.replace("\n","")
     cleanedText = re.sub("[\[].*?[\]]", "", cleanedText)
-    cleanedText = re.sub("[\(].*?[\)]", "", cleanedText)
+    #cleanedText = re.sub("[\(].*?[\)]", "", cleanedText)
     cleanedText = re.sub("[\<].*?[\>]", "", cleanedText)
     cleanedText = cleanedText.replace('&rsquo;','\'')
     cleanedText = cleanedText.replace('&lsquo;','\'')
