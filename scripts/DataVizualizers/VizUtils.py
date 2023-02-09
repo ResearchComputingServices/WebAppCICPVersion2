@@ -44,7 +44,7 @@ def SaveFigure(fig):
     
     fig.write_image(figureFilePath,format='png',engine='kaleido')
 
-    return filename
+    return figureFilePath
 
 ##################################################################################################################################
 #

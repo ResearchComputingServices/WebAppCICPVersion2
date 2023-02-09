@@ -19,7 +19,7 @@ def VisualizeTextGraphicQuestion(   question,
             allResponseText += ' ' + responseText
     
     
-    CreateWordCloud(allResponseText,
-                    title,
-                    len(userResponses),
-                    isEnglish)
+    return CreateWordCloud( allResponseText,
+                            title,
+                            len(userResponses),
+                            isEnglish)

@@ -1,7 +1,6 @@
 import plotly.express as px
 
 from scripts.Utils import *
-from scripts.Controller import HandleFrontEndQuery
 from scripts.DataVizualizers.VizUtils import *
 
 ##################################################################################################################################
@@ -52,10 +51,10 @@ def VisualizeMultipleChoiceQuestion(question,
         if float(totalResponses) > 0:
             responseDict[key] = float(responseDict[key]) / float(totalResponses)   
     
-    CreatePieChart(responseDict, 
-                   title, 
-                   totalResponses,
-                   isEnglish)
+    return CreatePieChart(  responseDict, 
+                            title, 
+                            totalResponses,
+                            isEnglish)
 
 ##################################################################################################################################
 #

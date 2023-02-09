@@ -50,10 +50,10 @@ def VisualizeSliderQuestion(question,
         if float(counter[key]) > 0:
             responseDict[key] = float(responseDict[key]) / float(counter[key]) 
             
-    CreateVerticalBarChart( responseDict, 
-                            title,
-                            totalResponses,  
-                            isEnglish)
+    return CreateVerticalBarChart(  responseDict, 
+                                    title,
+                                    totalResponses,  
+                                    isEnglish)
 
 ##################################################################################################################################
 #

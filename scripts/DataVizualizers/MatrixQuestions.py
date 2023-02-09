@@ -55,6 +55,6 @@ def VisualizeMatrixQuestion(question,
        dict = GetSubQuestionResponseDict(responseDict[key])
        finalResponseDicts[key] = dict
           
-    CreateStackedBarChart(finalResponseDicts, 
-                          title,
-                          totalResponses)
+    return CreateStackedBarChart(   finalResponseDicts, 
+                                    title,
+                                    totalResponses)

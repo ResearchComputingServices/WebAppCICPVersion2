@@ -67,10 +67,10 @@ def VisualizeRankOrderQuestion( question,
         finalResponseDicts[key] = rankCount
     
     # send everything to the figure creator
-    CreateStackedBarChart(finalResponseDicts, 
-                          title,
-                          totalResponses)
-    
+    return CreateStackedBarChart(   finalResponseDicts, 
+                                    title,
+                                    totalResponses)
+                
     
 ##################################################################################################################################
 #

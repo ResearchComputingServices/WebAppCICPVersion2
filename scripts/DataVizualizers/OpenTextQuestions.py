@@ -26,10 +26,10 @@ def VisualizeOpenTextQuestion(question,
         if responseText != None and responseText != '':
             allResponseText += ' ' + responseText
     
-    CreateWordCloud(allResponseText,  
-                    title,
-                    len(userResponses),
-                    isEnglish)
+    return CreateWordCloud( allResponseText,  
+                            title,
+                            len(userResponses),
+                            isEnglish)
 
 ##################################################################################################################################
 #
@@ -70,4 +70,4 @@ def CreateWordCloud(wordCloudText,
     
     AddAnnotation(fig, numberOfResponses, isEnglish)
     
-    return filename
+    return figureFilePath
