@@ -80,7 +80,44 @@ class UserResponseTable(models.Model):
             recode = self.choiceID.recode
             
         return f"UserResponse: \nuserID: {self.userID.id} \nquestionID: {self.questionID.id} \nrecode: {recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
+
+    # this function returns a dictionary which will be entered into the data file sent to the front end
+    # the key:value pair is columnHeader:entry        
+    def GetDataFileEntry(self):
         
-     # some of your models may have explicit ordering
+        questionKey = self.questionID.jsonKey
+        questionText = self.questionID.questionTextEnglish # TODO: handle fench as well
+        questionTheme = self.questionID.questionTheme
+        
+        userProv = self.userID.province
+        userSize = self.userID.size
+        userDomain = self.userID.domain
+        userLang = self.userID.languagePreference
+        
+        choiceRecode = '-1'
+        choiceText = ''
+        if self.choiceID != None:
+            choiceRecode = self.choiceID.recode
+            choiceText = self.choiceID.choiceTextEnglish # TODO: handle french
+        
+        responseText = self.answerText
+        responseValue = self.answerValue
+            
+        entryDict = {   'QuestionKey' : questionKey,
+                        'QuestionText' : questionText,
+                        'QuestionTheme' : questionTheme, 
+                        'userProv' : userProv,
+                        'userSize' : userSize,
+                        'userDomain' : userDomain,
+                        'userLang' : userLang,
+                        'choiceRecode' : choiceRecode,
+                        'choiceText' : choiceText,
+                        'responseText' : responseText,
+                        'responseValue' : responseValue                       
+                    }      
+        
+        return entryDict
+    
+    # This gives the model an explicit ordering
     class Meta:
         ordering = ('questionID',)

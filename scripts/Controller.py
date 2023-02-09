@@ -1,6 +1,12 @@
 from django.db.models import Q
+import pandas as pd
+import uuid
+
+import warnings
+warnings.filterwarnings('ignore')
 
 from scripts.Utils import *
+from scripts.DataVisualizer import DataVisualizerMain
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
 
 ##################################################################################################################################
@@ -30,6 +36,7 @@ def GetUserQuerySet(aQuery):
 # 
 ##################################################################################################################################
 def GetQuestionQuerySet(aQuery):
+    
     questionQuerySet = QuestionTable.objects.all()
     surveyQuerySet = SurveyTable.objects.all()
        
@@ -50,9 +57,7 @@ def GetQuestionQuerySet(aQuery):
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-
-def HandleFrontEndQuery(aQuery):
-    
+def GetUserResponseQuerySet(aQuery):
     # Get all questions that match the query
     questionQuerySet = GetQuestionQuerySet(aQuery)
     
@@ -69,6 +74,41 @@ def HandleFrontEndQuery(aQuery):
     userResponseQuerySet = UserResponseTable.objects.filter(quereObject)
     
     return userResponseQuerySet
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+
+def GenerateDataFile(userResponseQuerySet):
+            
+    mainDataFrame = pd.DataFrame()
+    
+    for user in userResponseQuerySet:
+        entryDict = user.GetDataFileEntry()
+        
+        if len(mainDataFrame.index) != 0:
+            mainDataFrame = mainDataFrame.append(entryDict,ignore_index=True)
+        else:
+            mainDataFrame = pd.DataFrame(entryDict, index=[0])
+        
+    filename = str(uuid.uuid4())
+    figureFilePath = os.path.join(FIGURE_FOLDER_PATH, filename)
+
+    mainDataFrame.to_csv(figureFilePath)
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+
+def HandleFrontEndQuery(aQuery):
+    
+    userResponseQuerySet = GetUserResponseQuerySet(aQuery)
+    
+    listOfImageFilePaths = DataVisualizerMain(userResponseQuerySet)
+    
+    dataCSVFilePath = GenerateDataFile(userResponseQuerySet)
+    
+    return listOfImageFilePaths, dataCSVFilePath
     
 ##################################################################################################################################
 # This function is used to test the controller functions
@@ -78,10 +118,12 @@ def run(*arg):
     aQuery.date = '2023-01-03'
     aQuery.locations = 'AB'
 
-    userResponseQuerySet = HandleFrontEndQuery(aQuery)
+    userResponseQuerySet = GetUserResponseQuerySet(aQuery)
+   
+    GenerateDataFile(userResponseQuerySet)
     
-    print('# of responses found:', len(userResponseQuerySet))
+    # print('# of responses found:', len(userResponseQuerySet))
     
-    for userResponse in userResponseQuerySet:
-        print(userResponse)
-        input()
+    # for userResponse in userResponseQuerySet:
+    #     print(userResponse)
+    #     input()
