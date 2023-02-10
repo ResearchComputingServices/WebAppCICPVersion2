@@ -26,11 +26,12 @@ def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
         
         # populate the questionTheme field 
         questionLabelField = qDict['questionLabel']
-        questionLabelFieldSplit = questionLabelField.split('_')
-        if len(questionLabelFieldSplit) >= 1:
-            question.questionTheme = questionLabelFieldSplit[0]
-        else:
-            question.questionTheme = ''
+        question.questionTheme = ''
+
+        if questionLabelField != None:
+            questionLabelFieldSplit = questionLabelField.split('_')
+            if len(questionLabelFieldSplit) >= 1:
+                question.questionTheme = questionLabelFieldSplit[0]
            
         question.save()        
         
@@ -43,7 +44,7 @@ def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
             
         elif question.questionType == MATRIX_QUESTION:
             if 'subQuestions' in qDict:
-                questionCounter = 0
+
                 for subQDictID in qDict['subQuestions']:
                     # Get direct access to the sub question dictionary
                     subQDict = qDict['subQuestions'][subQDictID]
@@ -51,14 +52,16 @@ def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
                     # Use data from the sub question dictionary and the question dictionary
                     # to create an entry in the QuestionTable for the sub question
                     subQuestion = QuestionTable()
+                    
                     subQuestion.surveyID = aSurvey
                     subQuestion.questionType = qDict['questionType']['type']       
                     subQuestion.questionName = qDict['questionName']+'_'+subQDict['recode']
                     subQuestion.questionTextEnglish = CleanText(subQDict['choiceText'])
                     subQuestion.parentQuestionID = question
+                    subQuestion.questionTheme = question.questionTheme
                     
                     subQuestion.save()
-                    
+
                     if 'choices' in qDict:
                         for cDictID in qDict['choices']:
                             
@@ -71,7 +74,6 @@ def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
                             choice.choiceTextEnglish = CleanText(cDict['choiceText'])
                             choice.save() 
                     
-                    questionCounter = questionCounter + 1 
         else:
             if 'choices' in qDict:
                 for cDictID in qDict['choices']:
@@ -93,7 +95,7 @@ def ExtractQuestionDataFromFrenchJSON(surveyJSON, aSurvey):
     frenchSurveyTextDict = surveyJSON['result']
     
     for key in frenchSurveyTextDict:
-       
+            
         keySplit = key.split('_')
         
         if 'QuestionText' in key:
@@ -115,12 +117,39 @@ def ExtractQuestionDataFromFrenchJSON(surveyJSON, aSurvey):
             choiceTextFrench = CleanText(frenchSurveyTextDict[key])
             
             question = QuestionTable.objects.filter(jsonKey = questionJSONKey, surveyID = aSurvey.id).first()
-            choice = ChoiceTable.objects.filter(questionID = question.id, recode = recode).first()
             
-            choice.choiceTextFrench = choiceTextFrench
+            if question.questionType != MATRIX_QUESTION:
+                choice = ChoiceTable.objects.filter(questionID = question.id, recode = recode).first()           
+                if choice != None:           
+                    choice.choiceTextFrench = choiceTextFrench
+                    choice.save()
+            else:
+                recode = keySplit[1][6:]
+                
+                subQuestionName =  question.questionName+'_'+recode
+
+                subQuestion = QuestionTable.objects.filter(questionName = subQuestionName, surveyID = aSurvey.id).first()
+                subQuestion.questionTextFrench = choiceTextFrench  
+                
+                subQuestion.save()
             
-            choice.save()    
-  
+        elif 'Answer' in key:
+            
+            questionJSONKey = keySplit[0]
+            recode = keySplit[1][6:]
+                      
+            question = QuestionTable.objects.filter(jsonKey = questionJSONKey, surveyID = aSurvey.id).first()
+            subQuestionQuerySet = QuestionTable.objects.filter(parentQuestionID = question.id)
+                       
+            for subQuestion in subQuestionQuerySet:
+            
+                choice = ChoiceTable.objects.filter(questionID = subQuestion.id, recode = recode).first()           
+            
+                choiceTextFrench = CleanText(frenchSurveyTextDict[key])
+                choice.choiceTextFrench = choiceTextFrench
+            
+                choice.save()  
+                   
 ##################################################################################################################################
 # Return a dictionary containing the contents of JSON file 
 ##################################################################################################################################  
