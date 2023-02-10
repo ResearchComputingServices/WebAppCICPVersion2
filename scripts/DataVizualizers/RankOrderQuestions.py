@@ -123,13 +123,6 @@ def CreateStackedBarChart(  responseDict,
                         plot_bgcolor='rgb(232,232,232)',
                         title_font={'size': 20})
         
-    fig.add_annotation( text = annotationText, 
-                        showarrow=False,
-                        xref = 'paper',
-                        yref = 'paper',
-                        x = 1.,
-                        y = 1.1)
-
     AddAnnotation(fig, numberOfResponses, isEnglish)
 
     return SaveFigure(fig)

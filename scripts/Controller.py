@@ -114,16 +114,17 @@ def HandleFrontEndQuery(aQuery):
 # This function is used to test the controller functions
 ##################################################################################################################################
 def run(*arg):
-    aQuery = FrontEndQuery()   
-    aQuery.date = '2023-01-03'
-    aQuery.locations = 'AB'
 
-    userResponseQuerySet = GetUserResponseQuerySet(aQuery)
-   
-    GenerateDataFile(userResponseQuerySet)
+    aQuery = None
+    if len(arg) == 0:
+        dateList = ['2022-12-01','2022-12-02','2022-12-03','2022-12-04','2022-12-05','2022-12-06']
     
-    # print('# of responses found:', len(userResponseQuerySet))
-    
-    # for userResponse in userResponseQuerySet:
-    #     print(userResponse)
-    #     input()
+        for date in dateList:
+            aQuery = FrontEndQuery()   
+            aQuery.date = date
+            aQuery.locations = 'AB'
+           
+            HandleFrontEndQuery(aQuery) 
+    else:
+        aQuery = arg[0]
+        return HandleFrontEndQuery(aQuery)    

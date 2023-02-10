@@ -68,6 +68,4 @@ def CreateWordCloud(wordCloudText,
     plt.savefig(figureFilePath, format="png")
     plt.close(fig)
     
-    AddAnnotation(fig, numberOfResponses, isEnglish)
-    
     return figureFilePath

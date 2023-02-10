@@ -15,9 +15,10 @@ def VisualizeTextGraphicQuestion(   question,
     allResponseText = ''
     for response in userResponses:
         responseText = response.answerText
-        if responseText != None and responseText != '':
+        if responseText != None and responseText != '' and not responseText.isnumeric() :
             allResponseText += ' ' + responseText
     
+    print('{',allResponseText,'}')
     
     return CreateWordCloud( allResponseText,
                             title,
