@@ -7,7 +7,8 @@ from scripts.DataVizualizers.OpenTextQuestions import CreateWordCloud
 ##################################################################################################################################
 def VisualizeTextGraphicQuestion(   question, 
                                     userResponses,
-                                    isEnglish = True): 
+                                    isEnglish = True,
+                                    saveToDirPath = FIGURE_FOLDER_PATH): 
     
     title = GetGraphicTitle(question, isEnglish)
         
@@ -18,7 +19,8 @@ def VisualizeTextGraphicQuestion(   question,
         if responseText != None and responseText != '' and not responseText.isnumeric() :
             allResponseText += ' ' + responseText
       
-    return CreateWordCloud( allResponseText,
-                            title,
-                            len(userResponses),
-                            isEnglish)
+    return CreateWordCloud( wordCloudText = allResponseText,  
+                            title = title,
+                            numberOfResponses = len(userResponses),
+                            isEnglish = isEnglish,
+                            saveToDirPath = saveToDirPath)

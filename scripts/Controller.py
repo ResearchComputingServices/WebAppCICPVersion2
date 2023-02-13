@@ -1,5 +1,6 @@
 from django.db.models import Q
 import pandas as pd
+from datetime import date, datetime
 import uuid
 
 import warnings
@@ -76,10 +77,29 @@ def GetUserResponseQuerySet(aQuery):
     return userResponseQuerySet
 
 ##################################################################################################################################
+# This function generates figures for all the questions in the current survey with no filtering of the data
+##################################################################################################################################
+
+def GenerateDefaultFigures(aSurvey):
+
+    aQuery = FrontEndQuery()   
+    aQuery.date = aSurvey.releaseDate
+    
+    dateString =  aSurvey.releaseDate.strftime("%d-%m-%Y")
+    
+    saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, dateString)
+       
+    listOfImageFilePaths, dataCSVFilePath = HandleFrontEndQuery(aQuery=aQuery,
+                                                                saveToDirPath=saveToDirPath)
+        
+    return True
+    
+##################################################################################################################################
 # 
 ##################################################################################################################################
 
-def GenerateDataFile(userResponseQuerySet):
+def GenerateDataFile(userResponseQuerySet,
+                     saveToDirPath = FIGURE_FOLDER_PATH):
             
     mainDataFrame = pd.DataFrame()
     
@@ -91,22 +111,24 @@ def GenerateDataFile(userResponseQuerySet):
         else:
             mainDataFrame = pd.DataFrame(entryDict, index=[0])
         
-    filename = str(uuid.uuid4())
-    figureFilePath = os.path.join(FIGURE_FOLDER_PATH, filename)
+    filename = str(uuid.uuid4()) + ".csv"
+    figureFilePath = os.path.join(saveToDirPath, filename)
 
     mainDataFrame.to_csv(figureFilePath)
+    
+    return figureFilePath
 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
 
-def HandleFrontEndQuery(aQuery):
-    
+def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_PATH):
+       
     userResponseQuerySet = GetUserResponseQuerySet(aQuery)
     
-    listOfImageFilePaths = DataVisualizerMain(userResponseQuerySet)
+    listOfImageFilePaths = DataVisualizerMain(userResponseQuerySet, isEnglish, saveToDirPath)
     
-    dataCSVFilePath = GenerateDataFile(userResponseQuerySet)
+    dataCSVFilePath = GenerateDataFile(userResponseQuerySet, saveToDirPath)
     
     return listOfImageFilePaths, dataCSVFilePath
     

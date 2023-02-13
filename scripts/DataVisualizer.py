@@ -1,7 +1,6 @@
 import os
 
 from scripts.Utils import *
-#from scripts.Controller import GetUserResponseQuerySet
 from scripts.DataVizualizers.SilderQuestions import VisualizeSliderQuestion
 from scripts.DataVizualizers.MultipleChoiceQuestions import VisualizeMultipleChoiceQuestion   
 from scripts.DataVizualizers.OpenTextQuestions import VisualizeOpenTextQuestion                        
@@ -72,12 +71,14 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
 # This function is the main entry point into the DataVisualizer. It will be called by the Controller to generate the images
 # which it will then send to the Front End. It will return a list of file paths to the location of the generated files
 ##################################################################################################################################
-def DataVisualizerMain(userResponseQuerySet):
-    
+def DataVisualizerMain(userResponseQuerySet,
+                       isEnglish = True,
+                       saveToDirPath = FIGURE_FOLDER_PATH):
+
     # make sure the tmp folder for storing the generated images exists
-    isExist = os.path.exists(FIGURE_FOLDER_PATH)
+    isExist = os.path.exists(saveToDirPath)
     if not isExist:
-        os.makedirs(FIGURE_FOLDER_PATH)
+        os.makedirs(saveToDirPath)
     
     questionList = GetListOfUniqueQuestions(userResponseQuerySet)
     
@@ -93,7 +94,10 @@ def DataVisualizerMain(userResponseQuerySet):
         if question.questionType not in questionHandleDict.keys():
             print('[ERROR]: Unknown question type: ', question.questionType)
         else:             
-            imageFilePath = questionHandleDict[question.questionType](question,userResponseList)
+            imageFilePath = questionHandleDict[question.questionType](  question = question,
+                                                                        userResponses = userResponseList, 
+                                                                        isEnglish= isEnglish,
+                                                                        saveToDirPath = saveToDirPath)
             
             imageFilePathList.append(imageFilePath)
     

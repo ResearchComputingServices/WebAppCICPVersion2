@@ -9,7 +9,8 @@ from scripts.DataVizualizers.VizUtils import *
 ##################################################################################################################################
 def VisualizeRankOrderQuestion( question, 
                                 userResponses,
-                                isEnglish = True): 
+                                isEnglish = True,
+                                saveToDirPath = FIGURE_FOLDER_PATH): 
     
     title = GetGraphicTitle(question, isEnglish)
     
@@ -69,7 +70,8 @@ def VisualizeRankOrderQuestion( question,
     # send everything to the figure creator
     return CreateStackedBarChart(   finalResponseDicts, 
                                     title,
-                                    totalResponses)
+                                    totalResponses,
+                                    saveToDirPath)
                 
     
 ##################################################################################################################################
@@ -79,7 +81,8 @@ def VisualizeRankOrderQuestion( question,
 def CreateStackedBarChart(  responseDict,
                             graphicTitle,
                             numberOfResponses,
-                            isEnglish = True):
+                            isEnglish = True,
+                            saveToDirPath = FIGURE_FOLDER_PATH):
     
     df = pd.DataFrame(columns=['subQ','response','value'])
     
@@ -125,4 +128,4 @@ def CreateStackedBarChart(  responseDict,
         
     AddAnnotation(fig, numberOfResponses, isEnglish)
 
-    return SaveFigure(fig)
+    return SaveFigure(fig,saveToDirPath)

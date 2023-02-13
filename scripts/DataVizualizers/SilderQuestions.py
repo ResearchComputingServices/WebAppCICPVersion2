@@ -11,7 +11,8 @@ from scripts.DataVizualizers.VizUtils import *
 
 def VisualizeSliderQuestion(question, 
                             userResponses,
-                            isEnglish = True): 
+                            isEnglish = True,
+                            saveToDirPath = FIGURE_FOLDER_PATH): 
        
     title = GetGraphicTitle(question, isEnglish)
     
@@ -53,7 +54,8 @@ def VisualizeSliderQuestion(question,
     return CreateVerticalBarChart(  responseDict, 
                                     title,
                                     totalResponses,  
-                                    isEnglish)
+                                    isEnglish,
+                                    saveToDirPath)
 
 ##################################################################################################################################
 #
@@ -95,7 +97,8 @@ def DetermineBarColours(values):
 def CreateVerticalBarChart( responseDict,
                             graphicTitle,
                             numberOfResponses,
-                            isEnglish = True):
+                            isEnglish = True,
+                            saveToDirPath = FIGURE_FOLDER_PATH):
    
     # Now that we have the extracted data we can create the graphic. 
     # the "values" and "names" are passed to the graphic object as lists    
@@ -194,4 +197,4 @@ def CreateVerticalBarChart( responseDict,
 
     AddAnnotation(fig, numberOfResponses, isEnglish)
 
-    return SaveFigure(fig)
+    return SaveFigure(fig, saveToDirPath)

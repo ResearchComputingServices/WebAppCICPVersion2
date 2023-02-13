@@ -22,7 +22,8 @@ def GetSubQuestionResponseDict(listOfUserResponses):
 
 def VisualizeMatrixQuestion(question, 
                             userResponses,
-                            isEnglish = True): 
+                            isEnglish = True,
+                            saveToDirPath = FIGURE_FOLDER_PATH): 
     
     # only the Parent Matrix question should be included in the list to be visualized
     if question.parentQuestionID != None:
@@ -57,4 +58,5 @@ def VisualizeMatrixQuestion(question,
           
     return CreateStackedBarChart(   finalResponseDicts, 
                                     title,
-                                    totalResponses)
+                                    totalResponses,
+                                    saveToDirPath)

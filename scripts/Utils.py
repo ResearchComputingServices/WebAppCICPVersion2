@@ -57,6 +57,8 @@ FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regu
 
 FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'tmpImages')
 
+DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'DefaultImages')
+
 WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
 
 ##################################################################################################################################
