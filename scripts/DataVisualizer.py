@@ -28,6 +28,7 @@ def GetListOfUniqueQuestions(userResponseQuerySet):
     
     # use the unique questionIDs to get a list of the questions
     for qID in questionIDs:
+        
         questionQuerySet = QuestionTable.objects.filter(id=qID[0])
         
         if len(questionQuerySet) == 1:
@@ -40,7 +41,7 @@ def GetListOfUniqueQuestions(userResponseQuerySet):
                     questionList.append(parentQuestion) 
             else:            
                 questionList.append(question)   
-    
+                    
     return questionList
 
 ##################################################################################################################################

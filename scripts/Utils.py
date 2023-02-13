@@ -69,8 +69,12 @@ WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_Wa
 @dataclass
 class FrontEndQuery:
     
-    # Filter on Survey
+    # Filter on Survey release data
     date: str = None
+    
+    # Filter by survey ID
+    # this filter is only used for the default image creation
+    qualtricsSurveyID: str = None
     
     # Filter on Question
     questionThemes: List = field(default_factory=lambda: [])  
@@ -79,7 +83,22 @@ class FrontEndQuery:
     locations: List = field(default_factory=lambda: []) 
     organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
-    fieldOfWork: List = field(default_factory=lambda: []) 
+    fieldOfWork: List = field(default_factory=lambda: [])       
+    
+    def IsDateOnly(self):
+        
+        isDateOnly = False
+        
+        if (len(self.questionThemes) == 0 and 
+            len(self.locations) == 0 and 
+            len(self.organizationSizes) == 0 and
+            len(self.languagePreference) == 0 and
+            len(self.fieldOfWork) == 0 and
+            self.qualtricsSurveyID == None):
+                isDateOnly = True
+        
+        return isDateOnly
+        
  
 ##################################################################################################################################
 # This function removes any text in brackets and replaces special characeter codes with the actual character

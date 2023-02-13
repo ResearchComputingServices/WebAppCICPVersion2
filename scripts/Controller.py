@@ -1,4 +1,4 @@
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 import pandas as pd
 from datetime import date, datetime
 import uuid
@@ -17,19 +17,31 @@ def GetUserQuerySet(aQuery):
     userQuerySet = UserTable.objects.all()
        
     if len(aQuery.locations) != 0:
-        userQuerySet = userQuerySet.filter(province=aQuery.locations)
-
+        qObject = Q()
+        for loc in aQuery.locations:
+            qObject |= Q(province=loc) 
+        userQuerySet = userQuerySet.filter(qObject)
     
-    if len(aQuery.organizationSizes) != 0:
-        userQuerySet = userQuerySet.filter(size=aQuery.organizationSizes)
-  
-    
-    if len(aQuery.languagePreference) != 0:
-        userQuerySet = userQuerySet.filter(languagePreference=aQuery.languagePreference)
-  
-        
+    if len(aQuery.organizationSizes) != 0: 
+        qObject = Q()
+        for size in aQuery.organizationSizes:
+            qObject |= Q(size=size) 
+        userQuerySet = userQuerySet.filter(qObject)
+       
+    if len(aQuery.languagePreference) != 0:        
+        qObject = Q()
+        for lang in aQuery.languagePreference:
+            qObject |= Q(languagePreference=lang) 
+        userQuerySet = userQuerySet.filter(qObject)
+                
     if len(aQuery.fieldOfWork) != 0:
-        userQuerySet = userQuerySet.filter(domain=aQuery.fieldOfWork)
+        qObject = Q()
+        for work in aQuery.fieldOfWork:
+            qObject |= Q(domain=work) 
+        userQuerySet = userQuerySet.filter(qObject)
+  
+    if len(userQuerySet) == 0:
+        userQuerySet = None
   
     return userQuerySet
 
@@ -38,42 +50,52 @@ def GetUserQuerySet(aQuery):
 ##################################################################################################################################
 def GetQuestionQuerySet(aQuery):
     
-    questionQuerySet = QuestionTable.objects.all()
     surveyQuerySet = SurveyTable.objects.all()
-       
+
     if aQuery.date != None:
         surveyQuerySet = surveyQuerySet.filter(releaseDate=aQuery.date)
-    
+        
+    if aQuery.qualtricsSurveyID != None:
+        surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
+                
     if len(aQuery.questionThemes) != 0:
         questionQuerySet = questionQuerySet.filter(questionTheme=aQuery.questionThemes)
-        
-    qObject = Q()
-    for e in surveyQuerySet:
-        qObject |= Q(surveyID=e.id)
+    
+    questionQuerySet = None
+    if len(surveyQuerySet) != 0:    
+        qObject = Q()
+        for e in surveyQuerySet:
+            qObject |= Q(surveyID=e.id)
       
-    questionQuerySet = questionQuerySet.filter(qObject)
-      
+        questionQuerySet = QuestionTable.objects.filter(qObject)
+     
     return questionQuerySet
 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
 def GetUserResponseQuerySet(aQuery):
+    
+    # the data structure which will be returned
+    userResponseQuerySet = None
+    
     # Get all questions that match the query
     questionQuerySet = GetQuestionQuerySet(aQuery)
     
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
-    
-    # Create a queryObject that concatenates both user and questios with OR operations   
-    quereObject = Q()
-    for q in questionQuerySet:
-        for u in userQuerySet:
-            quereObject |= Q(questionID=q.id, userID = u.id)
-    
-    # Get all the userResponses that match the queryObject
-    userResponseQuerySet = UserResponseTable.objects.filter(quereObject)
-    
+        
+    if questionQuerySet != None and userQuerySet != None:
+        
+        # Create a queryObject that concatenates both userID and questionID with OR operators   
+        queryObject = Q()
+        for q in questionQuerySet:
+            for u in userQuerySet:
+                queryObject |= Q(questionID=q.id, userID = u.id)
+        
+        # Get all the userResponses that match the queryObject
+        userResponseQuerySet = UserResponseTable.objects.filter(queryObject)
+        
     return userResponseQuerySet
 
 ##################################################################################################################################
@@ -82,15 +104,14 @@ def GetUserResponseQuerySet(aQuery):
 
 def GenerateDefaultFigures(aSurvey):
 
-    aQuery = FrontEndQuery()   
-    aQuery.date = aSurvey.releaseDate
+    aQuery = FrontEndQuery()
+    aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
     
-    dateString =  aSurvey.releaseDate.strftime("%d-%m-%Y")
-    
+    dateString =  aSurvey.releaseDate.strftime("%Y-%m-%d")
     saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, dateString)
        
-    listOfImageFilePaths, dataCSVFilePath = HandleFrontEndQuery(aQuery=aQuery,
-                                                                saveToDirPath=saveToDirPath)
+    HandleFrontEndQuery(aQuery=aQuery,
+                        saveToDirPath=saveToDirPath)
         
     return True
     
@@ -123,12 +144,36 @@ def GenerateDataFile(userResponseQuerySet,
 ##################################################################################################################################
 
 def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_PATH):
-       
-    userResponseQuerySet = GetUserResponseQuerySet(aQuery)
+     
+    listOfImageFilePaths = []
+    dataCSVFilePath = []
+      
+    if aQuery.IsDateOnly():
+        
+        folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
     
-    listOfImageFilePaths = DataVisualizerMain(userResponseQuerySet, isEnglish, saveToDirPath)
-    
-    dataCSVFilePath = GenerateDataFile(userResponseQuerySet, saveToDirPath)
+        if os.path.exists(folderPath):
+            for filename in os.listdir(folderPath):
+                if os.path.isfile(os.path.join(folderPath, filename)):
+                    
+                    filePath = os.path.join(folderPath, filename)
+                    
+                    if '.csv' in filename:    
+                        dataCSVFilePath.append(filePath)
+                    else:
+                        listOfImageFilePaths.append(filePath)            
+    else:       
+        print('GetUserResponseQuerySet')
+        userResponseQuerySet = GetUserResponseQuerySet(aQuery)
+        
+        if userResponseQuerySet != None:
+            print('DataVisualizerMain')
+            listOfImageFilePaths = DataVisualizerMain(userResponseQuerySet, isEnglish, saveToDirPath)   
+        
+            print('GenerateDataFile')
+            dataCSVFilePath = GenerateDataFile(userResponseQuerySet, saveToDirPath)
+        else:
+            print('[WARNING]: HandleFrontEndQuery: No data available for selected query')
     
     return listOfImageFilePaths, dataCSVFilePath
     
@@ -139,14 +184,21 @@ def run(*arg):
 
     aQuery = None
     if len(arg) == 0:
-        dateList = ['2022-12-01','2022-12-02','2022-12-03','2022-12-04','2022-12-05','2022-12-06']
+        dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
     
         for date in dateList:
             aQuery = FrontEndQuery()   
             aQuery.date = date
-            aQuery.locations = 'AB'
-           
-            HandleFrontEndQuery(aQuery) 
+            aQuery.locations = ['AB','BC']
+            aQuery.organizationSizes = ['small']
+               
+            images, data = HandleFrontEndQuery(aQuery) 
+
+            print(images)
+            print(data)
+
+            input()
+
     else:
         aQuery = arg[0]
         return HandleFrontEndQuery(aQuery)    
