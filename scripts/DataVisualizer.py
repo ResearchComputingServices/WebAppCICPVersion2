@@ -1,5 +1,4 @@
 import os
-import time
 
 from scripts.Utils import *
 from scripts.DataVizualizers.SilderQuestions import VisualizeSliderQuestion
@@ -23,76 +22,30 @@ questionHandleDict ={   SLIDER_QUESTION : VisualizeSliderQuestion,
 ##################################################################################################################################
 def GetListOfUniqueQuestions(userResponseQuerySet):
     questionList = []
-    questionSeenList = []
-
-    s1 = time.time()
-    listOfResponses = list(userResponseQuerySet)
-    e1 = time.time()
-    print(e1 -s1)
     
-    s2 = time.time()
-    # loop over all the responses
-    for response in listOfResponses:
-       
-        question = response.questionID
-        
-        # skip the question if we have already seen it
-        if question.id in questionSeenList:
-            continue
-        else:
-            questionSeenList.append(question.id)
-        
-        # handle matrix questions differently because they have subQuestions    
-        if question.questionType == MATRIX_QUESTION:
-
-            parentQuestion = QuestionTable.objects.filter(id=question.parentQuestionID.id).first()
-
-            if parentQuestion not in questionList:
-                questionList.append(parentQuestion) 
-        else:            
-            questionList.append(question)   
+    # Get all the unique questions in the set of responses
+    questionIDs = userResponseQuerySet.order_by().values_list('questionID').distinct()
    
-    e2 = time.time()
-    print(e2 - s2)
+    # use the unique questionIDs to get a list of the questions
+    
+    if questionIDs:
+        for qID in questionIDs:
+            questionQuerySet = QuestionTable.objects.filter(id=qID[0])
+
+            if len(questionQuerySet) == 1:
+                question = questionQuerySet.first()
+
+                # handle matrix questions differently because they have subQuestions    
+                if question.questionType == MATRIX_QUESTION:
+
+                    parentQuestion = QuestionTable.objects.filter(id=question.parentQuestionID.id).first()
+
+                    if parentQuestion not in questionList:
+                        questionList.append(parentQuestion) 
+                else:            
+                    questionList.append(question)   
    
     return questionList
-
-# def GetListOfUniqueQuestions(userResponseQuerySet):
-#     questionList = []
-    
-#     # Get all the unique questions in the set of responses
-    
-#     start1 = time.time()
-#     questionIDs = userResponseQuerySet.order_by().values_list('questionID').distinct()
-#     end1 = time.time()
-#     print('Sort: ', end1 - start1)
-   
-#     # use the unique questionIDs to get a list of the questions
-    
-#     if questionIDs:
-#         start1 = time.time()
-#         for qID in questionIDs:
-#             questionQuerySet = QuestionTable.objects.filter(id=qID[0])
-
-#             if len(questionQuerySet) == 1:
-#                 question = questionQuerySet.first()
-
-#                 # handle matrix questions differently because they have subQuestions    
-#                 if question.questionType == MATRIX_QUESTION:
-
-#                     parentQuestion = QuestionTable.objects.filter(id=question.parentQuestionID.id).first()
-
-#                     if parentQuestion not in questionList:
-#                         questionList.append(parentQuestion) 
-#                 else:            
-#                     questionList.append(question)   
-#             end2 = time.time()
-#             print(end2 - start2)
-   
-#     end3 = time.time()
-#     print('GetListOfUniqueQuestions: ', end3 - start1)
-#     input()              
-#     return questionList
 
 ##################################################################################################################################
 # This function returns a list responses to the question passed as an arguement
@@ -131,17 +84,13 @@ def DataVisualizerMain(userResponseQuerySet,
     if not isExist:
         os.makedirs(saveToDirPath)
     
-    start = time.time()
     questionList = GetListOfUniqueQuestions(userResponseQuerySet)
-    end = time.time()
-    print('GetListOfUniqueQuestions: ', end - start)
     
     imageFilePathList = []
     
     for question in questionList:
         print(question.questionType)
         
-        start = time.time()
         if question.questionTheme in QUESTION_THEME_SKIP_LIST:
             continue
         
@@ -155,8 +104,6 @@ def DataVisualizerMain(userResponseQuerySet,
                                                                         isEnglish= isEnglish,
                                                                         saveToDirPath = saveToDirPath) 
             imageFilePathList.append(imageFilePath)
-        end = time.time()
-        print(end - start)
     
     return imageFilePathList
 
