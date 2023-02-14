@@ -94,8 +94,8 @@ def CreatePieChart( responseDict,
                     title=graphTitle,
                     hole=PIE_CHART_HOLE_RADIUS,
                     template='presentation',
-                    width=FIGURE_WIDTH_PX,
-                    height=FIGURE_HEIGHT_PX,
+                    # width=FIGURE_WIDTH_PX,
+                    # height=FIGURE_HEIGHT_PX,
                     color_discrete_sequence=cmap)
 
     fig.update_layout(font_family='Helvetica Now', 

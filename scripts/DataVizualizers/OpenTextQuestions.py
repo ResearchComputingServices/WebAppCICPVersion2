@@ -52,8 +52,8 @@ def CreateWordCloud(wordCloudText,
        
     # create the word cloud object
     wc = WordCloud(font_path=FONT_LOCATION,
-                   width=FIGURE_WIDTH_PX,
-                   height=FIGURE_HEIGHT_PX,
+                #    width=FIGURE_WIDTH_PX,
+                #    height=FIGURE_HEIGHT_PX,
                    background_color='white',
                    colormap=cmap)
     
@@ -66,9 +66,9 @@ def CreateWordCloud(wordCloudText,
     plt.imshow(wc)
     
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())
+    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
-    plt.savefig(figureFilePath, format="png")
+    plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)
     
     return figureFilePath
