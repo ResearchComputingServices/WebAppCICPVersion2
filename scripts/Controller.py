@@ -2,6 +2,7 @@ from django.db.models import Q, QuerySet
 import pandas as pd
 from datetime import date, datetime
 import uuid
+import time
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -84,18 +85,22 @@ def GetUserResponseQuerySet(aQuery):
     
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
-        
+             
     if questionQuerySet != None and userQuerySet != None:
         
         # Create a queryObject that concatenates both userID and questionID with OR operators   
-        queryObject = Q()
+        questionQueryObject = Q()
         for q in questionQuerySet:
-            for u in userQuerySet:
-                queryObject |= Q(questionID=q.id, userID = u.id)
+            questionQueryObject |= Q(questionID=q.id)
         
-        # Get all the userResponses that match the queryObject
-        userResponseQuerySet = UserResponseTable.objects.filter(queryObject)
+        userResponseQuerySet = UserResponseTable.objects.filter(questionQueryObject)
+     
+        userQueryObject = Q()
+        for u in userQuerySet:
+            userQueryObject |= Q(userID = u.id)
         
+        userResponseQuerySet = userResponseQuerySet.filter(userQueryObject)
+            
     return userResponseQuerySet
 
 ##################################################################################################################################
@@ -148,7 +153,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
     listOfImageFilePaths = []
     dataCSVFilePath = []
       
-    if aQuery.IsDateOnly() and False:
+    if aQuery.IsDateOnly():
         
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
     
@@ -189,6 +194,7 @@ def run(*arg):
         for date in dateList:
             aQuery = FrontEndQuery()   
             aQuery.date = date
+            aQuery.organizationSizes = ['small','medium','large']
           
             images, data = HandleFrontEndQuery(aQuery) 
 
