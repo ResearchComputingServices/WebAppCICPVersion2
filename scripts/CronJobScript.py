@@ -6,6 +6,7 @@ from datetime import date, datetime
 from scripts.FetchData import FetchDataMain
 from scripts.ExtractSurvey import ExtractSurveyMain
 from scripts.ExtractResponses import ExtractResponsesMain
+from scripts.Controller import GenerateDefaultFigures
 
 ##################################################################################################################################
 # Main function 
@@ -22,6 +23,9 @@ def HandleReleasedSurvey(currentSurvey, currentDate):
     print('ExtractResponsesMain')
     successFlag = ExtractResponsesMain(aSurvey=currentSurvey)
     
+    print('GenerateDefaultFigures')
+    successFlag = GenerateDefaultFigures(aSurvey=currentSurvey) 
+        
     if successFlag:
         currentSurvey.fetchedDate = currentDate
         currentSurvey.save()
