@@ -94,7 +94,7 @@ def DataVisualizerMain(userResponseQuerySet,
     
         if question.questionType not in questionHandleDict.keys():
             print('[ERROR]: Unknown question type: ', question.questionType)
-        else:             
+        else:                        
             imageFilePath = questionHandleDict[question.questionType](  question = question,
                                                                         userResponses = userResponseList, 
                                                                         isEnglish= isEnglish,

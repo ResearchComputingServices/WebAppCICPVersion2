@@ -148,7 +148,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
     listOfImageFilePaths = []
     dataCSVFilePath = []
       
-    if aQuery.IsDateOnly():
+    if aQuery.IsDateOnly() and False:
         
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
     
@@ -184,14 +184,12 @@ def run(*arg):
 
     aQuery = None
     if len(arg) == 0:
-        dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
-    
+       # dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
+        dateList = ['2023-02-01']
         for date in dateList:
             aQuery = FrontEndQuery()   
             aQuery.date = date
-            aQuery.locations = ['AB','BC']
-            aQuery.organizationSizes = ['small']
-               
+          
             images, data = HandleFrontEndQuery(aQuery) 
 
             print(images)
