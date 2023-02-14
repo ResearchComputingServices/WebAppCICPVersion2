@@ -35,12 +35,13 @@ def GetAnnotation(numberOfResponses, isEnglish):
 #
 ##################################################################################################################################
 
-def SaveFigure(fig):
+def SaveFigure(fig,
+               saveToDirPath=FIGURE_FOLDER_PATH):
     
     fig = AddWaterMarkImage(fig)
     
     filename = str(uuid.uuid4())
-    figureFilePath = os.path.join(FIGURE_FOLDER_PATH, filename)
+    figureFilePath = os.path.join(saveToDirPath, filename)
     
     fig.write_image(figureFilePath,format='png',engine='kaleido')
 

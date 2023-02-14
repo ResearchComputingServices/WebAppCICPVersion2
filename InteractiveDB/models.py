@@ -9,7 +9,7 @@ class SurveyTable(models.Model):
     fetchedDate = models.DateField(null=True,blank=True)
        
     def __str__(self):
-        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} date: {self.releaseDate}"
+        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate}"
     
             
 class QuestionTable(models.Model):

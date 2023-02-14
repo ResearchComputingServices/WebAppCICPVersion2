@@ -13,9 +13,10 @@ from scripts.DataVizualizers.VizUtils import *
 #
 ##################################################################################################################################
 
-def VisualizeOpenTextQuestion(question, 
-                              userResponses,
-                              isEnglish=True):  
+def VisualizeOpenTextQuestion(  question, 
+                                userResponses,
+                                isEnglish=True,
+                                saveToDirPath = FIGURE_FOLDER_PATH):
     
     title = GetGraphicTitle(question, isEnglish)
        
@@ -26,10 +27,11 @@ def VisualizeOpenTextQuestion(question,
         if responseText != None and responseText != '':
             allResponseText += ' ' + responseText
     
-    return CreateWordCloud( allResponseText,  
-                            title,
-                            len(userResponses),
-                            isEnglish)
+    return CreateWordCloud( wordCloudText = allResponseText,  
+                            title = title,
+                            numberOfResponses = len(userResponses),
+                            isEnglish = isEnglish,
+                            saveToDirPath = saveToDirPath)
 
 ##################################################################################################################################
 #
@@ -38,7 +40,8 @@ def VisualizeOpenTextQuestion(question,
 def CreateWordCloud(wordCloudText, 
                     title,
                     numberOfResponses,
-                    isEnglish):
+                    isEnglish = True,
+                    saveToDirPath = FIGURE_FOLDER_PATH):
     
     if len(wordCloudText.strip()) == 0:
         return False
@@ -64,10 +67,8 @@ def CreateWordCloud(wordCloudText,
     
     # save the wordcloud to a file
     filename = str(uuid.uuid4())
-    figureFilePath = os.path.join(FIGURE_FOLDER_PATH, filename)
+    figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format="png")
     plt.close(fig)
-    
-    AddAnnotation(fig, numberOfResponses, isEnglish)
     
     return figureFilePath

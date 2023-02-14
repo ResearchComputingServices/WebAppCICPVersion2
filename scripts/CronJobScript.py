@@ -46,22 +46,14 @@ def run(*args):
     ##########################################################
     # TODO: Remove this block before production!
     # Remove comments below to test this script
-    #AddSurvey('SV_8epSb35vMSlpwea','2022-12-01')    # Sample Survey
-    # AddSurvey('SV_aYnUZN7y2nQhXJc','2022-11-30')    # Yr1 Wk 1
-    # AddSurvey('SV_0eMEVIZkeSbKyjk','2022-12-01')
-    # AddSurvey('SV_4PKhCR2n0Hw6xbo','2022-12-13')
-    # AddSurvey('SV_8D2MdCYlLUZqu22','2022-12-19')
-    # AddSurvey('SV_0SqKvaglCv3ophA','2022-12-19')
-    # AddSurvey('SV_3agBieQhc6t7d2K','2023-01-20')
-    # AddSurvey('SV_dhjlzfTnCj7mwT4','2023-01-20')
-    AddSurvey('SV_1RnShmHTBkbGhCu','2023-01-20')
-    
-    # AddSurvey('SV_4PKhCR2n0Hw6xbo','2022-12-08') 
+    # AddSurvey('SV_8epSb35vMSlpwea','2022-12-01')    # Sample Survey
+    # AddSurvey('SV_4PKhCR2n0Hw6xbo','2022-12-08')
+    # AddSurvey('SV_aYnUZN7y2nQhXJc','2022-12-17')
     # AddSurvey('SV_0eMEVIZkeSbKyjk','2023-02-03')
-    # AddSurvey('SV_dhjlzfTnCj7mwT4','2023-02-01')
+    AddSurvey('SV_dhjlzfTnCj7mwT4','2023-02-01')
     # AddSurvey('SV_6mJwD0WeUarScKy','2023-01-01')
     # AddSurvey('SV_dhjlzfTnCj7mwT4','2023-01-01')
-    # ##########################################################
+    ##########################################################
     
     surveyQuerySet = SurveyTable.objects.all()
     

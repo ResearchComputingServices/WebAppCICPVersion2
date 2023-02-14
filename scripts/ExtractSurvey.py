@@ -25,9 +25,8 @@ def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
         question.jsonKey = qDictID
         
         # populate the questionTheme field 
-        questionLabelField = qDict['questionLabel']
         question.questionTheme = ''
-
+        questionLabelField = qDict['questionLabel']
         if questionLabelField != None:
             questionLabelFieldSplit = questionLabelField.split('_')
             if len(questionLabelFieldSplit) >= 1:

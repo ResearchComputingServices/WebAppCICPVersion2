@@ -9,7 +9,8 @@ from scripts.DataVizualizers.VizUtils import *
 
 def VisualizeMultipleChoiceQuestion(question, 
                                     userResponses,
-                                    isEnglish = True):    
+                                    isEnglish = True,
+                                    saveToDirPath = FIGURE_FOLDER_PATH):    
     
     title = GetGraphicTitle(question, isEnglish)
         
@@ -54,7 +55,8 @@ def VisualizeMultipleChoiceQuestion(question,
     return CreatePieChart(  responseDict, 
                             title, 
                             totalResponses,
-                            isEnglish)
+                            isEnglish,
+                            saveToDirPath)
 
 ##################################################################################################################################
 #
@@ -63,7 +65,8 @@ def VisualizeMultipleChoiceQuestion(question,
 def CreatePieChart( responseDict,
                     graphicTitle,
                     numberOfResponses,
-                    isEnglish):
+                    isEnglish = True,
+                    saveToDirPath = FIGURE_FOLDER_PATH):
   
     graphTitle = WrapText(graphicTitle)
         
@@ -108,4 +111,4 @@ def CreatePieChart( responseDict,
 
     AddAnnotation(fig, numberOfResponses, isEnglish)
     
-    return SaveFigure(fig)
+    return SaveFigure(fig,saveToDirPath)
