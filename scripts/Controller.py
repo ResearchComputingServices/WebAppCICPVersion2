@@ -129,17 +129,20 @@ def GenerateDataFile(userResponseQuerySet,
             
     mainDataFrame = pd.DataFrame()
     
+    s1 = time.time()
     for user in userResponseQuerySet:
         entryDict = user.GetDataFileEntry()
-        
+       
         if len(mainDataFrame.index) != 0:
             mainDataFrame = mainDataFrame.append(entryDict,ignore_index=True)
         else:
             mainDataFrame = pd.DataFrame(entryDict, index=[0])
-        
+            
+    e1 = time.time()
+    print('for-loop:', e1 - s1)
+    
     filename = str(uuid.uuid4()) + ".csv"
     figureFilePath = os.path.join(saveToDirPath, filename)
-
     mainDataFrame.to_csv(figureFilePath)
     
     return figureFilePath
@@ -173,10 +176,18 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
         
         if userResponseQuerySet != None:
             print('DataVisualizerMain')
+            s0 = time.time()
             listOfImageFilePaths = DataVisualizerMain(userResponseQuerySet, isEnglish, saveToDirPath)   
-        
+            e0 = time.time()
+            print('DataVisualizerMain', e0 - s0)
+            
+            
             print('GenerateDataFile')
+            s1 = time.time()    
             dataCSVFilePath = GenerateDataFile(userResponseQuerySet, saveToDirPath)
+            e1 = time.time()
+            print('GenerateDataFile: ', e1 -s1)
+        
         else:
             print('[WARNING]: HandleFrontEndQuery: No data available for selected query')
     
@@ -190,7 +201,7 @@ def run(*arg):
     aQuery = None
     if len(arg) == 0:
        # dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
-        dateList = ['2023-02-03']
+        dateList = ['2022-12-17']
         for date in dateList:
             aQuery = FrontEndQuery()   
             aQuery.date = date

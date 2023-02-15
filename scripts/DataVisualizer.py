@@ -1,4 +1,5 @@
 import os
+import time
 
 from scripts.Utils import *
 from scripts.DataVizualizers.SilderQuestions import VisualizeSliderQuestion
@@ -56,7 +57,7 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
     userResponseList = []
     
     if question.questionType == MATRIX_QUESTION:
-        subQuestionsQuerySet = QuestionTable.objects.filter(parentQuestionID=question)
+        subQuestionsQuerySet = QuestionTable.objects.filter(parentQuestionID=question.id)
         
         for subQuestion in subQuestionsQuerySet:
             responsesToQuestion = userResponseQuerySet.filter(questionID=subQuestion.id)
@@ -68,7 +69,9 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
     
         for response in responsesToQuestion:
             userResponseList.append(response)
-        
+    
+
+    
     return userResponseList
 
 ##################################################################################################################################
@@ -89,22 +92,24 @@ def DataVisualizerMain(userResponseQuerySet,
     imageFilePathList = []
     
     for question in questionList:
-        print(question.questionType)
-        
+       
         if question.questionTheme in QUESTION_THEME_SKIP_LIST:
             continue
-        
-        userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)
     
+        userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)
+        
         if question.questionType not in questionHandleDict.keys():
             print('[ERROR]: Unknown question type: ', question.questionType)
         else:                        
+            s = time.time()
             imageFilePath = questionHandleDict[question.questionType](  question = question,
                                                                         userResponses = userResponseList, 
                                                                         isEnglish= isEnglish,
                                                                         saveToDirPath = saveToDirPath) 
+            e = time.time()
+            print(question.questionType, e-s)
             imageFilePathList.append(imageFilePath)
-    
+               
     return imageFilePathList
 
 ##################################################################################################################################

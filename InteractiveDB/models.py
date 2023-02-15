@@ -86,7 +86,7 @@ class UserResponseTable(models.Model):
     def GetDataFileEntry(self):
         
         questionKey = self.questionID.jsonKey
-        questionText = self.questionID.questionTextEnglish # TODO: handle fench as well
+        questionText = self.questionID.questionTextEnglish # TODO: handle fench
         questionTheme = self.questionID.questionTheme
         
         userProv = self.userID.province
@@ -115,7 +115,7 @@ class UserResponseTable(models.Model):
                         'responseText' : responseText,
                         'responseValue' : responseValue                       
                     }      
-        
+            
         return entryDict
     
     # This gives the model an explicit ordering

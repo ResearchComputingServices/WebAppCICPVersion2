@@ -293,8 +293,8 @@ def CreateHorizontalBarChart(   responseDict,
                     color="names",
                     text_auto='.2s',
                     color_discrete_sequence=colourMap,
-                    # width=FIGURE_WIDTH_PX,
-                    # height=FIGURE_HEIGHT_PX
+                    width=FIGURE_WIDTH_PX,
+                    height=FIGURE_HEIGHT_PX,
                     orientation='h')
     
     fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)      
