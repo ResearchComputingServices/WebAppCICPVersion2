@@ -20,7 +20,7 @@ def VisualizeSliderQuestion(question,
     
     # Generate the responseDict (choiceID:average as the key:value pair)
     # initially set the average to 0
-    choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)
+    choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)  
    
     if len(choiceQuerySet) == 1:
         filename = VisualizeSingleChoiceSliderQuestion( title=title,
@@ -29,7 +29,7 @@ def VisualizeSliderQuestion(question,
                                                         isEnglish=isEnglish,
                                                         saveToDirPath=saveToDirPath)
     else:
-        filename = VisualizeSingleChoiceSliderQuestion( title=title,
+        filename = VisualizeMultiChoiceSliderQuestion( title=title,
                                                         choiceQuerySet=choiceQuerySet,
                                                         userResponses=userResponses,
                                                         isEnglish=isEnglish,
@@ -51,6 +51,10 @@ def VisualizeSingleChoiceSliderQuestion(title,
     maxValue = -1*A_LARGE_NUMBER
     numberOfResponses = len(userResponses)
     for response in userResponses:
+        
+        if response.answerValue == None:
+            continue
+        
         value = int(response.answerValue)
         
         # update histo

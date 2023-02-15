@@ -56,8 +56,7 @@ def run(*args):
     AddSurvey('SV_0eMEVIZkeSbKyjk','2023-02-03')
     AddSurvey('SV_dhjlzfTnCj7mwT4','2023-02-01')
     AddSurvey('SV_6mJwD0WeUarScKy','2023-01-01')
-    AddSurvey('SV_dhjlzfTnCj7mwT4','2023-01-01')
-    #########################################################
+    # #########################################################
     
     surveyQuerySet = SurveyTable.objects.all()
     
