@@ -4,6 +4,10 @@
 
 ## Install Prerequisite Software
 
+First run:
+```bash
+sudo apt udpate
+```
 Run these commands to install Ubuntu software packages:
 
 ```bash
