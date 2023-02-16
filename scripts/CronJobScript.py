@@ -45,7 +45,6 @@ def AddSurvey(id,date):
     survey.releaseDate = date
     survey.save()
 
-
 def run(*args):
     ##########################################################
     # TODO: Remove this block before production!

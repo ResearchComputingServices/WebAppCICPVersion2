@@ -52,8 +52,8 @@ def CreateWordCloud(wordCloudText,
        
     # create the word cloud object
     wc = WordCloud(font_path=FONT_LOCATION,
-                #    width=FIGURE_WIDTH_PX,
-                #    height=FIGURE_HEIGHT_PX,
+                   width=FIGURE_WIDTH_PX,
+                   height=FIGURE_HEIGHT_PX,
                    background_color='white',
                    colormap=cmap)
     

@@ -1,4 +1,5 @@
 from django.db import models
+import pandas as pd
 
 # on_delete defines what to do with the current table if the foreign key is deleted
 
@@ -35,6 +36,20 @@ class QuestionTable(models.Model):
    
     def __str__(self):
         return f"Question: {self.questionName} \n id: {self.id} \n type: {self.questionType} \n theme: {self.questionTheme} \n text: {self.questionTextEnglish} "   
+    
+    def GetDataFileEntry(self):
+        
+        questionKey = self.jsonKey
+        questionText = self.questionTextEnglish # TODO: handle fench
+        questionTheme = self.questionTheme
+    
+        df = pd.DataFrame({ 'QuestionKey' : questionKey,
+                            'QuestionText' : questionText,
+                            'QuestionTheme' : questionTheme                       
+                            }, index=[0])
+
+        return df
+    
     
 class ChoiceTable(models.Model):
     
@@ -84,15 +99,13 @@ class UserResponseTable(models.Model):
     # this function returns a dictionary which will be entered into the data file sent to the front end
     # the key:value pair is columnHeader:entry        
     def GetDataFileEntry(self):
-        
-        questionKey = self.questionID.jsonKey
-        questionText = self.questionID.questionTextEnglish # TODO: handle fench
-        questionTheme = self.questionID.questionTheme
-        
+    
         userProv = self.userID.province
         userSize = self.userID.size
         userDomain = self.userID.domain
         userLang = self.userID.languagePreference
+        responseText = self.answerText
+        responseValue = self.answerValue
         
         choiceRecode = '-1'
         choiceText = ''
@@ -100,23 +113,17 @@ class UserResponseTable(models.Model):
             choiceRecode = self.choiceID.recode
             choiceText = self.choiceID.choiceTextEnglish # TODO: handle french
         
-        responseText = self.answerText
-        responseValue = self.answerValue
-            
-        entryDict = {   'QuestionKey' : questionKey,
-                        'QuestionText' : questionText,
-                        'QuestionTheme' : questionTheme, 
-                        'userProv' : userProv,
-                        'userSize' : userSize,
-                        'userDomain' : userDomain,
-                        'userLang' : userLang,
-                        'choiceRecode' : choiceRecode,
-                        'choiceText' : choiceText,
-                        'responseText' : responseText,
-                        'responseValue' : responseValue                       
-                    }      
-            
-        return entryDict
+        df = pd.DataFrame({ 'userProv' : userProv,
+                            'userSize' : userSize,
+                            'userDomain' : userDomain,
+                            'userLang' : userLang,
+                            'choiceRecode' : choiceRecode,
+                            'choiceText' : choiceText,
+                            'responseText' : responseText,
+                            'responseValue' : responseValue                       
+                        }, index=[0])
+
+        return df
     
     # This gives the model an explicit ordering
     class Meta:
