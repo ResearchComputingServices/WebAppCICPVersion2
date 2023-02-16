@@ -66,9 +66,9 @@ def CreateWordCloud(wordCloudText,
     plt.imshow(wc)
     
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())
+    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
-    plt.savefig(figureFilePath, format="png")
+    plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)
     
     return figureFilePath

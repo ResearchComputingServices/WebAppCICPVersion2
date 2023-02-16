@@ -40,10 +40,10 @@ def SaveFigure(fig,
     
     fig = AddWaterMarkImage(fig)
     
-    filename = str(uuid.uuid4())
+    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     
-    fig.write_image(figureFilePath,format='png',engine='kaleido')
+    fig.write_image(figureFilePath,format=GRAPHIC_FILE_TYPE,engine='kaleido')
 
     return figureFilePath
 

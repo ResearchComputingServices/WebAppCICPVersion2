@@ -3,6 +3,8 @@ import plotly.express as px
 from scripts.Utils import *
 from scripts.DataVizualizers.VizUtils import *
 
+import time
+
 ##################################################################################################################################
 #
 ##################################################################################################################################
@@ -11,7 +13,7 @@ def VisualizeMultipleChoiceQuestion(question,
                                     userResponses,
                                     isEnglish = True,
                                     saveToDirPath = FIGURE_FOLDER_PATH):    
-    
+    s = time.time()
     title = GetGraphicTitle(question, isEnglish)
         
     # Generate the responseDict (choiceID:average as the key:value pair) initially set the average to 0
@@ -47,10 +49,12 @@ def VisualizeMultipleChoiceQuestion(question,
             responseDict[key] += value
             totalResponses +=1
     
-
     for key in responseDict.keys():
         if float(totalResponses) > 0:
             responseDict[key] = float(responseDict[key]) / float(totalResponses)   
+    
+    e = time.time()
+    print('VisualizeMultipleChoiceQuestion:',e - s)
     
     return CreatePieChart(  responseDict, 
                             title, 
@@ -67,7 +71,7 @@ def CreatePieChart( responseDict,
                     numberOfResponses,
                     isEnglish = True,
                     saveToDirPath = FIGURE_FOLDER_PATH):
-  
+
     graphTitle = WrapText(graphicTitle)
         
     # Now that we have the extracted data can create the graphic. 
@@ -110,5 +114,5 @@ def CreatePieChart( responseDict,
     fig.update_yaxes(visible=False)
 
     AddAnnotation(fig, numberOfResponses, isEnglish)
-    
+      
     return SaveFigure(fig,saveToDirPath)

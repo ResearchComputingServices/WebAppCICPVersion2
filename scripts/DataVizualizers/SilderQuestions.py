@@ -20,7 +20,7 @@ def VisualizeSliderQuestion(question,
     
     # Generate the responseDict (choiceID:average as the key:value pair)
     # initially set the average to 0
-    choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)
+    choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)  
    
     if len(choiceQuerySet) == 1:
         filename = VisualizeSingleChoiceSliderQuestion( title=title,
@@ -29,7 +29,7 @@ def VisualizeSliderQuestion(question,
                                                         isEnglish=isEnglish,
                                                         saveToDirPath=saveToDirPath)
     else:
-        filename = VisualizeSingleChoiceSliderQuestion( title=title,
+        filename = VisualizeMultiChoiceSliderQuestion( title=title,
                                                         choiceQuerySet=choiceQuerySet,
                                                         userResponses=userResponses,
                                                         isEnglish=isEnglish,
@@ -51,6 +51,10 @@ def VisualizeSingleChoiceSliderQuestion(title,
     maxValue = -1*A_LARGE_NUMBER
     numberOfResponses = len(userResponses)
     for response in userResponses:
+        
+        if response.answerValue == None:
+            continue
+        
         value = int(response.answerValue)
         
         # update histo
@@ -137,25 +141,7 @@ def CreateVerticleBarChart( responseDataFrame,
                         plot_bgcolor='rgb(232,232,232)',
                         title_font={'size': 20},
                         showlegend=False)
-        
-    # fig.update_xaxes(   visible=True, 
-    #                     showline=True,
-    #                     gridcolor='rgb(152,152,152)',
-    #                     showticklabels=True, 
-    #                     tickangle = -45, 
-    #                     automargin =  True, 
-    #                     title=xAxisTitle,
-    #                     tickfont={'size': 15},
-    #                     tickvals=tickValues,
-    #                     ticktext=tickLabels)
-    
-    # fig.update_yaxes(   visible=True,
-    #                     showticklabels=True,
-    #                     tickangle = 0,
-    #                     automargin =  True,
-    #                     title='',
-    #                     tickfont={'size': 15})                       
-
+                            
     AddAnnotation(fig, numberOfResponses, isEnglish)
 
     return SaveFigure(fig, saveToDirPath)
@@ -307,9 +293,9 @@ def CreateHorizontalBarChart(   responseDict,
                     color="names",
                     text_auto='.2s',
                     color_discrete_sequence=colourMap,
-                    orientation='h',
                     width=FIGURE_WIDTH_PX,
-                    height=FIGURE_HEIGHT_PX)
+                    height=FIGURE_HEIGHT_PX,
+                    orientation='h')
     
     fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)      
     
