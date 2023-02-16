@@ -1,11 +1,37 @@
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
+from WebAppCICPVersion2 import settings
+
 from dataclasses import dataclass, field
 from typing import List, Dict
+import random
+import re 
+import os
+import textwrap
+
+
+
+A_LARGE_NUMBER = 99999999999
+
 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
 
+# Question Types
+OPEN_TEXT_QUESTION =        'TE'
+MULTIPLE_CHOICE_QUESTION =  'MC'
+SLIDER_QUESTION =           'Slider'
+MATRIX_QUESTION =           'Matrix'
+RANK_ORDER_QUESTION =       'RO'
+TEXT_GRAPHIC_QUESTION =     'DB'
+
+# Question Themes to skip
+QUESTION_THEME_SKIP_LIST = ['Consent','CONSENT','skip','SKIP']
+
+EXTERNAL_REF_KEY = 'ExternalDataReference'
+
+# These are the key:value pairs which are removed from the response JSON file to make it easier to 
+# extract the responses
 RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'ResponseSet',
                                 'IPAddress',
@@ -19,8 +45,29 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'LocationLatitude',
                                 'LocationLongitude',
                                 'LocationAccuracy',
-                                'Consent',
-                                'ExternalDataReference']
+                                'Consent']
+
+GRAPHIC_FILE_TYPE = 'png'
+GRAPHIC_FILE_SUFFIX = '.'+GRAPHIC_FILE_TYPE
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+
+FIGURE_WIDTH_PX = 800
+FIGURE_HEIGHT_PX = 600
+
+PIE_CHART_HOLE_RADIUS = 0.5
+
+MAX_TITLE_LENGTH = 75
+
+FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regular.ttf')
+
+FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'tmpImages')
+
+DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'DefaultImages')
+
+WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
 
 ##################################################################################################################################
 # This dataClass contains all the values which the user wants to filter on
@@ -30,8 +77,12 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
 @dataclass
 class FrontEndQuery:
     
-    # Filter on Survey
+    # Filter on Survey release data
     date: str = None
+    
+    # Filter by survey ID
+    # this filter is only used for the default image creation
+    qualtricsSurveyID: str = None
     
     # Filter on Question
     questionThemes: List = field(default_factory=lambda: [])  
@@ -40,8 +91,102 @@ class FrontEndQuery:
     locations: List = field(default_factory=lambda: []) 
     organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
-    fieldOfWork: List = field(default_factory=lambda: []) 
+    fieldOfWork: List = field(default_factory=lambda: [])       
+    
+    def IsDateOnly(self):
+        
+        isDateOnly = False
+        
+        if (len(self.questionThemes) == 0 and 
+            len(self.locations) == 0 and 
+            len(self.organizationSizes) == 0 and
+            len(self.languagePreference) == 0 and
+            len(self.fieldOfWork) == 0 and
+            self.qualtricsSurveyID == None):
+                isDateOnly = True
+        
+        return isDateOnly
+        
  
+##################################################################################################################################
+# This function removes any text in brackets and replaces special characeter codes with the actual character
+##################################################################################################################################
+
+def CleanText(text):
+    cleanedText = text
+    cleanedText= cleanedText.replace("\n","")
+    cleanedText = re.sub("[\[].*?[\]]", "", cleanedText)
+    #cleanedText = re.sub("[\(].*?[\)]", "", cleanedText)
+    cleanedText = re.sub("[\<].*?[\>]", "", cleanedText)
+    cleanedText = cleanedText.replace('&rsquo;','\'')
+    cleanedText = cleanedText.replace('&lsquo;','\'')
+    cleanedText = cleanedText.replace('&#39;','\'')
+        
+    return cleanedText
+ 
+##################################################################################################################################
+# This function ensures that the string passed as an agrument is less than MAX_LEGNTH. It does this by adding a line break 
+# to the string when it exceeds the length limit.
+##################################################################################################################################
+
+def WrapText(text, titleLength = MAX_TITLE_LENGTH):
+    
+    text = CleanText(text)
+    
+    tw = textwrap.TextWrapper(width=titleLength)
+    word_list = tw.wrap(text=text)
+            
+    newTitle = '<br>'.join(word_list)
+    
+    return newTitle    
+
+##################################################################################################################################
+# This function returns the numerical values of the max and min of the graphs range
+##################################################################################################################################
+
+def GetRange(allPositive, 
+             allNegative,
+             defaultMin = 0,
+             defaultMax = 10):
+    
+    xMin = defaultMin
+    xMax = defaultMax
+    
+    if allNegative:
+        xMin = -1*defaultMax
+        xMax = 0
+    elif not allPositive and not allPositive:
+        xMin = -1*defaultMax
+        xMax = defaultMax
+        
+    return xMin, xMax 
+
+##################################################################################################################################
+# This functions is a helper function for the CreateVerticalBarChart function. It takes the title string from the question 
+# DataClass and extracts from it the values and labels for the range of the figure.
+##################################################################################################################################
+
+def CreateLabels(titleText):
+    tickValues = []
+    tickLabels = []
+
+    # get the text in brackets
+    bracketText = CleanText(titleText[titleText.find("(")+1:titleText.find(")")])
+
+    # split it by comma
+    bracketTextSplit = bracketText.split(',')    
+    
+    if len(bracketTextSplit) != 0:
+        
+        # split each pair by colon
+        for pair in bracketTextSplit:
+            pairSplit = pair.split(':')
+            if len(pairSplit) == 2:
+                tickValues.append(float(pairSplit[0]))      
+                tickLabels.append(pairSplit[1])   
+        
+    return tickValues, tickLabels  
+  
 ##################################################################################################################################
 # 
 ##################################################################################################################################
@@ -76,3 +221,27 @@ def GetSurvey(qualtricSurveyID):
         print('[ERROR]: GetSurvey: qualtricsSurveyID is not unique: ', qualtricSurveyID, len(surveyQuerySet))
     
     return survey
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+def GetUser(externalRefNum):
+    
+    userQuerySet = UserTable.objects.filter(externalDataReference=externalRefNum)
+    user = None
+    if len(userQuerySet) == 1:
+        user = userQuerySet.first()      
+    else:    
+        ##########################################################
+        # Remove this could after development
+        # replace it with code to handle a user doesnt exist
+        user = UserTable()
+        user.externalDataReference = externalRefNum
+        user.province = 'AB'
+        user.size = 'small'
+        user.domain = 'other'
+        user.languagePreference = 'EN'
+        user.save()
+        ##########################################################
+
+    return user

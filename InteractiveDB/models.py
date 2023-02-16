@@ -1,4 +1,5 @@
 from django.db import models
+import pandas as pd
 
 # on_delete defines what to do with the current table if the foreign key is deleted
 
@@ -6,10 +7,10 @@ class SurveyTable(models.Model):
     # Fields/Attributes
     qualtricsSurveyID = models.CharField(max_length=30)
     releaseDate = models.DateField()
-    accessedDate = models.DateField(null=True,blank=True)
+    fetchedDate = models.DateField(null=True,blank=True)
        
     def __str__(self):
-        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} date: {self.releaseDate}"
+        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate}"
     
             
 class QuestionTable(models.Model):
@@ -17,15 +18,38 @@ class QuestionTable(models.Model):
     # Foreign Keys
     surveyID = models.ForeignKey(SurveyTable,on_delete=models.CASCADE)
     
+    parentQuestionID = models.ForeignKey('self', 
+                                         on_delete=models.CASCADE, 
+                                         null=True,
+                                         blank=True)
+    
     # Fields/Attributes
-    questionType = models.CharField(max_length=30) # Mutliple choice, Rank Order, Slider, True/False, Open Text
+    questionType = models.CharField(max_length=30) # Mutliple choice, Rank Order, Slider, matrix, Open Text, text/graphic
     questionName = models.CharField(max_length=30) # This is a name attached to a question by Qualtrics
+   
     questionTextEnglish = models.TextField()
     questionTextFrench = models.TextField() 
+   
     questionTheme = models.TextField() 
-    
+   
+    jsonKey = models.TextField() # used for matching with french survey file
+   
     def __str__(self):
-        return f"Question: \n name: {self.questionName} \n type: {self.questionType} \n text: {self.questionTextEnglish} "   
+        return f"Question: {self.questionName} \n id: {self.id} \n type: {self.questionType} \n theme: {self.questionTheme} \n text: {self.questionTextEnglish} "   
+    
+    def GetDataFileEntry(self):
+        
+        questionKey = self.jsonKey
+        questionText = self.questionTextEnglish # TODO: handle fench
+        questionTheme = self.questionTheme
+    
+        df = pd.DataFrame({ 'QuestionKey' : questionKey,
+                            'QuestionText' : questionText,
+                            'QuestionTheme' : questionTheme                       
+                            }, index=[0])
+
+        return df
+    
     
 class ChoiceTable(models.Model):
     
@@ -34,12 +58,11 @@ class ChoiceTable(models.Model):
     
     # Fields/Attributes
     recode = models.IntegerField()
-    choiceTextEnglish = models.TextField()
-    choiceTextFrench = models.TextField()  
+    choiceTextEnglish = models.TextField(null=True, blank=True)
+    choiceTextFrench = models.TextField(null=True, blank=True)  
     
     def __str__(self):
         return f"choice: choiceText: {self.choiceTextEnglish} recode: {self.recode}" 
-    
     
 class UserTable(models.Model):
     
@@ -67,7 +90,41 @@ class UserResponseTable(models.Model):
     answerValue = models.TextField(null=True)
     
     def __str__(self):
+        recode = '-1'
         if self.choiceID != None:
-            return f"UserResponse: \nuserID: {self.userID.id} \nrecode: {self.choiceID.recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
-        else:
-            return f"UserResponse: \nuserID: {self.userID.id} \nanswerText: {self.answerText} \n" 
+            recode = self.choiceID.recode
+            
+        return f"UserResponse: \nuserID: {self.userID.id} \nquestionID: {self.questionID.id} \nrecode: {recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
+
+    # this function returns a dictionary which will be entered into the data file sent to the front end
+    # the key:value pair is columnHeader:entry        
+    def GetDataFileEntry(self):
+    
+        userProv = self.userID.province
+        userSize = self.userID.size
+        userDomain = self.userID.domain
+        userLang = self.userID.languagePreference
+        responseText = self.answerText
+        responseValue = self.answerValue
+        
+        choiceRecode = '-1'
+        choiceText = ''
+        if self.choiceID != None:
+            choiceRecode = self.choiceID.recode
+            choiceText = self.choiceID.choiceTextEnglish # TODO: handle french
+        
+        df = pd.DataFrame({ 'userProv' : userProv,
+                            'userSize' : userSize,
+                            'userDomain' : userDomain,
+                            'userLang' : userLang,
+                            'choiceRecode' : choiceRecode,
+                            'choiceText' : choiceText,
+                            'responseText' : responseText,
+                            'responseValue' : responseValue                       
+                        }, index=[0])
+
+        return df
+    
+    # This gives the model an explicit ordering
+    class Meta:
+        ordering = ('questionID',)

@@ -4,6 +4,10 @@
 
 ## Install Prerequisite Software
 
+First run:
+```bash
+sudo apt udpate
+```
 Run these commands to install Ubuntu software packages:
 
 ```bash
@@ -191,25 +195,7 @@ systemctl restart apache2
 
 ## Setup Cronjob
 
-If the file doesn't yet exist, create a shell script to run as the
-cronjob.  Create the file `cronjob.sh` in the Django
-project directory with the following contents:
-
-```bash
-#!/bin/bash
-
-DJANGO_DIR=$(dirname $(realpath $0))
-
-
-cd "$DJANGO_DIR"
-source cicp_env/bin/activate
-echo "Extracting User Data" >& /tmp/cronjob_lastrun.log
-python3 manage.py runscript ExtractUserData 2>&1 >> /tmp/cronjob_lastrun.log
-echo "Extracting Survey Data"  2>&1 >> /tmp/cronjob_lastrun.log
-python3 manage.py runscript ExtractSurvey 2>&1 >> /tmp/cronjob_lastrun.log
-```
-
-Make sure the script is executable and then edit the cronjobs:
+Make sure the cronjob.sh script is executable and then edit the cronjobs:
 
 ```bash
 chmod +x cronjob.sh
