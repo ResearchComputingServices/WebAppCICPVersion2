@@ -1,0 +1,92 @@
+{% load static %}
+<link rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css"/>
+<link rel="stylesheet" href="{% static 'WebsiteApp/css/main.css' %}"/>
+<nav class="navbar navbar-expand-lg navbar-dark"
+     style="background-color: #000000">
+    <a class="navbar-brand" href="https://carleton.ca/cicp-pcpob/">
+        <img src="https://cdn.carleton.ca/theme-framework/img/favicons/favicon.ico"
+             alt="Carleton Shield"
+             width="30"
+             height="30"
+             class="d-inline-block align-text-top"/>
+        CICP-PCPOB
+    </a>
+    <div class="container">
+        <button class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                <li class="nav-item px-5">
+                    <a class="nav-link active" aria-current="page" href="">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">
+                            Report Results
+                            <br />
+                            Résultats du rapport
+                        </button>
+                    </a
+                    >
+                </li>
+                <li class="nav-item px-5">
+                    <a class="nav-link active" aria-current="page">
+                        <button class="btn btn-sm btn-outline-secondary"
+                                type="button"
+                                onClick="window.print();">
+                            Download PDF
+                            <br />
+                            Télécharger le PDF
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item px-5">
+                    <a class="nav-link" href="https://carleton.ca/cicp-pcpob/">
+                        <button class="btn btn-sm btn-outline-secondary" type="button">
+                            Back to CICP
+                            <br />
+                            Retour à PCPOB
+                        </button>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <ul class="navbar-nav sm-icons">
+        <li class="nav-item">
+            <a class="nav-link"
+               href="https://twitter.com/CICP_PCPOB"
+               target="_blank"><i class="fa-brands fa-twitter"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               href="https://www.instagram.com/cicp_pcpob/"
+               target="_blank"><i class="fab fa-instagram"></i></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link"
+               href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=cicp-pcpob@carleton.ca"
+               target="_blank"><i class="fa-regular fa-envelope"></i></a>
+        </li>
+    </ul>
+</nav>
+<div id="content">
+    <div id="filter">
+        <h6 class="p-1 border-bottom">Filter By</h6>
+        <ul class="list-group">
+            <div class="list-group-item list-group-item-action mb-2 rounded">
+                <a href="#demo_province" data-toggle="collapse">Province</a>
+            </div>
+            <div id="demo_province" class="collapse">{{ form_province.as_p }}</div>
+            <a href="#demo_theme" data-toggle="collapse">Theme</a>
+            <div id="demo_theme" class="collapse">{{ form_theme.as_p }}</div>
+            <a href="#demo_language" data-toggle="collapse">Language</a>
+            <div id="demo_language" class="collapse">{{ form_lang.as_p }}</div>
+        </ul>
+    </div>
+</div>

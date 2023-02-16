@@ -1,0 +1,51 @@
+/* @page {
+    size: A4;
+
+    @bottom-left {
+        content: string(heading);
+        font-size: 9pt;
+        height: 1cm;
+        vertical-align: middle;
+        width: 100%;
+        text-transform: uppercase;
+    }
+
+    @bottom-right {
+        background: #14213d;
+        color: #ffffff;
+        content: counter(page);
+        height: 1cm;
+        text-align: center;
+        width: 1cm;
+    }
+
+    @bottom-center {
+        background: #14213d;
+        content: '';
+        display: block;
+        height: 0.05cm;
+        opacity: 0.5;
+        width: 100%;
+    }
+} */
+
+* {
+    box-sizing: border-box;
+}
+
+/* Set additional styling options for the columns*/
+.column {
+    float: left;
+    width: 20%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+h2 {
+    color: #ff0000;
+}

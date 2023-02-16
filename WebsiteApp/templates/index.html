@@ -1,0 +1,231 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon"
+              href='{% static "webpage_images/title_icon.png" %}'
+              type="icon type"/>
+        <title>CICP-PCPOB</title>
+        <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+        <link rel="stylesheet" href="{% static 'css/sidebar.css' %}"/>
+        <link rel="stylesheet" href="{% static 'js/css/blitzer/jquery-ui.css' %}"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+              rel="stylesheet"
+              integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+              crossorigin="anonymous">
+        <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+              rel="Stylesheet"
+              type="text/css"/>
+        <script src="https://kit.fontawesome.com/17431f7655.js" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        {% comment %} DatePicker {% endcomment %}
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-light bg-white border-bottom">
+            <a class="navbar-brand" href="https://carleton.ca/cicp-pcpob/">
+                <img src="https://cdn.carleton.ca/theme-framework/img/favicons/favicon.ico"
+                     alt="Carleton Shield"
+                     width="30"
+                     height="30"
+                     class="d-inline-block align-text-top"/>
+                CICP-PCPOB
+            </a>
+            <button class="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="">
+                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                                Report Results
+                                <br />
+                                Résultats du rapport
+                            </button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page">
+                            <button class="btn btn-sm btn-outline-secondary"
+                                    type="button"
+                                    onClick="window.print();">
+                                Download PDF
+                                <br />
+                                Télécharger le PDF
+                            </button>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://carleton.ca/cicp-pcpob/">
+                            <button class="btn btn-sm btn-outline-secondary" type="button">
+                                Back to CICP
+                                <br />
+                                Retour à PCPOB
+                            </button>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div id="mobile-filter">
+            <div>
+                <h6 class="p-1 border-bottom">Filter By</h6>
+                <a href="#demo_province" data-toggle="collapse">Province</a>
+                <form class="ml-md-2">
+                    <div id="demo_province" class="collapse">{{ form_province.as_p }}</div>
+                </form>
+            </div>
+            <div>
+                <a href="#demo_theme" data-toggle="collapse">Theme</a>
+                <form class="ml-md-2">
+                    <div id="demo_theme" class="collapse">{{ form_theme.as_p }}</div>
+                </form>
+            </div>
+            <div>
+                <a href="#demo_language" data-toggle="collapse">Language</a>
+                <form class="ml-md-2">
+                    <div id="demo_language" class="collapse">{{ form_lang.as_p }}</div>
+                </form>
+            </div>
+        </div>
+        <div class="filter">
+            <button class="btn btn-default"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-target="#mobile-filter"
+                    aria-expanded="false"
+                    aria-controls="mobile-filter">
+                Filters<span class="fa fa-filter pl-1"></span>
+            </button>
+        </div>
+        <section id="sidebar">
+            <div>
+                <h6 class="p-1 border-bottom">Filter By</h6>
+                <div class="datePickerContainer">
+                    <input class="form-control datepicker bg-color-white"
+                           placeholder="MM/DD/YYYY"
+                           maxlength="15"
+                           ng-model="PriceLineObj.StartDate"
+                           id="txtDate"
+                           type="text">
+                </div>
+                <a href="#demo_province"
+                   data-bs-toggle="collapse"
+                   role="button"
+                   aria-expanded="false"
+                   aria-controls="demo_province">Province</a>
+                <form class="ml-md-2">
+                    <div id="demo_province" class="collapse">{{ form_province.as_p }}</div>
+                </form>
+            </div>
+            <div>
+                <a href="#demo_theme"
+                   data-bs-toggle="collapse"
+                   role="button"
+                   aria-expanded="false"
+                   aria-controls="demo_theme">Theme</a>
+                <form class="ml-md-2">
+                    <div id="demo_theme" class="collapse">{{ form_theme.as_p }}</div>
+                </form>
+            </div>
+            <div>
+                <a href="#demo_language"
+                   data-bs-toggle="collapse"
+                   role="button"
+                   aria-expanded="false"
+                   aria-controls="demo_language">Language</a>
+                <form class="ml-md-2">
+                    <div id="demo_language" class="collapse">{{ form_lang.as_p }}</div>
+                </form>
+            </div>
+        </section>
+        <section id="products">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
+                        <div class="card">
+                            <img class="card-img-top" src="" alt="Image1"/>
+                            <div class="card-body">
+                                <p class="card-text">Image1 text1</p>
+                                <p>Image1 text2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 offset-lg-0 col-sm-4 offset-sm-2 col-11 offset-1">
+                        <div class="card">
+                            <img class="card-img-top" src="" alt="Image2">
+                            <div class="card-body">
+                                <p class="card-text">Image2 text1</p>
+                                <p>Image2 text2</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
+                            <div class="card">
+                                <img class="card-img-top" src="" alt="row 2 image 1">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    </p>
+                                    <p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-4 offset-lg-0 offset-sm-2 col-11 offset-1">
+                            <div class="card">
+                                <img class="" alt="row 2 image 2">
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    </p>
+                                    <p>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <div align="center" class="footerLogos">
+                <div>
+                    <img src="{% static 'webpage_images/Sponsors.png' %}" alt="Sponsors"/>
+                </div>
+            </div>
+            <script type="text/javascript">
+$(function () {
+$("#txtDate").datepicker({
+changeMonth: true,
+changeYear: true,
+showOn: 'button',
+buttonText: 'Select Date',
+dateFormat: 'dd/mm/yy',
+beforeShowDay:
+function (date) {
+return [date.getDay() == 0 ||
+date.getDay() == 1 ||
+date.getDay() == 2 ||
+date.getDay() == 4 ||
+date.getDay() == 6 ? false : true];
+},
+onSelect: function (dateString, txtDate) {
+console.log(`gouthami choose this ${dateString}`)
+// work here
+// DisplayDate("Selected Date: " + dateString + "\nTextBox ID: " + txtDate.id);
+}
+});
+});
+            </script>
+        </body>
+    </html>

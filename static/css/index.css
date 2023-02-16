@@ -1,0 +1,34 @@
+.form-container {
+  margin-left: 450px;
+  margin-top: 30px
+}
+
+.form-button {
+  display: flex;
+}
+
+.mb-3 .form-button .form-input {
+  width: 5em;
+  height: 1.8em;
+  background-color: #e91C24;
+  border: 2px solid white;
+  border-radius: 4px;
+}
+
+.report-heading {
+  text-align: center;
+}
+
+.mb-3 {
+  margin-top: 50px;
+
+}
+
+.Report-Date {
+  color: #e91C24
+}
+
+.footerLogos {
+  text-align: center;
+  width: 100%;
+}
