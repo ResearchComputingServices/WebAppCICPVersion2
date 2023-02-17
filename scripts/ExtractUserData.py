@@ -13,11 +13,11 @@ def GetSize(numberOfEmployees):
     size = 'None'
     
     if(numberOfEmployees < 10):
-        size = 'small'
+        size = 'SMALL'
     elif(numberOfEmployees < 25):
-        size = 'medium'
+        size = 'MEDIUM'
     else:
-        size = 'large'   
+        size = 'LARGE'   
     
     return size
 

@@ -1,4 +1,3 @@
-from WebAppCICPVersion2 import settings
 from scripts.Utils import *
 from InteractiveDB.models import SurveyTable
 from datetime import date
@@ -39,31 +38,12 @@ def HandleReleasedSurvey(currentSurvey, currentDate):
 #   and which do not have an fetchedDate field defined.
 # - after Fetching and Extracting the survey entities fetchedDate field will be set to the current date
 ################################################################################################################################## 
-def AddSurvey(id,date):
-    survey = SurveyTable()
-    survey.qualtricsSurveyID = id
-    survey.releaseDate = date
-    survey.save()
-
 def run(*args):
-    ##########################################################
-    # TODO: Remove this block before production!
-    # Remove comments below to test this script
-    # AddSurvey('SV_8epSb35vMSlpwea','2022-12-01')    # Sample Survey
-    #AddSurvey('SV_4PKhCR2n0Hw6xbo','2022-12-08')
-    #AddSurvey('SV_aYnUZN7y2nQhXJc','2022-12-17')
-    #AddSurvey('SV_0eMEVIZkeSbKyjk','2023-02-03')
-    #AddSurvey('SV_dhjlzfTnCj7mwT4','2023-02-01')
-    #AddSurvey('SV_6mJwD0WeUarScKy','2023-01-01')
-    # #########################################################
     
     surveyQuerySet = SurveyTable.objects.all()
     
     currentDate = date.today()
-    
-    #print(currentDate)
-    #input()
-    
+        
     for survey in surveyQuerySet:
         print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
         
