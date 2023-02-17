@@ -42,7 +42,7 @@ from django.forms.widgets import MultiWidget, Select
 
 class WeekSelectorWidget(MultiWidget):
     def __init__(self, attrs=None):
-        year_choices = [(year, year) for year in range(2010, 2031)] # set range of year choices
+        year_choices = [(year, year) for year in range(2022, 2030)] # set range of year choices
         week_choices = [(week, week) for week in range(1, 53)] # set range of week choices
         widgets = [
             Select(choices=year_choices),
@@ -64,7 +64,7 @@ class WeekSelectorWidget(MultiWidget):
 
 
 class FilterForm(forms.Form):
-    week = forms.DateField(widget=WeekSelectorWidget)
+    year_week = forms.DateField(widget=WeekSelectorWidget)
     province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROVINCE_CHOICES,)
     theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,)
     language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=LANGUAGE_CHOICES,)

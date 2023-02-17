@@ -9,22 +9,31 @@ from scripts.Controller import HandleFrontEndQuery
 def report_results_EN(request):
     form_filter = FilterForm()
     context = {'form_filter' : form_filter}
+    
+    if request.GET:
 
-    location = (request.GET.getlist('province'))
-    question_theme = (request.GET.getlist('theme'))
-    language_preference = (request.GET.getlist('language'))
-    organization_size = (request.GET.getlist('size'))
+        date = (request.GET.getlist('year_week'))
+        location = (request.GET.getlist('province'))
+        question_theme = (request.GET.getlist('theme'))
+        language_preference = (request.GET.getlist('language'))
+        organization_size = (request.GET.getlist('size'))
+        qualtrics_id = []
 
-    front_end_query = FrontEndQuery()
+        front_end_query = FrontEndQuery()
+    
+        front_end_query.date = "2022-02-17"
+        front_end_query.locations = location
+        front_end_query.questionThemes = question_theme
+        front_end_query.languagePreference = language_preference
+        front_end_query.organizationSizes = organization_size
+        front_end_query.qualtricsSurveyID = []
 
-    front_end_query.locations = location
-    front_end_query.questionThemes = question_theme
-    front_end_query.languagePreference = language_preference
-    front_end_query.organizationSizes = organization_size
+        print(front_end_query)
 
-    query_response_imagefilepaths,query_response_csv = HandleFrontEndQuery(front_end_query)
-    print(query_response_imagefilepaths)
-    print(query_response_csv)
+        if front_end_query:
+            query_response_imagefilepaths,query_response_csv = HandleFrontEndQuery(front_end_query)
+            print(query_response_imagefilepaths)
+            print(query_response_csv)
 
     return render(request, 'index.html', context)
 
