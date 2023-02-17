@@ -8,6 +8,7 @@ from scripts.DataVizualizers.MatrixQuestions import VisualizeMatrixQuestion
 from scripts.DataVizualizers.RankOrderQuestions import VisualizeRankOrderQuestion                        
 from scripts.DataVizualizers.TextGraphicQuestions import VisualizeTextGraphicQuestion
 
+import time
 
 # This dictionary connects question type flags to the visualizer that creates the graphic for them
 questionHandleDict ={   SLIDER_QUESTION : VisualizeSliderQuestion,

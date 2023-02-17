@@ -15,5 +15,7 @@ def run(*args):
             deltaTime = currentTime - creationTime
             
             if deltaTime > IMAGE_LIFE_TIME_SECONDS:
-                os.remove(filePath)
-            
+		os.remove(filePath)
+		print('Delete: ',filePath)
+	    else:
+		print('Keep: ', filePath)
