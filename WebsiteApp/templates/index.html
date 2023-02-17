@@ -3,7 +3,7 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="X-UA-Compatible">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="icon"
               href='{% static "webpage_images/title_icon.png" %}'
@@ -11,7 +11,6 @@
         <title>CICP-PCPOB</title>
         <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
         <link rel="stylesheet" href="{% static 'css/sidebar.css' %}"/>
-        <link rel="stylesheet" href="{% static 'js/css/blitzer/jquery-ui.css' %}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
               rel="stylesheet"
               integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
@@ -79,7 +78,7 @@
                 </ul>
             </div>
         </nav>
-        <div id="mobile-filter">
+        {% comment %} <div id="mobile-filter">
             <div>
                 <h6 class="p-1 border-bottom">Filter By</h6>
                 <a href="#demo_province" data-toggle="collapse">Province</a>
@@ -99,7 +98,7 @@
                     <div id="demo_language" class="collapse">{{ form_lang.as_p }}</div>
                 </form>
             </div>
-        </div>
+        </div> {% endcomment %}
         <div class="filter">
             <button class="btn btn-default"
                     type="button"
@@ -112,42 +111,25 @@
         </div>
         <section id="sidebar">
             <div>
-                <h6 class="p-1 border-bottom">Filter By</h6>
-                <div class="datePickerContainer">
-                    <input class="form-control datepicker bg-color-white"
-                           placeholder="MM/DD/YYYY"
-                           maxlength="15"
-                           ng-model="PriceLineObj.StartDate"
-                           id="txtDate"
-                           type="text">
-                </div>
-                <a href="#demo_province"
-                   data-bs-toggle="collapse"
-                   role="button"
-                   aria-expanded="false"
-                   aria-controls="demo_province">Province</a>
-                <form class="ml-md-2">
-                    <div id="demo_province" class="collapse">{{ form_province.as_p }}</div>
-                </form>
-            </div>
-            <div>
-                <a href="#demo_theme"
-                   data-bs-toggle="collapse"
-                   role="button"
-                   aria-expanded="false"
-                   aria-controls="demo_theme">Theme</a>
-                <form class="ml-md-2">
-                    <div id="demo_theme" class="collapse">{{ form_theme.as_p }}</div>
-                </form>
-            </div>
-            <div>
-                <a href="#demo_language"
-                   data-bs-toggle="collapse"
-                   role="button"
-                   aria-expanded="false"
-                   aria-controls="demo_language">Language</a>
-                <form class="ml-md-2">
-                    <div id="demo_language" class="collapse">{{ form_lang.as_p }}</div>
+                <form id="myForm" method="get" action="{% url 'report_results_en' %}">
+                    {% csrf_token %}
+                    <div class="datePickerContainer">
+                        <input class="form-control datepicker bg-color-white"
+                               placeholder="MM/DD/YYYY"
+                               maxlength="15"
+                               ng-model="PriceLineObj.StartDate"
+                               id="txtDate"
+                               type="text"/>
+                    </div>
+                    <a href="#filter"
+                       data-bs-toggle="collapse"
+                       role="button"
+                       aria-expanded="false"
+                       aria-controls="demo_province">Filter By</a>
+                    <form class="ml-md-2" method="get">
+                        <div id="filter" class="collapse">{{ form_filter.as_p }}</div>
+                        <input class="form-input" type="submit" value="Search"/>
+                    </form>
                 </form>
             </div>
         </section>
@@ -177,10 +159,8 @@
                             <div class="card">
                                 <img class="card-img-top" src="" alt="row 2 image 1">
                                 <div class="card-body">
-                                    <p class="card-text">
-                                    </p>
-                                    <p>
-                                    </p>
+                                    <p class="card-text"></p>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -188,10 +168,8 @@
                             <div class="card">
                                 <img class="" alt="row 2 image 2">
                                 <div class="card-body">
-                                    <p class="card-text">
-                                    </p>
-                                    <p>
-                                    </p>
+                                    <p class="card-text"></p>
+                                    <p></p>
                                 </div>
                             </div>
                         </div>
@@ -222,7 +200,7 @@ date.getDay() == 6 ? false : true];
 onSelect: function (dateString, txtDate) {
 console.log(`gouthami choose this ${dateString}`)
 // work here
-// DisplayDate("Selected Date: " + dateString + "\nTextBox ID: " + txtDate.id);
+
 }
 });
 });
