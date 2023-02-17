@@ -1,4 +1,5 @@
 import os
+import re
 
 from scripts.Utils import *
 from InteractiveDB.models import UserTable
@@ -12,11 +13,11 @@ def GetSize(numberOfEmployees):
     size = 'None'
     
     if(numberOfEmployees < 10):
-        size = 'small'
+        size = 'SMALL'
     elif(numberOfEmployees < 25):
-        size = 'medium'
+        size = 'MEDIUM'
     else:
-        size = 'large'   
+        size = 'LARGE'   
     
     return size
 
@@ -24,31 +25,37 @@ def GetSize(numberOfEmployees):
 # 
 ##################################################################################################################################  
 def GetProvineAcronym(provinceName):
-    provinceName = provinceName.strip()
+    provinceName = provinceName.strip().lower()
+    provinceName = re.sub(r'[^\w\s]','',provinceName)
+    
     acronym = ''
     
-    if provinceName == 'Québec'or provinceName == 'QC':
+    if 'québec' in provinceName or 'quebec' in provinceName or 'QC' in provinceName or 'qc' in provinceName:
         acronym = 'QC'
-    elif provinceName == 'New Brunswick':
+    elif 'New Brunswick' in provinceName or 'new brunswick' in provinceName or 'nb' in provinceName or 'NB' in provinceName:
         acronym = 'NB'
-    elif provinceName == 'Ontario' or provinceName == 'Ontario (ON)' or provinceName == 'ON':
+    elif 'Ontario' in provinceName or  'Ontario (ON)' in provinceName or 'ON' in provinceName or 'on' in provinceName:
         acronym = 'ON'
-    elif provinceName == 'British Columbia' or provinceName == 'BC':
+    elif 'british columbia' in provinceName or 'BC' in provinceName or 'bc' in provinceName:
             acronym = 'BC'
-    elif provinceName == 'Manitoba'or provinceName == 'MB':
+    elif 'manitoba' in provinceName or 'MB' in provinceName or 'mb' in provinceName:
             acronym = 'MB'
-    elif provinceName == 'Nova Scotia'or provinceName == 'NS':
+    elif 'nova scotia' in provinceName or 'NS' in provinceName or 'ns' in provinceName:
             acronym = 'NS'
-    elif provinceName == 'Saskatchewan'or provinceName == 'SK':
+    elif 'aaskatchewan' in provinceName or 'SK' in provinceName or 'sk' in provinceName:
             acronym = 'SK'
-    elif provinceName == 'Alberta'or provinceName == 'AB':
+    elif 'alberta' in provinceName or 'AB' in provinceName or 'ab' in provinceName:
             acronym = 'AB'
-    elif provinceName == 'Prince Edward Island'or provinceName == 'PE':
+    elif 'prince edward island' in provinceName or 'pe' in provinceName or 'PEI' in provinceName or 'pei' in provinceName:
             acronym = 'PE'
-    elif provinceName == 'Yukon':
+    elif 'yukon' in provinceName or 'YK' in provinceName or 'yk' in provinceName:
             acronym = 'YK'
+    elif 'newfoundland' in provinceName or 'nlf' in provinceName or 'nl' in provinceName:
+            acronym = 'NL'
+    elif 'northwest territories' in provinceName or 'nwt' in provinceName or 'nt' in provinceName:
+            acronym = 'NT'
     else:
-        acronym = 'Unknown'
+        acronym = 'XX'
 
     return acronym
 

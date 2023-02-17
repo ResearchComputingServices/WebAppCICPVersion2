@@ -8,6 +8,7 @@ from scripts.DataVizualizers.MatrixQuestions import VisualizeMatrixQuestion
 from scripts.DataVizualizers.RankOrderQuestions import VisualizeRankOrderQuestion                        
 from scripts.DataVizualizers.TextGraphicQuestions import VisualizeTextGraphicQuestion
 
+import time
 
 # This dictionary connects question type flags to the visualizer that creates the graphic for them
 questionHandleDict ={   SLIDER_QUESTION : VisualizeSliderQuestion,
@@ -96,10 +97,13 @@ def DataVisualizerMain(responseDict,
         if question.questionType not in questionHandleDict.keys():
             print('[ERROR]: Unknown question type: ', question.questionType)
         else:                                              
+            s = time.time()
             imageFilePath = questionHandleDict[question.questionType](  question = question,
                                                                         userResponses = responseDict[question], 
                                                                         isEnglish= isEnglish,
                                                                         saveToDirPath = saveToDirPath) 
+            e = time.time()
+            print(question.questionType,':', e - s)
             imageFilePathList.append(imageFilePath)
                
     return imageFilePathList

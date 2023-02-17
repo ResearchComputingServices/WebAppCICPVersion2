@@ -23,11 +23,6 @@ QUESTION_FRENCH_JSON_FILENAME = 'surveyQuestionsFrench.json'
 RESPONSE_DATA_JSON_FILENAME = 'responseFile.json'
 USER_DATA_FILENAME = 'userData.csv'
 
-#TEST_SURVEY_ID = "SV_8epSb35vMSlpwea"  # Test Survey 8 questions
-#TEST_SURVEY_ID = "SV_4PKhCR2n0Hw6xbo"   # 
-#TEST_SURVEY_ID = "SV_aYnUZN7y2nQhXJc"  # 
-#TEST_SURVEY_ID = 'SV_0eMEVIZkeSbKyjk'  # 
-TEST_SURVEY_ID = 'SV_dhjlzfTnCj7mwT4'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
@@ -37,8 +32,8 @@ SECRET_KEY = 'django-insecure-ue)z4wo$392gy=#&=qn($(ru56zs+v6qivtt!gnws=669=2486
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
-
+ALLOWED_HOSTS = ['*']
+CSRF_TRUSTED_ORIGINS = ['http://*', 'http://134.117.214.42']
 
 # Application definition
 
@@ -92,7 +87,20 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
+
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'cicp_reports',
+    #     'USER': 'cicp',
+    #     'PASSWORD': 'MYSQL_PASSWORD',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
+
 }
 
 
@@ -148,3 +156,6 @@ QUATRICS_API = {
     #data_center = org_id.datacenter_id
     'data_center': "carletonu.ca1"
 }
+
+STATIC_ROOT = '/var/www/html/static/'
+MEDIA_ROOT = '/var/www/html/media/'
