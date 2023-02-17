@@ -2,16 +2,13 @@ from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTa
 from WebAppCICPVersion2 import settings
 
 from dataclasses import dataclass, field
-from typing import List, Dict
-import random
+from typing import List
 import re 
 import os
 import textwrap
-
-
+from datetime import datetime
 
 A_LARGE_NUMBER = 99999999999
-
 
 ##################################################################################################################################
 # 
@@ -53,6 +50,8 @@ GRAPHIC_FILE_SUFFIX = '.'+GRAPHIC_FILE_TYPE
 ##################################################################################################################################
 # 
 ##################################################################################################################################
+
+IMAGE_LIFE_TIME_SECONDS = 259200. # 72 hours
 
 FIGURE_WIDTH_PX = 800
 FIGURE_HEIGHT_PX = 600

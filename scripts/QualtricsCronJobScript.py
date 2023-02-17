@@ -1,7 +1,7 @@
 from WebAppCICPVersion2 import settings
 from scripts.Utils import *
 from InteractiveDB.models import SurveyTable
-from datetime import date, datetime
+from datetime import date
 
 from scripts.FetchData import FetchDataMain
 from scripts.ExtractSurvey import ExtractSurveyMain
