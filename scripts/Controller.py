@@ -104,8 +104,14 @@ def GetUserResponseQuerySet(aQuery):
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
     
-    print(surveyQuerySet)
-    print(questionQuerySet)    
+    if  surveyQuerySet != None:
+        print(len(surveyQuerySet))
+    
+    if  questionQuerySet != None:
+        print(len(questionQuerySet))
+          
+    if userQuerySet != None:
+        print(len(userQuerySet))
           
     if questionQuerySet != None and userQuerySet != None and surveyQuerySet != None:
             
