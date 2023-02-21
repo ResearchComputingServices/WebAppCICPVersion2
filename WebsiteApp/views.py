@@ -17,7 +17,6 @@ def report_results_EN(request):
         question_theme = (request.GET.getlist('theme'))
         language_preference = (request.GET.getlist('language'))
         organization_size = (request.GET.getlist('size'))
-        qualtrics_id = []
 
         front_end_query = FrontEndQuery()
     
@@ -26,9 +25,9 @@ def report_results_EN(request):
         front_end_query.questionThemes = question_theme
         front_end_query.languagePreference = language_preference
         front_end_query.organizationSizes = organization_size
-        front_end_query.qualtricsSurveyID = None
+        front_end_query.qualtricsSurveyID = ''
 
-        # print(front_end_query)
+        print(front_end_query)
 
         if front_end_query:
             query_response_imagefilepaths,query_response_csv = HandleFrontEndQuery(front_end_query)

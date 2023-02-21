@@ -80,11 +80,11 @@ WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_Wa
 class FrontEndQuery:
     
     # Filter on Survey release data
-    date: str = None
+    date: str = ''
     
     # Filter by survey ID
     # this filter is only used for the default image creation
-    qualtricsSurveyID: str = None
+    qualtricsSurveyID: str = ''
     
     # Filter on Question
     questionThemes: List = field(default_factory=lambda: [])  
