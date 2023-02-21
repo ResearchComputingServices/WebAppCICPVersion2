@@ -55,26 +55,12 @@ def GetSurveyQuerySet(aQuery):
     
     surveyQuerySet = SurveyTable.objects.all()
 
-    print('# of Surveys: ', len(surveyQuerySet))
-
     if len(aQuery.date) != 0:
-        print('DO filter by DATE')
-        print(aQuery.date)
         surveyQuerySet = surveyQuerySet.filter(releaseDate=aQuery.date)
-    else:
-        print('Do NOT filter by DATE')
-    
-    print('# of Surveys: ', len(surveyQuerySet))
     
     if len(aQuery.qualtricsSurveyID) != 0:
-        print('DO filter by ID')
-        print(aQuery.qualtricsSurveyID)
         surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
-    else:
-        print('Do NOT filter by ID')
            
-    print('# of Surveys: ', len(surveyQuerySet))
-
     if len(surveyQuerySet) == 0:
         surveyQuerySet = None
                 
@@ -117,22 +103,7 @@ def GetUserResponseQuerySet(aQuery):
            
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
-    
-    if  surveyQuerySet != None:
-        print('Survey:', len(surveyQuerySet))
-    else:
-        print(0)     
-        
-    if  questionQuerySet != None:
-        print('Questions:', len(questionQuerySet))
-    else:
-        print(0)     
-              
-    if userQuerySet != None:
-        print('User:', len(userQuerySet))
-    else:
-        print(0)     
-        
+            
     if questionQuerySet != None and userQuerySet != None and surveyQuerySet != None:
             
         surveyQueryObject = Q()
@@ -152,6 +123,10 @@ def GetUserResponseQuerySet(aQuery):
             userQueryObject |= Q(userID = u.id)
         
         userResponseQuerySet = userResponseQuerySet.filter(userQueryObject)
+        print('Survey:', len(surveyQuerySet))
+        print('Questions:', len(questionQuerySet))
+        print('User:', len(userQuerySet))
+        print('Responses:', len(userResponseQuerySet))
     else:
         print('[ERROR]: GetUserResponseQuerySet: Insufficient question or user data' )
     
