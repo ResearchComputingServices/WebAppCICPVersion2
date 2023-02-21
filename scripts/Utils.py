@@ -14,6 +14,9 @@ A_LARGE_NUMBER = 99999999999
 # 
 ##################################################################################################################################
 
+# Minimum number of users allowed in userQuerySize (this is for user anominity/data secured reasons)
+MINIMUM_USER_QUERY_SIZE = 10
+
 # Question Types
 OPEN_TEXT_QUESTION =        'TE'
 MULTIPLE_CHOICE_QUESTION =  'MC'
@@ -91,7 +94,7 @@ class FrontEndQuery:
     organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
     fieldOfWork: List = field(default_factory=lambda: [])       
-    
+                 
     def IsDateOnly(self):
         
         isDateOnly = False
