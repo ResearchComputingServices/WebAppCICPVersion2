@@ -8,7 +8,7 @@ def AddSurvey(id,date):
 
 def run(*args):
     #########################################################
-    AddSurvey('SV_8epSb35vMSlpwea','2022-12-01')    # Sample Survey
+    #AddSurvey('SV_8epSb35vMSlpwea','2022-12-01')    # Sample Survey
     AddSurvey('SV_4PKhCR2n0Hw6xbo','2022-12-08')
     AddSurvey('SV_aYnUZN7y2nQhXJc','2022-12-17')
     AddSurvey('SV_0eMEVIZkeSbKyjk','2023-02-03')
