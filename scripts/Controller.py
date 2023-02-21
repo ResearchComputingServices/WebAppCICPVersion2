@@ -57,15 +57,21 @@ def GetSurveyQuerySet(aQuery):
 
     print(len(surveyQuerySet))
 
-    if len(aQuery.date) != 0:
+    if aQuery.date != None:
         surveyQuerySet = surveyQuerySet.filter(releaseDate=aQuery.date)
     
     print(len(surveyQuerySet))
     
-    if len(aQuery.qualtricsSurveyID) != 0:
+    if aQuery.qualtricsSurveyID != None:
         surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
            
     print(len(surveyQuerySet))
+
+    # if len(aQuery.date) != 0:
+    #     surveyQuerySet = surveyQuerySet.filter(releaseDate=aQuery.date)
+    
+    # if len(aQuery.qualtricsSurveyID) != 0:
+    #     surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
 
     if len(surveyQuerySet) == 0:
         surveyQuerySet = None
