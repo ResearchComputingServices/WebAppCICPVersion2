@@ -66,7 +66,7 @@ def GetSurveyQuerySet(aQuery):
     
     print(len(surveyQuerySet))
     
-    if aQuery.qualtricsSurveyID != None and len(aQuery.qualtricsSurveyID) != 0:
+    if aQuery.qualtricsSurveyID != None:
         print('DO filter by ID')
         print(aQuery.qualtricsSurveyID)
         surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
