@@ -26,7 +26,7 @@ def report_results_EN(request):
         front_end_query.questionThemes = question_theme
         front_end_query.languagePreference = language_preference
         front_end_query.organizationSizes = organization_size
-        front_end_query.qualtricsSurveyID = None
+        front_end_query.qualtricsSurveyID = []
 
         print(front_end_query)
 
