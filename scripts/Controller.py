@@ -105,14 +105,20 @@ def GetUserResponseQuerySet(aQuery):
     userQuerySet = GetUserQuerySet(aQuery)
     
     if  surveyQuerySet != None:
-        print(len(surveyQuerySet))
-    
+        print('Survey:', len(surveyQuerySet))
+    else:
+        print(0)     
+        
     if  questionQuerySet != None:
-        print(len(questionQuerySet))
-          
+        print('Questions:', len(questionQuerySet))
+    else:
+        print(0)     
+              
     if userQuerySet != None:
-        print(len(userQuerySet))
-          
+        print('User:', len(userQuerySet))
+    else:
+        print(0)     
+        
     if questionQuerySet != None and userQuerySet != None and surveyQuerySet != None:
             
         surveyQueryObject = Q()
