@@ -15,7 +15,7 @@ from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTa
 ##################################################################################################################################
 def GetUserQuerySet(aQuery):
     userQuerySet = UserTable.objects.all()
-    
+        
     if len(aQuery.locations) != 0:
         qObject = Q()
         for loc in aQuery.locations:
@@ -57,7 +57,7 @@ def GetSurveyQuerySet(aQuery):
 
     print(len(surveyQuerySet))
 
-    if aQuery.date != None:
+    if len(aQuery.date) != 0:
         print('DO filter by DATE')
         print(aQuery.date)
         surveyQuerySet = surveyQuerySet.filter(releaseDate=aQuery.date)
@@ -66,7 +66,7 @@ def GetSurveyQuerySet(aQuery):
     
     print(len(surveyQuerySet))
     
-    if aQuery.qualtricsSurveyID != None:
+    if len(aQuery.qualtricsSurveyID) != 0:
         print('DO filter by ID')
         print(aQuery.qualtricsSurveyID)
         surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
@@ -325,13 +325,13 @@ def run(*arg):
         dateList = ['2022-12-17']
         for date in dateList:
             aQuery = FrontEndQuery()   
-            #aQuery.date = date
+            aQuery.date = date
             #aQuery.qualtricsSurveyID = 'SV_aYnUZN7y2nQhXJc'
             aQuery.questionThemes = ['GOV']
             
             aQuery.organizationSizes = ['MEDIUM']
-            aQuery.locations = ['NL']
-            aQuery.languagePreference = ['FR']
+            #aQuery.locations = ['NL']
+            #aQuery.languagePreference = ['FR']
           
             images, data = HandleFrontEndQuery(aQuery) 
 
