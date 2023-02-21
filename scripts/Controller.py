@@ -58,12 +58,18 @@ def GetSurveyQuerySet(aQuery):
     print(len(surveyQuerySet))
 
     if aQuery.date != None:
+        print('DO filter by DATE')
         surveyQuerySet = surveyQuerySet.filter(releaseDate=aQuery.date)
+    else:
+        print('Do NOT filter by DATE')
     
     print(len(surveyQuerySet))
     
     if aQuery.qualtricsSurveyID != None:
+        print('DO filter by ID')
         surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
+    else:
+        print('Do NOT filter by ID')
            
     print(len(surveyQuerySet))
 
