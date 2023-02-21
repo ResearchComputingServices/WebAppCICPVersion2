@@ -20,7 +20,7 @@ def report_results_EN(request):
 
         front_end_query = FrontEndQuery()
     
-        front_end_query.date = "2022-02-17"
+        front_end_query.date = "2022-12-17"
         front_end_query.locations = location
         front_end_query.questionThemes = question_theme
         front_end_query.languagePreference = language_preference

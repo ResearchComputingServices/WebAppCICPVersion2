@@ -55,7 +55,7 @@ def GetSurveyQuerySet(aQuery):
     
     surveyQuerySet = SurveyTable.objects.all()
 
-    print(len(surveyQuerySet))
+    print('# of Surveys: ', len(surveyQuerySet))
 
     if len(aQuery.date) != 0:
         print('DO filter by DATE')
@@ -64,7 +64,7 @@ def GetSurveyQuerySet(aQuery):
     else:
         print('Do NOT filter by DATE')
     
-    print(len(surveyQuerySet))
+    print('# of Surveys: ', len(surveyQuerySet))
     
     if len(aQuery.qualtricsSurveyID) != 0:
         print('DO filter by ID')
@@ -73,7 +73,7 @@ def GetSurveyQuerySet(aQuery):
     else:
         print('Do NOT filter by ID')
            
-    print(len(surveyQuerySet))
+    print('# of Surveys: ', len(surveyQuerySet))
 
     if len(surveyQuerySet) == 0:
         surveyQuerySet = None
