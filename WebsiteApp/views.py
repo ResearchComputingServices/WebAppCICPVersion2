@@ -26,9 +26,9 @@ def report_results_EN(request):
         front_end_query.questionThemes = question_theme
         front_end_query.languagePreference = language_preference
         front_end_query.organizationSizes = organization_size
-        front_end_query.qualtricsSurveyID = []
+        front_end_query.qualtricsSurveyID = None
 
-        print(front_end_query)
+        # print(front_end_query)
 
         if front_end_query:
             query_response_imagefilepaths,query_response_csv = HandleFrontEndQuery(front_end_query)
