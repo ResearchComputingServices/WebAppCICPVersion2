@@ -15,7 +15,7 @@ from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTa
 ##################################################################################################################################
 def GetUserQuerySet(aQuery):
     userQuerySet = UserTable.objects.all()
-       
+    
     if len(aQuery.locations) != 0:
         qObject = Q()
         for loc in aQuery.locations:
@@ -27,28 +27,31 @@ def GetUserQuerySet(aQuery):
         for size in aQuery.organizationSizes:
             qObject |= Q(size=size) 
         userQuerySet = userQuerySet.filter(qObject)
-       
+    
     if len(aQuery.languagePreference) != 0:        
         qObject = Q()
         for lang in aQuery.languagePreference:
             qObject |= Q(languagePreference=lang) 
         userQuerySet = userQuerySet.filter(qObject)
-                
+    
     if len(aQuery.fieldOfWork) != 0:
         qObject = Q()
         for work in aQuery.fieldOfWork:
             qObject |= Q(domain=work) 
         userQuerySet = userQuerySet.filter(qObject)
-  
+    
     if len(userQuerySet) == 0:
         userQuerySet = None
+        print('[ERROR]: GetUserQuerySet: UserQuerySet size is 0')
+    elif len(userQuerySet) < MINIMUM_USER_QUERY_SIZE:
+        print('[ERROR]: GetUserQuerySet: UserQuerySet below minimum threshold: ', len(userQuerySet), '<', MINIMUM_USER_QUERY_SIZE)
   
     return userQuerySet
 
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetQuestionQuerySet(aQuery):
+def GetSurveyQuerySet(aQuery):
     
     surveyQuerySet = SurveyTable.objects.all()
 
@@ -57,18 +60,31 @@ def GetQuestionQuerySet(aQuery):
         
     if aQuery.qualtricsSurveyID != None:
         surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
+           
+    if len(surveyQuerySet) == 0:
+        surveyQuerySet = None
                 
-    if len(aQuery.questionThemes) != 0:
-        questionQuerySet = questionQuerySet.filter(questionTheme=aQuery.questionThemes)
+    return surveyQuerySet
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+def GetQuestionQuerySet(aQuery):
     
-    questionQuerySet = None
-    if len(surveyQuerySet) != 0:    
-        qObject = Q()
-        for e in surveyQuerySet:
-            qObject |= Q(surveyID=e.id)
-      
-        questionQuerySet = QuestionTable.objects.filter(qObject)
-     
+    questionQuerySet = QuestionTable.objects.all()
+   
+    if len(aQuery.questionThemes) != 0:
+        
+        themeQueryObject = Q()
+        
+        for theme in aQuery.questionThemes:
+            themeQueryObject |= Q(questionTheme=theme)
+        
+        questionQuerySet = questionQuerySet.filter(themeQueryObject)       
+                  
+    if len(questionQuerySet) == 0:
+        questionQuerySet = None
+          
     return questionQuerySet
 
 ##################################################################################################################################
@@ -79,27 +95,38 @@ def GetUserResponseQuerySet(aQuery):
     # the data structure which will be returned
     userResponseQuerySet = None
     
+    # Get all the surveys that match the query
+    surveyQuerySet = GetSurveyQuerySet(aQuery)
+                
     # Get all questions that match the query
     questionQuerySet = GetQuestionQuerySet(aQuery)
-    
+           
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
-             
-    if questionQuerySet != None and userQuerySet != None:
-        
-        # Create a queryObject that concatenates both userID and questionID with OR operators   
+              
+    if questionQuerySet != None and userQuerySet != None and surveyQuerySet != None:
+            
+        surveyQueryObject = Q()
+        for s in surveyQuerySet:
+            surveyQueryObject |= Q(surveyID=s.id)
+          
+        questionQuerySet = questionQuerySet.filter(surveyQueryObject)  
+                   
         questionQueryObject = Q()
         for q in questionQuerySet:
             questionQueryObject |= Q(questionID=q.id)
         
         userResponseQuerySet = UserResponseTable.objects.filter(questionQueryObject)
-     
+                 
         userQueryObject = Q()
         for u in userQuerySet:
             userQueryObject |= Q(userID = u.id)
         
         userResponseQuerySet = userResponseQuerySet.filter(userQueryObject)
-            
+    else:
+        print('[ERROR]: GetUserResponseQuerySet: Insufficient question or user data' )
+    
+               
     return userResponseQuerySet
 
 ##################################################################################################################################
@@ -202,9 +229,7 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
     
         for response in responsesToQuestion:
             userResponseList.append(response)
-    
-
-    
+        
     return userResponseList
 
 ##################################################################################################################################
@@ -213,17 +238,16 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
 
 def GetResponseDict(aQuery):
     
-    userResponseQuerySet = GetUserResponseQuerySet(aQuery)
-    
     responseDict = {}
+    userResponseQuerySet = GetUserResponseQuerySet(aQuery)   
     
-    questionList = GetListOfUniqueQuestions(userResponseQuerySet)
-    
-    for question in questionList:
-    
-        userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)
+    if userResponseQuerySet != None:
+   
+        questionList = GetListOfUniqueQuestions(userResponseQuerySet)
         
-        responseDict[question] = userResponseList
+        for question in questionList:   
+            userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)
+            responseDict[question] = userResponseList
     
     return responseDict
 
@@ -236,7 +260,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
     listOfImageFilePaths = []
     dataCSVFilePath = []
       
-    if aQuery.IsDateOnly():
+    if aQuery.IsDateOnly() and False:
         
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
     
@@ -257,7 +281,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
             dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
         else:
-            print('[WARNING]: HandleFrontEndQuery: No data available for selected query')
+            print('[WARNING]: HandleFrontEndQuery: Insufficient data available for selected query')
     
     return listOfImageFilePaths, dataCSVFilePath
     
@@ -268,19 +292,24 @@ def run(*arg):
 
     aQuery = None
     if len(arg) == 0:
-       # dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
+        # dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
         dateList = ['2022-12-17']
         for date in dateList:
             aQuery = FrontEndQuery()   
-            aQuery.date = date
-            aQuery.organizationSizes = ['small','medium','large']
+            #aQuery.date = date
+            #aQuery.qualtricsSurveyID = 'SV_aYnUZN7y2nQhXJc'
+            aQuery.questionThemes = ['GOV']
+            
+            aQuery.organizationSizes = ['MEDIUM']
+            aQuery.locations = ['NL']
+            aQuery.languagePreference = ['FR']
           
             images, data = HandleFrontEndQuery(aQuery) 
 
             print(images)
             print(data)
 
-            input()
+            input('Press Enter to continue...')
 
     else:
         aQuery = arg[0]
