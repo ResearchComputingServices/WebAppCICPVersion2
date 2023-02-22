@@ -123,10 +123,7 @@ def GetUserResponseQuerySet(aQuery):
             userQueryObject |= Q(userID = u.id)
         
         userResponseQuerySet = userResponseQuerySet.filter(userQueryObject)
-        print('Survey:', len(surveyQuerySet))
-        print('Questions:', len(questionQuerySet))
-        print('User:', len(userQuerySet))
-        print('Responses:', len(userResponseQuerySet))
+
     else:
         print('[ERROR]: GetUserResponseQuerySet: Insufficient question or user data' )
     
@@ -264,7 +261,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
     listOfImageFilePaths = []
     dataCSVFilePath = []
       
-    if aQuery.IsDateOnly() and False:
+    if aQuery.IsDateOnly():
         
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
     
