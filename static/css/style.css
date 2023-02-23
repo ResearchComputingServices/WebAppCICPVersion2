@@ -2,9 +2,6 @@
     box-sizing: border-box
 }
 
-body {
-    color: #e91c24
-}
 
 #sidebar {
     width: 20%;
@@ -34,6 +31,7 @@ li a:hover {
     text-decoration: none;
     color: darksalmon
 }
+
 
 .card {
     width: 250px;

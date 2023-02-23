@@ -1,0 +1,21 @@
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/sidebar.css' %}"/>
+<section id="sidebar">
+    <form id="myForm" method="get" action="{% url 'report_results_en' %}">
+        {% csrf_token %}
+        {% comment %} <div class="datePickerContainer">
+            <input class="form-control datepicker bg-color-white" placeholder="MM/DD/YYYY" maxlength="15" ng-model="PriceLineObj.StartDate" id="txtDate" type="text"/>
+        </div> {% endcomment %}
+        <a href="#filter"
+           data-bs-toggle="collapse"
+           role="button"
+           aria-expanded="false"
+           aria-controls="demo_province">FILTERS</a>
+        <form class="ml-md-2" method="get">
+            <div id="filter" class="collapse">
+                {{ form_filter.as_p }}
+                <input class="form-input" type="submit" value="Search"/>
+            </div>
+        </form>
+    </form>
+</section>

@@ -324,7 +324,7 @@ def ExtractResponsesMain(aSurvey=None):
         return
     
     responseDataJSON= ''
-    with open(responseJSONFilePath) as f:
+    with open(responseJSONFilePath, encoding='utf-8') as f:
         responseDataJSON = json.load(f)
 
     # Get rid of all the metadata in the response dictionary and return it

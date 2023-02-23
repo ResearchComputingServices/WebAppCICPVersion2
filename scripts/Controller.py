@@ -51,6 +51,7 @@ def GetUserQuerySet(aQuery):
 def GetQuestionQuerySet(aQuery):
     
     surveyQuerySet = SurveyTable.objects.all()
+   
 
     if aQuery.date != None:
         surveyQuerySet = surveyQuerySet.filter(releaseDate=aQuery.date)
@@ -58,8 +59,7 @@ def GetQuestionQuerySet(aQuery):
     if aQuery.qualtricsSurveyID != None:
         surveyQuerySet = surveyQuerySet.filter(qualtricsSurveyID=aQuery.qualtricsSurveyID)
                 
-    if len(aQuery.questionThemes) != 0:
-        questionQuerySet = questionQuerySet.filter(questionTheme=aQuery.questionThemes)
+    
     
     questionQuerySet = None
     if len(surveyQuerySet) != 0:    
@@ -68,7 +68,8 @@ def GetQuestionQuerySet(aQuery):
             qObject |= Q(surveyID=e.id)
       
         questionQuerySet = QuestionTable.objects.filter(qObject)
-     
+        if len(aQuery.questionThemes) != 0:
+            questionQuerySet = questionQuerySet.filter(questionTheme=aQuery.questionThemes)
     return questionQuerySet
 
 ##################################################################################################################################
@@ -156,10 +157,10 @@ def GenerateDataFile(responseDict,
 ##################################################################################################################################
 def GetListOfUniqueQuestions(userResponseQuerySet):
     questionList = []
-    
+
     # Get all the unique questions in the set of responses
     questionIDs = userResponseQuerySet.order_by().values_list('questionID').distinct()
-   
+    
     # use the unique questionIDs to get a list of the questions
     
     if questionIDs:
@@ -212,19 +213,15 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
 ##################################################################################################################################
 
 def GetResponseDict(aQuery):
-    
-    userResponseQuerySet = GetUserResponseQuerySet(aQuery)
-    
     responseDict = {}
-    
-    questionList = GetListOfUniqueQuestions(userResponseQuerySet)
-    
-    for question in questionList:
-    
-        userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)
+    userResponseQuerySet = GetUserResponseQuerySet(aQuery)
+    if userResponseQuerySet != None:
+        print("Inside GetResponseDict, Printing length of useresponseQueryset",len(userResponseQuerySet))
+        questionList = GetListOfUniqueQuestions(userResponseQuerySet)
         
-        responseDict[question] = userResponseList
-    
+        for question in questionList:
+            userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)
+            responseDict[question] = userResponseList
     return responseDict
 
 ##################################################################################################################################
@@ -232,6 +229,9 @@ def GetResponseDict(aQuery):
 ##################################################################################################################################
 
 def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_PATH):
+
+    print("Inside Controller")
+    print(aQuery)
      
     listOfImageFilePaths = []
     dataCSVFilePath = []
