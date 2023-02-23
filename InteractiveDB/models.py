@@ -30,7 +30,7 @@ class QuestionTable(models.Model):
     questionTextEnglish = models.TextField()
     questionTextFrench = models.TextField() 
    
-    questionTheme = models.TextField() 
+    questionTheme = models.CharField(max_length=30)
    
     jsonKey = models.TextField() # used for matching with french survey file
    
@@ -74,7 +74,7 @@ class UserTable(models.Model):
     languagePreference = models.CharField(max_length=2)   #EN, FR
 
     def __str__(self):
-         return f"User: \n id: {self.id}\n ref#: {self.externalDataReference}\n prv: {self.province}"
+         return f"User: \n id: {self.id}\n ref#: {self.externalDataReference}\n prv: {self.province}\n sz: {self.size}\n lng: {self.languagePreference}"
 
 class UserResponseTable(models.Model):
     
