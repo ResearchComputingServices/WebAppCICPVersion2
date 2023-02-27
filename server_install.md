@@ -154,6 +154,17 @@ Edit the file `/etc/apache2/sites-available/default-ssl.conf` and make these cha
    SSLCertificateFile	/etc/ssl/certs/apache-selfsigned.crt
    SSLCertificateKeyFile /etc/ssl/private/apache-selfsigned.key
    
+   # Special log formatting/filtering because we are behind F5 reverse proxy
+   LogFormat "%{X-Forwarded-For}i %h %l %u [%L] %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"" f5combined
+   SetEnvIf Remote_Addr "10\.254\.159\.[34]" isF5
+   ErrorLog ${APACHE_LOG_DIR}/error.log
+   CustomLog ${APACHE_LOG_DIR}/access.log f5combined env=!isF5
+   
+   <Location "/admin">
+       SetEnvIf X-Forwarded-For "^134\.117\." internal_ip
+       Require env internal_ip
+   </Location>
+
    ProxyPass /static/ !
    ProxyPass /media/  !
    ProxyPass / http://localhost:8000/
