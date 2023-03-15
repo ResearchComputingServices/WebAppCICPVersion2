@@ -1,0 +1,165 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-14 14:26-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\WebsiteApp\forms.py:7
+msgid "Alberta"
+msgstr "Alberta"
+
+#: .\WebsiteApp\forms.py:8
+msgid "British Columbia"
+msgstr "British Columbia"
+
+#: .\WebsiteApp\forms.py:9
+msgid " Manitoba"
+msgstr "Manitoba"
+
+#: .\WebsiteApp\forms.py:10
+msgid "New Brunswick"
+msgstr "New Brunswick"
+
+#: .\WebsiteApp\forms.py:11
+msgid "Newfoundland and Labrador"
+msgstr "Newfoundland and Labrador"
+
+#: .\WebsiteApp\forms.py:12
+msgid "Nova Scotia"
+msgstr "Nova Scotia"
+
+#: .\WebsiteApp\forms.py:13
+msgid "Ontario"
+msgstr "Ontario"
+
+#: .\WebsiteApp\forms.py:14
+msgid "Prince Edward Island"
+msgstr "Prince Edward Island"
+
+#: .\WebsiteApp\forms.py:15
+msgid "Quebec"
+msgstr "Quebec"
+
+#: .\WebsiteApp\forms.py:16
+msgid "Saskatchewan"
+msgstr "Saskatchewan"
+
+#: .\WebsiteApp\forms.py:20
+msgid "Funding"
+msgstr "Funding"
+
+#: .\WebsiteApp\forms.py:21
+msgid "Governance"
+msgstr "Governance"
+
+#: .\WebsiteApp\forms.py:22
+msgid "Policy"
+msgstr "Policy"
+
+#: .\WebsiteApp\forms.py:23
+msgid "Collaboration"
+msgstr "Collaboration"
+
+#: .\WebsiteApp\forms.py:24
+msgid "Challenges"
+msgstr "Challenges"
+
+#: .\WebsiteApp\forms.py:25
+msgid "EDI"
+msgstr "EDI"
+
+#: .\WebsiteApp\forms.py:26
+msgid "Other"
+msgstr "Other"
+
+#: .\WebsiteApp\forms.py:30
+msgid "English"
+msgstr "English"
+
+#: .\WebsiteApp\forms.py:31
+msgid "French"
+msgstr "French"
+
+#: .\WebsiteApp\forms.py:34
+msgid "Small"
+msgstr "Small"
+
+#: .\WebsiteApp\forms.py:35
+msgid "Medium"
+msgstr "Medium"
+
+#: .\WebsiteApp\forms.py:36
+msgid "Large"
+msgstr "Large"
+
+#: .\WebsiteApp\forms.py:44
+msgid "Report Date"
+msgstr "Report Date"
+
+#: .\WebsiteApp\forms.py:46
+msgid "Province"
+msgstr "Province"
+
+#: .\WebsiteApp\forms.py:48
+msgid "Theme"
+msgstr "Theme"
+
+#: .\WebsiteApp\forms.py:50
+msgid "Language Preference"
+msgstr "Language Preference"
+
+#: .\WebsiteApp\forms.py:52
+msgid "Size"
+msgstr "Size"
+
+#: .\WebsiteApp\templates\index.html:37
+#, python-format
+msgid "Weekly Survey Distributed - %%(wednesday_date)d"
+msgstr "Weekly Survey Distributed - %%(wednesday_date)d"
+
+#: .\WebsiteApp\templates\index.html:42
+#, python-format
+msgid "Weekly Report Published - %%(friday_text_date)d"
+msgstr "Weekly Report Published - %%(friday_text_date)d"
+
+#: .\WebsiteApp\templates\navbar.html:36
+msgid "Report Results"
+msgstr "Report Results"
+
+#: .\WebsiteApp\templates\navbar.html:41
+msgid "Back to CICP"
+msgstr "Back to CICP"
+
+#: .\WebsiteApp\templates\navbar.html:44
+msgid "Download Report"
+msgstr "Download Report"
+
+#: .\WebsiteApp\templates\sidebar.html:15
+msgid "FILTERS"
+msgstr "FILTERS"
+
+#: .\WebsiteApp\templates\sidebar.html:19
+msgid "Search"
+msgstr "Search"
+
+#: .\WebsiteApp\templates\sidebar.html:20
+msgid "Reset"
+msgstr "Reset"
+
+#: .\WebsiteApp\views.py:29
+msgid "HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK"
+msgstr "HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK"

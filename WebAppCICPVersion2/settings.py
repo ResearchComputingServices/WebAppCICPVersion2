@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-TEMPLATES_DIR  = os.path.join(BASE_DIR,"templates")
 
 DATA_DIR_PATH = 'Data'
 QUESTION_ENGLISH_JSON_FILENAME = 'surveyQuestionsEnglish.json'
@@ -52,11 +52,13 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'WebAppCICPVersion2.urls'
@@ -64,7 +66,7 @@ ROOT_URLCONF = 'WebAppCICPVersion2.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [TEMPLATES_DIR,],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -84,22 +86,19 @@ WSGI_APPLICATION = 'WebAppCICPVersion2.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': BASE_DIR / 'db.sqlite3',
-
-    #    'ENGINE': 'django.db.backends.sqlite3',
-    #    'NAME': BASE_DIR / 'db.sqlite3',
-
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cicp_reports',
-        'USER': 'cicp',
-        'PASSWORD': 'MYSQL_PASSWORD',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     'NAME': 'cicp_reports',
+    #     'USER': 'cicp',
+    #     'PASSWORD': 'MYSQL_PASSWORD',
+    #     'HOST': 'localhost',
+    #     'PORT': '3306',
+    # }
 }
 
 
@@ -129,8 +128,14 @@ LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
-USE_I18N = True
+# Supported languages
+LANGUAGES = [
+    ('fr', ('Français')),
+    ('en', ('English')),
+]
 
+USE_I18N = True
+USE_L10N = True
 USE_TZ = True
 
 
@@ -141,6 +146,11 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+
+#Local files - Language settings
+# Locale path
+LOCALE_PATHS = [BASE_DIR / 'locale']
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

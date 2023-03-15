@@ -1,28 +1,15 @@
-#navbar-toggler-icon {
-    left: 7%;
-    height: 40px;
-    width: 40px;
-    text-align: center;
-    background: #1b1b1b;
-    border-radius: 3px;
+.navbar {
+    background-color: #e91c24;
+}
+
+#socialMedia {
+    border: none;
     cursor: pointer;
-    z-index: 5;
-    transition: left 0.4s ease
+    appearance: none;
+    margin-left: 110px;
 }
 
-#navbar-toggler-icon.click {
-    position: absolute;
-    left: 210px;
-    top: 0;
-    background-color: #747474
-}
-
-#navbar-toggler-icon.click span:before {
-    content: '\f00d'
-}
-
-#navbarSupportedContent {
-    display: inline-block;
-    width: 50%;
-    height: 100%;
+#myDiv {
+    width: 500px;
+    height: min-content
 }

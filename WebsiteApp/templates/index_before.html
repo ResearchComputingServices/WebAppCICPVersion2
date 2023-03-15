@@ -29,21 +29,20 @@
     </head>
     <body>
         {% include "navbar.html" %}
-        {% include "sidebar.html" %}
-        <button id="sidebar-toggle" class="sidebar-toggle">&#9776; Filters</button>
+        {% comment %} {% include "sidebar.html" %} {% endcomment %}
         <div class="heading">
             {% if wednesday_date %}
                 <h6>
-                    <strong><center>{% trans "Weekly Survey Distributed - %(wednesday_date)d" %}</center></strong>
+                    <strong>Weekly Survey Distributed on - {{ wednesday_date }}</strong>
                 </h6>
             {% endif %}
             {% if friday_text_date %}
                 <h6>
-                    <strong>{% trans "Weekly Report Published - %(friday_text_date)d" %}</strong>
+                    <strong>Weekly Report Published on - {{ friday_text_date }}</strong>
                 </h6>
             {% endif %}
-            <main class="main-content">
-            </div>
+        </div>
+        <main>
             {% if info %}
                 <h2 >{{ info }}</h2>
             {% else %}
@@ -51,23 +50,42 @@
                     <h1 >{{ error }}</h1>
                 {% else %}
                     <section class="images">
-                        <div class=row>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
-                            </div>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
-                            </div>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
-                            </div>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
+                        <div class="container">
+                            <div class="row mt-3">
+                                <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
+                                    <div class="card">
+                                        <img src="{% static "webpage_images/pie.png" %}" alt="">
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
+                                    <div class="card">
+                                        <img src="{% static "webpage_images/pie2.png" %}" alt="">
+                                    </div>
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
+                                        <div class="card">
+                                            <img src="{% static "webpage_images/bar.png" %}" alt="">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3 col-sm-4 col-11 offset-sm-0 offset-1">
+                                        <div class="card">
+                                            <img src="{% static "webpage_images/barh.png" %}" alt="">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </section>
                 {% endif %}
             {% endif %}
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">One of three columns</div>
+                    <div class="col-sm">One of three columns</div>
+                    <div class="col-sm">One of three columns</div>
+                </div>
+            </div>
         </main>
         {% block scripts %}
             <script src="https://kit.fontawesome.com/17431f7655.js"
@@ -83,7 +101,6 @@
                     crossorigin="anonymous"></script>
             <script src="{% static 'js/datepicker.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>
-            <script src="{% static 'js/sidebar.js' %}"></script>
         {% endblock scripts %}
     </body>
 </html>
