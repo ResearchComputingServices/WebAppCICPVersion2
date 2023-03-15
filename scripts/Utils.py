@@ -94,7 +94,7 @@ class FrontEndQuery:
     organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
     fieldOfWork: List = field(default_factory=lambda: [])       
-                 
+                
     def IsDateOnly(self):
         
         isDateOnly = False
