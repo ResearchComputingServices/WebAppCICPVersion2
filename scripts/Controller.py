@@ -40,7 +40,7 @@ def GetUserQuerySet(aQuery):
             qObject |= Q(domain=work) 
         userQuerySet = userQuerySet.filter(qObject)
     
-    if len(userQuerySet) == 0:
+    if len(userQuerySet) < MINIMUM_USER_QUERY_SIZE:
         userQuerySet = None
     
     return userQuerySet
@@ -79,7 +79,7 @@ def GetQuestionQuerySet(aQuery):
         
         questionQuerySet = questionQuerySet.filter(themeQueryObject)       
                   
-    if len(questionQuerySet) < MINIMUM_USER_QUERY_SIZE:
+    if len(questionQuerySet) == 0:
         questionQuerySet = None
           
     return questionQuerySet
@@ -87,7 +87,7 @@ def GetQuestionQuerySet(aQuery):
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetUserResponseQuerySet(aQuery):
+def GetUserResponseQuerySet(aQuery, VERBOSE = False):
     
     # the data structure which will be returned
     userResponseQuerySet = None
@@ -104,6 +104,11 @@ def GetUserResponseQuerySet(aQuery):
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
     
+    if VERBOSE:
+        print('surveyQuerySet',len(surveyQuerySet))
+        print('questionQuerySet',len(questionQuerySet))
+        print('userQuerySet',len(userQuerySet))
+    
     # test to make sure there is data in the querySets before proceeding
     if questionQuerySet != None and userQuerySet != None and surveyQuerySet != None:
         surveyQueryObject = Q()
@@ -115,26 +120,36 @@ def GetUserResponseQuerySet(aQuery):
         questionQueryObject = Q()
         for q in questionQuerySet:
             questionQueryObject |= Q(questionID=q.id)
-        
+        print(questionQueryObject)
         userResponseQuerySet = UserResponseTable.objects.filter(questionQueryObject)
-                 
+                    
         userQueryObject = Q()
         for u in userQuerySet:
             userQueryObject |= Q(userID = u.id)
+        print('userQueryObject', len(userQueryObject), flush=True)
         
         userResponseQuerySet = userResponseQuerySet.filter(userQueryObject)
+    
+        if len(userResponseQuerySet) == 0:
+            if VERBOSE:
+                print('[ERROR]: GetUserQuerySet: no user responses fix query')
+            errorLogs.append('Insufficient user response data, try relaxing search constraints')
+    
     # if any of the querySets are zero report an error explaining why
     else:
         if questionQuerySet == None:
-            print('[ERROR]: GetUserResponseQuerySet: Insufficient question data' )
+            if VERBOSE:
+                print('[ERROR]: GetUserResponseQuerySet: Insufficient question data' )
             errorLogs.append('Insufficient question data, try relaxing search constraints')    
         if surveyQuerySet == None:
-            print('[ERROR]: GetUserResponseQuerySet: Insufficient survey data' )    
+            if VERBOSE:
+                print('[ERROR]: GetUserResponseQuerySet: Insufficient survey data' )    
             errorLogs.append('Insufficient survey data, try relaxing search constraints')
         if userQuerySet == None:
-            print('[ERROR]: GetUserQuerySet: UserQuerySet below minimum threshold: ', MINIMUM_USER_QUERY_SIZE)
+            if VERBOSE:
+                print('[ERROR]: GetUserQuerySet: UserQuerySet below minimum threshold: ', MINIMUM_USER_QUERY_SIZE)
             errorLogs.append('Insufficient user data, try relaxing search constraints')
-            
+                 
     return userResponseQuerySet, errorLogs
 
 ##################################################################################################################################
@@ -248,7 +263,7 @@ def GetResponseDict(aQuery):
     
     responseDict = {}
     userResponseQuerySet, errorLogs = GetUserResponseQuerySet(aQuery)   
-    
+       
     if userResponseQuerySet != None:
    
         questionList = GetListOfUniqueQuestions(userResponseQuerySet)
@@ -271,8 +286,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
     
     # If only a date is specified in the query then no new images need to be generated since the default
     # images created when then the survey data was pulled from the website fullfill the request.
-    if aQuery.IsDateOnly():
-        
+    if aQuery.IsDateOnly():  
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
     
         if os.path.exists(folderPath):
@@ -284,9 +298,10 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
                     if '.csv' in filename:    
                         dataCSVFilePath.append(filePath)
                     else:
-                        listOfImageFilePaths.append(filePath)            
+                        listOfImageFilePaths.append(filePath)   
+             
     # If there are more filters in the query then just a date, new images will need to be generated.
-    else:       
+    else:    
         responseDict, errorLogs = GetResponseDict(aQuery)
         
         if responseDict.keys() != None:
@@ -300,36 +315,56 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
 ##################################################################################################################################
 def run(*arg):
 
-    aQuery = None
-    if len(arg) == 0:
-        # dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
-        dateList = ['2022-12-17']
-        for date in dateList:
-            aQuery = FrontEndQuery()   
-            aQuery.date = date
-            #aQuery.qualtricsSurveyID = 'SV_aYnUZN7y2nQhXJc'
-            aQuery.questionThemes = ['GOV']
+    # aQuery = None
+    # if len(arg) == 0:
+    #     # dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
+    #     dateList = ['2022-12-17']
+        
+    #     for date in dateList:
+    #         aQuery = FrontEndQuery()   
+    #         aQuery.date = date
+    #         #aQuery.qualtricsSurveyID = 'SV_aYnUZN7y2nQhXJc'
+    #         aQuery.questionThemes = ['GOV']
             
-            aQuery.organizationSizes = ['MEDIUM']
-            aQuery.locations = ['NL']
-            aQuery.languagePreference = ['FR']
+    #         aQuery.organizationSizes = ['MEDIUM']
+    #         aQuery.locations = ['NL']
+    #         aQuery.languagePreference = ['FR']
           
-            images, data, errorLogs = HandleFrontEndQuery(aQuery) 
+    #         images, data, errorLogs = HandleFrontEndQuery(aQuery) 
 
-            print('~~~~~~~~~~ QUERY ERROR LOG ~~~~~~~~~~')
-            for error in errorLogs:
-                print(error)
-            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    #         print('~~~~~~~~~~ QUERY ERROR LOG ~~~~~~~~~~')
+    #         for error in errorLogs:
+    #             print(error)
+    #         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
 
-            print('~~~~~~~~~~~ IMAGE OUTPUTS ~~~~~~~~~~~')
-            print(images)
-            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    #         print('~~~~~~~~~~~ IMAGE OUTPUTS ~~~~~~~~~~~')
+    #         print(images)
+    #         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
             
-            print('~~~~~~~~~~~ DATA  OUTPUTS ~~~~~~~~~~~')
-            print(data)
-            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-            input('Press Enter to continue...')
+    #         print('~~~~~~~~~~~ DATA  OUTPUTS ~~~~~~~~~~~')
+    #         print(data)
+    #         print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    #         input('Press Enter to continue...')
 
-    else:
-        aQuery = arg[0]
-        return HandleFrontEndQuery(aQuery)    
+    # else:
+    #     aQuery = arg[0]
+    #     return HandleFrontEndQuery(aQuery)    
+    
+    aQuery = FrontEndQuery()   
+    aQuery.qualtricsSurveyID = 'SV_0eMEVIZkeSbKyjk'#'SV_6mJwD0WeUarScKy'
+    
+    images, data, errorLogs = HandleFrontEndQuery(aQuery) 
+
+    print('~~~~~~~~~~ QUERY ERROR LOG ~~~~~~~~~~')
+    for error in errorLogs:
+        print(error)
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+
+    print('~~~~~~~~~~~ IMAGE OUTPUTS ~~~~~~~~~~~')
+    print(images)
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    
+    print('~~~~~~~~~~~ DATA  OUTPUTS ~~~~~~~~~~~')
+    print(data)
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    input('Press Enter to continue...')
