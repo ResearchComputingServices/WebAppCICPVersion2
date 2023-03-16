@@ -310,36 +310,21 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
 ##################################################################################################################################
 def run(*arg):
 
-    aQuery = None
-    if len(arg) == 0:
-        # dateList = ['2022-12-01','2022-12-08','2022-12-17','2023-02-03','2023-02-01','2023-01-01']
-        dateList = ['2022-12-17']
-        for date in dateList:
-            aQuery = FrontEndQuery()   
-            aQuery.date = date
-            #aQuery.qualtricsSurveyID = 'SV_aYnUZN7y2nQhXJc'
-            aQuery.questionThemes = ['GOV']
             
-            aQuery.organizationSizes = ['MEDIUM']
-            aQuery.locations = ['NL']
-            aQuery.languagePreference = ['FR']
-          
-            images, data, errorLogs = HandleFrontEndQuery(aQuery) 
+    aQuery = FrontEndQuery()   
+    aQuery.qualtricsSurveyID = 'SV_0eMEVIZkeSbKyjk'#'SV_6mJwD0WeUarScKy'
+    aQuery.locations= ["ON"]
+    images, data, errorLogs = HandleFrontEndQuery(aQuery) 
 
-            print('~~~~~~~~~~ QUERY ERROR LOG ~~~~~~~~~~')
-            for error in errorLogs:
-                print(error)
-            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-
-            print('~~~~~~~~~~~ IMAGE OUTPUTS ~~~~~~~~~~~')
-            print(images)
-            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-            
-            print('~~~~~~~~~~~ DATA  OUTPUTS ~~~~~~~~~~~')
-            print(data)
-            print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
-            input('Press Enter to continue...')
-
-    else:
-        aQuery = arg[0]
-        return HandleFrontEndQuery(aQuery)    
+    
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    print('~~~~~~~~~~ QUERY ERROR LOG ~~~~~~~~~~')
+    for error in errorLogs:
+            print(error)
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    print('~~~~~~~~~~~ IMAGE OUTPUTS ~~~~~~~~~~~')
+    print(images)
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    
+    
+         
