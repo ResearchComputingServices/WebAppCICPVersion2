@@ -52,7 +52,7 @@ def VisualizeSingleChoiceSliderQuestion(title,
     numberOfResponses = len(userResponses)
     for response in userResponses:
         
-        if response.answerValue == None:
+        if response.answerValue == None or not str(response.answerValue).isnumeric():
             continue
         
         value = int(response.answerValue)
@@ -177,7 +177,7 @@ def VisualizeMultiChoiceSliderQuestion( title,
         else:
             key = choiceQuerySet.filter(id=response.choiceID.id).first().choiceTextFrench
         
-        if response.answerValue != None:
+        if response.answerValue != None and str(response.answerValue).isnumeric():
             value = int(response.answerValue)
             responseDict[key] += value
             counter[key] += 1
