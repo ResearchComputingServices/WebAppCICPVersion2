@@ -15,6 +15,7 @@
            id="filterText">{% translate "FILTERS" %}</a>
         <form class="ml-md-2" method="get">
             <div>
+                <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                 {{ form_filter.as_p }}
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                 <input type="reset" value="{% translate "Reset" %}"  />

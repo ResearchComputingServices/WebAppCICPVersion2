@@ -31,11 +31,36 @@
     /* display: none; */
 }
 
-.heading {
+#heading {
     color: #e91c24;
     padding: 2em;
     margin-left: 30%;
     display: inline-block;
+}
+
+
+#errorcard .card-body {
+    background-color: #e91c24;
+}
+
+#errorcard .btn {
+    background-color: black;
+}
+
+#errorcard .card-header {
+    background-color: #000000;
+}
+
+#infocard .card-body {
+    background-color: #000000;
+}
+
+#infocard .card-header {
+    background-color: #e91c24;
+}
+
+#infocard .btn {
+    background-color: #e91c24;
 }
 
 .main-content {

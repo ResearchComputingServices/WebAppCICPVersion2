@@ -65,11 +65,12 @@ MAX_TITLE_LENGTH = 75
 
 FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regular.ttf')
 
-FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'tmpImages')
+FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'tmpImages')
 
-DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'DefaultImages')
+DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages/')
 
 WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
+
 
 ##################################################################################################################################
 # This dataClass contains all the values which the user wants to filter on
@@ -104,7 +105,7 @@ class FrontEndQuery:
             len(self.organizationSizes) == 0 and
             len(self.languagePreference) == 0 and
             len(self.fieldOfWork) == 0 and
-            self.qualtricsSurveyID == None):
+            self.qualtricsSurveyID == ''):
                 isDateOnly = True
         
         return isDateOnly

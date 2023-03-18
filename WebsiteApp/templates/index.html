@@ -30,8 +30,8 @@
     <body>
         {% include "navbar.html" %}
         {% include "sidebar.html" %}
-        <button id="sidebar-toggle" class="sidebar-toggle">&#9776; Filters</button>
-        <div class="heading">
+        <button id="sidebar-toggle" class="sidebar-toggle">☰ Filters</button>
+        <div id="heading">
             {% if wednesday_date %}
                 <h6>
                     <strong><center>{% trans "Weekly Survey Distributed - %(wednesday_date)d" %}</center></strong>
@@ -45,25 +45,41 @@
             <main class="main-content">
             </div>
             {% if info %}
-                <h2 >{{ info }}</h2>
+                <div id="infocard"
+                     class="h-100 d-flex align-items-center justify-content-center">
+                    <div class="card text-center">
+                        <div class="card-header text-light">Alert!!</div>
+                        <div class="card-body">
+                            <p class="card-title ">
+                                <p class="card-text text-light">{{ info }}</p>
+                            </p>
+                            <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>
+                        </div>
+                    </div>
+                </div>
             {% else %}
-                {% if error %}
-                    <h1 >{{ error }}</h1>
+                {% if errors %}
+                    <div id="errorcard"
+                         class="h-100 d-flex align-items-center justify-content-center">
+                        <div class="card text-center">
+                            <div class="card-header text-light">Alert!!</div>
+                            <div class="card-body">
+                                <p class="card-title text-light">
+                                    {% for error in errors %}<p class="card-text">{{ error }}</p>{% endfor %}
+                                </p>
+                                <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>
+                            </div>
+                        </div>
+                    </div>
                 {% else %}
                     <section class="images">
-                        <div class=row>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
-                            </div>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
-                            </div>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
-                            </div>
-                            <div class="column">
-                                <img src="{% static "webpage_images/pie.png" %}" alt="">
-                            </div>
+                        {% for image_url in image_filepaths %}
+                            <h1>{{ image_url.url }}</h1>
+                            <div class=row>
+                                <div class="column">
+                                    <img src={{ image_url.url }} alt="Image">
+                                </div>
+                            {% endfor %}
                         </div>
                     </section>
                 {% endif %}

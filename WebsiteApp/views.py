@@ -15,7 +15,11 @@ def report_results_EN(request):
        
         context = {'form_filter' : form_filter}
 
-        date = (request.GET['report_date'])
+        date = request.GET.get('report_date', None)
+        if date is None:
+            date = str(datetime.now().date())
+        else:
+            date = (request.GET['report_date'])
         location = (request.GET.getlist('province'))
         question_theme = (request.GET.getlist('theme'))
         # language_preference = request.GET.getlist('language')
@@ -26,13 +30,17 @@ def report_results_EN(request):
 
 
         if date == "2022-12-23" or date == "2022-12-30":
-            info = gettext("HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK")
+            info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
             context['info'] = info
 
         else:
             
             wednesday_date = get_wed_date(date,lang=get_language())
             friday_text_date = get_fri_textdate(date,lang=get_language())
+
+            context['wednesday_date'] = wednesday_date
+            context['friday_text_date'] = friday_text_date
+
             front_end_query = FrontEndQuery()
 
             front_end_query.date = date
@@ -43,11 +51,14 @@ def report_results_EN(request):
             front_end_query.qualtricsSurveyID = ''
             
             if front_end_query:
-                query_response_imagefilepaths,query_response_csv = HandleFrontEndQuery(front_end_query)
+                query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
 
-              
-            error = "Insufficient data"
-            context = {'error' : error,'wednesday_date': wednesday_date, 'friday_text_date': friday_text_date}
+                if len(errors) != 0:
+                    context["errors"] = errors
+            
+                if len(query_response_imagefilepaths) != 0:
+                    context["image_filepaths"] = query_response_imagefilepaths
+
 
         return render(request, 'index.html', context)
 
@@ -57,6 +68,20 @@ def report_results_EN(request):
         friday_text_date = get_fri_textdate(friday_date,lang="en")
         wednesday_date = get_wed_date(friday_date,lang="en")
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_date}
+        front_end_query = FrontEndQuery()
+        front_end_query.date = str(get_fridaydate_from_todays_date(datetime.now()))
+        if front_end_query:
+                query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
+                print(query_response_imagefilepaths)
+                
+
+                if len(errors) != 0:
+                    context["errors"] = errors
+            
+                if len(query_response_imagefilepaths) != 0:
+                    
+                    context["image_filepaths"] = query_response_imagefilepaths
+       
         return render(request, 'index.html', context)
     
 
