@@ -293,7 +293,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     if aQuery.IsDateOnly():  
 
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
-        # print(folderPath)
+        print(folderPath)
 
         if os.path.exists(folderPath):
             for filename in os.listdir(folderPath):
@@ -306,7 +306,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
                     else:
                         listOfImageFilePaths.append(filePath)   
         else:
-            print("Folder path doesn't exist")     
+            print("[WARNING]: HandleFrontEndQuery: Folder path doesn't exist:", folderPath)     
     # If there are more filters in the query then just a date, new images will need to be generated.
     else:    
         responseDict, errorLogs = GetResponseDict(aQuery)
@@ -315,9 +315,9 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
             dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
     
-    listOfImageFilePaths = Local2URLMedia(TMP_FIGURE_FOLDER_PATH)
+    listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
     dataCSVFilePath = Local2URLMedia([dataCSVFilePath])
-    
+      
     return listOfImageFilePaths, dataCSVFilePath, errorLogs
     
 ##################################################################################################################################
