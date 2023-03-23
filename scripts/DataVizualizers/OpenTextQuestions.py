@@ -16,7 +16,7 @@ from scripts.DataVizualizers.VizUtils import *
 def VisualizeOpenTextQuestion(  question, 
                                 userResponses,
                                 isEnglish=True,
-                                saveToDirPath = FIGURE_FOLDER_PATH):
+                                saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
     title = GetGraphicTitle(question, isEnglish)
        
@@ -41,7 +41,7 @@ def CreateWordCloud(wordCloudText,
                     title,
                     numberOfResponses,
                     isEnglish = True,
-                    saveToDirPath = FIGURE_FOLDER_PATH):
+                    saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
     if len(wordCloudText.strip()) == 0:
         return False

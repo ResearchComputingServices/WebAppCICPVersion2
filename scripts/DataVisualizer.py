@@ -80,7 +80,7 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
 ##################################################################################################################################
 def DataVisualizerMain(responseDict,
                        isEnglish = True,
-                       saveToDirPath = FIGURE_FOLDER_PATH):
+                       saveToDirPath = TMP_FIGURE_FOLDER_PATH):
 
     # make sure the tmp folder for storing the generated images exists
     isExist = os.path.exists(saveToDirPath)
@@ -115,9 +115,9 @@ def DataVisualizerMain(responseDict,
 def run(*arg):
     
     # make sure the tmp folder for storing the generated images exists
-    isExist = os.path.exists(FIGURE_FOLDER_PATH)
+    isExist = os.path.exists(TMP_FIGURE_FOLDER_PATH)
     if not isExist:
-        os.makedirs(FIGURE_FOLDER_PATH)
+        os.makedirs(TMP_FIGURE_FOLDER_PATH)
     
     # create a front end query to get some data from the DB
     aQuery = FrontEndQuery()   

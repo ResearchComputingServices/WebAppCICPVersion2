@@ -175,7 +175,7 @@ def GenerateDefaultFigures(aSurvey):
 ##################################################################################################################################
 
 def GenerateDataFile(responseDict,
-                     saveToDirPath = FIGURE_FOLDER_PATH):
+                     saveToDirPath = TMP_FIGURE_FOLDER_PATH):
                
     dataFrameList = []
     
@@ -282,10 +282,7 @@ def GetResponseDict(aQuery):
 # 
 ##################################################################################################################################
 
-def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_PATH):
-
-    
-    print(aQuery)
+def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
      
     listOfImageFilePaths = []
     dataCSVFilePath = []
@@ -303,11 +300,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
                 if os.path.isfile(os.path.join(folderPath, filename)):
 
                     filePath = os.path.join(folderPath, filename)
-                    filePath = filePath[len(str(settings.BASE_DIR)):]
-                    
-
-
-                    
+                                        
                     if '.csv' in filename:    
                         dataCSVFilePath.append(filePath)
                     else:
@@ -321,6 +314,9 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
         if responseDict.keys() != None:
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
             dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
+    
+    listOfImageFilePaths = Local2URLMedia(TMP_FIGURE_FOLDER_PATH)
+    dataCSVFilePath = Local2URLMedia([dataCSVFilePath])
     
     return listOfImageFilePaths, dataCSVFilePath, errorLogs
     

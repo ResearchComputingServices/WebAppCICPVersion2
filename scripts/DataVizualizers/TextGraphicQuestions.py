@@ -8,7 +8,7 @@ from scripts.DataVizualizers.OpenTextQuestions import CreateWordCloud
 def VisualizeTextGraphicQuestion(   question, 
                                     userResponses,
                                     isEnglish = True,
-                                    saveToDirPath = FIGURE_FOLDER_PATH): 
+                                    saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
     
     title = GetGraphicTitle(question, isEnglish)
         

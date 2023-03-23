@@ -10,7 +10,7 @@ from scripts.DataVizualizers.VizUtils import *
 def VisualizeMultipleChoiceQuestion(question, 
                                     userResponses,
                                     isEnglish = True,
-                                    saveToDirPath = FIGURE_FOLDER_PATH):    
+                                    saveToDirPath = TMP_FIGURE_FOLDER_PATH):    
     title = GetGraphicTitle(question, isEnglish)
         
     # Generate the responseDict (choiceID:average as the key:value pair) initially set the average to 0
@@ -64,7 +64,7 @@ def CreatePieChart( responseDict,
                     graphicTitle,
                     numberOfResponses,
                     isEnglish = True,
-                    saveToDirPath = FIGURE_FOLDER_PATH):
+                    saveToDirPath = TMP_FIGURE_FOLDER_PATH):
 
     graphTitle = WrapText(graphicTitle)
         

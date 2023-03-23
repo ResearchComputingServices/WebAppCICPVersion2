@@ -65,11 +65,9 @@ MAX_TITLE_LENGTH = 75
 
 FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regular.ttf')
 
-FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'tmpImages')
+TMP_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'tmpImages')
 
 DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
-
-DEFAULT_FIGURE_URL = os.path.join(settings.MEDIA_URL, 'DefaultImages')
 
 WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
 
@@ -112,10 +110,25 @@ class FrontEndQuery:
         
         return isDateOnly
         
- 
+##################################################################################################################################
+# This function changes a filepath local to the server to a url
+##################################################################################################################################
+
+def Local2URLMedia(listLocal):
+    
+    listOfURLPaths = []
+    
+    for localFilePath in listLocal:
+        urlPath = localFilePath[len(str(settings.BASE_DIR)):]
+        listOfURLPaths.append(urlPath)
+        
+    return listOfURLPaths
+    
+    
 ##################################################################################################################################
 # This function removes any text in brackets and replaces special characeter codes with the actual character
 ##################################################################################################################################
+
 
 def CleanText(text):
     cleanedText = text
