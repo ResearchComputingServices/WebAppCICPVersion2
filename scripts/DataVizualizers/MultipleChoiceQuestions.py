@@ -41,7 +41,7 @@ def VisualizeMultipleChoiceQuestion(question,
         else:
             key = choiceQuerySet.filter(id=response.choiceID.id).first().choiceTextFrench
         
-        if response.answerValue != None:
+        if response.answerValue != None and str(response.answerValue).isnumeric():
             value = int(response.answerValue)
             responseDict[key] += value
             totalResponses +=1
