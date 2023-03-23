@@ -155,8 +155,9 @@ STATICFILES_DIRS = [
 LOCALE_PATHS = [BASE_DIR / 'locale']
 
 
-# # #Static and Media files
+# # and Media files
 MEDIA_URL="/media/"
+MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -173,4 +174,4 @@ QUATRICS_API = {
 }
 
 STATIC_ROOT = '/var/www/html/static/'
-MEDIA_ROOT = '/var/www/html/media/'
+# MEDIA_ROOT = '/var/www/html/media/'

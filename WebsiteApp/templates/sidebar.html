@@ -1,12 +1,13 @@
 {% load static %}
 {% load i18n %}
 <link rel="stylesheet" href="{% static 'css/sidebar.css' %}"/>
-<section class="sidebar">
+<div id="sidebar" class="sidebar">
     <form autocomplete="off"
           id="myForm"
           method="get"
           action="{% url 'report_results_EN' %}">
         {% csrf_token %}
+        <p href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</p>
         <a href="#filter"
            data-bs-toggle="collapse"
            role="button"
@@ -16,10 +17,10 @@
         <form class="ml-md-2" method="get">
             <div>
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                {{ form_filter.as_p }}
+                <p>{{ form_filter.as_p }}</p>
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                 <input type="reset" value="{% translate "Reset" %}"  />
             </div>
         </form>
     </form>
-</section>
+</div>

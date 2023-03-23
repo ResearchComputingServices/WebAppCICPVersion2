@@ -161,7 +161,6 @@ def GenerateDefaultFigures(aSurvey):
 
     aQuery = FrontEndQuery()
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
-    aQuery.locations = ["ON"]
     
     dateString =  aSurvey.releaseDate.strftime("%Y-%m-%d")
     saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, dateString)
@@ -297,14 +296,17 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
     if aQuery.IsDateOnly():  
 
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
-        print(folderPath)
+        # print(folderPath)
 
         if os.path.exists(folderPath):
             for filename in os.listdir(folderPath):
                 if os.path.isfile(os.path.join(folderPath, filename)):
 
                     filePath = os.path.join(folderPath, filename)
-                    print(filePath)
+                    filePath = filePath[len(str(settings.BASE_DIR)):]
+                    
+
+
                     
                     if '.csv' in filename:    
                         dataCSVFilePath.append(filePath)

@@ -1,6 +1,7 @@
+<!DOCTYPE html>
 {% load static %}
 {% load i18n %}
-<!DOCTYPE html>
+{% load l10n %}
 <html lang="en">
     <head>
         <link rel="icon"
@@ -28,22 +29,24 @@
         {% endblock styles %}
     </head>
     <body>
-        {% include "navbar.html" %}
-        {% include "sidebar.html" %}
-        <button id="sidebar-toggle" class="sidebar-toggle">☰ Filters</button>
-        <div id="heading">
+        <div>
+            {% include "navbar.html" %}
+            {% include "sidebar.html" %}
+        </div>
+        <span class="sidebar-toggle" onclick="openNav()">☰ Filters</span>
+        <div id="heading" class="justify-content-center">
             {% if wednesday_date %}
-                <h6>
-                    <strong><center>{% trans "Weekly Survey Distributed - %(wednesday_date)d" %}</center></strong>
-                </h6>
+                <h4>
+                    <strong><center>{% trans "Weekly Survey Distributed -" %}{% blocktrans %} {{wednesday_date }}{% endblocktrans %}</center></strong>
+                </h4>
             {% endif %}
             {% if friday_text_date %}
-                <h6>
-                    <strong>{% trans "Weekly Report Published - %(friday_text_date)d" %}</strong>
-                </h6>
+                <h4>
+                    <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date }}{% endblocktrans %}</center></strong>
+                </h4>
             {% endif %}
-            <main class="main-content">
-            </div>
+        </div>
+        <main class="main-content">
             {% if info %}
                 <div id="infocard"
                      class="h-100 d-flex align-items-center justify-content-center">
@@ -73,11 +76,10 @@
                     </div>
                 {% else %}
                     <section class="images">
-                        {% for image_url in image_filepaths %}
-                            <h1>{{ image_url.url }}</h1>
-                            <div class=row>
+                        <div class="row">
+                            {% for image_url in image_filepaths %}
                                 <div class="column">
-                                    <img src={{ image_url.url }} alt="Image">
+                                    <img src={{ image_url }} alt="Image">
                                 </div>
                             {% endfor %}
                         </div>

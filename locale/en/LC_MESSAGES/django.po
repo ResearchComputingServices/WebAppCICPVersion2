@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-14 14:26-0400\n"
+"POT-Creation-Date: 2023-03-22 11:20-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -111,30 +111,37 @@ msgid "Report Date"
 msgstr "Report Date"
 
 #: .\WebsiteApp\forms.py:46
-msgid "Province"
-msgstr "Province"
-
-#: .\WebsiteApp\forms.py:48
 msgid "Theme"
 msgstr "Theme"
 
-#: .\WebsiteApp\forms.py:50
+#: .\WebsiteApp\forms.py:48
+msgid "Province"
+msgstr "Province"
+
+#: .\WebsiteApp\forms.py:51
 msgid "Language Preference"
 msgstr "Language Preference"
 
-#: .\WebsiteApp\forms.py:52
+#: .\WebsiteApp\forms.py:53
 msgid "Size"
 msgstr "Size"
 
-#: .\WebsiteApp\templates\index.html:37
-#, python-format
-msgid "Weekly Survey Distributed - %%(wednesday_date)d"
-msgstr "Weekly Survey Distributed - %%(wednesday_date)d"
+#: .\WebsiteApp\templates\index.html:38
+msgid "Weekly Survey Distributed -"
+msgstr "Weekly Survey Distributed -"
 
-#: .\WebsiteApp\templates\index.html:42
+#: .\WebsiteApp\templates\index.html:38
+msgid " %(wednesday_date)s"
+msgstr "%(wednesday_date)s"
+
+#: .\WebsiteApp\templates\index.html:43
+msgid "Weekly Survey Published -"
+msgstr "Weekly Survey Published -"
+
+#: .\WebsiteApp\templates\index.html:43
 #, python-format
-msgid "Weekly Report Published - %%(friday_text_date)d"
-msgstr "Weekly Report Published - %%(friday_text_date)d"
+msgid "%(friday_text_date)s"
+msgstr "%(friday_text_date)s"
 
 #: .\WebsiteApp\templates\navbar.html:36
 msgid "Report Results"
@@ -152,14 +159,15 @@ msgstr "Download Report"
 msgid "FILTERS"
 msgstr "FILTERS"
 
-#: .\WebsiteApp\templates\sidebar.html:19
+#: .\WebsiteApp\templates\sidebar.html:18
+#: .\WebsiteApp\templates\sidebar.html:20
 msgid "Search"
 msgstr "Search"
 
-#: .\WebsiteApp\templates\sidebar.html:20
+#: .\WebsiteApp\templates\sidebar.html:21
 msgid "Reset"
 msgstr "Reset"
 
-#: .\WebsiteApp\views.py:29
-msgid "HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK"
-msgstr "HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK"
+#: .\WebsiteApp\views.py:33
+msgid " 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
+msgstr "🥳🥳🥳 HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"

@@ -29,7 +29,7 @@ def report_results_EN(request):
         print(context)
 
 
-        if date == "2022-12-23" or date == "2022-12-30":
+        if date == "2022-12-23" or date == "2022-12-30" :
             info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
             context['info'] = info
 
@@ -65,8 +65,8 @@ def report_results_EN(request):
     else:
         form_filter = FilterForm()
         friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
-        friday_text_date = get_fri_textdate(friday_date,lang="en")
-        wednesday_date = get_wed_date(friday_date,lang="en")
+        friday_text_date = get_fri_textdate(friday_date,lang=get_language())
+        wednesday_date = get_wed_date(friday_date,lang=get_language())
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_date}
         front_end_query = FrontEndQuery()
         front_end_query.date = str(get_fridaydate_from_todays_date(datetime.now()))
@@ -91,27 +91,26 @@ def get_wed_date(fri_date,lang):
     wednesday = fri_date + \
                 timedelta(days = -2)
     if lang == "fr":
-        print(lang)
-        wednesday_fr = wednesday.strftime("%e %B, %Y")
-        wednesday_fr = gettext(wednesday_fr)
-        print("Wednesday date in French is ",wednesday_fr)
-        return(wednesday_fr)
+        wednesday_fr = wednesday.strftime("%d %B, %Y")
+        wednesday_fr = datetime.strptime(wednesday_fr,"%d %B, %Y")
+        return(wednesday_fr.date())
     else:
         print(lang)
-        wednesday = wednesday.strftime("%b %e, %Y")
+        wednesday = wednesday.strftime("%d %B, %Y")
         
         return(wednesday)
 
 # Converts the Friday Date from %Y-%m-%d to Month Date, Year
 def get_fri_textdate(fri_date,lang):
-    fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
 
+    fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
+    
     if lang == "fr":
-        friday_fr = fri_date.strftime("%b %e, %Y")
-        friday_fr = gettext(friday_fr)
-        return (friday_fr)
+        friday_fr = fri_date.strftime("%b %d, %Y")
+        friday_fr = datetime.strptime(friday_fr, "%b %d, %Y")
+        return (friday_fr.date())
     else:
-        friday = fri_date.strftime("%e %b, %Y")
+        friday = fri_date.strftime("%d %B, %Y")
         return friday
 
 

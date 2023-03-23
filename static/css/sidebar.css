@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Poppins&display=swap');
 
-/* * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif
-} */
-
 #filterText {
     background-color: #e91c24;
     text-decoration: none;
@@ -19,11 +12,7 @@
 }
 
 .sidebar {
-    flex: 1;
-    padding: 1rem;
-    /* position: absolute; */
-    width: 220px;
-    height: auto;
+    padding: 8px 8px 8px;
     background-color: #0f0e0e;
     color: white;
     left: 0;
