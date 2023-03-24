@@ -1,6 +1,6 @@
-/* * {
+* {
     box-sizing: border-box
-} */
+}
 
 .navbar-nav {
     margin-left: 10%;
@@ -10,37 +10,23 @@
     padding-left: 50px;
 }
 
-/* .sidebar {
-    width: 20%;
-    margin: 0;
-    float: left;
-    display: flex;
-} */
-
 .sidebar {
     height: 100%;
-    width: 0%;
-    /* position: fixed; */
+    width: 0;
+    position: fixed;
     z-index: 1;
-    top: 0;
     left: 0;
-    background-color: #111;
-    overflow-x: hidden;
+    overflow-x: auto;
     transition: 0.5s;
+    background-color: #0f0e0e;
+    color: white;
 }
 
-.sidebar p {
-    display: block;
-    color: #fff;
-}
-
-.sidebar .closebtn {
+.overlay-content {
     position: relative;
-    top: 0;
-    margin-bottom: 10px;
-    /* right: 25px; */
-    font-size: 36px;
-    /* margin-left: 150px; */
+    width: 100%;
+    padding: 8px 30px 8px 25px;
+    overflow-x: auto;
 }
 
 /* Button styles */
@@ -54,14 +40,13 @@
     border: none;
     border-radius: 0.25rem;
     cursor: pointer;
-    /* display: none; */
 }
 
 #heading {
     color: #e91c24;
-    padding: 2em;
-
+    padding: 1em;
 }
+
 
 
 #errorcard .card-body {
@@ -96,7 +81,7 @@
     float: right;
 }
 
-section {
+div {
     box-sizing: border-box;
 }
 
@@ -114,12 +99,6 @@ section {
     display: flex;
     flex-wrap: wrap;
 }
-
-/* Create four equal columns */
-/* .column {
-    flex: 50%;
-    padding: 10px;
-} */
 
 
 
@@ -143,33 +122,26 @@ section {
         width: 100%;
     }
 
-    /* .sidenav {
-        padding-top: 15px;
+    .sidebar .closebtn {
+        position: relative;
+        top: 0;
+        margin-bottom: 10px;
+        font-size: 36px;
     }
 
-    .sidenav a {
-        font-size: 18px;
-    } */
+    .sidebar {
+        top: 0%;
+        padding: 0%;
+    }
+
 
 }
+
 
 /* CSS code for small devices */
 @media (min-width: 576px) and (max-width: 767.98px) {
 
     /* Example CSS rules for small devices */
-    /* .heading {
-        padding: 2em;
-        margin-left: auto;
-        display: inline-block;
-        font-size: 16px;
-        position: center;
-        text-align: center;
-    } */
-
-    .sidebar {
-        display: none
-    }
-
     .main-content {
         margin-left: auto;
         width: auto;
@@ -181,7 +153,21 @@ section {
         flex-direction: column;
     }
 
+    .column {
+        width: 100%;
+    }
 
+    .sidebar .closebtn {
+        position: relative;
+        top: 0;
+        margin-bottom: 10px;
+        font-size: 36px;
+    }
+
+    .sidebar {
+        top: 0%;
+        padding: 0%;
+    }
 
 }
 
@@ -190,7 +176,7 @@ section {
 
     /* Example CSS rules for medium devices */
 
-    #sidebar-toggle {
+    .sidebar-toggle {
         display: none;
     }
 
@@ -209,14 +195,6 @@ section {
         padding: 10px;
         float: right;
     }
-
-    /* .heading {
-        padding: 2em;
-        margin-left: 15%;
-        display: inline-block;
-        font-size: 16px;
-        text-align: center;
-    } */
 
     .row {
         flex-direction: column;
@@ -250,11 +228,9 @@ section {
         display: none;
     }
 
-    .closebtn {
+    .sidebar .closebtn {
         display: none;
     }
-
-
 
     .sidebar {
         width: 20%;
@@ -275,7 +251,6 @@ section {
     }
 
     .images img {
-        /* flex: 1; */
         margin-bottom: 1rem;
         height: auto;
         width: 100%;
@@ -292,7 +267,7 @@ section {
         display: none;
     }
 
-    .closebtn {
+    .sidebar .closebtn {
         display: none;
     }
 
@@ -322,5 +297,12 @@ section {
         width: 100%;
         max-width: 500px;
         max-height: 400px;
+    }
+
+    .overlay-content {
+        position: relative;
+        width: 100%;
+        padding: 15px 30px 60px 25px;
+        overflow-x: auto;
     }
 }

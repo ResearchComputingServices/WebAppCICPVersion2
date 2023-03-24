@@ -48,26 +48,28 @@
         </div>
         <main class="main-content">
             {% if info %}
-                <div id="infocard"
-                     class="h-100 d-flex align-items-center justify-content-center">
-                    <div class="card text-center">
-                        <div class="card-header text-light">Alert!!</div>
-                        <div class="card-body">
-                            <p class="card-title ">
-                                <p class="card-text text-light">{{ info }}</p>
-                            </p>
-                            <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>
-                        </div>
-                    </div>
-                </div>
-            {% else %}
-                {% if errors %}
-                    <div id="errorcard"
+                <center>
+                    <div id="infocard"
                          class="h-100 d-flex align-items-center justify-content-center">
                         <div class="card text-center">
                             <div class="card-header text-light">Alert!!</div>
                             <div class="card-body">
-                                <p class="card-title text-light">
+                                <p class="card-title ">
+                                    <p class="card-text text-light">{{ info }}</p>
+                                </p>
+                                <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>
+                            </div>
+                        </div>
+                    </div>
+                </center>
+            {% else %}
+                {% if errors %}
+                    <div id="errorcard"
+                         class="d-flex align-items-center justify-content-center h-100">
+                        <div class="card text-center">
+                            <div class="card-header text-light">Alert!!</div>
+                            <div class="card-body">
+                                <p class="card-text text-light">
                                     {% for error in errors %}<p class="card-text">{{ error }}</p>{% endfor %}
                                 </p>
                                 <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>

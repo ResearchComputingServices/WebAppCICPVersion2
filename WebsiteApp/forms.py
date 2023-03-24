@@ -37,7 +37,7 @@ ORGANIZATION_SIZES = [('SMALL',_('Small')),
 
 # FIELD_OF_WORK = []
 
-DateInput = partial(forms.DateInput, {'class': 'dateinput','placeholder': 'Date is necessary'})
+DateInput = partial(forms.DateInput, {'class': 'dateinput'})
 
 
 class FilterForm(forms.Form):
@@ -51,5 +51,6 @@ class FilterForm(forms.Form):
                                         label = _('Language Preference'),required=False)
     size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=ORGANIZATION_SIZES,
                                     label=_('Size'),required=False)
+    
     
     

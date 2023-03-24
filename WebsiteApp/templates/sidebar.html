@@ -7,20 +7,23 @@
           method="get"
           action="{% url 'report_results_EN' %}">
         {% csrf_token %}
-        <p href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</p>
-        <a href="#filter"
-           data-bs-toggle="collapse"
-           role="button"
-           aria-expanded="false"
-           aria-controls="demo_province"
-           id="filterText">{% translate "FILTERS" %}</a>
-        <form class="ml-md-2" method="get">
-            <div>
-                <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                <p>{{ form_filter.as_p }}</p>
+        <div class="overlay-content">
+            <p href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</p>
+            <a href="#filter"
+               data-bs-toggle="collapse"
+               role="button"
+               aria-expanded="false"
+               aria-controls="demo_province"
+               id="filterText">{% translate "FILTERS" %}</a>
+            <form class="ml-md-2" method="get">
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                 <input type="reset" value="{% translate "Reset" %}"  />
-            </div>
-        </form>
+                <br/>
+                <br/>
+                {{ form_filter.as_div }}
+                <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                <input type="reset" value="{% translate "Reset" %}"  />
+            </form>
+        </div>
     </form>
 </div>

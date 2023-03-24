@@ -2,18 +2,10 @@
 
 #filterText {
     background-color: #e91c24;
-    text-decoration: none;
     color: #0f0e0e;
     display: flex;
-    text-align: center;
+    text-align: justify;
     padding: 0.2rem;
     margin-bottom: 30px;
     margin-top: 10px;
-}
-
-.sidebar {
-    padding: 8px 8px 8px;
-    background-color: #0f0e0e;
-    color: white;
-    left: 0;
 }
