@@ -10,7 +10,7 @@ from scripts.DataVizualizers.VizUtils import *
 def VisualizeRankOrderQuestion( question, 
                                 userResponses,
                                 isEnglish = True,
-                                saveToDirPath = FIGURE_FOLDER_PATH): 
+                                saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
     
     title = GetGraphicTitle(question, isEnglish)
     
@@ -82,7 +82,7 @@ def CreateStackedBarChart(  responseDict,
                             graphicTitle,
                             numberOfResponses,
                             isEnglish = True,
-                            saveToDirPath = FIGURE_FOLDER_PATH):
+                            saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
     df = pd.DataFrame(columns=['subQ','response','value'])
     

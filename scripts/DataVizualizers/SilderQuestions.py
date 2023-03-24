@@ -12,7 +12,7 @@ from scripts.DataVizualizers.VizUtils import *
 def VisualizeSliderQuestion(question, 
                             userResponses,
                             isEnglish = True,
-                            saveToDirPath = FIGURE_FOLDER_PATH): 
+                            saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
     
     filename = ''
       
@@ -44,7 +44,7 @@ def VisualizeSingleChoiceSliderQuestion(title,
                                         choiceQuerySet,
                                         userResponses,
                                         isEnglish = True,
-                                        saveToDirPath = FIGURE_FOLDER_PATH):    
+                                        saveToDirPath = TMP_FIGURE_FOLDER_PATH):    
     # Create a histogram of responses
     valueDict = {}
     minValue = A_LARGE_NUMBER
@@ -121,7 +121,7 @@ def CreateVerticleBarChart( responseDataFrame,
                             graphicTitle,
                             numberOfResponses,
                             isEnglish = True,
-                            saveToDirPath = FIGURE_FOLDER_PATH):
+                            saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     # create the actual plot object
     fig = px.bar(   responseDataFrame,
                     x='bin', 
@@ -154,7 +154,7 @@ def VisualizeMultiChoiceSliderQuestion( title,
                                         choiceQuerySet,
                                         userResponses,
                                         isEnglish = True,
-                                        saveToDirPath = FIGURE_FOLDER_PATH):  
+                                        saveToDirPath = TMP_FIGURE_FOLDER_PATH):  
     responseDict = {}
     counter = {}
     totalResponses = 0  
@@ -235,7 +235,7 @@ def CreateHorizontalBarChart(   responseDict,
                                 graphicTitle,
                                 numberOfResponses,
                                 isEnglish = True,
-                                saveToDirPath = FIGURE_FOLDER_PATH):
+                                saveToDirPath = TMP_FIGURE_FOLDER_PATH):
    
     # Now that we have the extracted data we can create the graphic. 
     # the "values" and "names" are passed to the graphic object as lists    

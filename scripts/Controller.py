@@ -175,7 +175,7 @@ def GenerateDefaultFigures(aSurvey):
 ##################################################################################################################################
 
 def GenerateDataFile(responseDict,
-                     saveToDirPath = FIGURE_FOLDER_PATH):
+                     saveToDirPath = TMP_FIGURE_FOLDER_PATH):
                
     dataFrameList = []
     
@@ -282,10 +282,7 @@ def GetResponseDict(aQuery):
 # 
 ##################################################################################################################################
 
-def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_PATH):
-
-    
-    print(aQuery)
+def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
      
     listOfImageFilePaths = []
     dataCSVFilePath = []
@@ -296,24 +293,20 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
     if aQuery.IsDateOnly():  
 
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
-        # print(folderPath)
+        print(folderPath)
 
         if os.path.exists(folderPath):
             for filename in os.listdir(folderPath):
                 if os.path.isfile(os.path.join(folderPath, filename)):
 
                     filePath = os.path.join(folderPath, filename)
-                    filePath = filePath[len(str(settings.BASE_DIR)):]
-                    
-
-
-                    
+                                        
                     if '.csv' in filename:    
                         dataCSVFilePath.append(filePath)
                     else:
                         listOfImageFilePaths.append(filePath)   
         else:
-            print("Folder path doesn't exist")     
+            print("[WARNING]: HandleFrontEndQuery: Folder path doesn't exist:", folderPath)     
     # If there are more filters in the query then just a date, new images will need to be generated.
     else:    
         responseDict, errorLogs = GetResponseDict(aQuery)
@@ -322,6 +315,9 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = FIGURE_FOLDER_
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
             dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
     
+    listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
+    dataCSVFilePath = Local2URLMedia([dataCSVFilePath])
+      
     return listOfImageFilePaths, dataCSVFilePath, errorLogs
     
 ##################################################################################################################################

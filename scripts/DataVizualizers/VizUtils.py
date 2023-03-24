@@ -36,7 +36,7 @@ def GetAnnotation(numberOfResponses, isEnglish):
 ##################################################################################################################################
 
 def SaveFigure(fig,
-               saveToDirPath=FIGURE_FOLDER_PATH):
+               saveToDirPath=TMP_FIGURE_FOLDER_PATH):
     
     fig = AddWaterMarkImage(fig)
     
