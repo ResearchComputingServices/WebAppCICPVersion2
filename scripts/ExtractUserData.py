@@ -6,24 +6,117 @@ from InteractiveDB.models import UserTable
 from WebAppCICPVersion2 import settings
 
 ##################################################################################################################################
-# 
-##################################################################################################################################  
+# This collection of functions interprets the raw input from the user database csv file and returns a value which is stored in
+# a entry in the database User Table 
+##################################################################################################################################
+
+def GetLanguage(langToken):
+    lang = None
+    
+    if langToken == 'FR-CA':
+        lang = 'FR'
+    elif langToken == 'EN':
+        lang = 'EN'
+    else:
+        lang = ''
+    
+    return lang
+
+##################################################################################################################################
+
+    
+def GetDesignation(desToken):
+    
+    desg = None
+       
+    if desToken in USER_DESIGNATION_DICT.keys():
+        desg = USER_DESIGNATION_DICT[desToken]
+    else:
+        desg = ''
+    
+    return desg
+
+##################################################################################################################################
+
+def GetDomain(domainToken):
+    domain = None
+    
+    if domainToken in USER_DOMAIN_DICT.keys():
+        domain = USER_DOMAIN_DICT[domainToken]
+    else:
+        domain = ''
+        
+    return domain
+
+
+##################################################################################################################################
+    
+def GetSubDomain(subDomToken):
+    return ''
+
+##################################################################################################################################
+    
+def GetLocationPolygon(locPolyToken):
+    return ''
+
+##################################################################################################################################
+   
+def GetUrbanRural(token):
+    return ''
+
+##################################################################################################################################
+    
+def GetSubsample(subToken):
+    subSampleString = ''
+    
+    for id in USER_SUB_SAMPLE_IDS:
+        if id in subToken:
+            subSampleString = subSampleString + ',' + id
+    
+    return subSampleString
+
+##################################################################################################################################
+    
+def GetDate(dateToken):
+    dateString = ''
+
+    dateTokenSplit = dateToken.split(' ')
+    dateString = dateTokenSplit[0]
+    
+    if '#' not in dateString and len(dateString) > 0:
+        dateString = dateString.replace('/','-')
+        dateString = dateString.replace('.','-')
+    
+        dateSplit = dateString.split('-')
+
+        if len(dateSplit[0]) != 4:
+            if int(dateSplit[0]) <= 12:
+                dateString = dateSplit[2]+'-'+dateSplit[0]+'-'+dateSplit[1]    
+            else:
+                dateString = dateSplit[2]+'-'+dateSplit[1]+'-'+dateSplit[0]   
+    
+    else:
+        dateString = '1000-01-01'
+    
+    return dateString
+
+##################################################################################################################################
+
 def GetSize(numberOfEmployees):
      
     size = 'None'
     
-    if(numberOfEmployees < 10):
-        size = 'SMALL'
-    elif(numberOfEmployees < 25):
-        size = 'MEDIUM'
+    if(numberOfEmployees < 25):
+        size = 'SM'
+    elif(numberOfEmployees < 200):
+        size = 'MD'
     else:
-        size = 'LARGE'   
+        size = 'LG'   
     
     return size
 
 ##################################################################################################################################
-# 
-##################################################################################################################################  
+
 def GetProvineAcronym(provinceName):
     provinceName = provinceName.strip().lower()
     provinceName = re.sub(r'[^\w\s]','',provinceName)
@@ -60,8 +153,7 @@ def GetProvineAcronym(provinceName):
     return acronym
 
 ##################################################################################################################################
-# 
-##################################################################################################################################  
+ 
 def GetNumber(token):
     num = 0
     
@@ -71,7 +163,22 @@ def GetNumber(token):
     return num
 
 ##################################################################################################################################
-# Main function 
+# Main function
+#  TOKENS:
+# 0     Language
+# 1     ExternalDataReference
+# 2     Province
+# 3     designation_code
+# 4     registration_date
+# 5     sub_category_code
+# 6     category_code
+# 7     Location Polygons
+# 8     Urban/Rural
+# 9     SubSample
+# 10    FTE
+# 11    Volunteers
+# 12    PTE
+# 13    Job Title
 ##################################################################################################################################  
 
 def run(*args):
@@ -83,24 +190,40 @@ def run(*args):
     
     userDataFile = open(userDataFilePath, 'r')
     lines = userDataFile.readlines()
-    
+        
     for line in lines:
         tokens = line.split('^')
-        
-        FT = GetNumber(tokens[7])
-        PT = GetNumber(tokens[8])
-        VT = GetNumber(tokens[9])
+                 
+        language = tokens[0]
+        externalDataReference = tokens[1]
+        province = tokens[2]
+        designation_code = tokens[3]
+        registration_date = tokens[4]
+        sub_category_code = tokens[5]
+        category_code = tokens[6]
+        locationPolygons= tokens[7] 
+        urbanRural = tokens[8]
+        subSample = tokens[9]
+        fte = GetNumber(tokens[10])
+        volunteers = GetNumber(tokens[11])
+        pte = GetNumber(tokens[12])
+        jobTitle = tokens[13] 
                
         user = UserTable()
         
-        user.externalDataReference = tokens[3]
-        user.domain = 'philatronic'
-        user.province = GetProvineAcronym(tokens[10])
-        user.size = GetSize(FT+PT+VT)
-        user.languagePreference = tokens[6]
+        user.languagePreference = GetLanguage(language)
+        user.externalDataReference = externalDataReference
+        user.designation = GetDesignation(designation_code)
+        user.domain = GetDomain(category_code)
+        user.subDomain = GetSubDomain(sub_category_code)
+        user.locationPolygon = GetLocationPolygon(locationPolygons)
+        user.urbanRural = GetUrbanRural(urbanRural)
+        user.subSample = GetSubsample(subSample)
+        user.province = GetProvineAcronym(province)
+        user.dateFounded = GetDate(registration_date)
+        user.size = GetSize(fte+pte+volunteers)
+        user.jobTitle = jobTitle
         
-        user.save()
-
-        
+        user.save()   
                 
-    
+
