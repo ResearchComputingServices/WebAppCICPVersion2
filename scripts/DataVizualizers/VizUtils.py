@@ -67,8 +67,8 @@ def SaveFigure(fig,
 
     return figureFilePath
 
-def SaveFigurePie(fig,
-               saveToDirPath=TMP_FIGURE_FOLDER_PATH):
+def SaveFigurePie(  fig,
+                    saveToDirPath=TMP_FIGURE_FOLDER_PATH):
     
     fig = AddWaterMarkImagePie(fig)
     

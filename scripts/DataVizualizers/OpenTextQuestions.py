@@ -44,9 +44,6 @@ def CreateWordCloud(wordCloudText,
                     isEnglish = True,
                     saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
-    if len(wordCloudText.strip()) == 0:
-        return False
-
     # define colours to use
     red = np.array([233/256, 28/256, 36/256, 1])
     cmap = colors.ListedColormap([red, 'black'])
@@ -60,19 +57,15 @@ def CreateWordCloud(wordCloudText,
         
     reportDate = saveToDirPath.split("/")[-1] 
     
-    # Annotation Text
-    aText = GetAnnotation(numberOfResponses,reportDate, isEnglish)
-    # Prepare the text for creating a word cloud by translating it and removing stop words
-    
+    # Prepare the text for creating a word cloud by translating it and removing stop words 
     destCode = 'fr'
     if isEnglish:
         destCode = 'en'
-        
+    
     wordCloudText = GetTextForWordCloud(wordCloudText, destCode)
 
-    # Get the watermark image
-    waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-
+    if len(wordCloudText) == 0:
+        wordCloudText = "Failure"
     # produce the actual wordcloud
     wc.generate(wordCloudText)
     
@@ -80,10 +73,14 @@ def CreateWordCloud(wordCloudText,
     fig = plt.figure()
     plt.title(title+'\n',loc='center',wrap=True)
     plt.axis('off')
-    plt.figtext(x=1., y=0., s=aText[0]+'\n'+aText[1],horizontalalignment='right')
     plt.imshow(wc)
-
-    # plt.figimage(waterMarkImg, xo=0,yo=0)
+    
+    # Get the annotation text and add it to the figure
+    aText = GetAnnotation(numberOfResponses,reportDate, isEnglish)
+    plt.figtext(x=1., y=0., s=aText[0]+'\n'+aText[1],horizontalalignment='right')
+    
+    # Get the watermark image and add it to the figure
+    waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
     newax = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
     newax.imshow(waterMarkImg)
     newax.axis('off')
