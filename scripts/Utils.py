@@ -56,8 +56,8 @@ GRAPHIC_FILE_SUFFIX = '.'+GRAPHIC_FILE_TYPE
 
 IMAGE_LIFE_TIME_SECONDS = 259200. # 72 hours
 
-FIGURE_WIDTH_PX = 800
-FIGURE_HEIGHT_PX = 600
+FIGURE_WIDTH_PX = 1200
+FIGURE_HEIGHT_PX = 1000
 
 PIE_CHART_HOLE_RADIUS = 0.5
 
@@ -119,7 +119,7 @@ def Local2URLMedia(listLocal):
     listOfURLPaths = []
     
     for localFilePath in listLocal:
-        urlPath = localFilePath[len(str(settings.BASE_DIR)):]
+        urlPath = localFilePath[len(str(settings.BASE_ROOT)):]
         listOfURLPaths.append(urlPath)
         
     return listOfURLPaths
@@ -202,7 +202,7 @@ def CreateLabels(titleText):
             if len(pairSplit) == 2:
                 tickValues.append(float(pairSplit[0]))      
                 tickLabels.append(pairSplit[1])   
-        
+    
     return tickValues, tickLabels  
   
 ##################################################################################################################################

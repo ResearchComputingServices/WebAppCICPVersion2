@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from matplotlib import colors
+from matplotlib.text import Text
 
 from scripts.Utils import *
 from scripts.DataVizualizers.VizUtils import *
@@ -58,13 +59,19 @@ def CreateWordCloud(wordCloudText,
                    colormap=cmap)
     
     
+    reportDate =  reportDate =  saveToDirPath.split("/")[-1] 
+    # Annotation Text
+    aText = GetAnnotation(numberOfResponses,reportDate, isEnglish)
+    
+    
     # produce the actual wordcloud
     wc.generate(wordCloudText)
     fig = plt.figure()
-    plt.title(title)
-    plt.axis('off') 
+    plt.title(title,loc='center')
+    plt.axis('off')
+    plt.Text(x=0.5,text=aText[1],horizontalalignment='center')
     plt.imshow(wc)
-    
+
     # save the wordcloud to a file
     filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)

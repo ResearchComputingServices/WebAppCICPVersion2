@@ -100,13 +100,16 @@ def CreatePieChart( responseDict,
                       font_color="black",
                       title_font={'size': 20},
                       legend_font={'size': 15},
-                      legend={'traceorder':'reversed', "yanchor":"bottom","y":-0.6,"xanchor":"center","x":0.3})
+                      legend={'traceorder':'reversed', "yanchor":"top","y":0.50,"xanchor":"right","x":1.75},
+                       margin=dict(l=100, r=300, t=150, b=320),)
     #x axis
     fig.update_xaxes(visible=False)
 
     #y axis    
     fig.update_yaxes(visible=False)
 
-    AddAnnotation(fig, numberOfResponses, isEnglish)
+    reportDate =  saveToDirPath.split("/")[-1]                 
+
+    AddAnnotation(fig, numberOfResponses, reportDate, isEnglish)
       
-    return SaveFigure(fig,saveToDirPath)
+    return SaveFigurePie(fig,saveToDirPath)

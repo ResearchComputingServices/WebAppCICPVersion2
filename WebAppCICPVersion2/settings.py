@@ -86,22 +86,21 @@ WSGI_APPLICATION = 'WebAppCICPVersion2.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',
-
-    }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'cicp_reports',
-    #     'USER': 'cicp',
-    #     'PASSWORD': 'MYSQL_PASSWORD',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    # }
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#       'ENGINE': 'django.db.backends.sqlite3',
+#       'NAME': BASE_DIR / 'db.sqlite3',
+#
+#    }
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'cicp_reports',
+         'USER': 'cicp',
+         'PASSWORD': 'MYSQL_PASSWORD',
+         'HOST': 'localhost',
+         'PORT': '3306',
+     }
 }
 
 
@@ -157,7 +156,7 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 
 # # and Media files
 MEDIA_URL="/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -173,5 +172,6 @@ QUATRICS_API = {
     'data_center': "carletonu.ca1"
 }
 
-STATIC_ROOT = '/var/www/html/static/'
-# MEDIA_ROOT = '/var/www/html/media/'
+BASE_ROOT = '/var/www/html'
+STATIC_ROOT = BASE_ROOT+ '/static/'
+MEDIA_ROOT = BASE_ROOT + '/media/'
