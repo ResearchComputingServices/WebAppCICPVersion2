@@ -3,6 +3,8 @@ import pandas as pd
 
 # on_delete defines what to do with the current table if the foreign key is deleted
 
+########################################################################################################################################################
+
 class SurveyTable(models.Model):    
     # Fields/Attributes
     qualtricsSurveyID = models.CharField(max_length=30)
@@ -12,6 +14,7 @@ class SurveyTable(models.Model):
     def __str__(self):
         return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate}"
     
+########################################################################################################################################################
             
 class QuestionTable(models.Model):
     
@@ -50,6 +53,7 @@ class QuestionTable(models.Model):
 
         return df
     
+########################################################################################################################################################
     
 class ChoiceTable(models.Model):
     
@@ -63,18 +67,32 @@ class ChoiceTable(models.Model):
     
     def __str__(self):
         return f"choice: choiceText: {self.choiceTextEnglish} recode: {self.recode}" 
+
+########################################################################################################################################################
     
 class UserTable(models.Model):
     
     # Fields/Attributes
     externalDataReference = models.CharField(max_length=15)
     province = models.CharField(max_length=2)   # BC,AB,SK,MB,ON,QC,NB,NS,NL,PI,YK,NV,NW
-    size = models.CharField(max_length=6)       # small, medium, large
+    size = models.CharField(max_length=2)       # SM, MD, LG
+    languagePreference = models.CharField(max_length=2)   # EN, FR, BI
+
+    designation = models.CharField(max_length=3) # A = Public (pub), B = Private (prv), C = Charitable (chr)
     domain = models.CharField(max_length=30)
-    languagePreference = models.CharField(max_length=2)   #EN, FR
+    subDomain = models.CharField(max_length=30)
+    dateFounded = models.DateField()
+    subSample = models.CharField(max_length=64)
+
+    locationPolygon = models.CharField(max_length=16)
+    jobTitle = models.CharField(max_length=50)
+    urbanRural = models.CharField(max_length=2) # UR/RL
 
     def __str__(self):
          return f"User: \n id: {self.id}\n ref#: {self.externalDataReference}\n prv: {self.province}\n sz: {self.size}\n lng: {self.languagePreference}"
+
+
+########################################################################################################################################################
 
 class UserResponseTable(models.Model):
     

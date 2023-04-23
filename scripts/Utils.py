@@ -72,6 +72,63 @@ DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
 WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
 
 
+USER_DESIGNATION_DICT = {'A' : 'pub', 'B' : 'prv', 'C' : 'chr'}
+
+USER_DOMAIN_DICT = {    '1'	: 'Organizations Relieving Poverty',
+                        '2'	: 'Foundations Relieving Poverty',
+                        '10'	: 'Teaching Institutions',
+                        '11'	: 'Support of schools and education',
+                        '12'	: 'Education in the arts',
+                        '13'	: 'Educational organizations not elsewhere categorized',
+                        '14'	: 'Research',
+                        '15'	: 'Foundations Advancing Education',
+                        '30'	: 'Christianity',
+                        '40'	: 'Islam',
+                        '50'	: 'Judaism',
+                        '60'	: 'Other Religions',
+                        '70'	: 'Support of Religion',
+                        '80'	: 'Ecumenical and Inter-faith Organizations',
+                        '90'	: 'Foundations Advancing Religions',
+                        '100'	: 'Core Health Care',
+                        '110'	: 'Supportive Health Care',
+                        '120'	: 'Protective Health Care',
+                        '130'	: 'Health Care Products',
+                        '140'	: 'Complementary or Alternative Health Care',
+                        '150'	: 'Relief of the Aged',
+                        '155'	: 'Upholding Human Rights',
+                        '160'	: 'Community Resource',
+                        '170'	: 'Environment',
+                        '175'	: 'Agriculture',
+                        '180'	: 'Animal Welfare',
+                        '190'	: 'Arts',
+                        '200'	: 'Public Amenities',
+                        '210'	: 'Foundations',
+                        '214'	: 'CAAA',
+                        '215'	: 'NASO'}
+
+USER_SUB_SAMPLE_IDS = [ 'SS1', 
+                        'SS2', 
+                        'SS3', 
+                        'SS4',
+                        'SS5',
+                        'SS6', 
+                        'SL Climate & Environment / Climat & Environnement', 
+                        'SL Advocacy & Human rights / Plaidoyer et droits de l\'homme'
+                        'SL Indigenous services / Services aux autochtones',
+                        'SL Crisis Intervention / Intervention en cas de crise',
+                        'SL Animal Welfare / Bien-Ãªtre des animaux',
+                        'SL Literacy groups / Groupes d\'alphabÃ©tisation',
+                        'SL Arts Education / Ã‰ducation artistique',
+                        'SL Food Security / SÃ©curitÃ© alimentaire',
+                        'SL Shelters / Organismes de refuge',
+                        'SL Senior care / Soins aux personnes Ã¢gÃ©es',
+                        'SL Humanitarian assistance (outside Canada) / Aide humanitaire (hors du Canada)',
+                        'SL Migration services / Services de migration',
+                        'Initial List',
+                        
+                        ]
+
+
 ##################################################################################################################################
 # This dataClass contains all the values which the user wants to filter on
 # it should be created by the viewer and passed to the controller

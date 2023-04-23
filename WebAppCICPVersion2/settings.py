@@ -21,7 +21,7 @@ DATA_DIR_PATH = 'Data'
 QUESTION_ENGLISH_JSON_FILENAME = 'surveyQuestionsEnglish.json'
 QUESTION_FRENCH_JSON_FILENAME = 'surveyQuestionsFrench.json'
 RESPONSE_DATA_JSON_FILENAME = 'responseFile.json'
-USER_DATA_FILENAME = 'userData.csv'
+USER_DATA_FILENAME = 'UserStaticDatabase.csv'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
