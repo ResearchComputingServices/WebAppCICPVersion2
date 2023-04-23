@@ -10,12 +10,13 @@ def run(*args):
     surveyQuerySet = SurveyTable.objects.all()
 
     for survey in surveyQuerySet:
-        print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
         #print('ExtractSurveyMain')
         #ExtractSurveyMain(aSurvey=survey)
 
         #print('ExtractResponsesMain')
         #ExtractResponsesMain(aSurvey=survey)
 
-        print('GenerateDefaultFigures')
-        GenerateDefaultFigures(aSurvey=survey) 
+        if survey.qualtricsSurveyID == 'SV_4PKhCR2n0Hw6xbo':
+            print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
+            print('GenerateDefaultFigures') 
+            GenerateDefaultFigures(aSurvey=survey) 

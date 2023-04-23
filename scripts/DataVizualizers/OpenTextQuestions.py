@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from matplotlib import colors
-from matplotlib.text import Text
+import matplotlib.image as image
 
 from scripts.Utils import *
 from scripts.DataVizualizers.VizUtils import *
@@ -57,20 +57,36 @@ def CreateWordCloud(wordCloudText,
                    height=FIGURE_HEIGHT_PX,
                    background_color='white',
                    colormap=cmap)
+        
+    reportDate = saveToDirPath.split("/")[-1] 
     
-    
-    reportDate =  reportDate =  saveToDirPath.split("/")[-1] 
     # Annotation Text
     aText = GetAnnotation(numberOfResponses,reportDate, isEnglish)
+    # Prepare the text for creating a word cloud by translating it and removing stop words
     
-    
+    destCode = 'fr'
+    if isEnglish:
+        destCode = 'en'
+        
+    wordCloudText = GetTextForWordCloud(wordCloudText, destCode)
+
+    # Get the watermark image
+    waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
+
     # produce the actual wordcloud
     wc.generate(wordCloudText)
+    
+    # Create the figure which plots the word cloud
     fig = plt.figure()
-    plt.title(title,loc='center')
+    plt.title(title+'\n',loc='center',wrap=True)
     plt.axis('off')
-    plt.Text(x=0.5,text=aText[1],horizontalalignment='center')
+    plt.figtext(x=1., y=0., s=aText[0]+'\n'+aText[1],horizontalalignment='right')
     plt.imshow(wc)
+
+    # plt.figimage(waterMarkImg, xo=0,yo=0)
+    newax = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    newax.imshow(waterMarkImg)
+    newax.axis('off')
 
     # save the wordcloud to a file
     filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX

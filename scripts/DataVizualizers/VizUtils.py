@@ -1,5 +1,8 @@
 import os
 import uuid
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+from googletrans import Translator
 
 from scripts.Utils import *
 
@@ -186,3 +189,83 @@ def AddWaterMarkImagePie(fig):
         )
     
     return fig
+
+##################################################################################################################################
+# This function is a helper function for the translation of text from french to english and vice versa
+##################################################################################################################################
+
+def removeStopWords(text, language):
+    
+    filteredText = []
+
+    textTokens = word_tokenize(text)
+
+    listOfStopWords = stopwords.words(language)
+        
+    for word in textTokens:
+        if word.lower() not in listOfStopWords:
+            filteredText.append(word.lower())
+
+    return filteredText
+
+def RemoveStopWords(text):
+
+    filteredText = removeStopWords(text, 'english')
+    filteredText = removeStopWords(text, 'french')
+
+    return filteredText
+
+##################################################################################################################################
+# This function returns translated text from srcCode to destCode 
+##################################################################################################################################
+
+def SplitText(inputText, maxLength = 10000):
+    
+    textList = []
+
+    textTokens = word_tokenize(inputText)
+    
+    currentString = ''
+    for word in textTokens:
+        if len(currentString) < maxLength:
+            currentString = currentString + ' ' + word    
+        else:
+            textList.append(currentString)
+            currentString = ''
+
+    return textList
+
+
+def Translate(inputText, srcCode, destCode):
+    
+    outputText = ''
+            
+    translator = Translator()
+ 
+    # There is a limit of 15k characters at a time so longer blocks of text will need to be split up
+    textList = SplitText(inputText)
+ 
+    for text in textList:
+        result = translator.translate(text,src=srcCode,dest=destCode)
+        outputText = outputText + ' ' + result.text
+    
+    return outputText
+
+##################################################################################################################################
+# This is a helper function for the CreateWordCloud function. It returns the text responses in either french or english depending
+# on the value of destCode ('en', or 'fr')
+##################################################################################################################################
+
+def GetTextForWordCloud(responseText, destCode):
+    
+    srcCode = 'en'
+    if destCode == 'en':
+        srcCode = 'fr'
+    
+    translatedText = Translate(responseText, srcCode, destCode)   
+    
+    stopwordsFiltered = RemoveStopWords(translatedText) 
+            
+    resultingText = ' '.join(stopwordsFiltered)
+    
+    return resultingText
