@@ -318,6 +318,9 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
     dataCSVFilePath = Local2URLMedia([dataCSVFilePath])
       
+      
+    print('Generated Images Location:')
+    print(listOfImageFilePaths)
     return listOfImageFilePaths, dataCSVFilePath, errorLogs
     
 ##################################################################################################################################

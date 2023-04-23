@@ -81,7 +81,7 @@ class UserTable(models.Model):
     designation = models.CharField(max_length=3) # A = Public (pub), B = Private (prv), C = Charitable (chr)
     domain = models.CharField(max_length=30)
     subDomain = models.CharField(max_length=30)
-    dateFounded = models.DateField()
+    dateFounded = models.DateField(null=True, blank=True)
     subSample = models.CharField(max_length=64)
 
     locationPolygon = models.CharField(max_length=16)

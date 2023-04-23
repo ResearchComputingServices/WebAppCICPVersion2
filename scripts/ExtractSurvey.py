@@ -205,8 +205,9 @@ def ExtractSurveyMain(aSurvey=None):
 ################################################################################################################################## 
 
 def run(*args):
-    aSurvey = SurveyTable()
-    aSurvey.qualtricsSurveyID = settings.TEST_SURVEY_ID
-    aSurvey.releaseDate = '2023-01-01'
-    aSurvey.save()
-    ExtractSurveyMain(aSurvey)
+    surveyQuerySet = SurveyTable.objects.all()
+        
+    for survey in surveyQuerySet:
+        print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
+
+        HandleReleasedSurvey(survey,currentDate)
