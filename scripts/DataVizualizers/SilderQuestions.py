@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.express as px
+import plotly.subplots as sp
 
 
 from scripts.Utils import *
@@ -101,16 +102,12 @@ def VisualizeSingleChoiceSliderQuestion(title,
     
     responseDataFrame['bin'] = bin
     responseDataFrame['value'] = value
-      
-    # print(valueDict)
-    # print('min:', minValue)
-    # print('max:', maxValue)
-    # print(responseDataFrame)
-    # input()
     
     return CreateVerticleBarChart(  responseDataFrame=responseDataFrame,
                                     graphicTitle=title,
                                     numberOfResponses=numberOfResponses,
+                                    minValue = minValue,
+                                    maxValue = maxValue,
                                     isEnglish = isEnglish,
                                     saveToDirPath = saveToDirPath)
 ##################################################################################################################################
@@ -120,6 +117,8 @@ def VisualizeSingleChoiceSliderQuestion(title,
 def CreateVerticleBarChart( responseDataFrame,
                             graphicTitle,
                             numberOfResponses,
+                            minValue,
+                            maxValue,
                             isEnglish = True,
                             saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     # create the actual plot object
@@ -139,12 +138,18 @@ def CreateVerticleBarChart( responseDataFrame,
     fig.update_layout(  font_family='Helvetica Now', 
                         font_color="black",
                         plot_bgcolor='rgb(232,232,232)',
-                        title_font={'size': 20},
-                        showlegend=False)
+                        title_font={'size': 15},
+                        xaxis_title="Titles on X-axis",
+                        yaxis_title="Titles on Y-axis",
+                        legend_title="Legend Title",
+                        showlegend=False,
+                        margin=dict(l=100, r=100, t=150, b=320))
                             
-    AddAnnotation(fig, numberOfResponses, isEnglish)
+    reportDate =  saveToDirPath.split("/")[-1] 
 
-    return SaveFigure(fig, saveToDirPath)
+    AddAnnotationBar(fig, numberOfResponses, reportDate, isEnglish,minValue,maxValue)
+
+    return SaveFigureBar(minValue,fig, saveToDirPath)
 
  
 ##################################################################################################################################
@@ -247,14 +252,14 @@ def CreateHorizontalBarChart(   responseDict,
     responseDict_sorted.reverse()
     for item in responseDict_sorted:
         names.append(WrapText(item[0], 30))
-        values.append(float(item[1]))
+        values.append(round(float(item[1]),1))
 
     colourMap = DetermineBarColours(values)
      
     # Determine X-axis labels and range
     tickValues = []
     tickLabels = []
-    tickValues, tickLabels = CreateLabels(graphicTitle)
+    tickValues, tickLabels = CreateLabels(graphicTitle)    
    
     xMin = 0
     xMax = 0
@@ -269,6 +274,7 @@ def CreateHorizontalBarChart(   responseDict,
             xMin = 0
         if xMax < 0:
             xMax = 0
+
 
     # x-axis title
     xAxisTitle = ''
@@ -305,15 +311,19 @@ def CreateHorizontalBarChart(   responseDict,
                         plot_bgcolor='rgb(232,232,232)',
                         title_font={'size': 20},
                         showlegend=False,
-                        xaxis_range=[xMin,xMax])
+                        xaxis=dict( 
+                            title=xAxisTitle),
+                        xaxis_range=[xMin,xMax],
+                        margin=dict(l=100, r=100, t=150, b=320),
+                        title_x=0.5
+                        )
         
     fig.update_xaxes(   visible=True, 
                         showline=True,
                         gridcolor='rgb(152,152,152)',
                         showticklabels=True, 
-                        tickangle = -45, 
+                        tickangle = -25, 
                         automargin =  True, 
-                        title=xAxisTitle,
                         tickfont={'size': 15},
                         tickvals=tickValues,
                         ticktext=tickLabels)
@@ -323,8 +333,11 @@ def CreateHorizontalBarChart(   responseDict,
                         tickangle = 0,
                         automargin =  True,
                         title='',
-                        tickfont={'size': 15})                       
+                        tickfont={'size': 15})
 
-    AddAnnotation(fig, numberOfResponses, isEnglish)
+    reportDate =  saveToDirPath.split("/")[-1]         
+            
 
-    return SaveFigure(fig, saveToDirPath)
+    AddAnnotationBar(fig, numberOfResponses, reportDate, isEnglish, xMin, xMax)
+
+    return SaveFigureBar(xMin,fig,saveToDirPath)

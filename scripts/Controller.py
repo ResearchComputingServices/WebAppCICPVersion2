@@ -293,7 +293,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     if aQuery.IsDateOnly():  
 
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
-        print(folderPath)
+        print('FolderPath:',folderPath)
 
         if os.path.exists(folderPath):
             for filename in os.listdir(folderPath):
@@ -317,6 +317,8 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     
     listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
     dataCSVFilePath = Local2URLMedia([dataCSVFilePath])
+
+    print('Image List:',listOfImageFilePaths)
       
       
     print('Generated Images Location:')

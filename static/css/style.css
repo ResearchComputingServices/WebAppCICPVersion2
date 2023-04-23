@@ -20,6 +20,7 @@
     transition: 0.5s;
     background-color: #0f0e0e;
     color: white;
+    justify-content: center;
 }
 
 .overlay-content {
@@ -139,7 +140,7 @@ div {
 
 
 /* CSS code for small devices */
-@media (min-width: 576px) and (max-width: 767.98px) {
+@media (min-width: 576px) and (max-width: 768px) {
 
     /* Example CSS rules for small devices */
     .main-content {
@@ -172,7 +173,7 @@ div {
 }
 
 /* CSS code for medium devices */
-@media (min-width: 768px) and (max-width: 991.98px) {
+@media (min-width: 769px) and (max-width: 1024px) {
 
     /* Example CSS rules for medium devices */
 
@@ -221,7 +222,7 @@ div {
 }
 
 /* CSS code for large devices */
-@media (min-width: 992px) and (max-width: 1199.98px) {
+@media (min-width: 1025px) and (max-width: 1200px) {
 
     /* Example CSS rules for large devices */
     .sidebar-toggle {
@@ -260,7 +261,7 @@ div {
 }
 
 /* CSS code for extra large devices */
-@media (min-width: 1200px) {
+@media (min-width: 1201px) {
 
     /* Example CSS rules for extra large devices */
     .sidebar-toggle {
@@ -272,7 +273,7 @@ div {
     }
 
     .sidebar {
-        width: 20%;
+        width: 22%;
         margin: 0;
         float: left;
         display: flex;
@@ -281,22 +282,20 @@ div {
 
     .row {
         display: flex;
-
+        padding: 1%;
+        margin-left: 10%
     }
 
     .column {
         flex: 50%;
-        padding: 10px;
         width: 100%;
     }
 
     .images img {
-        /* flex: 1; */
         margin-bottom: 1rem;
-        height: auto;
-        width: 100%;
-        max-width: 500px;
-        max-height: 400px;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
     }
 
     .overlay-content {

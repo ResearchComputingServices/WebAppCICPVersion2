@@ -4,8 +4,10 @@
     background-color: #e91c24;
     color: #0f0e0e;
     display: flex;
-    text-align: justify;
     padding: 0.2rem;
     margin-bottom: 30px;
     margin-top: 10px;
+    justify-content: center;
+    font-size: larger;
+    font-weight: bold;
 }

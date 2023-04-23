@@ -125,7 +125,9 @@ def CreateStackedBarChart(  responseDict,
                         font_color="black",
                         plot_bgcolor='rgb(232,232,232)',
                         title_font={'size': 20})
-        
-    AddAnnotation(fig, numberOfResponses, isEnglish)
+
+    reportDate =  saveToDirPath.split("/")[-1]                 
+
+    AddAnnotation(fig, numberOfResponses, reportDate, isEnglish)
 
     return SaveFigure(fig,saveToDirPath)
