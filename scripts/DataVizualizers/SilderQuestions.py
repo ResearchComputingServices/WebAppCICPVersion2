@@ -2,6 +2,10 @@ import pandas as pd
 import plotly.express as px
 import plotly.subplots as sp
 
+import matplotlib.pyplot as plt
+from matplotlib import colors
+import matplotlib.image as image
+from textwrap import fill
 
 from scripts.Utils import *
 from scripts.DataVizualizers.VizUtils import *
@@ -207,8 +211,8 @@ def DetermineBarColours(values):
 
     colourMap = []
         
-    carletonRed = 'rgb(233,28,36)'
-    black = 'rgb(0,0,0)'
+    carletonRed = (233/255,28/255,36/255)
+    black = (0,0,0)
       
     # first check if all values have the same sign
     allPositive = True
@@ -251,11 +255,18 @@ def CreateHorizontalBarChart(   responseDict,
     responseDict_sorted = sorted(responseDict.items(), key=lambda x:x[1])
     responseDict_sorted.reverse()
     for item in responseDict_sorted:
-        names.append(WrapText(item[0], 30))
+        names.append(fill(item[0],20))
         values.append(round(float(item[1]),1))
 
-    colourMap = DetermineBarColours(values)
-     
+    colourMap = DetermineBarColours(values) 
+    
+    # x-axis title
+    xAxisTitle = ''
+    if isEnglish:
+        xAxisTitle = 'Response Mean'
+    else:
+        xAxisTitle = 'Moyenne des réponses'
+    
     # Determine X-axis labels and range
     tickValues = []
     tickLabels = []
@@ -274,70 +285,36 @@ def CreateHorizontalBarChart(   responseDict,
             xMin = 0
         if xMax < 0:
             xMax = 0
-
-
-    # x-axis title
-    xAxisTitle = ''
-    if isEnglish:
-        xAxisTitle = 'Mean of the Responses '
-    else:
-        xAxisTitle = 'Moyenne des réponses'
-
-    # Get the title
-    graphTitle = WrapText(graphicTitle)
-      
-    # Start creating the graphic    
-    df = pd.DataFrame(columns=['names','values'])
-    df['names'] = names
-    df['values'] = values
-    
-    # create the actual plot object
-    fig = px.bar(   df,
-                    y='names', 
-                    x='values',
-                    title=graphTitle,
-                    color="names",
-                    text_auto='.2s',
-                    color_discrete_sequence=colourMap,
-                    width=FIGURE_WIDTH_PX,
-                    height=FIGURE_HEIGHT_PX,
-                    orientation='h')
-    
-    fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)      
-    
-    # update the layout of the figure
-    fig.update_layout(  font_family='Helvetica Now', 
-                        font_color="black",
-                        plot_bgcolor='rgb(232,232,232)',
-                        title_font={'size': 20},
-                        showlegend=False,
-                        xaxis=dict( 
-                            title=xAxisTitle),
-                        xaxis_range=[xMin,xMax],
-                        margin=dict(l=100, r=100, t=150, b=320),
-                        title_x=0.5
-                        )
         
-    fig.update_xaxes(   visible=True, 
-                        showline=True,
-                        gridcolor='rgb(152,152,152)',
-                        showticklabels=True, 
-                        tickangle = -25, 
-                        automargin =  True, 
-                        tickfont={'size': 15},
-                        tickvals=tickValues,
-                        ticktext=tickLabels)
+    # Create the figure which plots the bar chart
+    # creating the bar plot
+    fig = plt.figure(figsize=(8,8))
+    plt.subplots_adjust(left=0.22)
+    ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
+    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
+    ax1.barh(   names, 
+                values, 
+                color = colourMap)   
+    ax1.set_xlabel(xAxisTitle)
+    ax1.set_ylabel('')
+        
+    # Get the watermark image and add it to the figure
+    waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
+    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2.imshow(waterMarkImg)
+    ax2.axis('off')
+
+    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    reportDate = saveToDirPath.split("/")[-1] 
+    aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
+    annotateText = aText[0]+'\n'+aText[1]
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.axis('off')
+
+    # save the wordcloud to a file
+    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    figureFilePath = os.path.join(saveToDirPath, filename)
+    plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
+    plt.close(fig)   
     
-    fig.update_yaxes(   visible=True,
-                        showticklabels=True,
-                        tickangle = 0,
-                        automargin =  True,
-                        title='',
-                        tickfont={'size': 15})
-
-    reportDate =  saveToDirPath.split("/")[-1]         
-            
-
-    AddAnnotationBar(fig, numberOfResponses, reportDate, isEnglish, xMin, xMax)
-
-    return SaveFigureBar(xMin,fig,saveToDirPath)
+    return figureFilePath

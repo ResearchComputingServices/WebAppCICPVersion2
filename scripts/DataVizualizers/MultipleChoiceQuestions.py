@@ -157,6 +157,5 @@ def CreatePieChart( responseDict,
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)
-   
-      
+         
     return figureFilePath

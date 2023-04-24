@@ -16,7 +16,6 @@ def run(*args):
         #print('ExtractResponsesMain')
         #ExtractResponsesMain(aSurvey=survey)
 
-        if survey.qualtricsSurveyID == 'SV_4U8obsyEzkfvxTE':
-            print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
-            print('GenerateDefaultFigures') 
-            GenerateDefaultFigures(aSurvey=survey) 
+        print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
+        print('GenerateDefaultFigures') 
+        GenerateDefaultFigures(aSurvey=survey) 
