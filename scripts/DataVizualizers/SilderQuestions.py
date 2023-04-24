@@ -103,59 +103,17 @@ def VisualizeSingleChoiceSliderQuestion(title,
     for item in valueDict_sorted:
         bin.append(str(item[0]))
         value.append(int(item[1]))
-    
-    responseDataFrame['bin'] = bin
-    responseDataFrame['value'] = value
-    
-    return CreateVerticleBarChart(  responseDataFrame=responseDataFrame,
+        
+    return CreateVerticleBarChart(  binList = bin,
+                                    valueList = value,
                                     graphicTitle=title,
                                     numberOfResponses=numberOfResponses,
                                     minValue = minValue,
                                     maxValue = maxValue,
                                     isEnglish = isEnglish,
                                     saveToDirPath = saveToDirPath)
-##################################################################################################################################
-#
-##################################################################################################################################
-
-def CreateVerticleBarChart( responseDataFrame,
-                            graphicTitle,
-                            numberOfResponses,
-                            minValue,
-                            maxValue,
-                            isEnglish = True,
-                            saveToDirPath = TMP_FIGURE_FOLDER_PATH):
-    # create the actual plot object
-    fig = px.bar(   responseDataFrame,
-                    x='bin', 
-                    y='value',
-                    title=graphicTitle,
-                    # color="names",
-                    text_auto='.2s',
-                    color_discrete_sequence=['rgb(233,28,36)'],
-                    width=FIGURE_WIDTH_PX,
-                    height=FIGURE_HEIGHT_PX)
     
-    fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)      
     
-    # update the layout of the figure
-    fig.update_layout(  font_family='Helvetica Now', 
-                        font_color="black",
-                        plot_bgcolor='rgb(232,232,232)',
-                        title_font={'size': 15},
-                        xaxis_title="Titles on X-axis",
-                        yaxis_title="Titles on Y-axis",
-                        legend_title="Legend Title",
-                        showlegend=False,
-                        margin=dict(l=100, r=100, t=150, b=320))
-                            
-    reportDate =  saveToDirPath.split("/")[-1] 
-
-    AddAnnotationBar(fig, numberOfResponses, reportDate, isEnglish,minValue,maxValue)
-
-    return SaveFigureBar(minValue,fig, saveToDirPath)
-
- 
 ##################################################################################################################################
 #
 ##################################################################################################################################
@@ -205,8 +163,54 @@ def VisualizeMultiChoiceSliderQuestion( title,
 
 ##################################################################################################################################
 #
-##################################################################################################################################
+##################################################################################################################################    
+    
+def CreateVerticleBarChart( binList,
+                            valueList,
+                            graphicTitle,
+                            numberOfResponses,
+                            minValue,
+                            maxValue,
+                            isEnglish = True,
+                            saveToDirPath = TMP_FIGURE_FOLDER_PATH):
+    
+    
+    # Create the figure which plots the bar chart
+    # creating the bar plot
+    fig = plt.figure(figsize=(8,8))
+    ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
+    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
+    ax1.bar( binList, 
+            valueList, 
+            color = (233/255,28/255,36/255))   
+    
+    ax1.set_ylabel('Frequency')
+        
+    # Get the watermark image and add it to the figure
+    waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
+    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2.imshow(waterMarkImg)
+    ax2.axis('off')
 
+    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    reportDate = saveToDirPath.split("/")[-1] 
+    aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
+    annotateText = aText[0]+'\n'+aText[1]
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.axis('off')
+
+    # save the wordcloud to a file
+    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    figureFilePath = os.path.join(saveToDirPath, filename)
+    plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
+    plt.close(fig)   
+    
+    return figureFilePath
+
+##################################################################################################################################
+#
+##################################################################################################################################
+ 
 def DetermineBarColours(values):
 
     colourMap = []
@@ -236,8 +240,6 @@ def DetermineBarColours(values):
     
     return colourMap
 
-##################################################################################################################################
-#
 ##################################################################################################################################
 
 def CreateHorizontalBarChart(   responseDict,

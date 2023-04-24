@@ -130,4 +130,4 @@ def CreateStackedBarChart(  responseDict,
 
     AddAnnotation(fig, numberOfResponses, reportDate, isEnglish)
 
-    return SaveFigure(fig,saveToDirPath)
+    return SaveFigure(fig, saveToDirPath)
