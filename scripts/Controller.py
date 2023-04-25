@@ -22,11 +22,15 @@ def GetUserQuerySet(aQuery):
             qObject |= Q(province=loc) 
         userQuerySet = userQuerySet.filter(qObject)
     
+    print('userQuerySet:',userQuerySet)
+    
     if len(aQuery.organizationSizes) != 0: 
         qObject = Q()
         for size in aQuery.organizationSizes:
             qObject |= Q(size=size) 
         userQuerySet = userQuerySet.filter(qObject)
+    
+    print('userQuerySet:',userQuerySet)
     
     if len(aQuery.languagePreference) != 0:        
         qObject = Q()
@@ -34,13 +38,17 @@ def GetUserQuerySet(aQuery):
             qObject |= Q(languagePreference=lang) 
         userQuerySet = userQuerySet.filter(qObject)
     
+    print('userQuerySet:',userQuerySet)
+    
     if len(aQuery.fieldOfWork) != 0:
         qObject = Q()
         for work in aQuery.fieldOfWork:
             qObject |= Q(domain=work) 
         userQuerySet = userQuerySet.filter(qObject)
     
-    print(userQuerySet)
+    print('userQuerySet:',userQuerySet)
+    
+    input()
     
     if len(userQuerySet) < MINIMUM_USER_QUERY_SIZE:
         userQuerySet = None
