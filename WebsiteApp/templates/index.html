@@ -33,7 +33,7 @@
             {% include "navbar.html" %}
             {% include "sidebar.html" %}
         </div>
-        <span class="sidebar-toggle" onclick="openNav()">☰ Filters</span>
+        <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span>
         <div id="heading" class="justify-content-center">
             {% if wednesday_date %}
                 <h4>
@@ -52,12 +52,12 @@
                     <div id="infocard"
                          class="h-100 d-flex align-items-center justify-content-center">
                         <div class="card text-center">
-                            <div class="card-header text-light">Alert!!</div>
+                            <div class="card-header text-light">{% translate "Alert!!" %}</div>
                             <div class="card-body">
                                 <p class="card-title ">
                                     <p class="card-text text-light">{{ info }}</p>
                                 </p>
-                                <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>
+                                <a href="{% url 'report_results_EN' %}" class="btn text-light">{% translate "Try Again" %}</a>
                             </div>
                         </div>
                     </div>
@@ -68,12 +68,14 @@
                         <div id="errorcard"
                              class="d-flex align-items-center justify-content-center h-100">
                             <div class="card text-center">
-                                <div class="card-header text-light">Alert!!</div>
+                                <div class="card-header text-light">{% translate "Alert!!" %}</div>
                                 <div class="card-body">
                                     <p class="card-text text-light">
-                                        {% for error in errors %}<p class="card-text">{{ error }}</p>{% endfor %}
+                                        {% for error in errors %}
+                                            <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
+                                        {% endfor %}
                                     </p>
-                                    <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>
+                                    <a href="{% url 'report_results_EN' %}" class="btn text-light">{% translate "Try Again" %}</a>
                                 </div>
                             </div>
                         </div>
