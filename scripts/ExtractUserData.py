@@ -210,6 +210,9 @@ def run(*args):
         jobTitle = tokens[13] 
                
         user = UserTable()
+
+        print('subSample:',subSample, flush = True)
+        print('category_code:',category_code, flush = True)
         
         user.languagePreference = GetLanguage(language)
         user.externalDataReference = externalDataReference
