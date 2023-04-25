@@ -40,6 +40,8 @@ def GetUserQuerySet(aQuery):
             qObject |= Q(domain=work) 
         userQuerySet = userQuerySet.filter(qObject)
     
+    print(userQuerySet)
+    
     if len(userQuerySet) < MINIMUM_USER_QUERY_SIZE:
         userQuerySet = None
     
