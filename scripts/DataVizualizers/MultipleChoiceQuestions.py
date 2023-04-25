@@ -117,11 +117,11 @@ def CreatePieChart( responseDict,
             (185/255,44/255,49/255),
             (200/255,200/255,200/255)]
 
-    # Create the figure which plots the pie chart
-    plt.title(graphicTitle+'\n',loc='center',wrap=True)
-    plt.axis('off')
-    
-    plt.pie(values,
+    fig = plt.figure(figsize=(8,8))
+    ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
+    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
+
+    ax1.pie(values,
             #labels=names,
             autopct='%1.1f%%',
             pctdistance=0.8,
@@ -129,32 +129,26 @@ def CreatePieChart( responseDict,
             startangle=90,
             counterclock=False)
     
-    # Add the legend
+    plt.subplots_adjust(right=0.8)
     plt.legend(names, bbox_to_anchor=(0.9 ,1.), loc="upper left")
-    plt.subplots_adjust(left=0.1, bottom=0.1, right=0.75)  
-    
-    # draw circle
-    centre_circle = plt.Circle((0, 0), PIE_CHART_HOLE_RADIUS, fc='white')
-    fig = plt.gcf()
-    fig.set_size_inches(w=8.,h=8)
-    # Adding Circle in Pie chart
-    fig.gca().add_artist(centre_circle)
-    
-    # Get the annotation text and add it to the figure
-    reportDate = saveToDirPath.split("/")[-1] 
-    aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
-    plt.figtext(x=1., y=0., s=aText[0]+'\n'+aText[1],horizontalalignment='right')
     
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    newax = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
-    newax.imshow(waterMarkImg)
-    newax.axis('off')
+    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2.imshow(waterMarkImg)
+    ax2.axis('off')
+
+    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    reportDate = saveToDirPath.split("/")[-1] 
+    aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
+    annotateText = aText[0]+'\n'+aText[1]
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.axis('off')
 
     # save the wordcloud to a file
     filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
-    plt.close(fig)
-         
+    plt.close(fig)   
+    
     return figureFilePath

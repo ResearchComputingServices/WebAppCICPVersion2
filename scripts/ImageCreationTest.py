@@ -8,7 +8,13 @@ from scripts.Controller import GenerateDefaultFigures
 def run(*args):
     
     surveyQuerySet = SurveyTable.objects.all()
-
+    doneList = ['SV_aYnUZN7y2nQhXJc',
+                'SV_0eMEVIZkeSbKyjk',
+                'SV_4PKhCR2n0Hw6xbo',
+                'SV_8D2MdCYlLUZqu22', 
+                'SV_0SqKvaglCv3ophA',
+                'SV_3agBieQhc6t7d2K',
+                'SV_dhjlzfTnCj7mwT4']
     # doneList = ['SV_aYnUZN7y2nQhXJc',
     #             'SV_0eMEVIZkeSbKyjk',
     #             'SV_4PKhCR2n0Hw6xbo',
