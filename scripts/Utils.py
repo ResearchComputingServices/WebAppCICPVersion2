@@ -164,7 +164,6 @@ class FrontEndQuery:
         if (len(self.questionThemes) == 0 and 
             len(self.locations) == 0 and 
             len(self.organizationSizes) == 0 and
-            len(self.languagePreference) == 0 and
             len(self.fieldOfWork) == 0 and
             self.qualtricsSurveyID == ''):
                 isDateOnly = True
