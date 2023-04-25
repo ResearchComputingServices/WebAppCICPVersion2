@@ -91,18 +91,11 @@ def CreateStackedBarChart(  responseDict,
                             isEnglish = True,
                             saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
-    # define colours to use
-    colourMap = [(0/255,0/255,0/255),
-                (233/255,28/255,36/255),
-                (45/255,45/255,45/255),
-                (242/255,121/255,126/255),
-                (151/255,151/255,151/255),
-                (145/255,14/255,19/255),
-                (51/255,51/255,51/255),
-                (185/255,44/255,49/255)]
-
-    cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
+    #####################################################################
+    # ToDo: move this code block to a separate function
+    # Rearrange the incoming data into a format we can plot   
     
+    # get col
     columns = ['subQ']
     subQs = []
     for subQ in responseDict.keys():
@@ -114,14 +107,38 @@ def CreateStackedBarChart(  responseDict,
             if response not in columns:
                 columns.append(response)
     
+    # create data frame with correct rows
     df = pd.DataFrame(columns=columns)
     
+    # populate elements
     for subQ in responseDict.keys():
         for response in responseDict[subQ].keys():
             value = responseDict[subQ][response]
             df.at[subQ, response] = value
+            df.at[subQ, 'subQ'] = 0.
+    
+    # normalize rows (magic, I dont know how this works)
+    df = df.div(df.sum(axis=1), axis=0) 
+    df = df.multiply(100)
+    
+    # change subQ to have the correct names
+    for subQ in responseDict.keys():
+        for response in responseDict[subQ].keys():
             df.at[subQ, 'subQ'] = fill(subQ,15)
-       
+    #####################################################################3   
+   
+    # define colours to use
+    colourMap = [(0/255,0/255,0/255),
+                (233/255,28/255,36/255),
+                (45/255,45/255,45/255),
+                (242/255,121/255,126/255),
+                (151/255,151/255,151/255),
+                (145/255,14/255,19/255),
+                (51/255,51/255,51/255),
+                (185/255,44/255,49/255)]
+
+    cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
+        
     # Create the figure which plots the bar chart
     # creating the bar plot
     fig = plt.figure(figsize=(8,8))
@@ -132,12 +149,17 @@ def CreateStackedBarChart(  responseDict,
     df.plot(x='subQ', 
             kind='barh', 
             stacked=True,
-            title='Stacked Bar Graph by dataframe', 
             ax=ax1,
             colormap=cmap)
     
     ax1.set_title(graphicTitle,wrap=True)
     ax1.set_ylabel('')
+    ax1.set_xticks([0,25,50,75,100])
+    
+    if isEnglish:
+        ax1.set_xlabel('% of Responses')
+    else:
+        ax1.set_xlabel('% de réponses')
        
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
@@ -161,31 +183,3 @@ def CreateStackedBarChart(  responseDict,
     plt.close(fig)   
     
     return figureFilePath
-    
-    # # Get the title
-    # graphicTitle = WrapText(graphicTitle)       
-     
-    # # create the actual plot object
-    # fig = px.bar(   df, 
-    #                 color="response", 
-    #                 y="subQ", 
-    #                 x="value", 
-    #                 title=graphicTitle,
-    #                 color_discrete_sequence=colourMap,
-    #                 width=FIGURE_WIDTH_PX,
-    #                 height=FIGURE_HEIGHT_PX,
-    #                 orientation='h')
-    
-    # fig.update_traces(textfont_size=12, textangle=0, textposition="outside", cliponaxis=False)      
-    
-    # # update the layout of the figure
-    # fig.update_layout(  font_family='Helvetica Now', 
-    #                     font_color="black",
-    #                     plot_bgcolor='rgb(232,232,232)',
-    #                     title_font={'size': 20})
-
-    # reportDate =  saveToDirPath.split("/")[-1]                 
-
-    # AddAnnotation(fig, numberOfResponses, reportDate, isEnglish)
-
-    # return SaveFigure(fig, saveToDirPath)
