@@ -296,6 +296,8 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     # images created when then the survey data was pulled from the website fullfill the request.
     if aQuery.IsDateOnly():  
 
+        print('Date Only Query')
+
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
         print('FolderPath:',folderPath)
 
@@ -312,7 +314,10 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
         else:
             print("[WARNING]: HandleFrontEndQuery: Folder path doesn't exist:", folderPath)     
     # If there are more filters in the query then just a date, new images will need to be generated.
-    else:    
+    else:
+        
+        print('Full Query')
+         
         responseDict, errorLogs = GetResponseDict(aQuery)
         
         if responseDict.keys() != None:
