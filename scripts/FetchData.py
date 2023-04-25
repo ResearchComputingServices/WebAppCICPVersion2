@@ -27,6 +27,13 @@ def FetchSurveyQuestionsJSON(   surveyID,
     jsonFile = open(outputFilePath, 'w+')
     jsonFile.write(response.text)
     jsonFile.close()
+     
+    #print('English: ', response.json()['meta']['httpStatus'])   
+    returnFlag = False
+    if response.json()['meta']['httpStatus'] == '200 - OK':
+        returnFlag = True
+    
+    return returnFlag
 
 ##################################################################################################################################
 # This function fetchs the translation file from the Qualtrics website and saves it as a JSON file
@@ -47,6 +54,14 @@ def FetchSurveyTranslationJSON( surveyID,
     jsonFile = open(outputFilePath, 'w+')
     jsonFile.write(response.text)
     jsonFile.close() 
+    
+    
+    #print('French: ', response.json()['meta']['httpStatus'])
+    returnFlag = False
+    if response.json()['meta']['httpStatus'] == '200 - OK':
+        returnFlag = True
+    
+    return returnFlag
      
 ##################################################################################################################################
 # This funciton downloads the specific survey response data from Qualtrics website and saves it as a JSON file
@@ -125,22 +140,23 @@ def FetchDataMain(aSurvey):
                                settings.DATA_DIR_PATH,
                                aSurvey.qualtricsSurveyID)
 
-    print(outputPath)
     # create the output folder if it does not exist already
     if not os.path.exists(outputPath):
         os.makedirs(outputPath)
 
     # # Fetch the survey question data from the Qualtric website
     print('FetchSurveyQuestionsJSON')
-    FetchSurveyQuestionsJSON(   aSurvey.qualtricsSurveyID,
-                                englishJSONFilePath)
+    successFlagEnglish = FetchSurveyQuestionsJSON(  aSurvey.qualtricsSurveyID,
+                                                    englishJSONFilePath)
     
     print('FetchSurveyTranslationSON')
-    FetchSurveyTranslationJSON( aSurvey.qualtricsSurveyID,
-                                frenchJSONFilePath)
+    successFlagFrench = FetchSurveyTranslationJSON( aSurvey.qualtricsSurveyID,
+                                                    frenchJSONFilePath)
 
     # Fetch the survey response data from the Qualtric website
     print('FetchSurveyReponsesJSON')
     FetchSurveyReponsesJSON(aSurvey.qualtricsSurveyID,
                             outputPath,
                             responseJSONFilePath)
+    
+    return successFlagEnglish and successFlagFrench

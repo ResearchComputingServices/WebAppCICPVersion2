@@ -90,6 +90,19 @@
                             {% endfor %}
                         </div>
                     </section>
+                {% elif errors %}
+                <div id="errorcard"
+                         class="d-flex align-items-center justify-content-center h-100">
+                        <div class="card text-center">
+                            <div class="card-header text-light">Error!!</div>
+                            <div class="card-body">
+                                <p class="card-text text-light">
+                                    {% for error in errors %}<p class="card-text">{{ error }}</p>{% endfor %}
+                                </p>
+                                <a href="{% url 'report_results_EN' %}" class="btn text-light">Try Again</a>
+                            </div>
+                        </div>
+                    </div>
                 {% endif %}
             {% endif %}
         </main>

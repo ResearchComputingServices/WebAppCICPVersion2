@@ -10,7 +10,11 @@ from WebAppCICPVersion2 import settings
 # the extracted data is stored in Question Objects which are in turn stored in a list
 ##################################################################################################################################
 def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
-     
+    
+    if 'result' not in surveyJSON.keys():
+        return False
+    
+    
     # loop over the questions data in the JSON file
     for qDictID in surveyJSON['result']['questions']:          
         
@@ -86,10 +90,16 @@ def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
                     choice.choiceTextEnglish = CleanText(cDict['choiceText'])
                     choice.save()   
 
+    return True
+
 ##################################################################################################################################
 # 
 ##################################################################################################################################  
 def ExtractQuestionDataFromFrenchJSON(surveyJSON, aSurvey):                   
+    
+    if 'result' not in surveyJSON.keys():
+        return False
+    
     
     frenchSurveyTextDict = surveyJSON['result']
     
@@ -148,6 +158,8 @@ def ExtractQuestionDataFromFrenchJSON(surveyJSON, aSurvey):
                 choice.choiceTextFrench = choiceTextFrench
             
                 choice.save()  
+    
+    return True
                    
 ##################################################################################################################################
 # Return a dictionary containing the contents of JSON file 
@@ -188,12 +200,11 @@ def ExtractSurveyMain(aSurvey=None):
         # open the english language JSON file
         if aSurvey != None:
             englishSurveyJSON = OpenSurveyJSONFile(aSurvey.qualtricsSurveyID, 'EN')
-            ExtractQuestionDataFromEnglishJSON(englishSurveyJSON, aSurvey)
+            successFlag = ExtractQuestionDataFromEnglishJSON(englishSurveyJSON, aSurvey)
             
-            frenchSurveyJSON = OpenSurveyJSONFile(aSurvey.qualtricsSurveyID, 'FR')
-            ExtractQuestionDataFromFrenchJSON(frenchSurveyJSON, aSurvey)
-            
-            successFlag = True
+            if successFlag:
+                frenchSurveyJSON = OpenSurveyJSONFile(aSurvey.qualtricsSurveyID, 'FR')
+                successFlag = ExtractQuestionDataFromFrenchJSON(frenchSurveyJSON, aSurvey)
         else:
             print('[ERROR]: ExtractSurveyMain: no surveyID given')
             successFlag = False
@@ -205,8 +216,9 @@ def ExtractSurveyMain(aSurvey=None):
 ################################################################################################################################## 
 
 def run(*args):
-    aSurvey = SurveyTable()
-    aSurvey.qualtricsSurveyID = settings.TEST_SURVEY_ID
-    aSurvey.releaseDate = '2023-01-01'
-    aSurvey.save()
-    ExtractSurveyMain(aSurvey)
+    surveyQuerySet = SurveyTable.objects.all()
+        
+    for survey in surveyQuerySet:
+        print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
+
+        HandleReleasedSurvey(survey,currentDate)

@@ -14,22 +14,26 @@ def HandleReleasedSurvey(currentSurvey, currentDate):
     successFlag = False
 
     print('Download data for survey:',currentSurvey.qualtricsSurveyID)
-    FetchDataMain(aSurvey=currentSurvey)
+    successFlag = FetchDataMain(aSurvey=currentSurvey)
     
-    print('ExtractSurveyMain')
-    successFlag = ExtractSurveyMain(aSurvey=currentSurvey)
-    
-    print('ExtractResponsesMain')
-    successFlag = ExtractResponsesMain(aSurvey=currentSurvey)
-    
-    print('GenerateDefaultFigures')
-    successFlag = GenerateDefaultFigures(aSurvey=currentSurvey) 
-        
     if successFlag:
-        currentSurvey.fetchedDate = currentDate
-        currentSurvey.save()
+        print('ExtractSurveyMain')
+        successFlag = ExtractSurveyMain(aSurvey=currentSurvey)
+    
+        print('ExtractResponsesMain')
+        successFlag = ExtractResponsesMain(aSurvey=currentSurvey)
+    
+        print('GenerateDefaultFigures')
+        successFlag = GenerateDefaultFigures(aSurvey=currentSurvey) 
+
+        if successFlag:
+            currentSurvey.fetchedDate = currentDate
+            currentSurvey.save()
+        else:
+            print('[ERROR]: HandleReleasedSurvey: Unable to retrieve survey:', currentSurvey.qualtricsSurveyID)
+
     else:
-        print('[ERROR]: HandleReleasedSurvey: Unable to retrieve survey:', currentSurvey.qualtricsSurveyID)
+        print('[ERROR]: HandleReleasedSurvey: Unable to download survey data :', currentSurvey.qualtricsSurveyID)
 
 ##################################################################################################################################
 # Main function 

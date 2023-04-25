@@ -9,7 +9,7 @@ def VisualizeTextGraphicQuestion(   question,
                                     userResponses,
                                     isEnglish = True,
                                     saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
-    
+    print('VisualizeTextGraphicQuestion')
     title = GetGraphicTitle(question, isEnglish)
         
     # Get text for wordcloud generation 
@@ -18,7 +18,7 @@ def VisualizeTextGraphicQuestion(   question,
         responseText = response.answerText
         if responseText != None and responseText != '' and not responseText.isnumeric() :
             allResponseText += ' ' + responseText
-      
+
     return CreateWordCloud( wordCloudText = allResponseText,  
                             title = title,
                             numberOfResponses = len(userResponses),

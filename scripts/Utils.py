@@ -5,8 +5,11 @@ from dataclasses import dataclass, field
 from typing import List
 import re 
 import os
+from textwrap import fill
 import textwrap
 from datetime import datetime
+
+import math
 
 A_LARGE_NUMBER = 99999999999
 
@@ -56,8 +59,8 @@ GRAPHIC_FILE_SUFFIX = '.'+GRAPHIC_FILE_TYPE
 
 IMAGE_LIFE_TIME_SECONDS = 259200. # 72 hours
 
-FIGURE_WIDTH_PX = 800
-FIGURE_HEIGHT_PX = 600
+FIGURE_WIDTH_PX = 1200
+FIGURE_HEIGHT_PX = 1000
 
 PIE_CHART_HOLE_RADIUS = 0.5
 
@@ -67,9 +70,67 @@ FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regu
 
 TMP_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'tmpImages')
 
-DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
+#DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
+DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'media')
 
 WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
+
+
+USER_DESIGNATION_DICT = {'A' : 'pub', 'B' : 'prv', 'C' : 'chr'}
+
+USER_DOMAIN_DICT = {    '1'	: 'Organizations Relieving Poverty',
+                        '2'	: 'Foundations Relieving Poverty',
+                        '10'	: 'Teaching Institutions',
+                        '11'	: 'Support of schools and education',
+                        '12'	: 'Education in the arts',
+                        '13'	: 'Educational organizations not elsewhere categorized',
+                        '14'	: 'Research',
+                        '15'	: 'Foundations Advancing Education',
+                        '30'	: 'Christianity',
+                        '40'	: 'Islam',
+                        '50'	: 'Judaism',
+                        '60'	: 'Other Religions',
+                        '70'	: 'Support of Religion',
+                        '80'	: 'Ecumenical and Inter-faith Organizations',
+                        '90'	: 'Foundations Advancing Religions',
+                        '100'	: 'Core Health Care',
+                        '110'	: 'Supportive Health Care',
+                        '120'	: 'Protective Health Care',
+                        '130'	: 'Health Care Products',
+                        '140'	: 'Complementary or Alternative Health Care',
+                        '150'	: 'Relief of the Aged',
+                        '155'	: 'Upholding Human Rights',
+                        '160'	: 'Community Resource',
+                        '170'	: 'Environment',
+                        '175'	: 'Agriculture',
+                        '180'	: 'Animal Welfare',
+                        '190'	: 'Arts',
+                        '200'	: 'Public Amenities',
+                        '210'	: 'Foundations',
+                        '214'	: 'CAAA',
+                        '215'	: 'NASO'}
+
+USER_SUB_SAMPLE_IDS = [ 'SS1', 
+                        'SS2', 
+                        'SS3', 
+                        'SS4',
+                        'SS5',
+                        'SS6', 
+                        'SL Climate & Environment / Climat & Environnement', 
+                        'SL Advocacy & Human rights / Plaidoyer et droits de l\'homme'
+                        'SL Indigenous services / Services aux autochtones',
+                        'SL Crisis Intervention / Intervention en cas de crise',
+                        'SL Animal Welfare / Bien-Ãªtre des animaux',
+                        'SL Literacy groups / Groupes d\'alphabÃ©tisation',
+                        'SL Arts Education / Ã‰ducation artistique',
+                        'SL Food Security / SÃ©curitÃ© alimentaire',
+                        'SL Shelters / Organismes de refuge',
+                        'SL Senior care / Soins aux personnes Ã¢gÃ©es',
+                        'SL Humanitarian assistance (outside Canada) / Aide humanitaire (hors du Canada)',
+                        'SL Migration services / Services de migration',
+                        'Initial List',
+                        
+                        ]
 
 
 ##################################################################################################################################
@@ -119,7 +180,7 @@ def Local2URLMedia(listLocal):
     listOfURLPaths = []
     
     for localFilePath in listLocal:
-        urlPath = localFilePath[len(str(settings.BASE_DIR)):]
+        urlPath = localFilePath[len(str(settings.BASE_ROOT)):]
         listOfURLPaths.append(urlPath)
         
     return listOfURLPaths
@@ -193,16 +254,18 @@ def CreateLabels(titleText):
 
     # split it by comma
     bracketTextSplit = bracketText.split(',')    
-    
+   
     if len(bracketTextSplit) != 0:
-        
         # split each pair by colon
         for pair in bracketTextSplit:
             pairSplit = pair.split(':')
             if len(pairSplit) == 2:
                 tickValues.append(float(pairSplit[0]))      
-                tickLabels.append(pairSplit[1])   
-        
+                tickLabels.append(fill(pairSplit[1],15)) 
+            if len(pairSplit) == 3: 
+                tickValues.append(float(pairSplit[1]))      
+                tickLabels.append(fill(pairSplit[2],15)) 
+
     return tickValues, tickLabels  
   
 ##################################################################################################################################
@@ -250,16 +313,13 @@ def GetUser(externalRefNum):
     if len(userQuerySet) == 1:
         user = userQuerySet.first()      
     else:    
-        ##########################################################
-        # Remove this could after development
-        # replace it with code to handle a user doesnt exist
-        user = UserTable()
-        user.externalDataReference = externalRefNum
-        user.province = 'AB'
-        user.size = 'small'
-        user.domain = 'other'
-        user.languagePreference = 'EN'
-        user.save()
-        ##########################################################
+        print('[ERROR]: GetUser: No User found with:', externalRefNum)
 
     return user
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+
+def roundup(x):
+    return int(math.ceil(x / 10.0)) * 10

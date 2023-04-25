@@ -52,6 +52,7 @@ def report_results_EN(request):
             
             if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
+                print(query_response_imagefilepaths)
 
                 if len(errors) != 0:
                     context["errors"] = errors
@@ -70,6 +71,7 @@ def report_results_EN(request):
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_date}
         front_end_query = FrontEndQuery()
         front_end_query.date = str(get_fridaydate_from_todays_date(datetime.now()))
+      
         if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
                 print(query_response_imagefilepaths)

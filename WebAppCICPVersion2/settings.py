@@ -21,7 +21,7 @@ DATA_DIR_PATH = 'Data'
 QUESTION_ENGLISH_JSON_FILENAME = 'surveyQuestionsEnglish.json'
 QUESTION_FRENCH_JSON_FILENAME = 'surveyQuestionsFrench.json'
 RESPONSE_DATA_JSON_FILENAME = 'responseFile.json'
-USER_DATA_FILENAME = 'userData.csv'
+USER_DATA_FILENAME = 'UserStaticDatabase.csv'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -86,22 +86,21 @@ WSGI_APPLICATION = 'WebAppCICPVersion2.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+#    'default': {
+#        'ENGINE': 'django.db.backends.sqlite3',
+#        'NAME': BASE_DIR / 'db.sqlite3',
+#       'ENGINE': 'django.db.backends.sqlite3',
+#       'NAME': BASE_DIR / 'db.sqlite3',
 
-       'ENGINE': 'django.db.backends.sqlite3',
-       'NAME': BASE_DIR / 'db.sqlite3',
-
-    }
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     'NAME': 'cicp_reports',
-    #     'USER': 'cicp',
-    #     'PASSWORD': 'MYSQL_PASSWORD',
-    #     'HOST': 'localhost',
-    #     'PORT': '3306',
-    # }
+#    }
+     'default': {
+         'ENGINE': 'django.db.backends.mysql',
+         'NAME': 'cicp_reports',
+         'USER': 'cicp',
+         'PASSWORD': 'MYSQL_PASSWORD',
+         'HOST': 'localhost',
+         'PORT': '3306',
+     }
 }
 
 
@@ -141,7 +140,6 @@ USE_I18N = True
 USE_L10N = True
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -157,7 +155,7 @@ LOCALE_PATHS = [BASE_DIR / 'locale']
 
 # # and Media files
 MEDIA_URL="/media/"
-MEDIA_ROOT = BASE_DIR / "media"
+# MEDIA_ROOT = BASE_DIR / "media"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -173,5 +171,6 @@ QUATRICS_API = {
     'data_center': "carletonu.ca1"
 }
 
-STATIC_ROOT = '/var/www/html/static/'
-# MEDIA_ROOT = '/var/www/html/media/'
+BASE_ROOT = '/var/www/html'
+STATIC_ROOT = BASE_ROOT+ '/static/'
+MEDIA_ROOT = BASE_ROOT + '/media/'
