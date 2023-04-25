@@ -211,9 +211,6 @@ def run(*args):
                
         user = UserTable()
         
-        print('subSample:', len(subSample))
-        print('category_code:', len(category_code))
-        
         user.languagePreference = GetLanguage(language)
         user.externalDataReference = externalDataReference
         user.designation = GetDesignation(designation_code)
