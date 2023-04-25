@@ -105,9 +105,8 @@ def CreatePieChart( responseDict,
         values = values[:7]
         
         names.append('other')
-        values.append(otherValue)
-    
-    
+        values.append(otherValue)  
+        
     # define colours to use
     cmap = [(233/255,28/255,36/255),
             (45/255,45/255,45/255),
@@ -137,7 +136,7 @@ def CreatePieChart( responseDict,
     # draw circle
     centre_circle = plt.Circle((0, 0), PIE_CHART_HOLE_RADIUS, fc='white')
     fig = plt.gcf()
- 
+    fig.set_size_inches(w=8.,h=8)
     # Adding Circle in Pie chart
     fig.gca().add_artist(centre_circle)
     

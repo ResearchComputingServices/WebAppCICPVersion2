@@ -98,10 +98,8 @@ def GetUserResponseQuerySet(aQuery, VERBOSE = False):
     
     # Get all the surveys that match the query
     surveyQuerySet = GetSurveyQuerySet(aQuery)
-                
     # Get all questions that match the query
     questionQuerySet = GetQuestionQuerySet(aQuery)
-           
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
     
@@ -112,6 +110,7 @@ def GetUserResponseQuerySet(aQuery, VERBOSE = False):
     
     # test to make sure there is data in the querySets before proceeding
     if questionQuerySet != None and userQuerySet != None and surveyQuerySet != None:
+        
         surveyQueryObject = Q()
         for s in surveyQuerySet:
             surveyQueryObject |= Q(surveyID=s.id)
@@ -121,21 +120,24 @@ def GetUserResponseQuerySet(aQuery, VERBOSE = False):
         questionQueryObject = Q()
         for q in questionQuerySet:
             questionQueryObject |= Q(questionID=q.id)
-        print(questionQueryObject)
-        userResponseQuerySet = UserResponseTable.objects.filter(questionQueryObject)
-                    
-        userQueryObject = Q()
-        for u in userQuerySet:
-            userQueryObject |= Q(userID = u.id)
-        print('userQueryObject', len(userQueryObject), flush=True)
+    
+        if len(questionQueryObject) != 0:
         
-        userResponseQuerySet = userResponseQuerySet.filter(userQueryObject)
+            userResponseQuerySet = UserResponseTable.objects.filter(questionQueryObject)
+                    
+            userQueryObject = Q()
+            for u in userQuerySet:
+                userQueryObject |= Q(userID = u.id)
+              
+            userResponseQuerySet = userResponseQuerySet.filter(userQueryObject)
     
-        if len(userResponseQuerySet) == 0:
-            if VERBOSE:
-                print('[ERROR]: GetUserQuerySet: no user responses fix query')
-            errorLogs.append('Insufficient user response data, try relaxing search constraints')
-    
+            if len(userResponseQuerySet) == 0:
+                if VERBOSE:
+                    print('[ERROR]: GetUserQuerySet: no user responses fix query')
+                errorLogs.append('Insufficient user response data, try relaxing search constraints')
+        else:
+            errorLogs.append('Insufficient question data')
+            
     # if any of the querySets are zero report an error explaining why
     else:
         if questionQuerySet == None:

@@ -5,8 +5,11 @@ from dataclasses import dataclass, field
 from typing import List
 import re 
 import os
+from textwrap import fill
 import textwrap
 from datetime import datetime
+
+import math
 
 A_LARGE_NUMBER = 99999999999
 
@@ -251,16 +254,18 @@ def CreateLabels(titleText):
 
     # split it by comma
     bracketTextSplit = bracketText.split(',')    
-    
+   
     if len(bracketTextSplit) != 0:
-        
         # split each pair by colon
         for pair in bracketTextSplit:
             pairSplit = pair.split(':')
             if len(pairSplit) == 2:
                 tickValues.append(float(pairSplit[0]))      
-                tickLabels.append(pairSplit[1])   
-    
+                tickLabels.append(fill(pairSplit[1],15)) 
+            if len(pairSplit) == 3: 
+                tickValues.append(float(pairSplit[1]))      
+                tickLabels.append(fill(pairSplit[2],15)) 
+
     return tickValues, tickLabels  
   
 ##################################################################################################################################
@@ -308,16 +313,13 @@ def GetUser(externalRefNum):
     if len(userQuerySet) == 1:
         user = userQuerySet.first()      
     else:    
-        ##########################################################
-        # Remove this could after development
-        # replace it with code to handle a user doesnt exist
-        user = UserTable()
-        user.externalDataReference = externalRefNum
-        user.province = 'AB'
-        user.size = 'small'
-        user.domain = 'other'
-        user.languagePreference = 'EN'
-        user.save()
-        ##########################################################
+        print('[ERROR]: GetUser: No User found with:', externalRefNum)
 
     return user
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+
+def roundup(x):
+    return int(math.ceil(x / 10.0)) * 10

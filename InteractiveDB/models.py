@@ -97,8 +97,8 @@ class UserTable(models.Model):
 class UserResponseTable(models.Model):
     
     # Foreign Keys
-    userID = models.ForeignKey(UserTable, on_delete=models.DO_NOTHING)
-    questionID = models.ForeignKey(QuestionTable, on_delete=models.CASCADE)
+    userID = models.ForeignKey(UserTable, on_delete=models.DO_NOTHING,null=True,blank=True)
+    questionID = models.ForeignKey(QuestionTable, on_delete=models.CASCADE,null=True,blank=True)
     
     # this foriegn key might be redundant since we can access the choice through the question
     choiceID = models.ForeignKey(ChoiceTable, on_delete=models.CASCADE,null=True,blank=True)

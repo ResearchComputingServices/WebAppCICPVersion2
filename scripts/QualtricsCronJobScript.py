@@ -51,7 +51,7 @@ def run(*args):
     for survey in surveyQuerySet:
         print(survey.id,'\n',survey.qualtricsSurveyID,'\n',survey.releaseDate,'\n',survey.fetchedDate)
         
-        if currentDate >= survey.releaseDate and survey.fetchedDate == None and survey.qualtricsSurveyID == 'SV_1RnShmHTBkbGhCu':
+        if currentDate >= survey.releaseDate and survey.fetchedDate == None:
             HandleReleasedSurvey(survey,currentDate)
         else:
             print('skip survey')

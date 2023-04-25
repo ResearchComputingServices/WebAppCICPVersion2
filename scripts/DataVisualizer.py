@@ -98,6 +98,7 @@ def DataVisualizerMain(responseDict,
             print('[ERROR]: Unknown question type: ', question.questionType)
         else:                                              
             s = time.time()
+
             imageFilePath = questionHandleDict[question.questionType](  question = question,
                                                                         userResponses = responseDict[question], 
                                                                         isEnglish= isEnglish,

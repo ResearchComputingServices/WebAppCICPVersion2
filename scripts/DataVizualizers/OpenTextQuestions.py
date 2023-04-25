@@ -61,11 +61,15 @@ def CreateWordCloud(wordCloudText,
     destCode = 'fr'
     if isEnglish:
         destCode = 'en'
+
+    if len(wordCloudText) == 0:
+        return ''
     
     wordCloudText = GetTextForWordCloud(wordCloudText, destCode)
 
     if len(wordCloudText) == 0:
-        wordCloudText = "Failure"
+        return ''
+
     # produce the actual wordcloud
     wc.generate(wordCloudText)
     

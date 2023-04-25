@@ -75,17 +75,12 @@ def VisualizeSingleChoiceSliderQuestion(title,
             maxValue = value
             
     # pad the min and max
-    if maxValue <= 10:
-        maxValue = 10
-    elif maxValue <= 100:
-        maxValue = 100
+    maxValue = roundup(maxValue)
     
     if minValue >= 0:
         minValue = 0
-    elif minValue >= -10:
-        minValue = -10
-    elif minValue >= -100:
-        minValue = -100
+    else:
+        minValue = -1.*roundup(-1.*minValue)
     
     # now pad the valueDict
     for i in range(minValue, maxValue):
@@ -108,8 +103,8 @@ def VisualizeSingleChoiceSliderQuestion(title,
                                     valueList = value,
                                     graphicTitle=title,
                                     numberOfResponses=numberOfResponses,
-                                    minValue = minValue,
-                                    maxValue = maxValue,
+                                    xMin = minValue,
+                                    xMax = maxValue,
                                     isEnglish = isEnglish,
                                     saveToDirPath = saveToDirPath)
     
@@ -169,8 +164,8 @@ def CreateVerticleBarChart( binList,
                             valueList,
                             graphicTitle,
                             numberOfResponses,
-                            minValue,
-                            maxValue,
+                            xMin,
+                            xMax,
                             isEnglish = True,
                             saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
@@ -185,6 +180,7 @@ def CreateVerticleBarChart( binList,
             color = (233/255,28/255,36/255))   
     
     ax1.set_ylabel('Frequency')
+    ax1.set_xlim(xMin,xMax)
         
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
@@ -298,6 +294,9 @@ def CreateHorizontalBarChart(   responseDict,
                 values, 
                 color = colourMap)   
     ax1.set_xlabel(xAxisTitle)
+    ax1.set_xlim(xMin,xMax)
+    ax1.set_xticks(tickValues)
+    ax1.set_xticklabels(tickLabels)
     ax1.set_ylabel('')
         
     # Get the watermark image and add it to the figure
