@@ -211,8 +211,8 @@ def run(*args):
                
         user = UserTable()
 
-        print('subSample:',subSample, flush = True)
-        print('category_code:',category_code, flush = True)
+        print('subSample:',GetSubsample(subSample), flush = True)
+        print('category_code:',GetDomain(category_code), flush = True)
         
         user.languagePreference = GetLanguage(language)
         user.externalDataReference = externalDataReference
