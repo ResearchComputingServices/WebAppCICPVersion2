@@ -75,7 +75,7 @@ def CreateWordCloud(wordCloudText,
     wc.generate(wordCloudText)
     
     # Create the figure which plots the word cloud
-    fig = plt.figure()
+    fig = plt.figure(figsize=(8.,8.))
     plt.title(title+'\n',loc='center',wrap=True)
     plt.axis('off')
     plt.imshow(wc)
