@@ -2,6 +2,7 @@ import os
 import uuid
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+import nltk
 from googletrans import Translator
 
 from scripts.Utils import *
@@ -262,6 +263,9 @@ def Translate(inputText, srcCode, destCode):
 ##################################################################################################################################
 
 def GetTextForWordCloud(responseText, destCode):
+    
+    nltk.download('wordnet')
+    nltk.download('stopwords')
     
     resultingText = ''
     

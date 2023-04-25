@@ -21,16 +21,12 @@ def GetUserQuerySet(aQuery):
         for loc in aQuery.locations:
             qObject |= Q(province=loc) 
         userQuerySet = userQuerySet.filter(qObject)
-    
-    print('Loc  userQuerySet:',len(userQuerySet))
-    
+       
     if len(aQuery.organizationSizes) != 0: 
         qObject = Q()
         for size in aQuery.organizationSizes:
             qObject |= Q(size=size) 
         userQuerySet = userQuerySet.filter(qObject)
-    
-    print('Size userQuerySet:',len(userQuerySet))
     
     if len(aQuery.languagePreference) != 0:        
         qObject = Q()
@@ -39,15 +35,11 @@ def GetUserQuerySet(aQuery):
             qObject |= Q(languagePreference=lang) 
         userQuerySet = userQuerySet.filter(qObject)
     
-    print('Lang userQuerySet:',len(userQuerySet))
-    
     if len(aQuery.fieldOfWork) != 0:
         qObject = Q()
         for work in aQuery.fieldOfWork:
             qObject |= Q(domain=work) 
         userQuerySet = userQuerySet.filter(qObject)
-    
-    print('Field userQuerySet:',len(userQuerySet))
     
     if len(userQuerySet) < MINIMUM_USER_QUERY_SIZE:
         userQuerySet = None
@@ -345,7 +337,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     else: 
         print('QueryType: Full Query')
          
-        responseDict, errorLogs = GetResponseDict(aQuery, True)
+        responseDict, errorLogs = GetResponseDict(aQuery)
         
         if responseDict.keys() != None:
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  

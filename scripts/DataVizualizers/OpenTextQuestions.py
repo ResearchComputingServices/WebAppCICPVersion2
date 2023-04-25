@@ -42,8 +42,7 @@ def CreateWordCloud(wordCloudText,
                     title,
                     numberOfResponses,
                     isEnglish = True,
-                    saveToDirPath = TMP_FIGURE_FOLDER_PATH):
-    
+                    saveToDirPath = TMP_FIGURE_FOLDER_PATH):   
    
     # define colours to use
     red = np.array([233/256, 28/256, 36/256, 1])

@@ -25,9 +25,6 @@ def run(*args):
     #             'SV_29xoxQFVl4Rladg',
     #             'SV_55fMnaZIQKk86ZE']
     
-    doneList = ['SV_aYnUZN7y2nQhXJc',
-                'SV_0eMEVIZkeSbKyjk']
-
     for survey in surveyQuerySet:
         
         if survey.qualtricsSurveyID in doneList:
