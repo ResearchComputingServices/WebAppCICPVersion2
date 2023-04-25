@@ -48,8 +48,6 @@ def GetUserQuerySet(aQuery):
     
     print('userQuerySet:',userQuerySet)
     
-    input()
-    
     if len(userQuerySet) < MINIMUM_USER_QUERY_SIZE:
         userQuerySet = None
     
