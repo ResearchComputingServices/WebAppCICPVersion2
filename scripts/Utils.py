@@ -321,7 +321,7 @@ def GetUser(externalRefNum, VERBOSE = False):
         user = UserTable()
         user.externalDataReference = externalRefNum
         user.province = 'AB'
-        user.size = 'small'
+        user.size = 'SM'
         user.domain = 'other'
         user.languagePreference = 'EN'
         user.save()
