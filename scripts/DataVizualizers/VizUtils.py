@@ -263,10 +263,7 @@ def Translate(inputText, srcCode, destCode):
 ##################################################################################################################################
 
 def GetTextForWordCloud(responseText, destCode):
-    
-    nltk.download('wordnet')
-    nltk.download('stopwords')
-    
+       
     resultingText = ''
     
     srcCode = 'en'
