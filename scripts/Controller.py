@@ -104,10 +104,21 @@ def GetUserResponseQuerySet(aQuery, VERBOSE = False):
     userQuerySet = GetUserQuerySet(aQuery)
     
     if VERBOSE:
-        print('surveyQuerySet',len(surveyQuerySet))
-        print('questionQuerySet',len(questionQuerySet))
-        print('userQuerySet',len(userQuerySet))
-    
+        if surveyQuerySet != None:
+            print('surveyQuerySet',len(surveyQuerySet))
+        else:
+            print('surveyQuerySet is None')
+        
+        if questionQuerySet != None:
+            print('questionQuerySet',len(questionQuerySet))
+        else:
+            print('questionQuerySet is None')
+            
+        if userQuerySet != None:
+            print('userQuerySet',len(userQuerySet))
+        else:
+            print('userQuerySet is None')
+            
     # test to make sure there is data in the querySets before proceeding
     if questionQuerySet != None and userQuerySet != None and surveyQuerySet != None:
         
