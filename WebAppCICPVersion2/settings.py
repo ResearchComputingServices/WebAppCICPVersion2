@@ -33,7 +33,7 @@ SECRET_KEY = 'django-insecure-ue)z4wo$392gy=#&=qn($(ru56zs+v6qivtt!gnws=669=2486
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-CSRF_TRUSTED_ORIGINS = ['http://*', 'http://134.117.214.42']
+CSRF_TRUSTED_ORIGINS = ['http://*', 'http://10.254.159.6', 'https://cicp-pcpob.carleton.ca']
 
 # Application definition
 
