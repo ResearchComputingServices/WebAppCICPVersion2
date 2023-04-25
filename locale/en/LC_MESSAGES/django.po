@@ -3,12 +3,11 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-03-22 11:20-0400\n"
+"POT-Creation-Date: 2023-04-25 08:57-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -126,22 +125,39 @@ msgstr "Language Preference"
 msgid "Size"
 msgstr "Size"
 
-#: .\WebsiteApp\templates\index.html:38
+#: .\WebsiteApp\templates\index.html:36
+msgid "☰ Filters"
+msgstr "☰ Filters"
+
+#: .\WebsiteApp\templates\index.html:40
 msgid "Weekly Survey Distributed -"
 msgstr "Weekly Survey Distributed -"
 
-#: .\WebsiteApp\templates\index.html:38
+#: .\WebsiteApp\templates\index.html:40
+#, python-format
 msgid " %(wednesday_date)s"
 msgstr "%(wednesday_date)s"
 
-#: .\WebsiteApp\templates\index.html:43
+#: .\WebsiteApp\templates\index.html:45
 msgid "Weekly Survey Published -"
 msgstr "Weekly Survey Published -"
 
-#: .\WebsiteApp\templates\index.html:43
+#: .\WebsiteApp\templates\index.html:45
 #, python-format
 msgid "%(friday_text_date)s"
 msgstr "%(friday_text_date)s"
+
+#: .\WebsiteApp\templates\index.html:55 .\WebsiteApp\templates\index.html:71
+msgid "Alert!!"
+msgstr "Alert!!"
+
+#: .\WebsiteApp\templates\index.html:60 .\WebsiteApp\templates\index.html:78
+msgid "Try Again"
+msgstr "Try Again"
+
+#: .\WebsiteApp\templates\index.html:75
+msgid "Insufficient survey data, try relaxing search constraints"
+msgstr "Insufficient survey data, try relaxing search constraints"
 
 #: .\WebsiteApp\templates\navbar.html:36
 msgid "Report Results"
@@ -155,16 +171,21 @@ msgstr "Back to CICP"
 msgid "Download Report"
 msgstr "Download Report"
 
-#: .\WebsiteApp\templates\sidebar.html:15
+#: .\WebsiteApp\templates\navbar.html:54
+msgid "Language"
+msgstr "Language"
+
+#: .\WebsiteApp\templates\sidebar.html:17
 msgid "FILTERS"
 msgstr "FILTERS"
 
-#: .\WebsiteApp\templates\sidebar.html:18
-#: .\WebsiteApp\templates\sidebar.html:20
+#: .\WebsiteApp\templates\sidebar.html:19
+#: .\WebsiteApp\templates\sidebar.html:24
 msgid "Search"
 msgstr "Search"
 
-#: .\WebsiteApp\templates\sidebar.html:21
+#: .\WebsiteApp\templates\sidebar.html:20
+#: .\WebsiteApp\templates\sidebar.html:25
 msgid "Reset"
 msgstr "Reset"
 

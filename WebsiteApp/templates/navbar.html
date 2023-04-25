@@ -51,7 +51,7 @@
                            data-toggle="dropdown"
                            aria-haspopup="true"
                            aria-expanded="false">
-                            Language
+                            {% translate "Language" %}
                         </a>
                         <ul class="dropdown-menu"           aria-labelledby="navbarDropdown">
                             {% get_current_language as LANGUAGE_CODE %}
@@ -59,7 +59,7 @@
                             {% get_language_info_list for LANGUAGES as languages %}
                             {% for lang in languages %}
                                 <li>
-                                    <a class="dropdown-item" href="/{{ lang.code }}/">{{ lang.name_local }}</a>
+                                    <a class="dropdown-item" href="/{{ lang.code }}/">{{ lang.name_local|capfirst }}</a>
                                 </li>
                             {% endfor %}
                         </ul>
