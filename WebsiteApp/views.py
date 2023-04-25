@@ -26,8 +26,8 @@ def report_results_EN(request):
             
         location = (request.GET.getlist('province'))
         question_theme = (request.GET.getlist('theme'))
-        # language_preference = request.GET.getlist('language')
-        language_preference = request.GET.getlist(get_language())
+        language_preference = request.GET.getlist('language')
+        #language_preference = get_language()
         organization_size = (request.GET.getlist('size'))
 
         print(context)
