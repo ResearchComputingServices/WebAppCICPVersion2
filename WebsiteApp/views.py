@@ -20,7 +20,9 @@ def report_results_EN(request):
         if date is None:
             date = str(datetime.now().date())
         else:
-            date = (get_wed_date(request.GET['report_date'], get_language()))
+            date_requested = request.GET['report_date']
+            date_string = get_wed_date(date_requested, get_language())
+            date = str(datetime.strptime(date_string, "%d %B, %Y").date())
             
         location = (request.GET.getlist('province'))
         question_theme = (request.GET.getlist('theme'))
