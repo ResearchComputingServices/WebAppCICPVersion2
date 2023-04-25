@@ -256,7 +256,6 @@ div {
         width: 100%;
         max-height: 400px;
     }
-
 }
 
 /* CSS code for extra large devices */
@@ -304,5 +303,24 @@ div {
         width: 100%;
         padding: 15px 30px 60px 25px;
         overflow-x: auto;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 40vh;
+    }
+
+    #errorcard {
+        max-width: 100%;
+    }
+
+    #infocard {
+        height: 20vh;
+    }
+
+    #heading {
+        margin-left: 20%;
     }
 }
