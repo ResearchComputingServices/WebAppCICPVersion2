@@ -306,15 +306,27 @@ def GetSurvey(qualtricSurveyID):
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetUser(externalRefNum):
+def GetUser(externalRefNum, VERBOSE = False):
     
     userQuerySet = UserTable.objects.filter(externalDataReference=externalRefNum)
     user = None
     if len(userQuerySet) == 1:
         user = userQuerySet.first()      
     else:    
-        print('[ERROR]: GetUser: No User found with:', externalRefNum)
-
+        if VERBOSE:
+            print('[ERROR]: GetUser: No User found with:', externalRefNum)
+        ##########################################################
+        # Remove this could after development
+        # replace it with code to handle a user doesnt exist
+        user = UserTable()
+        user.externalDataReference = externalRefNum
+        user.province = 'AB'
+        user.size = 'small'
+        user.domain = 'other'
+        user.languagePreference = 'EN'
+        user.save()
+        ##########################################################
+    
     return user
 
 ##################################################################################################################################
