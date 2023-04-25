@@ -11,17 +11,17 @@ def report_results_EN(request):
 
     if request.GET:
         
-        print('\n\n\n\n HEREHERHEHRHERER \n\n\n\n\n')
-        
         form_filter = FilterForm(request.GET)
        
         context = {'form_filter' : form_filter}
 
         date = request.GET.get('report_date', None)
+        
         if date is None:
             date = str(datetime.now().date())
         else:
-            date = (request.GET['report_date'])
+            date = (get_wed_date(request.GET['report_date']))
+            
         location = (request.GET.getlist('province'))
         question_theme = (request.GET.getlist('theme'))
         # language_preference = request.GET.getlist('language')
