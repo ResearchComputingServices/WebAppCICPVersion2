@@ -285,17 +285,23 @@ def GetResponseDict(aQuery):
 ##################################################################################################################################
 
 def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
-    
-    print('HandleFrontEndQuery')
      
     listOfImageFilePaths = []
     dataCSVFilePath = []
     errorLogs = []
     
+    print('HandleFrontEndQuery') 
+    print(aQuery.date)
+    print(aQuery.qualtricsSurveyID)
+    print(aQuery.questionThemes)
+    print(aQuery.locations)
+    print(aQuery.organizationSizes)
+    print(aQuery.languagePreference)
+    print(aQuery.fieldOfWork)
+    
     # If only a date is specified in the query then no new images need to be generated since the default
     # images created when then the survey data was pulled from the website fullfill the request.
     if aQuery.IsDateOnly():  
-
         print('Date Only Query')
 
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
@@ -314,8 +320,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
         else:
             print("[WARNING]: HandleFrontEndQuery: Folder path doesn't exist:", folderPath)     
     # If there are more filters in the query then just a date, new images will need to be generated.
-    else:
-        
+    else: 
         print('Full Query')
          
         responseDict, errorLogs = GetResponseDict(aQuery)

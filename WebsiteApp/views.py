@@ -28,7 +28,6 @@ def report_results_EN(request):
 
         print(context)
 
-
         if date == "2022-12-23" or date == "2022-12-30" :
             info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
             context['info'] = info
