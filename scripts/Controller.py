@@ -291,13 +291,13 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     errorLogs = []
     
     print('HandleFrontEndQuery') 
-    print(aQuery.date)
-    print(aQuery.qualtricsSurveyID)
-    print(aQuery.questionThemes)
-    print(aQuery.locations)
-    print(aQuery.organizationSizes)
-    print(aQuery.languagePreference)
-    print(aQuery.fieldOfWork)
+    print('date:',aQuery.date)
+    print('id',aQuery.qualtricsSurveyID)
+    print('themes',aQuery.questionThemes)
+    print('location',aQuery.locations)
+    print('size',aQuery.organizationSizes)
+    print('lang',aQuery.languagePreference)
+    print('field',aQuery.fieldOfWork)
     
     # If only a date is specified in the query then no new images need to be generated since the default
     # images created when then the survey data was pulled from the website fullfill the request.

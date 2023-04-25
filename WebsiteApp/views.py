@@ -7,10 +7,12 @@ from datetime import datetime, timedelta
 
 # Create your views here.
 def report_results_EN(request):
-
-    
+   
 
     if request.GET:
+        
+        print('\n\n\n\n HEREHERHEHRHERER \n\n\n\n\n')
+        
         form_filter = FilterForm(request.GET)
        
         context = {'form_filter' : form_filter}
