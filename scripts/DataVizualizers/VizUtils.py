@@ -263,12 +263,17 @@ def Translate(inputText, srcCode, destCode):
 
 def GetTextForWordCloud(responseText, destCode):
     
+    resultingText = ''
+    
     srcCode = 'en'
     if destCode == 'en':
         srcCode = 'fr'
     
-    translatedText = Translate(responseText, srcCode, destCode)   
-    stopwordsFiltered = RemoveStopWords(translatedText) 
-    resultingText = ' '.join(stopwordsFiltered)
+    if len(responseText) != 0:
+        translatedText = Translate(responseText, srcCode, destCode)   
+        stopwordsFiltered = RemoveStopWords(translatedText) 
+        resultingText = ' '.join(stopwordsFiltered)
+    else:
+        print('[ERROR]: GetTextForWordCloud: responseText empty.')
     
     return resultingText
