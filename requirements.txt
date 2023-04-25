@@ -6,3 +6,6 @@ plotly
 matplotlib
 wordcloud
 kaleido
+googletrans
+nltk
+
