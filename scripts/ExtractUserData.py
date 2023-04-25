@@ -210,18 +210,16 @@ def run(*args):
         jobTitle = tokens[13] 
                
         user = UserTable()
-
-        print('subSample:',GetSubsample(subSample), flush = True)
-        print('category_code:',GetDomain(category_code), flush = True)
+        
+        user.domain = ""#GetDomain(category_code)
+        user.subSample = ""#GetSubsample(subSample)
         
         user.languagePreference = GetLanguage(language)
         user.externalDataReference = externalDataReference
         user.designation = GetDesignation(designation_code)
-        user.domain = GetDomain(category_code)
         user.subDomain = GetSubDomain(sub_category_code)
         user.locationPolygon = GetLocationPolygon(locationPolygons)
         user.urbanRural = GetUrbanRural(urbanRural)
-        user.subSample = GetSubsample(subSample)
         user.province = GetProvineAcronym(province)
         user.dateFounded = GetDate(registration_date)
         user.size = GetSize(fte+pte+volunteers)
