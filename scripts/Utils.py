@@ -322,7 +322,7 @@ def GetUser(externalRefNum, VERBOSE = False):
         user.externalDataReference = externalRefNum
         user.province = 'AB'
         user.size = 'SM'
-        user.domain = 'other'
+        user.domain = ''
         user.languagePreference = 'EN'
         user.save()
         ##########################################################
