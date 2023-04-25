@@ -35,6 +35,7 @@ def GetUserQuerySet(aQuery):
     if len(aQuery.languagePreference) != 0:        
         qObject = Q()
         for lang in aQuery.languagePreference:
+            print(lang)
             qObject |= Q(languagePreference=lang) 
         userQuerySet = userQuerySet.filter(qObject)
     
