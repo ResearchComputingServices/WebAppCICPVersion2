@@ -285,6 +285,8 @@ def GetResponseDict(aQuery):
 ##################################################################################################################################
 
 def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
+    
+    print('HandleFrontEndQuery')
      
     listOfImageFilePaths = []
     dataCSVFilePath = []
