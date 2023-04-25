@@ -44,6 +44,7 @@ def CreateWordCloud(wordCloudText,
                     isEnglish = True,
                     saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
+   
     # define colours to use
     red = np.array([233/256, 28/256, 36/256, 1])
     cmap = colors.ListedColormap([red, 'black'])
@@ -63,12 +64,12 @@ def CreateWordCloud(wordCloudText,
         destCode = 'en'
 
     if len(wordCloudText) == 0:
-        return ''
+        wordCloudText = 'ERRROR1'
     
     wordCloudText = GetTextForWordCloud(wordCloudText, destCode)
 
     if len(wordCloudText) == 0:
-        return ''
+        wordCloudText = 'ERRROR2'
 
     # produce the actual wordcloud
     wc.generate(wordCloudText)

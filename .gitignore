@@ -8,4 +8,5 @@ scripts/DataVizualizers/__pycache__/
 WebsiteApp/__pycache__/
 WebsiteApp/migrations/__pycache__/
 token
+media/
 
