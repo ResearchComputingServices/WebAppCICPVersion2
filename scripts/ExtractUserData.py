@@ -211,8 +211,9 @@ def run(*args):
                
         user = UserTable()
         
-        user.domain = ""#GetDomain(category_code)
-        user.subSample = ""#GetSubsample(subSample)
+        user.domain = "" # GetDomain(category_code)
+        user.subSample = "" # GetSubsample(subSample)
+        user.jobTitle = "" # jobTitle
         
         user.languagePreference = GetLanguage(language)
         user.externalDataReference = externalDataReference
@@ -223,7 +224,6 @@ def run(*args):
         user.province = GetProvineAcronym(province)
         user.dateFounded = GetDate(registration_date)
         user.size = GetSize(fte+pte+volunteers)
-        user.jobTitle = jobTitle
         
         user.save()   
                 
