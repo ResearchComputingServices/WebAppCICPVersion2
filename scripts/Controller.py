@@ -265,10 +265,10 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
 # 
 ##################################################################################################################################
 
-def GetResponseDict(aQuery):
+def GetResponseDict(aQuery, VERBOSE = False):
     
     responseDict = {}
-    userResponseQuerySet, errorLogs = GetUserResponseQuerySet(aQuery)   
+    userResponseQuerySet, errorLogs = GetUserResponseQuerySet(aQuery, VERBOSE)   
        
     if userResponseQuerySet != None:
    
@@ -290,6 +290,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     dataCSVFilePath = []
     errorLogs = []
     
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     print('HandleFrontEndQuery') 
     print('date:',aQuery.date)
     print('id',aQuery.qualtricsSurveyID)
@@ -298,14 +299,15 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     print('size',aQuery.organizationSizes)
     print('lang',aQuery.languagePreference)
     print('field',aQuery.fieldOfWork)
+    print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     
     # If only a date is specified in the query then no new images need to be generated since the default
     # images created when then the survey data was pulled from the website fullfill the request.
     if aQuery.IsDateOnly():  
-        print('Date Only Query')
+        print('QueryType: Date Only Query')
 
         folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
-        print('FolderPath:',folderPath)
+        print('FolderPath:', folderPath)
 
         if os.path.exists(folderPath):
             for filename in os.listdir(folderPath):
@@ -321,9 +323,9 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
             print("[WARNING]: HandleFrontEndQuery: Folder path doesn't exist:", folderPath)     
     # If there are more filters in the query then just a date, new images will need to be generated.
     else: 
-        print('Full Query')
+        print('QueryType: Full Query')
          
-        responseDict, errorLogs = GetResponseDict(aQuery)
+        responseDict, errorLogs = GetResponseDict(aQuery, True)
         
         if responseDict.keys() != None:
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
@@ -334,6 +336,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
       
     print('Generated Images Location:')
     print(listOfImageFilePaths)
+    
     return listOfImageFilePaths, dataCSVFilePath, errorLogs
     
 ##################################################################################################################################
