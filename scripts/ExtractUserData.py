@@ -191,9 +191,9 @@ def run(*args):
     userDataFile = open(userDataFilePath, 'r')
     lines = userDataFile.readlines()
         
-    for line in lines:
-        tokens = line.split('^')
-                 
+    for line in lines:        
+        # Get the tokens from the input line separated by ^ symbol
+        tokens = line.split('^')     
         language = tokens[0]
         externalDataReference = tokens[1]
         province = tokens[2]
@@ -208,23 +208,25 @@ def run(*args):
         volunteers = GetNumber(tokens[11])
         pte = GetNumber(tokens[12])
         jobTitle = tokens[13] 
-               
+        
+        # Create an instance of the user model       
         user = UserTable()
         
+        # store the tokens in the previously created instance of a user model       
         user.domain = GetDomain(category_code)
-        user.subSample = "" # GetSubsample(subSample)
-        user.jobTitle = "" # jobTitle
+        user.subDomain = GetSubDomain(sub_category_code)
+        user.subSample = GetSubsample(subSample)
+        user.jobTitle = jobTitle
         
         user.languagePreference = GetLanguage(language)
         user.externalDataReference = externalDataReference
         user.designation = GetDesignation(designation_code)
-        user.subDomain = GetSubDomain(sub_category_code)
         user.locationPolygon = GetLocationPolygon(locationPolygons)
         user.urbanRural = GetUrbanRural(urbanRural)
         user.province = GetProvineAcronym(province)
         user.dateFounded = GetDate(registration_date)
         user.size = GetSize(fte+pte+volunteers)
-        
+
         user.save()   
                 
 

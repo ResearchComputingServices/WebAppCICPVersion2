@@ -77,16 +77,16 @@ class UserTable(models.Model):
     province = models.CharField(max_length=2)   # BC,AB,SK,MB,ON,QC,NB,NS,NL,PI,YK,NV,NW
     size = models.CharField(max_length=2)       # SM, MD, LG
     languagePreference = models.CharField(max_length=2)   # EN, FR, BI
-
     designation = models.CharField(max_length=3) # A = Public (pub), B = Private (prv), C = Charitable (chr)
-    domain = models.TextField(max_length=256)
-    subDomain = models.CharField(max_length=30)
-    dateFounded = models.DateField(null=True, blank=True)
-    subSample = models.TextField(max_length=256)
-
     locationPolygon = models.CharField(max_length=16)
-    jobTitle = models.CharField(max_length=50)
     urbanRural = models.CharField(max_length=2) # UR/RL
+
+    dateFounded = models.DateField(null=True, blank=True)
+
+    domain = models.TextField()
+    subDomain = models.TextField()
+    subSample = models.TextField()
+    jobTitle = models.TextField()
 
     def __str__(self):
          return f"User: \n id: {self.id}\n ref#: {self.externalDataReference}\n prv: {self.province}\n sz: {self.size}\n lng: {self.languagePreference}"
