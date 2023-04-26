@@ -50,7 +50,7 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'LocationAccuracy',
                                 'Consent']
 
-GRAPHIC_FILE_TYPE = 'png'
+GRAPHIC_FILE_TYPE = 'svg'
 GRAPHIC_FILE_SUFFIX = '.'+GRAPHIC_FILE_TYPE
 
 ##################################################################################################################################
