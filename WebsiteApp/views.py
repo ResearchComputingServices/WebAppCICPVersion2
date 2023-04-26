@@ -67,13 +67,19 @@ def report_results_EN(request):
         return render(request, 'index.html', context)
 
     else:
+
         form_filter = FilterForm()
         friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
         friday_text_date = get_fri_textdate(friday_date,lang=get_language())
         wednesday_date = get_wed_date(friday_date,lang=get_language())
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_date}
         front_end_query = FrontEndQuery()
-        front_end_query.date = str(get_fridaydate_from_todays_date(datetime.now()))
+
+
+        date_requested = str(get_fridaydate_from_todays_date(datetime.now()))
+        date_string = get_wed_date(date_requested, get_language())
+        date = str(datetime.strptime(date_string, "%d %B, %Y").date())
+        front_end_query.date = date
       
         if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
