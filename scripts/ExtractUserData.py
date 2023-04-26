@@ -211,7 +211,7 @@ def run(*args):
                
         user = UserTable()
         
-        user.domain = "" # GetDomain(category_code)
+        user.domain = GetDomain(category_code)
         user.subSample = "" # GetSubsample(subSample)
         user.jobTitle = "" # jobTitle
         
