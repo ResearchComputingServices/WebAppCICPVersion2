@@ -94,6 +94,7 @@ div {
     max-height: 400px;
     width: 100%;
     border-style: double;
+    object-fit: contain;
 
 }
 
@@ -286,7 +287,7 @@ div {
 
     }
 
-    .row {
+    .images .row {
         display: inline-flex;
         padding: 1%;
         margin-left: 10%
@@ -294,6 +295,7 @@ div {
 
     .column {
         flex: 1 1 50%;
+        margin-bottom: 2rem;
         /* width: 100%; */
     }
 
