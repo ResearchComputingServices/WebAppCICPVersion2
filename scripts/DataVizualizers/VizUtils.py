@@ -236,7 +236,6 @@ def SplitText(inputText, maxLength = 10000):
 
     return textList
 
-
 def Translate(inputText, srcCode, destCode):
     
     outputText = ''

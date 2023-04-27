@@ -111,7 +111,8 @@ def ExtractTextQuestionResponse(question, userResponsesList):
                 continue
             
             userResponse = GetUserResponse(user, question)
-            userResponse.answerText = responseValue
+            userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+            userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             userResponse.save()
         
 ##################################################################################################################################
@@ -138,7 +139,8 @@ def ExtractMultipleChoiceQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                            
             if "TEXT" in responseKey:
-                userResponse.answerText = responseValue
+                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')    
             else:
                 userResponse.answerValue = responseValue
 
@@ -168,7 +170,8 @@ def ExtractSliderQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                          
             if "TEXT" in responseKey:
-                userResponse.answerText = responseValue
+                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')    
             else:
                 userResponse.answerValue = responseValue
                 
@@ -207,7 +210,8 @@ def ExtractMatrixQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                         
             if "TEXT" in responseKey:
-                userResponse.answerText = responseValue
+                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             else:
                 userResponse.answerValue = responseValue
                 
@@ -233,7 +237,8 @@ def ExtractTextGraphicQuestionResponse(question, userResponsesList):
                 continue
             
             userResponse = GetUserResponse(user, question)
-            userResponse.answerText = responseValue
+            userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+            userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             userResponse.save()
                    
 ##################################################################################################################################
@@ -260,7 +265,8 @@ def ExtractRankOrderQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                         
             if "TEXT" in responseKey:
-                userResponse.answerText = responseValue
+                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             else:
                 userResponse.answerValue = responseValue
             userResponse.save()       
