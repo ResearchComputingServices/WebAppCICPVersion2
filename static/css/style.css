@@ -302,8 +302,8 @@ div {
     .images img {
         margin-bottom: 2rem;
         margin-left: 1rem;
-        max-width: 80%;
-        max-height: 400px;
+        max-width: 500px;
+        max-height: 500px;
     }
 
     .overlay-content {
