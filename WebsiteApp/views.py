@@ -38,8 +38,8 @@ def report_results_EN(request):
 
         else:
             
-            wednesday_date = get_wed_date(date,lang=get_language())
-            friday_text_date = get_fri_textdate(date,lang=get_language())
+            wednesday_date = get_wed_date(date_requested,lang=get_language())
+            friday_text_date = get_fri_textdate(date_requested,lang=get_language())
 
             context['wednesday_date'] = wednesday_date
             context['friday_text_date'] = friday_text_date

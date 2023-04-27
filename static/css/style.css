@@ -265,6 +265,11 @@ div {
 @media (min-width: 1201px) {
 
     /* Example CSS rules for extra large devices */
+
+    .navbar-nav {
+        margin-left: 15%;
+    }
+
     .sidebar-toggle {
         display: none;
     }
@@ -275,7 +280,7 @@ div {
 
     .sidebar {
         width: 22%;
-        margin-right: 80%;
+        /* margin-right: 80%; */
         float: left;
         display: flex;
 
@@ -288,8 +293,8 @@ div {
     }
 
     .column {
-        flex: 50%;
-        width: 100%;
+        flex: 1 1 50%;
+        /* width: 100%; */
     }
 
     .images img {
@@ -298,6 +303,7 @@ div {
         height: 100%;
         max-width: 100%;
         max-height: 100%;
+        object-fit: cover;
     }
 
     .overlay-content {
