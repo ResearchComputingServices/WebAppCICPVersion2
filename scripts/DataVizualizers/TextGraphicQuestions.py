@@ -15,7 +15,13 @@ def VisualizeTextGraphicQuestion(   question,
     # Get text for wordcloud generation 
     allResponseText = ''
     for response in userResponses:
-        responseText = response.answerText
+        
+        responseText = ''
+        if isEnglish:
+            responseText = response.answerTextEnglish
+        else:
+            responseText = response.answerTextFrench
+        
         if responseText != None and responseText != '' and not responseText.isnumeric() :
             allResponseText += ' ' + responseText
 

@@ -1,6 +1,11 @@
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
 from WebAppCICPVersion2 import settings
 
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import nltk
+from googletrans import Translator
+
 from dataclasses import dataclass, field
 from typing import List
 import re 
@@ -327,6 +332,16 @@ def GetUser(externalRefNum, VERBOSE = False):
         ##########################################################
     
     return user
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+def Translate(inputText, srcCode, destCode):
+             
+    translator = Translator()
+    outputText = translator.translate(inputText,src=srcCode,dest=destCode)
+    
+    return outputText.text
 
 ##################################################################################################################################
 # 
