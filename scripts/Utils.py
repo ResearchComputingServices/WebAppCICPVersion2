@@ -1,6 +1,11 @@
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
 from WebAppCICPVersion2 import settings
 
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+import nltk
+from googletrans import Translator
+
 from dataclasses import dataclass, field
 from typing import List
 import re 
@@ -50,7 +55,7 @@ RESPONSE_KEYS_TO_REMOVE_LIST = ['ResponseID',
                                 'LocationAccuracy',
                                 'Consent']
 
-GRAPHIC_FILE_TYPE = 'png'
+GRAPHIC_FILE_TYPE = 'svg'
 GRAPHIC_FILE_SUFFIX = '.'+GRAPHIC_FILE_TYPE
 
 ##################################################################################################################################
@@ -70,8 +75,8 @@ FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regu
 
 TMP_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'tmpImages')
 
-#DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
-DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'media')
+DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
+#DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'media')
 
 WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
 
@@ -164,7 +169,6 @@ class FrontEndQuery:
         if (len(self.questionThemes) == 0 and 
             len(self.locations) == 0 and 
             len(self.organizationSizes) == 0 and
-            len(self.languagePreference) == 0 and
             len(self.fieldOfWork) == 0 and
             self.qualtricsSurveyID == ''):
                 isDateOnly = True
@@ -306,16 +310,38 @@ def GetSurvey(qualtricSurveyID):
 ##################################################################################################################################
 # 
 ##################################################################################################################################
-def GetUser(externalRefNum):
+def GetUser(externalRefNum, VERBOSE = False):
     
     userQuerySet = UserTable.objects.filter(externalDataReference=externalRefNum)
     user = None
     if len(userQuerySet) == 1:
         user = userQuerySet.first()      
     else:    
-        print('[ERROR]: GetUser: No User found with:', externalRefNum)
-
+        if VERBOSE:
+            print('[ERROR]: GetUser: No User found with:', externalRefNum)
+        ##########################################################
+        # Remove this could after development
+        # replace it with code to handle a user doesnt exist
+        user = UserTable()
+        user.externalDataReference = externalRefNum
+        user.province = 'AB'
+        user.size = 'SM'
+        user.domain = ''
+        user.languagePreference = 'EN'
+        user.save()
+        ##########################################################
+    
     return user
+
+##################################################################################################################################
+# 
+##################################################################################################################################
+def Translate(inputText, srcCode, destCode):
+             
+    translator = Translator()
+    outputText = translator.translate(inputText,src=srcCode,dest=destCode)
+    
+    return outputText.text
 
 ##################################################################################################################################
 # 

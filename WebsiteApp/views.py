@@ -7,43 +7,43 @@ from datetime import datetime, timedelta
 
 # Create your views here.
 def report_results_EN(request):
-
-    
+   
 
     if request.GET:
+        
         form_filter = FilterForm(request.GET)
        
         context = {'form_filter' : form_filter}
 
         date = request.GET.get('report_date', None)
+        
         if date is None:
             date = str(datetime.now().date())
+
         else:
-            date = (request.GET['report_date'])
-        location = (request.GET.getlist('province'))
-        question_theme = (request.GET.getlist('theme'))
-        # language_preference = request.GET.getlist('language')
-        language_preference = get_language()
-        organization_size = (request.GET.getlist('size'))
+            date_requested = request.GET['report_date']
+            get_wed_fetch_images_date= str(get_wed_date(date_requested, get_language()))
 
-        print(context)
+            location = (request.GET.getlist('province'))
+            question_theme = (request.GET.getlist('theme'))
+            language_preference = request.GET.getlist('language')
+            organization_size = (request.GET.getlist('size'))
 
-
-        if date == "2022-12-23" or date == "2022-12-30" :
+        if date_requested == "2022-12-23" or date_requested == "2022-12-30" :
             info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
             context['info'] = info
 
         else:
             
-            wednesday_date = get_wed_date(date,lang=get_language())
-            friday_text_date = get_fri_textdate(date,lang=get_language())
+            wednesday_date = get_wed_date(date_requested,lang=get_language())
+            friday_text_date = get_fri_textdate(date_requested,lang=get_language())
 
             context['wednesday_date'] = wednesday_date
             context['friday_text_date'] = friday_text_date
 
             front_end_query = FrontEndQuery()
 
-            front_end_query.date = date
+            front_end_query.date = get_wed_fetch_images_date
             front_end_query.locations = location
             front_end_query.questionThemes = question_theme
             front_end_query.languagePreference = language_preference
@@ -64,13 +64,17 @@ def report_results_EN(request):
         return render(request, 'index.html', context)
 
     else:
+
         form_filter = FilterForm()
         friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
         friday_text_date = get_fri_textdate(friday_date,lang=get_language())
         wednesday_date = get_wed_date(friday_date,lang=get_language())
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_date}
         front_end_query = FrontEndQuery()
-        front_end_query.date = str(get_fridaydate_from_todays_date(datetime.now()))
+
+
+        wed_fetch_images_date = str(get_wed_date(friday_date, get_language()))
+        front_end_query.date = wed_fetch_images_date
       
         if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
@@ -97,7 +101,6 @@ def get_wed_date(fri_date,lang):
         wednesday_fr = datetime.strptime(wednesday_fr,"%d %B, %Y")
         return(wednesday_fr.date())
     else:
-        print(lang)
         wednesday = wednesday.strftime("%d %B, %Y")
         
         return(wednesday)
@@ -109,7 +112,10 @@ def get_fri_textdate(fri_date,lang):
     
     if lang == "fr":
         friday_fr = fri_date.strftime("%b %d, %Y")
+        print("strftime",friday_fr)
         friday_fr = datetime.strptime(friday_fr, "%b %d, %Y")
+        print("strptime",friday_fr)
+        print("strptime.date()",friday_fr.date())
         return (friday_fr.date())
     else:
         friday = fri_date.strftime("%d %B, %Y")

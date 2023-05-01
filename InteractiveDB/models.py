@@ -77,16 +77,16 @@ class UserTable(models.Model):
     province = models.CharField(max_length=2)   # BC,AB,SK,MB,ON,QC,NB,NS,NL,PI,YK,NV,NW
     size = models.CharField(max_length=2)       # SM, MD, LG
     languagePreference = models.CharField(max_length=2)   # EN, FR, BI
-
     designation = models.CharField(max_length=3) # A = Public (pub), B = Private (prv), C = Charitable (chr)
-    domain = models.CharField(max_length=30)
-    subDomain = models.CharField(max_length=30)
-    dateFounded = models.DateField(null=True, blank=True)
-    subSample = models.CharField(max_length=64)
-
     locationPolygon = models.CharField(max_length=16)
-    jobTitle = models.CharField(max_length=50)
     urbanRural = models.CharField(max_length=2) # UR/RL
+
+    dateFounded = models.DateField(null=True, blank=True)
+
+    domain = models.TextField()
+    subDomain = models.TextField()
+    subSample = models.TextField()
+    jobTitle = models.TextField()
 
     def __str__(self):
          return f"User: \n id: {self.id}\n ref#: {self.externalDataReference}\n prv: {self.province}\n sz: {self.size}\n lng: {self.languagePreference}"
@@ -104,7 +104,9 @@ class UserResponseTable(models.Model):
     choiceID = models.ForeignKey(ChoiceTable, on_delete=models.CASCADE,null=True,blank=True)
     
     # Fields/Attributes
-    answerText = models.TextField(null=True)
+    answerTextEnglish = models.TextField(null=True)
+    answerTextFrench = models.TextField(null=True)
+    
     answerValue = models.TextField(null=True)
     
     def __str__(self):
@@ -112,7 +114,7 @@ class UserResponseTable(models.Model):
         if self.choiceID != None:
             recode = self.choiceID.recode
             
-        return f"UserResponse: \nuserID: {self.userID.id} \nquestionID: {self.questionID.id} \nrecode: {recode} \nanswerText: {self.answerText} \nanswerValue: {self.answerValue}" 
+        return f"UserResponse: \nuserID: {self.userID.id} \nquestionID: {self.questionID.id} \nrecode: {recode} \nanswerText: {self.answerTextEnglish} \nanswerValue: {self.answerValue}" 
 
     # this function returns a dictionary which will be entered into the data file sent to the front end
     # the key:value pair is columnHeader:entry        
@@ -122,7 +124,8 @@ class UserResponseTable(models.Model):
         userSize = self.userID.size
         userDomain = self.userID.domain
         userLang = self.userID.languagePreference
-        responseText = self.answerText
+        responseTextEnglish = self.answerTextEnglish
+        responseTextFrench = self.answerTextFrench
         responseValue = self.answerValue
         
         choiceRecode = '-1'
@@ -137,7 +140,8 @@ class UserResponseTable(models.Model):
                             'userLang' : userLang,
                             'choiceRecode' : choiceRecode,
                             'choiceText' : choiceText,
-                            'responseText' : responseText,
+                            'responseTextEnglish' : responseTextEnglish,
+                            'responseTextFrench' : responseTextFrench,
                             'responseValue' : responseValue                       
                         }, index=[0])
 

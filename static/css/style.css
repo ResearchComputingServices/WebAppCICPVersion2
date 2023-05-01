@@ -77,9 +77,10 @@
 .main-content {
     display: flex;
     flex-wrap: wrap;
-    width: 80%;
+    width: 90%;
     padding: 10px;
     float: right;
+    margin: 0 auto;
 }
 
 div {
@@ -92,6 +93,8 @@ div {
     height: auto;
     max-height: 400px;
     width: 100%;
+    border-style: double;
+    object-fit: contain;
 
 }
 
@@ -263,6 +266,11 @@ div {
 @media (min-width: 1201px) {
 
     /* Example CSS rules for extra large devices */
+
+    .navbar-nav {
+        margin-left: 15%;
+    }
+
     .sidebar-toggle {
         display: none;
     }
@@ -273,28 +281,29 @@ div {
 
     .sidebar {
         width: 22%;
-        margin: 0;
+        /* margin-right: 80%; */
         float: left;
         display: flex;
 
     }
 
-    .row {
-        display: flex;
+    .images .row {
+        display: inline-flex;
         padding: 1%;
-        margin-left: 10%
+        margin-left: 20%
     }
 
     .column {
-        flex: 50%;
-        width: 100%;
+        flex: 1 1 50%;
+        margin-bottom: 2rem;
+        /* width: 100%; */
     }
 
     .images img {
-        margin-bottom: 1rem;
-        height: 100%;
-        max-width: 100%;
-        max-height: 100%;
+        margin-bottom: 2rem;
+        margin-left: 1rem;
+        max-width: 500px;
+        max-height: 500px;
     }
 
     .overlay-content {
@@ -319,7 +328,7 @@ div {
         height: 20vh;
     }
 
-    #heading {
+    #heading h4 {
         margin-left: 20%;
     }
 }

@@ -2,6 +2,7 @@ import os
 import uuid
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
+import nltk
 from googletrans import Translator
 
 from scripts.Utils import *
@@ -235,7 +236,6 @@ def SplitText(inputText, maxLength = 10000):
 
     return textList
 
-
 def Translate(inputText, srcCode, destCode):
     
     outputText = ''
@@ -244,8 +244,9 @@ def Translate(inputText, srcCode, destCode):
  
     # There is a limit of 15k characters at a time so longer blocks of text will need to be split up
     textList = []
+    
     if len(inputText) > 15000: 
-        SplitText(inputText)
+        textList = SplitText(inputText)
     else:
         textList.append(inputText)
  
@@ -261,13 +262,18 @@ def Translate(inputText, srcCode, destCode):
 ##################################################################################################################################
 
 def GetTextForWordCloud(responseText, destCode):
+       
+    resultingText = ''
     
     srcCode = 'en'
     if destCode == 'en':
         srcCode = 'fr'
     
-    translatedText = Translate(responseText, srcCode, destCode)   
-
-    stopwordsFiltered = RemoveStopWords(translatedText) 
-    resultingText = ' '.join(stopwordsFiltered)
+    if len(responseText) != 0:
+        translatedText = Translate(responseText, srcCode, destCode)   
+        stopwordsFiltered = RemoveStopWords(translatedText) 
+        resultingText = ' '.join(stopwordsFiltered)
+    else:
+        print('[ERROR]: GetTextForWordCloud: responseText empty.')
+    
     return resultingText
