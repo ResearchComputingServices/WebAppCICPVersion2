@@ -77,7 +77,7 @@ def report_results_EN(request):
 
 
         date_requested = str(get_fridaydate_from_todays_date(datetime.now()))
-        date_string = get_wed_date(date_requested, get_language())
+        date_string = str(get_wed_date(date_requested, get_language()))
         date = str(datetime.strptime(date_string, "%d %B, %Y").date())
         front_end_query.date = date
       
