@@ -160,9 +160,11 @@ msgstr "Essayer à nouveau"
 msgid "Insufficient survey data, try relaxing search constraints"
 msgstr "Données d'enquête insuffisantes, essayez d'assouplir les contraintes de recherche"
 
+#: .\WebsiteApp\templates\index.html:75
 msgid "Insufficient question data, try relaxing search constraints"
 msgstr "Données de question insuffisantes, essayez d'assouplir les contraintes de recherche"
 
+#: .\WebsiteApp\templates\index.html:75
 msgid "Insufficient question data"
 msgstr "Données de question insuffisantes"
 
