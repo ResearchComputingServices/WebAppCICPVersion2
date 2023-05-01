@@ -36,6 +36,7 @@ def report_results_EN(request):
             # Input - Friday Date selected by the user
             # Output - Wednesday date that matches the folder created in Media
             user_response_images_wed_date = str(get_wed_date(user_requested_friday_date))
+            print("user_response_images_wed_date",user_response_images_wed_date)
 
             location = (request.GET.getlist('province'))
             question_theme = (request.GET.getlist('theme'))
@@ -51,7 +52,9 @@ def report_results_EN(request):
 
             # Get the textdates to display in the frontend based on English and French selection
             wednesday_text_date = textdate(str(user_response_images_wed_date),lang=get_language())
+            print("wednesday_text_date",wednesday_text_date)
             friday_text_date = textdate(str(user_requested_friday_date),lang=get_language())
+            print("friday_text_date",friday_text_date)
 
 
             # Pass the dates in text format to the frontend
@@ -89,18 +92,20 @@ def report_results_EN(request):
 
         # Get the latest Friday date from today
         default_this_week_friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
+        print("default_this_week_friday_date",default_this_week_friday_date)
 
         # Format the date from Y%-%m-%d to respective english and french formats in text
         friday_text_date = textdate(str(default_this_week_friday_date),lang=get_language())
-
+        print("friday_text_date inside else",friday_text_date)
 
         # Get the wednesday date to search in the media folder and display on the frontend
         # based on the Friday date
         wednesday_date = get_wed_date(default_this_week_friday_date)
+        print("wednesday_date inside else",wednesday_date)
 
         # Format the date from Y%-%m-%d to respective english and french formats in text
         wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
-
+        print("wednesday_text_date inside else", wednesday_text_date)
 
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
         front_end_query = FrontEndQuery()
@@ -128,9 +133,9 @@ def get_wed_date(fri_date):
     wed_date = fri_date + \
                 timedelta(days = -2)
     
-    print("Inside get_wed_date func",wed_date)
-    print("type of wed_date",type(wed_date))
-    return wed_date
+    print("Inside get_wed_date func",wed_date.date())
+    print("type of wed_date",type(wed_date.date()))
+    return wed_date.date()
 
 # Converts the Date from %Y-%m-%d to Month Date, Year
 def textdate(date,lang):
