@@ -35,7 +35,7 @@ def report_results_EN(request):
             # Type - str 
             # Input - Friday Date selected by the user
             # Output - Wednesday date that matches the folder created in Media
-            user_response_images_wed_date = str(get_wed_date(user_requested_friday_date))
+            user_response_images_wed_date = get_wed_date(user_requested_friday_date)
             print("user_response_images_wed_date",user_response_images_wed_date)
 
             location = (request.GET.getlist('province'))
@@ -63,7 +63,7 @@ def report_results_EN(request):
 
             front_end_query = FrontEndQuery()
 
-            front_end_query.date = user_response_images_wed_date
+            front_end_query.date = str(user_response_images_wed_date)
             front_end_query.locations = location
             front_end_query.questionThemes = question_theme
             front_end_query.languagePreference = language_preference
@@ -112,7 +112,7 @@ def report_results_EN(request):
 
 
         # Pass the wednesday date to select the images from media folder
-        front_end_query.date = wednesday_date
+        front_end_query.date = str(wednesday_date)
       
         if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)                
