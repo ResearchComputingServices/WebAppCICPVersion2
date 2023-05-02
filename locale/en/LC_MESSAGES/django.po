@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-04-25 08:57-0400\n"
+"POT-Creation-Date: 2023-05-01 13:44-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -158,6 +158,14 @@ msgstr "Try Again"
 #: .\WebsiteApp\templates\index.html:75
 msgid "Insufficient survey data, try relaxing search constraints"
 msgstr "Insufficient survey data, try relaxing search constraints"
+
+#: .\WebsiteApp\templates\index.html:75
+msgid "Insufficient question data, try relaxing search constraints"
+msgstr "Insufficient question data, try relaxing search constraints"
+
+#: .\WebsiteApp\templates\index.html:75
+msgid "Insufficient question data"
+msgstr "Insufficient question data"
 
 #: .\WebsiteApp\templates\navbar.html:36
 msgid "Report Results"

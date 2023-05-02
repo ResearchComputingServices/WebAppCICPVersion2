@@ -15,11 +15,22 @@ def report_results_EN(request):
         form_filter = FilterForm(request.GET)      
         context = {'form_filter' : form_filter}
 
+<<<<<<< HEAD
         # Get the date and handle the case where no date is specified by the user
         date = request.GET.get('report_date', None)
+=======
+
+        # Date Format - Y%-%m-%d
+        # Type - str
+        date = request.GET.get('report_date', None)
+        
+        
+>>>>>>> main
         if date is None:
             date = str(datetime.now().date())
+
         else:
+<<<<<<< HEAD
             date_requested = request.GET['report_date']
             date_string = get_wed_date(date_requested, get_language())
             date = str(datetime.strptime(date_string, "%d %B, %Y").date())
@@ -30,23 +41,57 @@ def report_results_EN(request):
         language_preference = request.GET.getlist('language')
         organization_size = (request.GET.getlist('size'))
         site_language = get_language()
+=======
+>>>>>>> main
 
-        print(context)
+            # Date Format - Y%-%m-%d
+            # Type - str 
+            # Input - Friday Date selected by the user
+            user_requested_friday_date = request.GET['report_date']
 
+<<<<<<< HEAD
         # Handle case where the specified date is in Special Date.
         if date in SPECIAL_DATE:
             info = gettext("🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
+=======
+            # Date Format - Y%-%m-%d
+            # Type - str 
+            # Input - Friday Date selected by the user
+            # Output - Wednesday date that matches the folder created in Media
+            user_response_images_wed_date = get_wed_date(user_requested_friday_date)
+            print("user_response_images_wed_date",user_response_images_wed_date)
+
+            location = (request.GET.getlist('province'))
+            question_theme = (request.GET.getlist('theme'))
+            language_preference = request.GET.getlist('language')
+            organization_size = (request.GET.getlist('size'))
+
+        if user_requested_friday_date == "2022-12-23" or user_requested_friday_date == "2022-12-30" :
+            info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
+>>>>>>> main
             context['info'] = info
         else:
+<<<<<<< HEAD
             wednesday_date = get_wed_date(date_requested,lang=get_language())
             friday_text_date = get_fri_textdate(date_requested,lang=get_language())
+=======
+            
+>>>>>>> main
 
-            context['wednesday_date'] = wednesday_date
+            # Get the textdates to display in the frontend based on English and French selection
+            wednesday_text_date = textdate(str(user_response_images_wed_date),lang=get_language())
+            print("wednesday_text_date",wednesday_text_date)
+            friday_text_date = textdate(str(user_requested_friday_date),lang=get_language())
+            print("friday_text_date",friday_text_date)
+
+
+            # Pass the dates in text format to the frontend
+            context['wednesday_date'] = wednesday_text_date
             context['friday_text_date'] = friday_text_date
 
             front_end_query = FrontEndQuery()
 
-            front_end_query.date = date
+            front_end_query.date = str(user_response_images_wed_date)
             front_end_query.locations = location
             front_end_query.questionThemes = question_theme
             front_end_query.languagePreference = language_preference
@@ -71,22 +116,44 @@ def report_results_EN(request):
     else:
 
         form_filter = FilterForm()
-        friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
-        friday_text_date = get_fri_textdate(friday_date,lang=get_language())
-        wednesday_date = get_wed_date(friday_date,lang=get_language())
-        context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_date}
+
+        
+        # For default selection and display of latest report
+
+        # Get the latest Friday date from today
+        default_this_week_friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
+        print("default_this_week_friday_date",default_this_week_friday_date)
+
+        # Format the date from Y%-%m-%d to respective english and french formats in text
+        friday_text_date = textdate(str(default_this_week_friday_date),lang=get_language())
+        print("friday_text_date inside else",friday_text_date)
+
+        # Get the wednesday date to search in the media folder and display on the frontend
+        # based on the Friday date
+        wednesday_date = get_wed_date(default_this_week_friday_date)
+        print("wednesday_date inside else",wednesday_date)
+
+        # Format the date from Y%-%m-%d to respective english and french formats in text
+        wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
+        print("wednesday_text_date inside else", wednesday_text_date)
+
+        context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
         front_end_query = FrontEndQuery()
 
+<<<<<<< HEAD
         date_requested = str(get_fridaydate_from_todays_date(datetime.now()))
         date_string = get_wed_date(date_requested, get_language())
         print(type(date_string))
         date = datetime.strptime(date_string, "%d %B, %Y").date()
         front_end_query.date = str(date)
+=======
+
+        # Pass the wednesday date to select the images from media folder
+        front_end_query.date = str(wednesday_date)
+>>>>>>> main
       
         if front_end_query:
-                query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
-                print(query_response_imagefilepaths)
-                
+                query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)                
 
                 if len(errors) != 0:
                     context["errors"] = errors
@@ -99,37 +166,41 @@ def report_results_EN(request):
     
 ##################################################################################################################################
 # Calculates Wednesday based on Friday date
-def get_wed_date(fri_date,lang):
+def get_wed_date(fri_date):
     fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
-    wednesday = fri_date + \
+    wed_date = fri_date + \
                 timedelta(days = -2)
-    if lang == "fr":
-        wednesday_fr = wednesday.strftime("%d %B, %Y")
-        wednesday_fr = datetime.strptime(wednesday_fr,"%d %B, %Y")
-        return(wednesday_fr.date())
-    else:
-        print(lang)
-        wednesday = wednesday.strftime("%d %B, %Y")
-        
-        return(wednesday)
+    
+    print("Inside get_wed_date func",wed_date.date())
+    print("type of wed_date",type(wed_date.date()))
+    return wed_date.date()
 
+<<<<<<< HEAD
 ##################################################################################################################################
 # Converts the Friday Date from %Y-%m-%d to Month Date, Year
 def get_fri_textdate(fri_date,lang):
+=======
+# Converts the Date from %Y-%m-%d to Month Date, Year
+def textdate(date,lang):
+>>>>>>> main
 
-    fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
+    date = datetime.strptime(date, '%Y-%m-%d')
     
     if lang == "fr":
-        friday_fr = fri_date.strftime("%b %d, %Y")
-        friday_fr = datetime.strptime(friday_fr, "%b %d, %Y")
-        return (friday_fr.date())
+        fr_date_text = date.strftime("%b %d, %Y")
+        print("Inside textdate fr_date_text",fr_date_text)
+        return fr_date_text
+       
     else:
-        friday = fri_date.strftime("%d %B, %Y")
-        return friday
+        en_date_text = date.strftime("%d %B, %Y")
+        print("Inside textdate en_date_text",en_date_text)
+        return en_date_text
 
 ##################################################################################################################################
 # Fetching the Friday date based on user input date
 def get_fridaydate_from_todays_date(todays_date):
+        
+
 # Using current time
         week_day = todays_date.weekday()
 
