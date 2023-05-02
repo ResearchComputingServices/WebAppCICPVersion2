@@ -1,43 +1,43 @@
 from django.shortcuts import render
 from .forms import FilterForm
-from scripts.Utils import FrontEndQuery
+from scripts.Utils import *
 from scripts.Controller import HandleFrontEndQuery
 from django.utils.translation import gettext,get_language
 from datetime import datetime, timedelta
 
+##################################################################################################################################
 # Create your views here.
 def report_results_EN(request):
    
-
+    # handle the case where the user has specified front end query options
     if request.GET:
         
-        form_filter = FilterForm(request.GET)
-       
+        form_filter = FilterForm(request.GET)      
         context = {'form_filter' : form_filter}
 
+        # Get the date and handle the case where no date is specified by the user
         date = request.GET.get('report_date', None)
-        
         if date is None:
             date = str(datetime.now().date())
         else:
             date_requested = request.GET['report_date']
             date_string = get_wed_date(date_requested, get_language())
             date = str(datetime.strptime(date_string, "%d %B, %Y").date())
-            
+        
+        # Get the remainder of the the query requirements
         location = (request.GET.getlist('province'))
         question_theme = (request.GET.getlist('theme'))
         language_preference = request.GET.getlist('language')
-        #language_preference = get_language()
         organization_size = (request.GET.getlist('size'))
+        site_language = get_language()
 
         print(context)
 
-        if date == "2022-12-23" or date == "2022-12-30" :
-            info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
+        # Handle case where the specified date is in Special Date.
+        if date in SPECIAL_DATE:
+            info = gettext("🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
             context['info'] = info
-
         else:
-            
             wednesday_date = get_wed_date(date_requested,lang=get_language())
             friday_text_date = get_fri_textdate(date_requested,lang=get_language())
 
@@ -52,6 +52,7 @@ def report_results_EN(request):
             front_end_query.languagePreference = language_preference
             front_end_query.organizationSizes = organization_size
             front_end_query.qualtricsSurveyID = ''
+            front_end_query.siteLanguage = site_language
             
             if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
@@ -66,6 +67,7 @@ def report_results_EN(request):
 
         return render(request, 'index.html', context)
 
+    # This handles the case where we need to display the default pages
     else:
 
         form_filter = FilterForm()
@@ -75,11 +77,11 @@ def report_results_EN(request):
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_date}
         front_end_query = FrontEndQuery()
 
-
         date_requested = str(get_fridaydate_from_todays_date(datetime.now()))
         date_string = get_wed_date(date_requested, get_language())
-        date = str(datetime.strptime(date_string, "%d %B, %Y").date())
-        front_end_query.date = date
+        print(type(date_string))
+        date = datetime.strptime(date_string, "%d %B, %Y").date()
+        front_end_query.date = str(date)
       
         if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
@@ -95,7 +97,7 @@ def report_results_EN(request):
        
         return render(request, 'index.html', context)
     
-
+##################################################################################################################################
 # Calculates Wednesday based on Friday date
 def get_wed_date(fri_date,lang):
     fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
@@ -111,6 +113,7 @@ def get_wed_date(fri_date,lang):
         
         return(wednesday)
 
+##################################################################################################################################
 # Converts the Friday Date from %Y-%m-%d to Month Date, Year
 def get_fri_textdate(fri_date,lang):
 
@@ -124,7 +127,7 @@ def get_fri_textdate(fri_date,lang):
         friday = fri_date.strftime("%d %B, %Y")
         return friday
 
-
+##################################################################################################################################
 # Fetching the Friday date based on user input date
 def get_fridaydate_from_todays_date(todays_date):
 # Using current time

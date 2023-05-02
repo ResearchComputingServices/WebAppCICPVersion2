@@ -253,8 +253,11 @@ def CreateHorizontalBarChart(   responseDict,
     responseDict_sorted = sorted(responseDict.items(), key=lambda x:x[1])
     responseDict_sorted.reverse()
     for item in responseDict_sorted:
-        names.append(fill(item[0],20))
-        values.append(round(float(item[1]),1))
+        name = item[0]
+        value = item[1]
+                
+        names.append(WrapText(name,20))
+        values.append(round(float(value),1))
 
     colourMap = DetermineBarColours(values) 
     

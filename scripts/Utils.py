@@ -75,11 +75,15 @@ FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regu
 
 TMP_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'tmpImages')
 
-DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
-#DEFAULT_FIGURE_FOLDER_PATH = os.path.join(settings.BASE_DIR, 'media')
+#DEFAULT_FIGURE_FOLDER_PATH_BASE = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
+DEFAULT_FIGURE_FOLDER_PATH_BASE = os.path.join(settings.BASE_DIR, 'media')
+DEFAULT_FIGURE_FOLDER_PATH_FRENCH = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_BASE, 'FR')
+DEFAULT_FIGURE_FOLDER_PATH_ENGLISH = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_BASE, 'EN')
 
 WATERMARK_IMAGE_FILE_PATH = os.path.join(settings.BASE_DIR, 'WaterMark','CICP_WaterMark.png')
 
+FRENCH = 'fr'
+ENGLISH = 'en'
 
 USER_DESIGNATION_DICT = {'A' : 'pub', 'B' : 'prv', 'C' : 'chr'}
 
@@ -137,6 +141,7 @@ USER_SUB_SAMPLE_IDS = [ 'SS1',
                         
                         ]
 
+SPECIAL_DATE = ["2022-12-23", "2022-12-30"]
 
 ##################################################################################################################################
 # This dataClass contains all the values which the user wants to filter on
@@ -161,7 +166,9 @@ class FrontEndQuery:
     organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
     fieldOfWork: List = field(default_factory=lambda: [])       
-                
+
+    siteLanguage: str = ''
+    
     def IsDateOnly(self):
         
         isDateOnly = False
@@ -196,32 +203,30 @@ def Local2URLMedia(listLocal):
 
 
 def CleanText(text):
+
     cleanedText = text
     cleanedText= cleanedText.replace("\n","")
     cleanedText = re.sub("[\[].*?[\]]", "", cleanedText)
-    #cleanedText = re.sub("[\(].*?[\)]", "", cleanedText)
     cleanedText = re.sub("[\<].*?[\>]", "", cleanedText)
     cleanedText = cleanedText.replace('&rsquo;','\'')
     cleanedText = cleanedText.replace('&lsquo;','\'')
     cleanedText = cleanedText.replace('&#39;','\'')
-        
+    
     return cleanedText
  
 ##################################################################################################################################
-# This function ensures that the string passed as an agrument is less than MAX_LEGNTH. It does this by adding a line break 
-# to the string when it exceeds the length limit.
-##################################################################################################################################
+# This function ensures that the string passed as an agrument is less than MAX_LEGNTH. It also checks to make sure the 
+# string passed as an argument exist (ie. not None) and is not empty
+# ##################################################################################################################################
 
-def WrapText(text, titleLength = MAX_TITLE_LENGTH):
+def WrapText(text, length = MAX_TITLE_LENGTH):
     
-    text = CleanText(text)
+    wrappedText = ''
     
-    tw = textwrap.TextWrapper(width=titleLength)
-    word_list = tw.wrap(text=text)
-            
-    newTitle = '<br>'.join(word_list)
+    if text != None and len(text.strip()) != 0:
+        wrappedText = fill(text, length)
     
-    return newTitle    
+    return wrappedText    
 
 ##################################################################################################################################
 # This function returns the numerical values of the max and min of the graphs range
@@ -263,12 +268,34 @@ def CreateLabels(titleText):
         # split each pair by colon
         for pair in bracketTextSplit:
             pairSplit = pair.split(':')
-            if len(pairSplit) == 2:
-                tickValues.append(float(pairSplit[0]))      
-                tickLabels.append(fill(pairSplit[1],15)) 
-            if len(pairSplit) == 3: 
-                tickValues.append(float(pairSplit[1]))      
-                tickLabels.append(fill(pairSplit[2],15)) 
+            
+            value = 1
+            label = ''
+            
+            # Todo: Create a seperate helper function that takes in either 0,1 or 1,2
+            goodLabel = True
+            if len(pairSplit) == 2: 
+                if pairSplit[0].isnumeric():
+                    value = float(pairSplit[0])
+                else:
+                    print('[WARNING]: CreateLabels: Label format error')
+                    goodLabel = False
+                
+                label = pairSplit[1]
+            elif len(pairSplit) == 3: 
+                if pairSplit[1].isnumeric():
+                    value = float(pairSplit[1])
+                else:
+                    print('[WARNING]: CreateLabels: Label format error')
+                    goodLabel = False
+                    
+                label = pairSplit[2]
+            else:
+                print('[ERROR]: CreateLabels: Unable to read label string')
+            
+            if goodLabel:
+                tickValues.append(value)      
+                tickLabels.append(WrapText(label,15)) 
 
     return tickValues, tickLabels  
   

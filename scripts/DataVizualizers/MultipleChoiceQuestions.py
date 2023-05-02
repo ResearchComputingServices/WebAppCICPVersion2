@@ -64,7 +64,6 @@ def VisualizeMultipleChoiceQuestion(question,
 ##################################################################################################################################
 #
 ##################################################################################################################################
-
 def CreatePieChart( responseDict,
                     graphicTitle,
                     numberOfResponses,
@@ -91,8 +90,8 @@ def CreatePieChart( responseDict,
         responseDict.pop(maxKey)
             
         # add the max to the list
-        if maxValue > 0.:
-            names.append(fill(maxKey,20))
+        if maxValue > 0.:                       
+            names.append(WrapText(maxKey,20))
             values.append(maxValue)
         
     if len(names) > 7:

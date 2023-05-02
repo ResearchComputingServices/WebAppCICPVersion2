@@ -179,8 +179,18 @@ def GenerateDefaultFigures(aSurvey):
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
     
     dateString =  aSurvey.releaseDate.strftime("%Y-%m-%d")
-    saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, dateString)
-       
+    
+    # Create the ENGLISH Default images
+    saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, dateString)
+    aQuery.siteLanguage = ENGLISH
+    
+    HandleFrontEndQuery(aQuery=aQuery,
+                        saveToDirPath=saveToDirPath)
+    
+    # Create the FRENCH Default images
+    saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH, dateString)
+    aQuery.siteLanguage = FRENCH   
+    
     HandleFrontEndQuery(aQuery=aQuery,
                         saveToDirPath=saveToDirPath)
         
@@ -297,7 +307,7 @@ def GetResponseDict(aQuery, VERBOSE = False):
 # 
 ##################################################################################################################################
 
-def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
+def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
      
     listOfImageFilePaths = []
     dataCSVFilePath = []
@@ -312,14 +322,24 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
     print('size',aQuery.organizationSizes)
     print('lang',aQuery.languagePreference)
     print('field',aQuery.fieldOfWork)
+    print('Site Lang:',aQuery.siteLanguage)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+    
+    # Set the language flag depending on the siteLanguage in the query
+    isEnglish = True
+    if aQuery.siteLanguage == FRENCH:
+        isEnglish = False
     
     # If only a date is specified in the query then no new images need to be generated since the default
     # images created when the survey data was pulled from the qualtrics website fullfills the request.
     if aQuery.IsDateOnly():  
         print('QueryType: Date Only Query')
 
-        folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH, aQuery.date)
+        folderPath = ''
+        if isEnglish:
+            folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, aQuery.date)
+        else:
+            folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH, aQuery.date)
         print('FolderPath:', folderPath)
 
         if os.path.exists(folderPath):
@@ -342,7 +362,7 @@ def HandleFrontEndQuery(aQuery, isEnglish = True, saveToDirPath = TMP_FIGURE_FOL
         
         if responseDict.keys() != None:
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
-            dataCSVFilePath = ""#GenerateDataFile(responseDict, saveToDirPath)
+            dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
     
     listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
     dataCSVFilePath = Local2URLMedia([dataCSVFilePath])    

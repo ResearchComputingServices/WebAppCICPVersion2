@@ -1,6 +1,6 @@
 rm db.sqlite3
 rm -r InteractiveDB/migrations/__pycache__
-rm InteractiveDB/migrations/0*
+#rm InteractiveDB/migrations/0*
 
 python3 manage.py makemigrations
 python3 manage.py migrate

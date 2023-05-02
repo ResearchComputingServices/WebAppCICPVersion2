@@ -124,7 +124,7 @@ def CreateStackedBarChart(  responseDict,
     # change subQ to have the correct names
     for subQ in responseDict.keys():
         for response in responseDict[subQ].keys():
-            df.at[subQ, 'subQ'] = fill(subQ,15)
+            df.at[subQ, 'subQ'] = WrapText(subQ,15)
     #####################################################################3   
    
     # define colours to use
