@@ -15,45 +15,20 @@ def report_results_EN(request):
         form_filter = FilterForm(request.GET)      
         context = {'form_filter' : form_filter}
 
-<<<<<<< HEAD
-        # Get the date and handle the case where no date is specified by the user
-        date = request.GET.get('report_date', None)
-=======
-
         # Date Format - Y%-%m-%d
         # Type - str
         date = request.GET.get('report_date', None)
-        
-        
->>>>>>> main
+               
         if date is None:
             date = str(datetime.now().date())
 
         else:
-<<<<<<< HEAD
-            date_requested = request.GET['report_date']
-            date_string = get_wed_date(date_requested, get_language())
-            date = str(datetime.strptime(date_string, "%d %B, %Y").date())
-        
-        # Get the remainder of the the query requirements
-        location = (request.GET.getlist('province'))
-        question_theme = (request.GET.getlist('theme'))
-        language_preference = request.GET.getlist('language')
-        organization_size = (request.GET.getlist('size'))
-        site_language = get_language()
-=======
->>>>>>> main
 
             # Date Format - Y%-%m-%d
             # Type - str 
             # Input - Friday Date selected by the user
             user_requested_friday_date = request.GET['report_date']
 
-<<<<<<< HEAD
-        # Handle case where the specified date is in Special Date.
-        if date in SPECIAL_DATE:
-            info = gettext("🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
-=======
             # Date Format - Y%-%m-%d
             # Type - str 
             # Input - Friday Date selected by the user
@@ -68,15 +43,9 @@ def report_results_EN(request):
 
         if user_requested_friday_date == "2022-12-23" or user_requested_friday_date == "2022-12-30" :
             info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
->>>>>>> main
             context['info'] = info
         else:
-<<<<<<< HEAD
-            wednesday_date = get_wed_date(date_requested,lang=get_language())
-            friday_text_date = get_fri_textdate(date_requested,lang=get_language())
-=======
             
->>>>>>> main
 
             # Get the textdates to display in the frontend based on English and French selection
             wednesday_text_date = textdate(str(user_response_images_wed_date),lang=get_language())
@@ -97,7 +66,7 @@ def report_results_EN(request):
             front_end_query.languagePreference = language_preference
             front_end_query.organizationSizes = organization_size
             front_end_query.qualtricsSurveyID = ''
-            front_end_query.siteLanguage = site_language
+            front_end_query.siteLanguage = get_language()
             
             if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
@@ -140,17 +109,9 @@ def report_results_EN(request):
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
         front_end_query = FrontEndQuery()
 
-<<<<<<< HEAD
-        date_requested = str(get_fridaydate_from_todays_date(datetime.now()))
-        date_string = get_wed_date(date_requested, get_language())
-        print(type(date_string))
-        date = datetime.strptime(date_string, "%d %B, %Y").date()
-        front_end_query.date = str(date)
-=======
 
         # Pass the wednesday date to select the images from media folder
         front_end_query.date = str(wednesday_date)
->>>>>>> main
       
         if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)                
@@ -175,14 +136,8 @@ def get_wed_date(fri_date):
     print("type of wed_date",type(wed_date.date()))
     return wed_date.date()
 
-<<<<<<< HEAD
-##################################################################################################################################
-# Converts the Friday Date from %Y-%m-%d to Month Date, Year
-def get_fri_textdate(fri_date,lang):
-=======
 # Converts the Date from %Y-%m-%d to Month Date, Year
 def textdate(date,lang):
->>>>>>> main
 
     date = datetime.strptime(date, '%Y-%m-%d')
     
