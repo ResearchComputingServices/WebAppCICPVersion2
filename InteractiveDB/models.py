@@ -104,8 +104,8 @@ class UserResponseTable(models.Model):
     choiceID = models.ForeignKey(ChoiceTable, on_delete=models.CASCADE,null=True,blank=True)
     
     # Fields/Attributes
-    answerTextEnglish = models.TextField(null=True)
-    answerTextFrench = models.TextField(null=True)
+    answerTextEnglish = models.TextField(max_length=4096,null=True)
+    answerTextFrench = models.TextField(max_length=4096,null=True)
     
     answerValue = models.TextField(null=True)
     

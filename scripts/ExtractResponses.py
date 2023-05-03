@@ -107,7 +107,7 @@ def ExtractTextQuestionResponse(question, userResponsesList):
             
             responseValue = userResponses[response]
             
-            if responseValue == '':
+            if responseValue == '' or 'none':
                 continue
             
             userResponse = GetUserResponse(user, question)
@@ -131,7 +131,7 @@ def ExtractMultipleChoiceQuestionResponse(question, userResponsesList):
         for responseKey in userResponse2CurQ:
             responseValue = userResponses[responseKey]
             
-            if responseValue == '':
+            if responseValue == '' or 'none':
                 continue
                         
             choice = GetChoiceEntity(question, responseKey, responseValue)
@@ -162,7 +162,7 @@ def ExtractSliderQuestionResponse(question, userResponsesList):
         for responseKey in userResponse2CurQ:
         
             responseValue = userResponses[responseKey]
-            if responseValue == '':
+            if responseValue == '' or 'none':
                 continue
                        
             choice = GetChoiceEntity(question, responseKey, responseValue)
@@ -202,7 +202,7 @@ def ExtractMatrixQuestionResponse(question, userResponsesList):
                     
             responseValue = userResponses[responseKey]
         
-            if responseValue == '':
+            if responseValue == '' or 'none':
                 continue
                    
             choice = GetChoiceEntity(question, responseKey, responseValue)
@@ -233,7 +233,7 @@ def ExtractTextGraphicQuestionResponse(question, userResponsesList):
         for response in userResponse2CurQ:
             
             responseValue = userResponses[response]
-            if responseValue == '':
+            if responseValue == '' or 'none':
                 continue
             
             userResponse = GetUserResponse(user, question)
@@ -257,7 +257,7 @@ def ExtractRankOrderQuestionResponse(question, userResponsesList):
         for responseKey in userResponse2CurQ:
         
             responseValue = userResponses[responseKey]
-            if responseValue == '':
+            if responseValue == '' or 'none':
                 continue
                        
             choice = GetChoiceEntity(question, responseKey, responseValue)

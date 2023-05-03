@@ -10,3 +10,4 @@ WebsiteApp/migrations/__pycache__/
 token
 media/
 WebAppCICPVersion2/settings.py
+InteractiveDB/migrations/
