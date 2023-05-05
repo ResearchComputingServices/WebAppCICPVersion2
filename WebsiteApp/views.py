@@ -11,15 +11,17 @@ def report_results_EN(request):
    
     # handle the case where the user has specified front end query options
     if request.GET:
-        
+
         form_filter = FilterForm(request.GET)      
         context = {'form_filter' : form_filter}
 
+        ############################DATE
         # Date Format - Y%-%m-%d
         # Type - str
         date = request.GET.get('report_date', None)
-               
+              
         if date is None:
+
             date = str(datetime.now().date())
 
         else:
@@ -36,30 +38,29 @@ def report_results_EN(request):
             user_response_images_wed_date = get_wed_date(user_requested_friday_date)
             print("user_response_images_wed_date",user_response_images_wed_date)
 
-            location = (request.GET.getlist('province'))
-            question_theme = (request.GET.getlist('theme'))
-            language_preference = request.GET.getlist('language')
-            organization_size = (request.GET.getlist('size'))
+        # Get other filter options from the get request
+        location = (request.GET.getlist('province'))
+        question_theme = (request.GET.getlist('theme'))
+        language_preference = request.GET.getlist('language')
+        organization_size = (request.GET.getlist('size'))
 
         if user_requested_friday_date == "2022-12-23" or user_requested_friday_date == "2022-12-30" :
             info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
             context['info'] = info
         else:
-            
-
             # Get the textdates to display in the frontend based on English and French selection
             wednesday_text_date = textdate(str(user_response_images_wed_date),lang=get_language())
-            print("wednesday_text_date",wednesday_text_date)
+            print("get_language()",get_language())
             friday_text_date = textdate(str(user_requested_friday_date),lang=get_language())
-            print("friday_text_date",friday_text_date)
+            print("get_language()",get_language())
 
 
             # Pass the dates in text format to the frontend
             context['wednesday_date'] = wednesday_text_date
             context['friday_text_date'] = friday_text_date
 
+            # Create the FrontEndQuery object based on the options selected by the user
             front_end_query = FrontEndQuery()
-
             front_end_query.date = str(user_response_images_wed_date)
             front_end_query.locations = location
             front_end_query.questionThemes = question_theme
@@ -91,27 +92,27 @@ def report_results_EN(request):
 
         # Get the latest Friday date from today
         default_this_week_friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
-        print("default_this_week_friday_date",default_this_week_friday_date)
+       
 
         # Format the date from Y%-%m-%d to respective english and french formats in text
         friday_text_date = textdate(str(default_this_week_friday_date),lang=get_language())
-        print("friday_text_date inside else",friday_text_date)
+        
 
         # Get the wednesday date to search in the media folder and display on the frontend
         # based on the Friday date
         wednesday_date = get_wed_date(default_this_week_friday_date)
-        print("wednesday_date inside else",wednesday_date)
+     
 
         # Format the date from Y%-%m-%d to respective english and french formats in text
         wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
-        print("wednesday_text_date inside else", wednesday_text_date)
+       
 
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
+        
+        # Create the FrontEndQuery object for todays date
         front_end_query = FrontEndQuery()
-
-
-        # Pass the wednesday date to select the images from media folder
-        front_end_query.date = str(wednesday_date)
+        front_end_query.date = str(wednesday_date) # Pass the wednesday date to select the images from media folder
+        front_end_query.siteLanguage = get_language()
       
         if front_end_query:
                 query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)                

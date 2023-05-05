@@ -75,8 +75,8 @@ FONT_LOCATION = os.path.join(settings.BASE_DIR,'fonts','Helvetica_Now_Text__Regu
 
 TMP_FIGURE_FOLDER_PATH = os.path.join(settings.MEDIA_ROOT, 'tmpImages')
 
-DEFAULT_FIGURE_FOLDER_PATH_BASE = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
 #DEFAULT_FIGURE_FOLDER_PATH_BASE = os.path.join(settings.BASE_DIR, 'media')
+DEFAULT_FIGURE_FOLDER_PATH_BASE = os.path.join(settings.MEDIA_ROOT, 'DefaultImages')
 DEFAULT_FIGURE_FOLDER_PATH_FRENCH = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_BASE, 'FR')
 DEFAULT_FIGURE_FOLDER_PATH_ENGLISH = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_BASE, 'EN')
 
