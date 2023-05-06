@@ -275,23 +275,25 @@ def CreateLabels(titleText):
             # Todo: Create a seperate helper function that takes in either 0,1 or 1,2
             goodLabel = True
             if len(pairSplit) == 2: 
-                if pairSplit[0].isnumeric():
+                pairSplit[0] = pairSplit[0].replace(' ','')
+                if pairSplit[0].lstrip('-+').isnumeric():
                     value = float(pairSplit[0])
                 else:
-                    print('[WARNING]: CreateLabels: Label format error')
+                    print('[WARNING]: CreateLabels: Label format error:',pairSplit)
                     goodLabel = False
                 
                 label = pairSplit[1]
             elif len(pairSplit) == 3: 
-                if pairSplit[1].isnumeric():
+                pairSplit[1] = pairSplit[1].replace(' ','')
+                if pairSplit[1].lstrip('-+').isnumeric():
                     value = float(pairSplit[1])
                 else:
-                    print('[WARNING]: CreateLabels: Label format error')
+                    print('[WARNING]: CreateLabels: Label format error:',pairSplit)
                     goodLabel = False
                     
                 label = pairSplit[2]
             else:
-                print('[ERROR]: CreateLabels: Unable to read label string')
+                print('[ERROR]: CreateLabels: Unable to read label string:',pair)
             
             if goodLabel:
                 tickValues.append(value)      
@@ -364,11 +366,21 @@ def GetUser(externalRefNum, VERBOSE = False):
 # 
 ##################################################################################################################################
 def Translate(inputText, srcCode, destCode):
-             
     translator = Translator()
-    outputText = translator.translate(inputText,src=srcCode,dest=destCode)
     
-    return outputText.text
+    outputText = ''
+    translatedText = None
+    if isinstance(inputText, str):
+        # try:
+        #     translatedText = translator.translate(inputText,src=srcCode,dest=destCode)
+        #     outputText = translatedText.text
+        # except Exception as e:
+        #     print('[Warning]: Translate: Failed to translate:',inputText)
+        #     print(translatedText)
+        translatedText = translator.translate(inputText,src=srcCode,dest=destCode)
+        outputText = translatedText.text
+    
+    return outputText  
 
 ##################################################################################################################################
 # 
@@ -376,3 +388,6 @@ def Translate(inputText, srcCode, destCode):
 
 def roundup(x):
     return int(math.ceil(x / 10.0)) * 10
+
+
+

@@ -362,7 +362,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
         
         if responseDict.keys() != None:
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
-            dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
+            #dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
     
     listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
     dataCSVFilePath = Local2URLMedia([dataCSVFilePath])    

@@ -104,6 +104,7 @@ class UserResponseTable(models.Model):
     choiceID = models.ForeignKey(ChoiceTable, on_delete=models.CASCADE,null=True,blank=True)
     
     # Fields/Attributes
+    answerTextOriginal = models.TextField(max_length=4096,null=True)
     answerTextEnglish = models.TextField(max_length=4096,null=True)
     answerTextFrench = models.TextField(max_length=4096,null=True)
     
@@ -114,7 +115,7 @@ class UserResponseTable(models.Model):
         if self.choiceID != None:
             recode = self.choiceID.recode
             
-        return f"UserResponse: \nuserID: {self.userID.id} \nquestionID: {self.questionID.id} \nrecode: {recode} \nanswerText: {self.answerTextEnglish} \nanswerValue: {self.answerValue}" 
+        return f"UserResponse: \nuserID: {self.userID.id} \nquestionID: {self.questionID.id} \nrecode: {recode} \nanswerText: {self.answerTextOriginal} \nanswerValue: {self.answerValue}" 
 
     # this function returns a dictionary which will be entered into the data file sent to the front end
     # the key:value pair is columnHeader:entry        

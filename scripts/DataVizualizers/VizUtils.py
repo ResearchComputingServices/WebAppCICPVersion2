@@ -242,10 +242,10 @@ def Translate(inputText, srcCode, destCode):
             
     translator = Translator()
  
-    # There is a limit of 15k characters at a time so longer blocks of text will need to be split up
+    # There is a limit of 3k characters at a time so longer blocks of text will need to be split up
     textList = []
     
-    if len(inputText) > 15000: 
+    if len(inputText) > 2000: 
         textList = SplitText(inputText)
     else:
         textList.append(inputText)
@@ -270,7 +270,13 @@ def GetTextForWordCloud(responseText, destCode):
         srcCode = 'fr'
     
     if len(responseText) != 0:
-        translatedText = Translate(responseText, srcCode, destCode)   
+        translatedText = ''
+        try:
+            translatedText = Translate(responseText, srcCode, destCode)   
+        except:
+            print('[ERROR]: GetTextForWordCloud: Translation Service not available')
+            translatedText = responseText
+            
         stopwordsFiltered = RemoveStopWords(translatedText) 
         resultingText = ' '.join(stopwordsFiltered)
     else:

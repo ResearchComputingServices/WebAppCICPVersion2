@@ -107,12 +107,13 @@ def ExtractTextQuestionResponse(question, userResponsesList):
             
             responseValue = userResponses[response]
             
-            if responseValue == '' or 'none':
+            if responseValue == '' or responseValue == None:
                 continue
             
             userResponse = GetUserResponse(user, question)
-            userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
-            userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
+            userResponse.answerTextOriginal = responseValue
+            # userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+            # userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             userResponse.save()
         
 ##################################################################################################################################
@@ -131,7 +132,7 @@ def ExtractMultipleChoiceQuestionResponse(question, userResponsesList):
         for responseKey in userResponse2CurQ:
             responseValue = userResponses[responseKey]
             
-            if responseValue == '' or 'none':
+            if responseValue == '' or responseValue == None:
                 continue
                         
             choice = GetChoiceEntity(question, responseKey, responseValue)
@@ -139,8 +140,9 @@ def ExtractMultipleChoiceQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                            
             if "TEXT" in responseKey:
-                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
-                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')    
+                userResponse.answerTextOriginal = responseValue
+                # userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                # userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')    
             else:
                 userResponse.answerValue = responseValue
 
@@ -162,7 +164,7 @@ def ExtractSliderQuestionResponse(question, userResponsesList):
         for responseKey in userResponse2CurQ:
         
             responseValue = userResponses[responseKey]
-            if responseValue == '' or 'none':
+            if responseValue == '' or responseValue == None:
                 continue
                        
             choice = GetChoiceEntity(question, responseKey, responseValue)
@@ -170,8 +172,9 @@ def ExtractSliderQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                          
             if "TEXT" in responseKey:
-                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
-                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')    
+                userResponse.answerTextOriginal = responseValue
+                # userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                # userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')    
             else:
                 userResponse.answerValue = responseValue
                 
@@ -202,7 +205,7 @@ def ExtractMatrixQuestionResponse(question, userResponsesList):
                     
             responseValue = userResponses[responseKey]
         
-            if responseValue == '' or 'none':
+            if responseValue == '' or responseValue == None:
                 continue
                    
             choice = GetChoiceEntity(question, responseKey, responseValue)
@@ -210,8 +213,9 @@ def ExtractMatrixQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                         
             if "TEXT" in responseKey:
-                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
-                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
+                userResponse.answerTextOriginal = responseValue
+                # userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                # userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             else:
                 userResponse.answerValue = responseValue
                 
@@ -233,12 +237,13 @@ def ExtractTextGraphicQuestionResponse(question, userResponsesList):
         for response in userResponse2CurQ:
             
             responseValue = userResponses[response]
-            if responseValue == '' or 'none':
+            if responseValue == '' or responseValue == None:
                 continue
             
             userResponse = GetUserResponse(user, question)
-            userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
-            userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
+            userResponse.answerTextOriginal = responseValue
+            # userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+            # userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             userResponse.save()
                    
 ##################################################################################################################################
@@ -257,7 +262,7 @@ def ExtractRankOrderQuestionResponse(question, userResponsesList):
         for responseKey in userResponse2CurQ:
         
             responseValue = userResponses[responseKey]
-            if responseValue == '' or 'none':
+            if responseValue == '' or responseValue == None:
                 continue
                        
             choice = GetChoiceEntity(question, responseKey, responseValue)
@@ -265,8 +270,9 @@ def ExtractRankOrderQuestionResponse(question, userResponsesList):
             userResponse = GetUserResponse(user, question, choice)
                         
             if "TEXT" in responseKey:
-                userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
-                userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
+                userResponse.answerTextOriginal = responseValue
+                # userResponse.answerTextEnglish = Translate(responseValue, 'fr', 'en')
+                # userResponse.answerTextFrench = Translate(responseValue, 'en', 'fr')
             else:
                 userResponse.answerValue = responseValue
             userResponse.save()       

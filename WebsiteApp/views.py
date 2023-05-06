@@ -86,27 +86,22 @@ def report_results_EN(request):
     else:
 
         form_filter = FilterForm()
-
-        
+     
         # For default selection and display of latest report
 
         # Get the latest Friday date from today
-        default_this_week_friday_date = str(get_fridaydate_from_todays_date(datetime.now()))
-       
+        default_this_week_friday_date = str(get_fridaydate_from_todays_date(datetime.now()))       
 
         # Format the date from Y%-%m-%d to respective english and french formats in text
         friday_text_date = textdate(str(default_this_week_friday_date),lang=get_language())
-        
 
         # Get the wednesday date to search in the media folder and display on the frontend
         # based on the Friday date
         wednesday_date = get_wed_date(default_this_week_friday_date)
      
-
         # Format the date from Y%-%m-%d to respective english and french formats in text
         wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
-       
-
+    
         context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
         
         # Create the FrontEndQuery object for todays date

@@ -104,27 +104,4 @@ def CreateWordCloud(wordCloudText,
     plt.close(fig)   
     
     return figureFilePath
-        
-    # # Create the figure which plots the word cloud
-    # fig = plt.figure(figsize=(8.,8.))
-    # plt.title(title+'\n',loc='center',wrap=True)
-    # plt.axis('off')
-    # plt.imshow(wc)
     
-    # # Get the annotation text and add it to the figure
-    # aText = GetAnnotation(numberOfResponses,reportDate, isEnglish)
-    # plt.figtext(x=1., y=0., s=aText[0]+'\n'+aText[1],horizontalalignment='right')
-    
-    # # Get the watermark image and add it to the figure
-    # waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    # newax = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
-    # newax.imshow(waterMarkImg)
-    # newax.axis('off')
-
-    # # save the wordcloud to a file
-    # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
-    # figureFilePath = os.path.join(saveToDirPath, filename)
-    # plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
-    # plt.close(fig)
-    
-    # return figureFilePath
