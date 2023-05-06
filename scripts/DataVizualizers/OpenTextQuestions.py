@@ -28,8 +28,7 @@ def VisualizeOpenTextQuestion(  question,
         # if isEnglish:
         #     responseText = response.answerTextEnglish
         # else:
-        #     responseText = response.answerTextFrench
-            
+        #     responseText = response.answerTextFrench     
         responseText = response.answerTextOriginal
             
         if responseText != None and responseText != '':

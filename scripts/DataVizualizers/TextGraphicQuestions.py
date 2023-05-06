@@ -16,11 +16,12 @@ def VisualizeTextGraphicQuestion(   question,
     allResponseText = ''
     for response in userResponses:
         
-        responseText = ''
-        if isEnglish:
-            responseText = response.answerTextEnglish
-        else:
-            responseText = response.answerTextFrench
+        # responseText = ''
+        # if isEnglish:
+        #     responseText = response.answerTextEnglish
+        # else:
+        #     responseText = response.answerTextFrench
+        responseText = response.answerTextOriginal
         
         if responseText != None and responseText != '' and not responseText.isnumeric() :
             allResponseText += ' ' + responseText
