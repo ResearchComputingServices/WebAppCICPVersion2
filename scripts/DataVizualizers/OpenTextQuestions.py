@@ -25,10 +25,12 @@ def VisualizeOpenTextQuestion(  question,
     allResponseText = ''
     for response in userResponses:
         responseText = ''
-        if isEnglish:
-            responseText = response.answerTextEnglish
-        else:
-            responseText = response.answerTextFrench
+        # if isEnglish:
+        #     responseText = response.answerTextEnglish
+        # else:
+        #     responseText = response.answerTextFrench
+            
+        responseText = response.answerTextOriginal
             
         if responseText != None and responseText != '':
             allResponseText += ' ' + responseText

@@ -18,10 +18,10 @@ def HandleReleasedSurvey(currentSurvey, currentDate):
     
     if successFlag:
         print('ExtractSurveyMain')
-        successFlag = ExtractSurveyMain(aSurvey=currentSurvey)
+        #successFlag = ExtractSurveyMain(aSurvey=currentSurvey)
     
         print('ExtractResponsesMain')
-        successFlag = ExtractResponsesMain(aSurvey=currentSurvey)
+        #successFlag = ExtractResponsesMain(aSurvey=currentSurvey)
     
         print('GenerateDefaultFigures')
         successFlag = GenerateDefaultFigures(aSurvey=currentSurvey) 
