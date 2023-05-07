@@ -24,13 +24,13 @@ def VisualizeOpenTextQuestion(  question,
     # Get text for wordcloud generation 
     allResponseText = ''
     for response in userResponses:
-        responseText = ''
+        # responseText = ''
         # if isEnglish:
         #     responseText = response.answerTextEnglish
         # else:
         #     responseText = response.answerTextFrench     
         responseText = response.answerTextOriginal
-            
+
         if responseText != None and responseText != '':
             allResponseText += ' ' + responseText
     
@@ -71,7 +71,11 @@ def CreateWordCloud(wordCloudText,
     if len(wordCloudText) == 0:
         wordCloudText = 'ERRROR1'
     
+    print('BEFORE:')
+    print(wordCloudText)
     wordCloudText = GetTextForWordCloud(wordCloudText, destCode)
+    print('AFTER:')
+    print(wordCloudText)
 
     if len(wordCloudText) == 0:
         wordCloudText = 'ERRROR2'

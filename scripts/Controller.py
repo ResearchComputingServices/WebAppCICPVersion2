@@ -203,28 +203,42 @@ def GenerateDefaultFigures(aSurvey):
 def GenerateDataFile(responseDict,
                      saveToDirPath = TMP_FIGURE_FOLDER_PATH):
                
-    dataFrameList = []
+    # dataFrameList = []
+    
+    # for question in responseDict.keys():
+    #     questiondDF = question.GetDataFileEntry()       
+    
+    #     userDataFrameList = []
+    #     for user in responseDict[question]:
+    #         userDF = user.GetDataFileEntry()
+            
+    #         userDataFrameList.append(userDF)
+            
+    #     userDF = pd.concat(userDataFrameList)       
+        
+    #     dataFrameList.append(pd.concat([questiondDF,userDF],axis=1))
+    # filePath = ''
+    # if len(dataFrameList) > 0:
+    #     mainDataFrame = pd.concat(dataFrameList)   
+    #     filename = str(uuid.uuid4()) + ".csv"
+    #     filePath = os.path.join(saveToDirPath, filename)
+    #     mainDataFrame.to_csv(filePath)
+    
+    filename = str(uuid.uuid4()) + ".csv"
+    filePath = os.path.join(saveToDirPath, filename)
+    
+    file = open(filePath, 'w+')
     
     for question in responseDict.keys():
-        questiondDF = question.GetDataFileEntry()       
+        questiondDataString = question.GetDataFileString()       
     
-        userDataFrameList = []
-        for user in responseDict[question]:
-            userDF = user.GetDataFileEntry()
+        for userResponse in responseDict[question]:
+            userResponseDataString = userResponse.GetDataFileString()
             
-            userDataFrameList.append(userDF)
-            
-        userDF = pd.concat(userDataFrameList)       
+            file.write(questiondDataString+','+userResponseDataString+'\n')
+    
+    file.close()
         
-        dataFrameList.append(pd.concat([questiondDF,userDF],axis=1))
-    
-    filePath = ''
-    if len(dataFrameList) > 0:
-        mainDataFrame = pd.concat(dataFrameList)   
-        filename = str(uuid.uuid4()) + ".csv"
-        filePath = os.path.join(saveToDirPath, filename)
-        mainDataFrame.to_csv(filePath)
-    
     return filePath
 
 ##################################################################################################################################

@@ -220,7 +220,7 @@ def RemoveStopWords(text):
 # This function returns translated text from srcCode to destCode 
 ##################################################################################################################################
 
-def SplitText(inputText, maxLength = 10000):
+def SplitText(inputText, maxLength):
     
     textList = []
 
@@ -246,13 +246,17 @@ def Translate(inputText, srcCode, destCode):
     textList = []
     
     if len(inputText) > 2000: 
-        textList = SplitText(inputText)
+        textList = SplitText(inputText,2000)
     else:
         textList.append(inputText)
  
-    for text in textList:
-        result = translator.translate(text,src=srcCode,dest=destCode)
-        outputText = outputText + ' ' + result.text
+    for text in textList:        
+        try:
+            result = translator.translate(text,src=srcCode,dest=destCode)
+            outputText = outputText + ' ' + result.text
+        except:
+            print('[ERROR]: GetTextForWordCloud: Translation Service not available')
+            translatedText = responseText       
     
     return outputText
 
@@ -270,15 +274,9 @@ def GetTextForWordCloud(responseText, destCode):
         srcCode = 'fr'
     
     if len(responseText) != 0:
-        translatedText = ''
-        try:
-            translatedText = Translate(responseText, srcCode, destCode)   
-        except:
-            print('[ERROR]: GetTextForWordCloud: Translation Service not available')
-            translatedText = responseText
-            
+        translatedText = Translate(responseText, srcCode, destCode)              
         stopwordsFiltered = RemoveStopWords(translatedText) 
-        resultingText = ' '.join(stopwordsFiltered)
+        resultingText = ' '.join(stopwordsFiltered)        
     else:
         print('[ERROR]: GetTextForWordCloud: responseText empty.')
     
