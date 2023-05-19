@@ -40,17 +40,15 @@ ORGANIZATION_SIZES = [('SMALL',_('Small')),
 DateInput = partial(forms.DateInput, {'class': 'dateinput'})
 
 
-class FilterForm(forms.Form):
-    report_date = forms.DateField(widget=DateInput(),label=_('Report Date'))
+class PrimaryFilterForm(forms.Form):
+    report_date = forms.DateField(widget=DateInput(),label=_('Report Date'),required=False)
     theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,
                                     label = _('Theme'),required=False)
-    province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROVINCE_CHOICES,
-                                        label=_('Province'),required=False)
+    # province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROVINCE_CHOICES,
+    #                                     label=_('Province'),required=False)
     
-    language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=LANGUAGE_CHOICES,
-                                        label = _('Language Preference'),required=False)
-    size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=ORGANIZATION_SIZES,
-                                    label=_('Size'),required=False)
-    
-    
+    # language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=LANGUAGE_CHOICES,
+    #                                     label = _('Language Preference'),required=False)
+    # size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=ORGANIZATION_SIZES,
+    #                                 label=_('Size'),required=False)
     

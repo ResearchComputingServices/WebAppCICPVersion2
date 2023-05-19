@@ -13,3 +13,8 @@
     width: 500px;
     height: min-content
 }
+
+.navbutton {
+    background-color: black;
+    color: white;
+}

@@ -29,21 +29,19 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav mr-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link "
-                           aria-current="page"
-                           href="{% url 'report_results_EN' %}">{% translate "Report Results" %}</a>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item active ">                        
+                        <button class="btn active navbutton" type="button">
+                            <a class="nav-link " aria-current="page" href="https://carleton.ca/cicp-pcpob/homepage/all-reports/">{% translate "Back to CICP Website" %}</a>
+                        </button>       
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link "
-                           aria-current="page"
-                           href="https://carleton.ca/cicp-pcpob/homepage/all-reports/">{% translate "Back to CICP" %}</a>
+                    <li class="nav-item active ">
+                        <button class="btn active navbutton" type="button">
+                        <a class="nav-link" aria-current="page" href="#">{% translate "Print Report" %}</a>
+                        </button>  
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link " aria-current="page" href="#">{% translate "Download Report" %}</a>
-                    </li>
-                    <li class="nav-item dropdown">
+                    <li class="nav-item active dropdown">
+                        <button class="btn active navbutton" type="button">
                         <a class="nav-link dropdown-toggle"
                            href="#"
                            id="navbarDropdown"
@@ -63,6 +61,7 @@
                                 </li>
                             {% endfor %}
                         </ul>
+                        </button> 
                     </li>
                 </ul>
             </div>

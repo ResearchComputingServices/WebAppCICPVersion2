@@ -1,5 +1,6 @@
+from django.forms import ValidationError
 from django.shortcuts import render
-from .forms import FilterForm
+from .forms import PrimaryFilterForm
 from scripts.Utils import *
 from scripts.Controller import HandleFrontEndQuery
 from django.utils.translation import gettext,get_language
@@ -11,81 +12,70 @@ def report_results_EN(request):
    
     # handle the case where the user has specified front end query options
     if request.GET:
+        
 
-        form_filter = FilterForm(request.GET)      
-        context = {'form_filter' : form_filter}
+        # Create the FrontEndQuery object
+        front_end_query = FrontEndQuery()
+        context = {}
 
-        ############################DATE
+
+        form_filter = PrimaryFilterForm(request.GET) 
+        context['form_filter'] = form_filter        
+
         # Date Format - Y%-%m-%d
         # Type - str
-        date = request.GET.get('report_date', None)
+        user_requested_friday_date = request.GET.get('report_date', None)
+        print("request.GET",request.GET)
+        print("user_requested_friday_date",user_requested_friday_date)
+        question_theme = request.GET.getlist('theme')
+        print("question_theme",question_theme)
               
-        if date is None:
+        if len(user_requested_friday_date) == 0:
+              front_end_query.questionThemes = question_theme
 
-            date = str(datetime.now().date())
-
-        else:
-
-            # Date Format - Y%-%m-%d
-            # Type - str 
-            # Input - Friday Date selected by the user
-            user_requested_friday_date = request.GET['report_date']
-
-            # Date Format - Y%-%m-%d
-            # Type - str 
-            # Input - Friday Date selected by the user
-            # Output - Wednesday date that matches the folder created in Media
+        elif  len(question_theme) == 0:
+            # Date Format - Y%-%m-%d,Type - str,Input - Friday Date selected by the user, Output - Wednesday date that matches the folder created in Media
             user_response_images_wed_date = get_wed_date(user_requested_friday_date)
-            print("user_response_images_wed_date",user_response_images_wed_date)
+            front_end_query.date = str(user_response_images_wed_date)
+            
+            wednesday_text_date = textdate(str(user_response_images_wed_date),lang=get_language())                
+            friday_text_date = textdate(str(user_requested_friday_date),lang=get_language())
+
+            context['wednesday_date'] = wednesday_text_date
+            context['friday_text_date'] = friday_text_date
 
         # Get other filter options from the get request
         location = (request.GET.getlist('province'))
-        question_theme = (request.GET.getlist('theme'))
         language_preference = request.GET.getlist('language')
         organization_size = (request.GET.getlist('size'))
 
         if user_requested_friday_date == "2022-12-23" or user_requested_friday_date == "2022-12-30" :
             info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
             context['info'] = info
-        else:
-            # Get the textdates to display in the frontend based on English and French selection
-            wednesday_text_date = textdate(str(user_response_images_wed_date),lang=get_language())
-            print("get_language()",get_language())
-            friday_text_date = textdate(str(user_requested_friday_date),lang=get_language())
-            print("get_language()",get_language())
-
-
-            # Pass the dates in text format to the frontend
-            context['wednesday_date'] = wednesday_text_date
-            context['friday_text_date'] = friday_text_date
-
-            # Create the FrontEndQuery object based on the options selected by the user
-            front_end_query = FrontEndQuery()
-            front_end_query.date = str(user_response_images_wed_date)
-            front_end_query.locations = location
-            front_end_query.questionThemes = question_theme
-            front_end_query.languagePreference = language_preference
-            front_end_query.organizationSizes = organization_size
-            front_end_query.qualtricsSurveyID = ''
-            front_end_query.siteLanguage = get_language()
+       
+        front_end_query.locations = location
+        front_end_query.languagePreference = language_preference
+        front_end_query.organizationSizes = organization_size
+        front_end_query.qualtricsSurveyID = ''
+        front_end_query.siteLanguage = get_language()
+        
+        if front_end_query:
+            query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
+            print("query_response_imagefilepaths",query_response_imagefilepaths)
             
-            if front_end_query:
-                query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
-                print(query_response_imagefilepaths)
-
-                if len(errors) != 0:
-                    context["errors"] = errors
+            if len(errors) != 0:
+                context["errors"] = errors
             
-                if len(query_response_imagefilepaths) != 0:
-                    context["image_filepaths"] = query_response_imagefilepaths
+            if len(query_response_imagefilepaths) != 0:
+                context["image_filepaths"] = query_response_imagefilepaths
 
-
+        print("context",context)
         return render(request, 'index.html', context)
 
     # This handles the case where we need to display the default pages
     else:
 
-        form_filter = FilterForm()
+        form_filter = PrimaryFilterForm()
      
         # For default selection and display of latest report
 
@@ -127,9 +117,6 @@ def get_wed_date(fri_date):
     fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
     wed_date = fri_date + \
                 timedelta(days = -2)
-    
-    print("Inside get_wed_date func",wed_date.date())
-    print("type of wed_date",type(wed_date.date()))
     return wed_date.date()
 
 # Converts the Date from %Y-%m-%d to Month Date, Year
@@ -139,12 +126,10 @@ def textdate(date,lang):
     
     if lang == "fr":
         fr_date_text = date.strftime("%b %d, %Y")
-        print("Inside textdate fr_date_text",fr_date_text)
         return fr_date_text
        
     else:
         en_date_text = date.strftime("%d %B, %Y")
-        print("Inside textdate en_date_text",en_date_text)
         return en_date_text
 
 ##################################################################################################################################
