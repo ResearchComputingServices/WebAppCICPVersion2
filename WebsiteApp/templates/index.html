@@ -34,7 +34,7 @@
             {% include "sidebar.html" %}
         </div>
         <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span>
-        <div id="heading" class="justify-content-center">
+        <div id="heading" class="justify-content-center mx-auto">
             {% if wednesday_date %}
                 <h4>
                     <strong><center>{% trans "Weekly Survey Distributed -" %}{% blocktrans %} {{wednesday_date }}{% endblocktrans %}</center></strong>
@@ -46,6 +46,9 @@
                 </h4>
             {% endif %}
         </div>
+        <div class="hamburger" ></div>
+        <div class="hamburger"></div>
+        <div class="hamburger"></div>
         <main class="main-content">
             {% if info %}
                 <div class="container">
