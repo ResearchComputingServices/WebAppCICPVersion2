@@ -53,6 +53,15 @@ class QuestionTable(models.Model):
 
         return df
     
+    def GetDataFileString(self):
+       questionKey = self.jsonKey
+       questionText = self.questionTextEnglish # TODO: handle fench
+       questionTheme = self.questionTheme 
+       
+       dataString = questionKey +','+questionText+','+questionTheme
+       
+       return dataString
+    
 ########################################################################################################################################################
     
 class ChoiceTable(models.Model):
@@ -125,8 +134,9 @@ class UserResponseTable(models.Model):
         userSize = self.userID.size
         userDomain = self.userID.domain
         userLang = self.userID.languagePreference
-        responseTextEnglish = self.answerTextEnglish
-        responseTextFrench = self.answerTextFrench
+        # responseTextEnglish = self.answerTextEnglish
+        # responseTextFrench = self.answerTextFrench
+        responseTextOriginal = self.answerTextOriginal
         responseValue = self.answerValue
         
         choiceRecode = '-1'
@@ -141,12 +151,37 @@ class UserResponseTable(models.Model):
                             'userLang' : userLang,
                             'choiceRecode' : choiceRecode,
                             'choiceText' : choiceText,
-                            'responseTextEnglish' : responseTextEnglish,
-                            'responseTextFrench' : responseTextFrench,
+                            'responseTextOriginal' : responseTextOriginal,
                             'responseValue' : responseValue                       
                         }, index=[0])
 
         return df
+    
+    def GetDataFileString(self):
+    
+        userProv = self.userID.province
+        userSize = self.userID.size
+        userDomain = self.userID.domain
+        userLang = self.userID.languagePreference
+        responseTextOriginal = self.answerTextOriginal
+        responseValue = self.answerValue
+        
+        choiceRecode = '-1'
+        choiceText = ''
+        if self.choiceID != None:
+            choiceRecode = self.choiceID.recode
+            choiceText = self.choiceID.choiceTextEnglish # TODO: handle french
+        
+        dataFileString =    str(userProv) + ',' + \
+                            str(userSize) + ',' + \
+                            str(userDomain) + ',' + \
+                            str(userLang) + ',' + \
+                            str(choiceRecode) + ',' + \
+                            str(choiceText) + ',' + \
+                            str(responseTextOriginal) + ',' + \
+                            str(responseValue)                 
+                
+        return dataFileString   
     
     # This gives the model an explicit ordering
     class Meta:
