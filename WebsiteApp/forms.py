@@ -45,8 +45,9 @@ class PrimaryFilterForm(forms.Form):
     theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,
                                     label = _('Theme'),required=False)
     
+    
 class ProvinceFilterForm(forms.Form):
-    province= forms.MultipleChoiceField(widget=forms.SelectMultiple(choices=PROVINCE_CHOICES),
+    province= forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=PROVINCE_CHOICES,
                                         label=_('Province'),required=False)
 
 class LanguageFilterForm(forms.Form):

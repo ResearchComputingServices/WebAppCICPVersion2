@@ -120,9 +120,36 @@ div.hamburger {
 div.filterbox {
     width: 800px;
     height: 300px;
+    padding: 10px;
     background-color: #e91c24;
     margin: auto;
-    padding: 10px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    padding: 5px;
+    border: none;
+    background: transparent;
+    color: white;
+    font-size: 14px;
+}
+
+.dropdown::after {
+    content: '\25BC';
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
 }
 
 /* CSS code for extra small devices */

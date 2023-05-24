@@ -19,12 +19,12 @@ def report_results_EN(request):
         context = {}
 
         # Pass the different form filter options
-        primaryForm = PrimaryFilterForm(request.GET)
-        provinceForm = ProvinceFilterForm(request.GET)
-        languageForm = LanguageFilterForm(request.GET)
-        orgForm = OrgsizeFilterForm(request.GET)
+        form_filter = PrimaryFilterForm(request.GET)
+        province_form_filter = ProvinceFilterForm(request.GET)
 
-        context = {'primaryForm' :primaryForm, 'provinceForm' : provinceForm, 'languageForm': languageForm ,'orgForm' : orgForm }        
+
+        context['form_filter'] = form_filter
+        context['province_form_filter'] = province_form_filter
 
         # Date Format - Y%-%m-%d
         # Type - str
@@ -78,6 +78,7 @@ def report_results_EN(request):
     else:
 
         form_filter = PrimaryFilterForm()
+        province_form_filter = ProvinceFilterForm()
      
         # For default selection and display of latest report
 
@@ -94,7 +95,7 @@ def report_results_EN(request):
         # Format the date from Y%-%m-%d to respective english and french formats in text
         wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
     
-        context = {'form_filter' : form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
+        context = {'form_filter' : form_filter,'province_form_filter': province_form_filter, 'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
         
         # Create the FrontEndQuery object for todays date
         front_end_query = FrontEndQuery()

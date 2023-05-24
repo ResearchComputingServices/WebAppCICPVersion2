@@ -25,6 +25,7 @@
             <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
                   rel="Stylesheet"
                   type="text/css"/>
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
         {% endblock styles %}
     </head>
@@ -51,30 +52,14 @@
             <div class="hamburger"></div>
             <div class="hamburger"></div>
         </div>
-            <div class="filterbox">
-                    {% comment %} <label for="province">Province</label>
-                    <select name="cars" id="province">
-                    <option value="">{{ provinceForm }}</option>
-                    </select> {% endcomment %}
-
-                    {% comment %} <label for="language">Language</label>
-                    <select name="cars" id="language">
-                    <option value="">{{ languageForm }}</option>
-                    </select>
-
-                    <label for="orgsize">Organization Size</label>
-                    <select name="cars" id="orgsize">
-                        <option value="">{{ orgForm }}</option>
-                    </select> {% endcomment %}
-                    
-                    {{ provinceForm }}
-                    {{ languageForm }}
-                    {{ orgForm }}
-                    <br/>
-                    <br/>
-                    <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                    <input type="reset" value="{% translate "Reset" %}"  />
-            </div>
+        <div class="filterbox">
+            <form action="get">
+                {% csrf_token %}
+                <div class="dropdown">
+                    {{ province_form_filter.as_div }}
+                </div>
+            </form>
+        </div>
         <main class="main-content">
             {% if info %}
                 <div class="container">
@@ -134,7 +119,9 @@
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
                     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                     crossorigin="anonymous"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
             <script src="{% static 'js/datepicker.js' %}"></script>
+            <script src="{% static 'js/index.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>
             <script src="{% static 'js/sidebar.js' %}"></script>
         {% endblock scripts %}
