@@ -104,14 +104,18 @@ div {
     flex-wrap: wrap;
 }
 
-.hamburger div {
+div.hamburger {
     width: 35px;
     height: 5px;
     background-color: black;
     margin: 6px 0;
 }
 
-
+#hamburger {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
 
 /* CSS code for extra small devices */
 @media (max-width: 575.98px) {
