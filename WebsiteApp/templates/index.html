@@ -47,17 +47,11 @@
             {% endif %}
         </div>
         <div id="hamburger">
-        <div class="hamburger"></div>
-        <div class="hamburger"></div>
-        <div class="hamburger"></div>
+            <div class="hamburger"></div>
+            <div class="hamburger"></div>
+            <div class="hamburger"></div>
         </div>
-        <div class="filterbox">
-            <form autocomplete="off"
-                  id="myForm"
-                  method="get"
-                  action="">
-                  {% csrf_token %}
-                <form class="ml-md-2" method="get">
+            <div class="filterbox">
                     <label for="province">Province</label>
                     <select name="cars" id="province">
                     <option value="">{{ provinceForm }}</option>
@@ -72,16 +66,12 @@
                     <select name="cars" id="orgsize">
                         <option value="">{{ orgForm }}</option>
                     </select>
-
+                    
                     <br/>
                     <br/>
                     <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                     <input type="reset" value="{% translate "Reset" %}"  />
-                </form>
-            </form>
-        </div>
-    </form>
-        </div>
+            </div>
         <main class="main-content">
             {% if info %}
                 <div class="container">
