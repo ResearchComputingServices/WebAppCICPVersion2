@@ -1,6 +1,6 @@
 from django.forms import ValidationError
 from django.shortcuts import render
-from .forms import PrimaryFilterForm
+from .forms import *
 from scripts.Utils import *
 from scripts.Controller import HandleFrontEndQuery
 from django.utils.translation import gettext,get_language
@@ -18,17 +18,19 @@ def report_results_EN(request):
         front_end_query = FrontEndQuery()
         context = {}
 
+        # Pass the different form filter options
+        primaryForm = PrimaryFilterForm(request.GET)
+        provinceForm = ProvinceFilterForm(request.GET)
+        languageForm = LanguageFilterForm(request.GET)
+        orgForm = OrgsizeFilterForm(request.GET)
 
-        form_filter = PrimaryFilterForm(request.GET) 
-        context['form_filter'] = form_filter        
+        context = {'primaryForm' :primaryForm, 'provinceForm' : provinceForm, 'languageForm': languageForm ,'orgForm' : orgForm }        
 
         # Date Format - Y%-%m-%d
         # Type - str
         user_requested_friday_date = request.GET.get('report_date', None)
-        print("request.GET",request.GET)
-        print("user_requested_friday_date",user_requested_friday_date)
         question_theme = request.GET.getlist('theme')
-        print("question_theme",question_theme)
+      
               
         if len(user_requested_friday_date) == 0:
               front_end_query.questionThemes = question_theme

@@ -44,11 +44,16 @@ class PrimaryFilterForm(forms.Form):
     report_date = forms.DateField(widget=DateInput(),label=_('Report Date'),required=False)
     theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,
                                     label = _('Theme'),required=False)
-    # province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROVINCE_CHOICES,
-    #                                     label=_('Province'),required=False)
     
-    # language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=LANGUAGE_CHOICES,
-    #                                     label = _('Language Preference'),required=False)
-    # size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=ORGANIZATION_SIZES,
-    #                                 label=_('Size'),required=False)
+class ProvinceFilterForm(forms.form):
+    province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROVINCE_CHOICES,
+                                        label=_('Province'),required=False)
+
+class LanguageFilterForm(forms.form):
+    language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=LANGUAGE_CHOICES,
+                                        label = _('Language Preference'),required=False)
+
+class OrgsizeFilterForm(forms.form):
+    size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=ORGANIZATION_SIZES,
+                                    label=_('Size'),required=False)
     
