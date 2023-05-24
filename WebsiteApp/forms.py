@@ -45,15 +45,15 @@ class PrimaryFilterForm(forms.Form):
     theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,
                                     label = _('Theme'),required=False)
     
-class ProvinceFilterForm(forms.form):
+class ProvinceFilterForm(forms.Form):
     province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=PROVINCE_CHOICES,
                                         label=_('Province'),required=False)
 
-class LanguageFilterForm(forms.form):
+class LanguageFilterForm(forms.Form):
     language = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=LANGUAGE_CHOICES,
                                         label = _('Language Preference'),required=False)
 
-class OrgsizeFilterForm(forms.form):
+class OrgsizeFilterForm(forms.Form):
     size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=ORGANIZATION_SIZES,
                                     label=_('Size'),required=False)
     
