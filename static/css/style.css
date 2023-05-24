@@ -121,6 +121,8 @@ div.filterbox {
     width: 800px;
     height: 300px;
     background-color: #e91c24;
+    margin: auto;
+    padding: 10px;
 }
 
 /* CSS code for extra small devices */
