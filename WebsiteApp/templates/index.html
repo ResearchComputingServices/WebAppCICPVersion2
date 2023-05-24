@@ -55,28 +55,29 @@
             <form autocomplete="off"
                   id="myForm"
                   method="get"
-                  action="{% url 'report_results_EN' %}">
+                  action="">
                   {% csrf_token %}
-            <form class="ml-md-2" method="get">
-                <label for="province">Province</label>
-                <select name="cars" id="province">
-                <option value="">{{ provinceForm }}</option>
-                </select>
+                <form class="ml-md-2" method="get">
+                    <label for="province">Province</label>
+                    <select name="cars" id="province">
+                    <option value="">{{ provinceForm }}</option>
+                    </select>
 
-                <label for="language">Language</label>
-                <select name="cars" id="language">
-                <option value="">{{ languageForm }}</option>
-                </select>
+                    <label for="language">Language</label>
+                    <select name="cars" id="language">
+                    <option value="">{{ languageForm }}</option>
+                    </select>
 
-                <label for="orgsize">Organization Size</label>
-                <select name="cars" id="orgsize">
-                    <option value="">{{ orgForm }}</option>
-                </select>
+                    <label for="orgsize">Organization Size</label>
+                    <select name="cars" id="orgsize">
+                        <option value="">{{ orgForm }}</option>
+                    </select>
 
-                <br/>
-                <br/>
-                <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                <input type="reset" value="{% translate "Reset" %}"  />
+                    <br/>
+                    <br/>
+                    <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                    <input type="reset" value="{% translate "Reset" %}"  />
+                </form>
             </form>
         </div>
     </form>
