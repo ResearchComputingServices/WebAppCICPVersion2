@@ -52,12 +52,12 @@
             <div class="hamburger"></div>
         </div>
             <div class="filterbox">
-                    <label for="province">Province</label>
+                    {% comment %} <label for="province">Province</label>
                     <select name="cars" id="province">
                     <option value="">{{ provinceForm }}</option>
-                    </select>
+                    </select> {% endcomment %}
 
-                    <label for="language">Language</label>
+                    {% comment %} <label for="language">Language</label>
                     <select name="cars" id="language">
                     <option value="">{{ languageForm }}</option>
                     </select>
@@ -65,8 +65,11 @@
                     <label for="orgsize">Organization Size</label>
                     <select name="cars" id="orgsize">
                         <option value="">{{ orgForm }}</option>
-                    </select>
+                    </select> {% endcomment %}
                     
+                    {{ provinceForm }}
+                    {{ languageForm }}
+                    {{ orgForm }}
                     <br/>
                     <br/>
                     <input class="form-input" type="submit" value="{% translate "Search" %}"/>
