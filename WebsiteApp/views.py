@@ -79,7 +79,8 @@ def report_results_EN(request):
 
         form_filter = PrimaryFilterForm()
         province_form_filter = ProvinceFilterForm()
-     
+        language_filter_form = LanguageFilterForm()
+        org_size_filter = OrgsizeFilterForm()
         # For default selection and display of latest report
 
         # Get the latest Friday date from today
@@ -95,7 +96,7 @@ def report_results_EN(request):
         # Format the date from Y%-%m-%d to respective english and french formats in text
         wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
     
-        context = {'form_filter' : form_filter,'province_form_filter': province_form_filter, 'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
+        context = {'form_filter' : form_filter,'province_form_filter': province_form_filter, 'language_filter_form':language_filter_form,'org_size_filter' :org_size_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
         
         # Create the FrontEndQuery object for todays date
         front_end_query = FrontEndQuery()
