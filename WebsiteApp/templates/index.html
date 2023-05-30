@@ -49,13 +49,13 @@
         </div>
         
         
-        <div id="menuButton" onclick="toggleblackbox()">
+        {% comment %} <div id="menuButton" onclick="toggleblackbox()">
             <div class="hamburger"></div>
             <div class="hamburger"></div>
             <div class="hamburger"></div>
-        </div>
+        </div> {% endcomment %}
 
-        {% comment %} <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox()"></a> {% endcomment %}
+        <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox(event)"></a>
         <div class="filterbox" id="blackbox">
             <form method="get">
                 {% csrf_token %}
