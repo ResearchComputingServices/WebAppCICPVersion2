@@ -55,10 +55,12 @@
         <div class="filterbox">
             <form method="get">
                 {% csrf_token %}
-               
-                    {{ province_form_filter.as_div }}
-                    {{language_filter_form.as_div}}
-                    {{org_size_filter.as_div}}
+                    <div id="sec-filters">
+                        {{province_form_filter.as_div}}
+                        {{language_filter_form.as_div}}
+                        {{org_size_filter.as_div}}
+                    </div>
+                    
                
                     <input class="form-input" type="submit" value="{% translate "Search" %}"/>
             </form>
