@@ -2,6 +2,7 @@ from django import forms
 from datetime import datetime
 from functools import partial
 from django.utils.translation import gettext, gettext_lazy as _
+# from django_select2.forms import Select2MultipleWidget,Select2Widget
 
 PROVINCE_CHOICES= [
     ('AB', _('Alberta')),
@@ -47,14 +48,14 @@ class PrimaryFilterForm(forms.Form):
     
     
 class ProvinceFilterForm(forms.Form):
-    province= forms.MultipleChoiceField(widget=forms.SelectMultiple(attrs={'class': 'select-hidden'}),choices=PROVINCE_CHOICES,
+    province= forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=PROVINCE_CHOICES,
                                         label=_('Province'),required=False)
 
 class LanguageFilterForm(forms.Form):
-    language = forms.MultipleChoiceField(widget=forms.SelectMultiple(attrs={'class': 'select-hidden'}),choices=LANGUAGE_CHOICES,
+    language = forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=LANGUAGE_CHOICES,
                                         label = _('Language Preference'),required=False)
 
 class OrgsizeFilterForm(forms.Form):
-    size = forms.MultipleChoiceField(widget=forms.SelectMultiple(attrs={'class': 'select-hidden'}),choices=ORGANIZATION_SIZES,
+    size = forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=ORGANIZATION_SIZES,
                                     label=_('Size'),required=False)
     

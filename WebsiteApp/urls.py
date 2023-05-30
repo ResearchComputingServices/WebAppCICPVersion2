@@ -3,5 +3,6 @@ from WebsiteApp import views
 
 urlpatterns = [
     path('',views.report_results_EN, name='report_results_EN'),
+    # path("select2/", include("django_select2.urls")),
     
 ]

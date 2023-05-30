@@ -1,4 +1,9 @@
 $(document).ready(function () {
+
+    $(document).ready(function () {
+        $('.select2').select2(); // Initialize Select2 on the select fields
+    });
+
     $('.select-hidden').change(function () {
         var selectedOptions = $(this).val();
         var tagsContainer = $('#selected-options-tags');
@@ -33,5 +38,7 @@ $(document).ready(function () {
             tag.remove();
         }
     });
+
+
 });
 
