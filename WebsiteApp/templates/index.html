@@ -47,12 +47,18 @@
                 </h4>
             {% endif %}
         </div>
+        
+        {% comment %} <a onclick="toggleblackbox()" id="boxButton">
+        
         <div id="hamburger">
             <div class="hamburger"></div>
             <div class="hamburger"></div>
             <div class="hamburger"></div>
         </div>
-        <div class="filterbox">
+        </a> {% endcomment %}
+
+        <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox()"></a>
+        <div class="filterbox" id="blackbox">
             <form method="get">
                 {% csrf_token %}
                     <div id="sec-filters">
@@ -60,14 +66,8 @@
                         {{language_filter_form.as_div}}
                         {{org_size_filter.as_div}}
                     </div>
-                    
-               
-                    <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                <input class="form-input" type="submit" value="{% translate "Search" %}"/>
             </form>
-        </div>
-        <div id="selected-options-container">
-            <input type="hidden" id="selected-options" name="selected_options" value="">
-            <div id="selected-options-tags"></div>
         </div>
         <main class="main-content">
             {% if info %}
