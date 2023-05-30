@@ -1,4 +1,4 @@
-function toggleblackbox() {
+function toggleblackbox(e) {
 
     e.preventDefault();
     // get the clock
