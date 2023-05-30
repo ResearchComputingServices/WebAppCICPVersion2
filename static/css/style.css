@@ -104,19 +104,20 @@ div {
     flex-wrap: wrap;
 }
 
-/* div.hamburger {
+div.hamburger {
     width: 35px;
     height: 5px;
     background-color: black;
     margin: 6px 0;
 }
 
-#hamburger {
+#menuButton {
     margin: auto;
     width: 50%;
     padding: 10px;
-} */
+}
 
+/* 
 .menu {
     width: 30px;
     height: 20px;
@@ -142,7 +143,7 @@ div {
 .menu:before {
     top: 8px;
     left: 0;
-}
+} */
 
 div.filterbox {
     width: 800px;

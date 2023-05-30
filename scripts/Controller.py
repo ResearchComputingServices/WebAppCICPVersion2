@@ -289,11 +289,13 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
             responsesToQuestion = userResponseQuerySet.filter(questionID=subQuestion.id)
     
             for response in responsesToQuestion:
+                print(response)
                 userResponseList.append(response)
     else:
         responsesToQuestion = userResponseQuerySet.filter(questionID=question.id)
     
         for response in responsesToQuestion:
+            print(response)
             userResponseList.append(response)
         
     return userResponseList
@@ -392,8 +394,8 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
 def run(*arg):    
     
     aQuery = FrontEndQuery()   
-    aQuery.qualtricsSurveyID = 'SV_0eMEVIZkeSbKyjk'#'SV_6mJwD0WeUarScKy'
-    aQuery.locations = ["ON"]
+    aQuery.qualtricsSurveyID = 'SV_0lJ2ddSC0PnAQPI'#'SV_6mJwD0WeUarScKy'
+    aQuery.locations = ''
     images, data, errorLogs = HandleFrontEndQuery(aQuery) 
 
     print('~~~~~~~~~~ QUERY ERROR LOG ~~~~~~~~~~')

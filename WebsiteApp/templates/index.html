@@ -25,7 +25,7 @@
             <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
                   rel="Stylesheet"
                   type="text/css"/>
-           <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css"> 
+           {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">  {% endcomment %}
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
         {% endblock styles %}
     </head>
@@ -48,16 +48,14 @@
             {% endif %}
         </div>
         
-        {% comment %} <a onclick="toggleblackbox()" id="boxButton">
         
-        <div id="hamburger">
+        <div id="menuButton" onclick="toggleblackbox()">
             <div class="hamburger"></div>
             <div class="hamburger"></div>
             <div class="hamburger"></div>
         </div>
-        </a> {% endcomment %}
 
-        <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox()"></a>
+        {% comment %} <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox()"></a> {% endcomment %}
         <div class="filterbox" id="blackbox">
             <form method="get">
                 {% csrf_token %}
@@ -130,7 +128,7 @@
                     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                     crossorigin="anonymous"></script>
             {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> {% endcomment %}
-            <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+            {% comment %} <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script> {% endcomment %}
             <script src="{% static 'js/datepicker.js' %}"></script>
             <script src="{% static 'js/index.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>
