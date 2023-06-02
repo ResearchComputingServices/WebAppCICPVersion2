@@ -289,13 +289,13 @@ def GetUserResponsesToQuestion(question, userResponseQuerySet):
             responsesToQuestion = userResponseQuerySet.filter(questionID=subQuestion.id)
     
             for response in responsesToQuestion:
-                print(response)
+                #print(response)
                 userResponseList.append(response)
     else:
         responsesToQuestion = userResponseQuerySet.filter(questionID=question.id)
     
         for response in responsesToQuestion:
-            print(response)
+            #print(response)
             userResponseList.append(response)
         
     return userResponseList

@@ -98,9 +98,16 @@ def DataVisualizerMain(responseDict,
             print('[ERROR]: Unknown question type: ', question.questionType)
         else:                                              
             s = time.time()
+            
+            lstOfRespondents = {}
+            for r in responseDict[question]:
+                lstOfRespondents[r.userID.id] = 1
+            numOfRespondents = len(list(lstOfRespondents.keys()))
+            print(numOfRespondents)
 
             imageFilePath = questionHandleDict[question.questionType](  question = question,
-                                                                        userResponses = responseDict[question], 
+                                                                        userResponses = responseDict[question],
+                                                                        numOfRespondents = numOfRespondents, 
                                                                         isEnglish= isEnglish,
                                                                         saveToDirPath = saveToDirPath) 
             e = time.time()

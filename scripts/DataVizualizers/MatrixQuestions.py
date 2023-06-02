@@ -22,6 +22,7 @@ def GetSubQuestionResponseDict(listOfUserResponses):
 
 def VisualizeMatrixQuestion(question, 
                             userResponses,
+                            numOfRespondents,
                             isEnglish = True,
                             saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
     
@@ -36,7 +37,8 @@ def VisualizeMatrixQuestion(question,
     # Get all the subquestions
     subQuestionsQuerySet = QuestionTable.objects.filter(parentQuestionID=question)
     
-    totalResponses = len(userResponses)
+    totalResponses = numOfRespondents
+    
     
     for r in userResponses:
         subQ = subQuestionsQuerySet.filter(id=r.questionID.id).first()

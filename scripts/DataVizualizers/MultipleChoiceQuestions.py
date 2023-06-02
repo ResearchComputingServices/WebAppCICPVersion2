@@ -14,6 +14,7 @@ from scripts.DataVizualizers.VizUtils import *
 
 def VisualizeMultipleChoiceQuestion(question, 
                                     userResponses,
+                                    numOfRespondents,
                                     isEnglish = True,
                                     saveToDirPath = TMP_FIGURE_FOLDER_PATH):    
     title = GetGraphicTitle(question, isEnglish)
@@ -21,7 +22,8 @@ def VisualizeMultipleChoiceQuestion(question,
     # Generate the responseDict (choiceID:average as the key:value pair) initially set the average to 0
     choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)
     responseDict = {}
-    totalResponses = 0   
+    totalResponses = numOfRespondents
+    totalResponses1 = 0
 
     for choice in choiceQuerySet:
         key = ''
@@ -49,11 +51,11 @@ def VisualizeMultipleChoiceQuestion(question,
         if response.answerValue != None and str(response.answerValue).isnumeric():
             value = int(response.answerValue)
             responseDict[key] += value
-            totalResponses +=1
+            totalResponses1 +=1
     
     for key in responseDict.keys():
-        if float(totalResponses) > 0:
-            responseDict[key] = float(responseDict[key]) / float(totalResponses)   
+        if float(totalResponses1) > 0:
+            responseDict[key] = float(responseDict[key]) / float(totalResponses1)   
        
     return CreatePieChart(  responseDict, 
                             title, 

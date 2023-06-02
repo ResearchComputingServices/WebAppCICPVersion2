@@ -16,6 +16,7 @@ from scripts.DataVizualizers.VizUtils import *
 
 def VisualizeOpenTextQuestion(  question, 
                                 userResponses,
+                                numOfRespondents,
                                 isEnglish=True,
                                 saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     
@@ -71,11 +72,7 @@ def CreateWordCloud(wordCloudText,
     if len(wordCloudText) == 0:
         wordCloudText = 'ERRROR1'
     
-    print('BEFORE:')
-    print(wordCloudText)
     wordCloudText = GetTextForWordCloud(wordCloudText, destCode)
-    print('AFTER:')
-    print(wordCloudText)
 
     if len(wordCloudText) == 0:
         wordCloudText = 'ERRROR2'

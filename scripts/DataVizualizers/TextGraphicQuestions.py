@@ -7,6 +7,7 @@ from scripts.DataVizualizers.OpenTextQuestions import CreateWordCloud
 ##################################################################################################################################
 def VisualizeTextGraphicQuestion(   question, 
                                     userResponses,
+                                    numOfRespondents,
                                     isEnglish = True,
                                     saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
     print('VisualizeTextGraphicQuestion')

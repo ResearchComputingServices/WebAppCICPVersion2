@@ -16,6 +16,7 @@ from scripts.DataVizualizers.VizUtils import *
 
 def VisualizeSliderQuestion(question, 
                             userResponses,
+                            numOfRespondents,
                             isEnglish = True,
                             saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
     
@@ -31,12 +32,14 @@ def VisualizeSliderQuestion(question,
         filename = VisualizeSingleChoiceSliderQuestion( title=title,
                                                         choiceQuerySet=choiceQuerySet,
                                                         userResponses=userResponses,
+                                                        numOfRespondents = numOfRespondents,
                                                         isEnglish=isEnglish,
                                                         saveToDirPath=saveToDirPath)
     else:
         filename = VisualizeMultiChoiceSliderQuestion( title=title,
                                                         choiceQuerySet=choiceQuerySet,
                                                         userResponses=userResponses,
+                                                        numOfRespondents = numOfRespondents,
                                                         isEnglish=isEnglish,
                                                         saveToDirPath=saveToDirPath)
     
@@ -48,13 +51,14 @@ def VisualizeSliderQuestion(question,
 def VisualizeSingleChoiceSliderQuestion(title, 
                                         choiceQuerySet,
                                         userResponses,
+                                        numOfRespondents,
                                         isEnglish = True,
                                         saveToDirPath = TMP_FIGURE_FOLDER_PATH):    
     # Create a histogram of responses
     valueDict = {}
     minValue = A_LARGE_NUMBER
     maxValue = -1*A_LARGE_NUMBER
-    numberOfResponses = len(userResponses)
+    numberOfResponses = numOfRespondents
     for response in userResponses:
         
         if response.answerValue == None or not str(response.answerValue).isnumeric():
@@ -115,11 +119,13 @@ def VisualizeSingleChoiceSliderQuestion(title,
 def VisualizeMultiChoiceSliderQuestion( title, 
                                         choiceQuerySet,
                                         userResponses,
+                                        numOfRespondents,
                                         isEnglish = True,
                                         saveToDirPath = TMP_FIGURE_FOLDER_PATH):  
     responseDict = {}
     counter = {}
-    totalResponses = 0  
+    totalResponses = numOfRespondents
+    totalResponses1 = 0 
    
     for choice in choiceQuerySet:
         key = ''
@@ -143,7 +149,7 @@ def VisualizeMultiChoiceSliderQuestion( title,
             value = int(response.answerValue)
             responseDict[key] += value
             counter[key] += 1
-            totalResponses +=1
+            totalResponses1 +=1
  
     # calculate the average        
     for key in responseDict.keys():

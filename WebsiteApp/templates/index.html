@@ -59,12 +59,15 @@
         <div class="filterbox" id="blackbox">
             <form method="get">
                 {% csrf_token %}
-                    <div id="sec-filters">
-                        {{province_form_filter.as_div}}
-                        {{language_filter_form.as_div}}
-                        {{org_size_filter.as_div}}
-                    </div>
-                <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+
+                        <span class="sec-filters">
+                            {{province_form_filter}}
+                            {{language_form_filter}}
+                            {{org_size_form_filter}}
+                        </span>
+                   
+                    <div><input class="form-input" type="submit" value="{% translate "Search" %}"/></div>
+                
             </form>
         </div>
         <main class="main-content">

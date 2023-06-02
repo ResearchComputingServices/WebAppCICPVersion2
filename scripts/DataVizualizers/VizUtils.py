@@ -250,14 +250,14 @@ def Translate(inputText, srcCode, destCode):
     else:
         textList.append(inputText)
  
-    for text in textList:        
+    for text in textList:             
         try:
             result = translator.translate(text,src=srcCode,dest=destCode)
             outputText = outputText + ' ' + result.text
-        except:
+        except Exception as e:
             print('[ERROR]: GetTextForWordCloud: Translation Service not available')
-            translatedText = responseText       
-    
+            print(e)
+
     return outputText
 
 ##################################################################################################################################

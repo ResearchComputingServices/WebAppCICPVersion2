@@ -21,10 +21,14 @@ def report_results_EN(request):
         # Pass the different form filter options
         form_filter = PrimaryFilterForm(request.GET)
         province_form_filter = ProvinceFilterForm(request.GET)
+        language_form_filter = LanguageFilterForm(request.GET)
+        org_size_form_filter = OrgsizeFilterForm(request.GET)
 
 
         context['form_filter'] = form_filter
         context['province_form_filter'] = province_form_filter
+        context['language_form_filter'] = language_form_filter
+        context['org_size_form_filter'] = org_size_form_filter
 
         # Date Format - Y%-%m-%d
         # Type - str
@@ -47,9 +51,9 @@ def report_results_EN(request):
             context['friday_text_date'] = friday_text_date
 
         # Get other filter options from the get request
-        location = (request.GET.getlist('province'))
+        location = request.GET.getlist('province')
         language_preference = request.GET.getlist('language')
-        organization_size = (request.GET.getlist('size'))
+        organization_size = request.GET.getlist('size')
 
         if user_requested_friday_date == "2022-12-23" or user_requested_friday_date == "2022-12-30" :
             info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
@@ -79,8 +83,8 @@ def report_results_EN(request):
 
         form_filter = PrimaryFilterForm()
         province_form_filter = ProvinceFilterForm()
-        language_filter_form = LanguageFilterForm()
-        org_size_filter = OrgsizeFilterForm()
+        language_form_filter = LanguageFilterForm()
+        org_size_form_filter = OrgsizeFilterForm()
         # For default selection and display of latest report
 
         # Get the latest Friday date from today
@@ -96,7 +100,7 @@ def report_results_EN(request):
         # Format the date from Y%-%m-%d to respective english and french formats in text
         wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
     
-        context = {'form_filter' : form_filter,'province_form_filter': province_form_filter, 'language_filter_form':language_filter_form,'org_size_filter' :org_size_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
+        context = {'form_filter' : form_filter,'province_form_filter': province_form_filter, 'language_form_filter':language_form_filter,'org_size_form_filter' :org_size_form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
         
         # Create the FrontEndQuery object for todays date
         front_end_query = FrontEndQuery()

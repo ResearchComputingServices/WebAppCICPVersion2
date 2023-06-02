@@ -15,6 +15,7 @@ from textwrap import fill
 ##################################################################################################################################
 def VisualizeRankOrderQuestion( question, 
                                 userResponses,
+                                numOfRespondents,
                                 isEnglish = True,
                                 saveToDirPath = TMP_FIGURE_FOLDER_PATH): 
     
@@ -23,7 +24,7 @@ def VisualizeRankOrderQuestion( question,
     # Generate the responseDict (choiceID:average as the key:value pair) initially set the average to 0
     choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)
         
-    totalResponses = len(userResponses)
+    totalResponses = numOfRespondents
     
     # Create the response dictionary
     responseDict= {}
