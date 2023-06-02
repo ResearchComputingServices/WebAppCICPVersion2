@@ -157,6 +157,10 @@ span.sec-filters {
     color: #fff;
 }
 
+#secsearch {
+    margin: auto;
+}
+
 /* CSS code for extra small devices */
 @media (max-width: 575.98px) {
 
