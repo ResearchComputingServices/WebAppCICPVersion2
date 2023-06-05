@@ -339,9 +339,10 @@ div {
 
     .images img {
         margin-bottom: 2rem;
-        margin-left: 1rem;
-        max-width: 500px;
-        max-height: 500px;
+        margin-left: 30%;
+        max-height: 900px;
+        /* max-width: 500px;
+        max-height: 500px; */
     }
 
     .overlay-content {
