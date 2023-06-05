@@ -28,6 +28,7 @@
            {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">  {% endcomment %}
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
         {% endblock styles %}
+        {{ form.media }}
     </head>
     <body>
         <div>
@@ -106,13 +107,13 @@
                     </div>
             {% else %}
                  <section class="images">
-                        <div class="row">
+                        {% comment %} <div class="row"> {% endcomment %}
                             {% for image_url in image_filepaths %}
-                                <div class="column">
+                                {% comment %} <div class="column"> {% endcomment %}
                                     <img src={{ image_url }} alt="Image">
-                                </div>
+                                {% comment %} </div> {% endcomment %}
                             {% endfor %}
-                        </div>
+                        {% comment %} </div> {% endcomment %}
                     </section>
                 {% endif %}
             {% endif %}

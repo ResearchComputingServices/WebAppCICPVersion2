@@ -45,10 +45,26 @@ class PrimaryFilterForm(forms.Form):
     report_date = forms.DateField(widget=DateInput(),label=_('Report Date'),required=False)
     theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,
                                     label = _('Theme'),required=False)
-    
+
+
+
+class MultiSelectWidget(forms.SelectMultiple):
+    class Media:
+        css = {
+            'all': ('https://code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css',),
+        }
+        js = (
+            'https://code.jquery.com/jquery-3.6.0.min.js',
+            'https://code.jquery.com/ui/1.12.1/jquery-ui.js',
+        )
+
+    def build_attrs(self, *args, **kwargs):
+        attrs = super().build_attrs(*args, **kwargs)
+        attrs['class'] = 'multiselect-widget'
+        return attrs
     
 class ProvinceFilterForm(forms.Form):
-    province= forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=PROVINCE_CHOICES,
+    province= forms.MultipleChoiceField(widget=MultiSelectWidget,choices=PROVINCE_CHOICES,
                                         label=_('Province'),required=False)
 
 class LanguageFilterForm(forms.Form):
