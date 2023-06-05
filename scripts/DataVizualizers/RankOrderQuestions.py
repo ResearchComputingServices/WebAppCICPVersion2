@@ -142,7 +142,7 @@ def CreateStackedBarChart(  responseDict,
         
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=(10,10))
     plt.subplots_adjust(left=0.22)
     ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
    
@@ -151,7 +151,8 @@ def CreateStackedBarChart(  responseDict,
             kind='barh', 
             stacked=True,
             ax=ax1,
-            colormap=cmap)
+            colormap=cmap,
+            bbox_to_anchor=(1.05,1))
     
     ax1.set_title(graphicTitle,wrap=True)
     ax1.set_ylabel('')
