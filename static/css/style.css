@@ -341,8 +341,8 @@ div {
         margin-bottom: 2rem;
         margin-left: 30%;
         max-height: 900px;
-        /* max-width: 500px;
-        max-height: 500px; */
+        max-width: 500px;
+        /* max-height: 500px; */
     }
 
     .overlay-content {
