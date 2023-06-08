@@ -25,10 +25,8 @@
             <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
                   rel="Stylesheet"
                   type="text/css"/>
-           {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">  {% endcomment %}
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
         {% endblock styles %}
-        {{ form.media }}
     </head>
     <body>
         <div>
@@ -48,14 +46,6 @@
                 </h4>
             {% endif %}
         </div>
-        
-        
-        {% comment %} <div id="menuButton" onclick="toggleblackbox()">
-            <div class="hamburger"></div>
-            <div class="hamburger"></div>
-            <div class="hamburger"></div>
-        </div> {% endcomment %}
-
         <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox(event)"></a>
         <div class="filterbox" id="blackbox">
             <form method="get">
@@ -107,25 +97,9 @@
                         </div>
                 {% else %}
                     <section class="images">
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div class="graph">
-                                            {% for image_url in image_filepaths %}                                    
-                                                    <img src={{ image_url }} alt="Image">
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </a>
-                            </div>
+                        {% for image_url in image_filepaths %}                                    
+                                <img src={{ image_url }} alt="Image">
+                        {% endfor %}
                     </section>
                 {% endif %}
             {% endif %}
@@ -143,8 +117,6 @@
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
                     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                     crossorigin="anonymous"></script>
-            {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> {% endcomment %}
-            {% comment %} <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script> {% endcomment %}
             <script src="{% static 'js/datepicker.js' %}"></script>
             <script src="{% static 'js/index.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>

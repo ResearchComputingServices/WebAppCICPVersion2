@@ -118,20 +118,47 @@ def CreatePieChart( responseDict,
             (185/255,44/255,49/255),
             (200/255,200/255,200/255)]
 
-    fig = plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=(12,12))
     ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
     ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
 
-    ax1.pie(values,
-            #labels=names,
-            autopct='%1.1f%%',
-            pctdistance=0.8,
-            colors=cmap, 
-            startangle=90,
-            counterclock=False)
+
+    #ax1.pie(values,
+        #labels=names,
+        #autopct='%1.1f%%',
+        #pctdistance=0.8,
+        #colors=cmap, 
+        #startangle=90,
+        #counterclock=False)
+
+    #Added to modify pie chart - Rohan
+    perc = [str(round(e / s * 100., 2)) + '%' for s in (sum(values),) for e in values]
     
+    wedges, texts = ax1.pie(values,
+                            #labels=names,
+                            wedgeprops=dict(width=0.5),
+                            #autopct='%1.1f%%',
+                            pctdistance=0.8,
+                            colors=cmap, 
+                            startangle=90,
+                            counterclock=False)
+
+    #wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=-40, radius = 0.8,colors = cmap)
+    kw = dict(arrowprops=dict(arrowstyle="-"),zorder=0, va="center")
+
+    for i, p in enumerate(wedges):
+        ang = (p.theta2 - p.theta1) / 2. + p.theta1
+        y = np.sin(np.deg2rad(ang))
+        x = np.cos(np.deg2rad(ang))
+        yc = np.arcsin(y) / (np.pi / 2)
+        horizontalalignment = {-1: "right", 1: "left"}[int(np.sign(x))]
+        connectionstyle = f'angle,angleA=0,angleB={ang}'
+        kw["arrowprops"].update({"connectionstyle": connectionstyle})
+        ax1.annotate(names[i] + ' ' + str(values[i]), xy = (0.5 * x, 0.5 * y), xytext = ((1.0 + (i % 2) * 0.4) * np.sign(x), 1.4 * yc),
+                    horizontalalignment = horizontalalignment, fontsize = 'x-small', **kw)
+
     plt.subplots_adjust(right=0.8)
-    plt.legend(names, bbox_to_anchor=(0.9 ,1.), loc="upper left")
+    #plt.legend(names, bbox_to_anchor=(0.9 ,1.), loc="upper left")
     
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)

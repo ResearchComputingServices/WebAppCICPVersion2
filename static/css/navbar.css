@@ -16,5 +16,13 @@
 
 .navbutton {
     background-color: black;
+}
+
+.navbutton.nav-link {
+    color: white;
+}
+
+.dropdown-item {
+    background-color: black;
     color: white;
 }
