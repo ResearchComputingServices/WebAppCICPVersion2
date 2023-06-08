@@ -144,6 +144,30 @@ div {
     left: 0;
 }
 
+.carousel {
+    overflow: hidden;
+    width: 100%;
+    height: 400px;
+    /* Adjust the height as needed */
+}
+
+.carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.carousel-item {
+    flex: 0 0 100%;
+    padding: 20px;
+}
+
+.graph {
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    /* Additional styling for the graph container */
+}
+
 /* CSS code for extra small devices */
 @media (max-width: 575.98px) {
 

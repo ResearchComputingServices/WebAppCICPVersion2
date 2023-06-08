@@ -142,8 +142,11 @@ def CreateStackedBarChart(  responseDict,
         
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(8,8))
-    plt.subplots_adjust(left=0.22)
+    fig = plt.figure(figsize=(14,14))
+    #fig = plt.figure(figsize=(20,20))
+    
+    #Added comment for below line
+    #plt.subplots_adjust(left=0.22)
     ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
    
     # plot data in stack manner of bar type
@@ -154,10 +157,16 @@ def CreateStackedBarChart(  responseDict,
             colormap=cmap)
             #bbox_to_anchor=(1.05,1))
     
+    #Below two lines added extra
+    plt.subplots_adjust(right=0.8)
+    #plt.legend(names, bbox_to_anchor=(0.9 ,1.), loc="upper left")
+    
     ax1.set_title(graphicTitle,wrap=True)
-    #ax1.set_ylabel(bbox_to_anchor=(1.05,1))
+    ax1.set_ylabel('')
     ax1.set_xticks([0,25,50,75,100])
-    ax1.legend(bbox_to_anchor=(1.05,1))
+
+    #Modified for the labels to display outside - Rohan
+    ax1.legend(bbox_to_anchor=(1.03,1))
     
     if isEnglish:
         ax1.set_xlabel('% of Responses')
@@ -174,7 +183,7 @@ def CreateStackedBarChart(  responseDict,
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=20)
     ax3.axis('off')
 
     # plt.show() 

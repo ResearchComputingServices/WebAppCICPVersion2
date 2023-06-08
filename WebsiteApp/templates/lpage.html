@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+{% load static %}
+{% load i18n %}
+{% load l10n %}
+<html lang="en">
+    <head>
+        <link rel="icon"
+              href="{% static 'webpage_images/favicon.ico' %}"
+              type="image/x-icon"/>
+        <title>
+            {% block title %}
+                CICP-PCPOB
+            {% endblock title %}
+        </title>
+        <meta charset="UTF-8"/>
+        <meta name="description" content="Main Website"/>
+        <meta name="keywords" content="HTML, CSS, JavaScript"/>
+        <meta name="author" content="Priyanka"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        {% block styles %}
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
+                  rel="stylesheet"
+                  integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
+                  crossorigin="anonymous"/>
+            <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
+                  rel="Stylesheet"
+                  type="text/css"/>
+           {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">  {% endcomment %}
+            <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+        {% endblock styles %}
+        {{ form.media }}
+    </head>
+<body>
+    <div>
+        {% include "navbar.html" %}           
+    </div>
+
+    <h1>WELCOME TO DATA DASHBOARD</h1>
+    <h2>Check out the latest report <a href="">Latest Report</a></h2>
+    <h3>Explore reports - 
+        <form autocomplete="off"
+          id="myForm"   
+          method="get"
+          action="{% url 'datereports' %}">
+                {% csrf_token %}
+                <form class="ml-md-2" method="get">
+                 {{dateFilter.as_div}}
+                <input class="form-input" type="submit" value="Search"/>
+            </form>
+        </form>
+        
+    </h3>
+    <h3>Explore reports - 
+        
+                <form action="{% url 'themereports' %}" method="get">
+                    {{themeFilter}}
+                    <input class="form-input" type="submit" value="Search"/>
+                </form>
+        
+    </h3>
+    {% block scripts %}
+            <script src="https://kit.fontawesome.com/17431f7655.js"
+                    crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+                    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+                    crossorigin="anonymous"></script>
+
+            {% comment %} DatePicker {% endcomment %}
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
+                    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
+                    crossorigin="anonymous"></script>
+            <script src="{% static 'js/datepicker.js' %}"></script>
+            <script src="{% static 'js/index.js' %}"></script>
+            <script src="{% static 'js/navbar.js' %}"></script>
+    {% endblock scripts %}
+</body>
+
+</html>

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{% comment %} <!DOCTYPE html>
 {% load static %}
 {% load i18n %}
 {% load l10n %}
@@ -18,14 +18,13 @@
         <meta name="author" content="Priyanka"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         {% block styles %}
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
                   rel="stylesheet"
                   integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
                   crossorigin="anonymous"/>
             <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
                   rel="Stylesheet"
                   type="text/css"/>
-           {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">  {% endcomment %}
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
         {% endblock styles %}
         {{ form.media }}
@@ -33,29 +32,21 @@
     <body>
         <div>
             {% include "navbar.html" %}
-            {% include "sidebar.html" %}
         </div>
         <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span>
         <div id="heading" class="justify-content-center mx-auto">
-            {% if wednesday_date %}
+            {% if theme %}
                 <h4>
-                    <strong><center>{% trans "Weekly Survey Distributed -" %}{% blocktrans %} {{wednesday_date }}{% endblocktrans %}</center></strong>
-                </h4>
-            {% endif %}
-            {% if friday_text_date %}
-                <h4>
-                    <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date }}{% endblocktrans %}</center></strong>
+                    <strong><center>{% trans "Reports by Theme -" %}{% blocktrans %} {% endblocktrans %}</center></strong>
                 </h4>
             {% endif %}
         </div>
-        
-        
-        {% comment %} <div id="menuButton" onclick="toggleblackbox()">
-            <div class="hamburger"></div>
-            <div class="hamburger"></div>
-            <div class="hamburger"></div>
-        </div> {% endcomment %}
-
+        <h1>Themes</h1>
+        <form action="" method="get">
+            <a href="">Policy</a>
+            <a href="">Policy</a>
+            <a href="">Policy</a>
+        </form>
         <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox(event)"></a>
         <div class="filterbox" id="blackbox">
             <form method="get">
@@ -88,45 +79,29 @@
                     </div>
                 </div>
             {% else %}
-                {% if errors %}
-                        <div class="container">
-                            <div id="errorcard"
-                                 class="d-flex align-items-center justify-content-center h-100">
-                                <div class="card text-center">
-                                    <div class="card-header text-light">{% translate "Alert!!" %}</div>
-                                    <div class="card-body">
-                                        <p class="card-text text-light">
-                                            {% for error in errors %}
-                                                <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
-                                            {% endfor %}
-                                        </p>
-                                        <a href="{% url 'report_results_EN' %}" class="btn text-light">{% translate "Try Again" %}</a>
-                                    </div>
+            {% if errors %}
+                    <div class="container">
+                        <div id="errorcard"
+                             class="d-flex align-items-center justify-content-center h-100">
+                            <div class="card text-center">
+                                <div class="card-header text-light">{% translate "Alert!!" %}</div>
+                                <div class="card-body">
+                                    <p class="card-text text-light">
+                                        {% for error in errors %}
+                                            <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
+                                        {% endfor %}
+                                    </p>
+                                    <a href="{% url 'report_results_EN' %}" class="btn text-light">{% translate "Try Again" %}</a>
                                 </div>
                             </div>
                         </div>
-                {% else %}
-                    <section class="images">
-                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
-                                <div class="carousel-inner">
-                                    <div class="carousel-item active">
-                                        <div class="graph">
-                                            {% for image_url in image_filepaths %}                                    
-                                                    <img src={{ image_url }} alt="Image">
-                                            {% endfor %}
-                                        </div>
-                                    </div>
-                                </div>
-                                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
-                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Previous</span>
-                                        </a>
-                                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-bs-slide="next">
-                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                            <span class="visually-hidden">Next</span>
-                                        </a>
-                            </div>
-                    </section>
+                    </div>
+            {% else %}
+                <section class="images">                        
+                        {% for image_url in image_filepaths %}
+                            <img src={{ image_url }} alt="Image">
+                        {% endfor %}
+                </section>
                 {% endif %}
             {% endif %}
         </main>
@@ -139,16 +114,28 @@
                     crossorigin="anonymous"></script>
 
             {% comment %} DatePicker {% endcomment %}
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+            {% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
                     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                     crossorigin="anonymous"></script>
-            {% comment %} <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script> {% endcomment %}
-            {% comment %} <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script> {% endcomment %}
+            
             <script src="{% static 'js/datepicker.js' %}"></script>
             <script src="{% static 'js/index.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>
             <script src="{% static 'js/sidebar.js' %}"></script>
         {% endblock scripts %}
     </body>
+</html> {% endcomment %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>You are in theme page</h1>
+</body>
 </html>

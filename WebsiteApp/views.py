@@ -12,7 +12,9 @@ def report_results_EN(request):
    
     # handle the case where the user has specified front end query options
     if request.GET:
-        
+
+
+        print("Insdie request.get")   
 
         # Create the FrontEndQuery object
         front_end_query = FrontEndQuery()
@@ -37,6 +39,7 @@ def report_results_EN(request):
       
               
         if len(user_requested_friday_date) == 0:
+              print("Inside the theme if block")
               front_end_query.questionThemes = question_theme
 
         elif  len(question_theme) == 0:
@@ -66,6 +69,7 @@ def report_results_EN(request):
         front_end_query.siteLanguage = get_language()
         
         if front_end_query:
+            print("Next step is handlefrontend query function")
             query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
             print("query_response_imagefilepaths",query_response_imagefilepaths)
             
@@ -118,6 +122,87 @@ def report_results_EN(request):
                     context["image_filepaths"] = query_response_imagefilepaths
        
         return render(request, 'index.html', context)
+
+
+# Function to render two different pages for theme and date
+def themeOrDate(request,theme,date):
+    
+    front_end_query = FrontEndQuery()
+    context = {}
+
+    themeFilter = ThemeFilterForm()
+    dateFilter = DateFilterForm()
+    provinceFilter = ProvinceFilterForm()
+    languageFilter = LanguageFilterForm()
+    orgFilter = OrgsizeFilterForm()
+    
+    
+    context['province_form_filter'] = provinceFilter
+    context['language_form_filter'] = languageFilter
+    context['org_size_form_filter'] = orgFilter
+
+    location = request.GET.getlist('province')
+    language_preference = request.GET.getlist('language')
+    organization_size = request.GET.getlist('size')
+    
+    
+    if date is None:
+        context['themeFilter'] = themeFilter
+        if request.GET:
+            front_end_query.questionThemes = request.GET.getlist('theme')
+        else:
+            front_end_query.questionThemes = theme
+
+    elif theme is None:
+        context['dateFilter'] = dateFilter
+        if request.GET:
+             front_end_query.date = str(get_wed_date(request.GET.get('report_date', None)))
+        else:
+             front_end_query.date = str(get_wed_date(date))  
+
+    front_end_query.locations = location
+    front_end_query.languagePreference = language_preference
+    front_end_query.organizationSizes = organization_size
+    front_end_query.qualtricsSurveyID = ''
+    front_end_query.siteLanguage = get_language()
+    
+    if front_end_query:
+        query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
+        print("query_response_imagefilepaths",query_response_imagefilepaths)
+
+        return query_response_imagefilepaths,query_response_csv,errors
+        
+        # if len(errors) != 0:
+        #     context["errors"] = errors
+        
+        # if len(query_response_imagefilepaths) != 0:
+        #     context["image_filepaths"] = query_response_imagefilepaths   
+      
+    if date is None:
+        return render(request,'themereports.html')
+    else:
+         return render(request, 'datereports.html')
+
+def landingPageView(request):
+
+    context = {}
+    themeFilter = ThemeFilterForm(request.GET)
+    dateFilter = DateFilterForm(request.GET)
+    context = {'themeFilter': themeFilter ,'dateFilter' : dateFilter}
+    questionTheme = request.GET.getlist('theme')
+    reportDate = request.GET.getlist('report_date')
+
+    if len(questionTheme) != 0 :
+        themeOrDate(request,theme=questionTheme,date=None)
+        return render(request,'themereports.html')
+    
+    elif reportDate :
+        themeOrDate(request,theme=None,date=reportDate)
+        return render(request, 'datereports.html')
+     
+    else:
+        return render(request,'lpage.html',context)
+      
     
 ##################################################################################################################################
 # Calculates Wednesday based on Friday date
