@@ -18,11 +18,11 @@
     background-color: black;
 }
 
-a.nav-link {
+#navtext {
     color: white;
 }
 
-#text {
+#navbarDropdown {
     color: white;
 }
 
