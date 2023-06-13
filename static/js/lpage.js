@@ -2,6 +2,7 @@ $(document).ready(async function () {
     await typeSentence("Charity Insights Canada Project", "#sentence");
     await waitForMs(2000);
     deleteSentence("#sentence");
+    carousel(carouselText, "#sentence");
 });
 
 
