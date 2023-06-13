@@ -8,6 +8,7 @@ $(document).ready(async function () {
 
 
 async function typeSentence(sentence, eleRef, delay = 100) {
+    console.log("Inside type sentence")
     const letters = sentence.split("");
     let i = 0;
     while (i < letters.length) {
