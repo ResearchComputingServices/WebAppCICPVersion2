@@ -140,7 +140,7 @@ def CreatePieChart( responseDict,
                             #autopct='%1.1f%%',
                             pctdistance=0.8,
                             colors=cmap, 
-                            startangle=90,
+                            startangle=-40,
                             counterclock=False)
 
     #wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=-40, radius = 0.8,colors = cmap)
@@ -154,11 +154,13 @@ def CreatePieChart( responseDict,
         horizontalalignment = {-1: "right", 1: "left"}[int(np.sign(x))]
         connectionstyle = f'angle,angleA=0,angleB={ang}'
         kw["arrowprops"].update({"connectionstyle": connectionstyle})
-        ax1.annotate(names[i] + ' ' + str(values[i]), xy = (0.5 * x, 0.5 * y), xytext = ((1.0 + (i % 2) * 0.4) * np.sign(x), 1.4 * yc),
+        #ax1.annotate(names[i] + ' ' + str(values[i]), xy = (0.5 * x, 0.5 * y), xytext = ((1.0 + (i % 2) * 0.4) * np.sign(x), 1.4 * yc),
+                    #horizontalalignment = horizontalalignment, fontsize = 'x-small', **kw)
+        ax1.annotate(str(perc[i]), xy = (0.8 * x, 0.8 * y), xytext = ((1.0 + (i % 2) * 0.4) * np.sign(x), 1.4 * yc),
                     horizontalalignment = horizontalalignment, fontsize = 'x-small', **kw)
 
     plt.subplots_adjust(right=0.8)
-    #plt.legend(names, bbox_to_anchor=(0.9 ,1.), loc="upper left")
+    plt.legend(names, bbox_to_anchor=(1.03 ,1.), loc="upper left")
     
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
