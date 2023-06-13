@@ -2,6 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: black;
+
 }
 
 .input-cursor {
@@ -32,4 +34,8 @@
 
 .input-cursor {
     animation: blink .6s linear infinite alternate;
+}
+
+#sentence {
+    color: white;
 }
