@@ -4,7 +4,7 @@ $(document).ready(async function () {
     carousel(carouselText, "#sentence");
 });
 
-
+typeSentence("Charity Insights Canada Project", "#sentence");
 
 async function typeSentence(sentence, eleRef, delay = 100) {
     console.log("Inside type sentence")
