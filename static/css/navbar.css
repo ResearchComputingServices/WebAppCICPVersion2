@@ -22,6 +22,10 @@ a.nav-link {
     color: white;
 }
 
+#text {
+    color: white;
+}
+
 .dropdown-item {
     background-color: black;
     color: white;
