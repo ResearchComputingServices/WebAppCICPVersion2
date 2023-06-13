@@ -27,6 +27,7 @@
                   type="text/css"/>
            {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">  {% endcomment %}
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
+            <link rel="stylesheet" href="{% static 'css/lpage.css' %}"/>
         {% endblock styles %}
         {{ form.media }}
     </head>
@@ -35,13 +36,21 @@
         {% include "navbar.html" %}           
     </div>
 
-    <h1>WELCOME TO DATA DASHBOARD</h1>
-    <h2>Check out the latest report <a href="">Latest Report</a></h2>
+
+    <div class="typing-container">
+        <span id="sentence" class="sentence"></span>
+        <span class="input-cursor">This is going well</span>
+    </div>
+
+
+
+    <h1>CHARITY INSIGHTS CANADA PROJECT</h1>
+    <h2>Check out the <a href= "{% url 'report_results_EN' %}">Latest Report</a></h2>
     <h3>Explore reports - 
         <form autocomplete="off"
           id="myForm"   
           method="get"
-          action="{% url 'datereports' %}">
+          action="{% url 'report_results_EN' %}">
                 {% csrf_token %}
                 <form class="ml-md-2" method="get">
                  {{dateFilter.as_div}}
