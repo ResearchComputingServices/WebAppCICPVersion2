@@ -5,7 +5,7 @@ var speed = 200;
 
 typewriter = () => {
     document.querySelector('#message').innerHTML = messageArray[0].substring(0, textPosition);
-    document.querySelector("#message-dynamic").innerHTML = messageArray[1].substring(0, textPosition) + "<span>\uFF0E</span>" + messageArray[2].substring(0, textPosition) + "<span>\uFF0E</span>" + messageArray[3].substring(0, textPosition) + "<span>\u25ae</span>";
+    document.querySelector("#message-dynamic").innerHTML = messageArray[1].substring(0, textPosition) + "<span>\uFF0E</span>" + messageArray[2].substring(0, textPosition) + "<span>\uFF0E</span>" + messageArray[3].substring(0, textPosition) + "<span>\uFF0E</span>" + "<span>\u25ae</span>";
 
 
     if (textPosition++ != messageArray.length[0])

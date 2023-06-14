@@ -1,15 +1,11 @@
 .typing-container {
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     background-color: black;
     height: 300px;
     color: white;
 
-}
-
-#message {
-    display: ;
 }
 
 #message-dynamic {
