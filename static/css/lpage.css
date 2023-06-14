@@ -16,7 +16,7 @@
 #message-dynamic {
     font-size: 25px;
     text-align: center;
-    color: red;
+    color: #e91c24;
 }
 
 .cursor {
@@ -31,4 +31,14 @@
     50% {
         opacity: 0;
     }
+}
+
+#latest-report {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e91c24;
+    height: 100px;
+    color: white;
+    flex-direction: column;
 }
