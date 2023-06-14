@@ -36,14 +36,16 @@
         {% include "navbar.html" %}           
     </div>
 
-    <div class="typing-container">
+    {% comment %} <div class="typing-container">
         <h1 id="message"></h1>
     </div>
-    <ul class="dynamic-text">
-        <li><span>Inform</span></li>
-        <li><span>Build</span></li>
-        <li><span>Strengthen</span></li>
-    </ul>
+    <span id="feature-text"></span> {% endcomment %}
+
+    <div class="typing-container">
+    <span id="sentence" class="sentence">Charity Insights Canada Project</span>
+    <span id="feature-text"></span>
+    <span class="input-cursor"></span>
+  </div>
     
     <h2>Check out the <a href= "{% url 'report_results_EN' %}">Latest Report</a></h2>
     <h3>Explore reports - 
