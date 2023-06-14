@@ -3,6 +3,7 @@
     justify-content: center;
     align-items: center;
     background-color: black;
+    height: 300px;
 }
 
 #message {
@@ -18,4 +19,17 @@ span {
     50% {
         opacity: 0;
     }
+}
+
+.dynamic-text {
+    margin-left: 1.3em;
+    line-height: 90px;
+    overflow: hidden;
+}
+
+.dynamic-text li {
+    list-style: none;
+    color: red;
+    position: relative;
+
 }
