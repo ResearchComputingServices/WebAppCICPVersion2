@@ -2,11 +2,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: black;
     height: 300px;
-}
-
-#message {
     color: white;
 }
 
