@@ -1,47 +1,17 @@
-/* .typing-container {
+.typing-container {
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: black;
-
 }
 
-.input-cursor {
-    display: inline-block;
-    width: 2px;
-    height: 42px;
-    background-color: white;
-    margin-left: 8px;
-}
-
-@keyframes blink {
-    0% {
-        opacity: 1;
-    }
-
-    40% {
-        opacity: 1;
-    }
-
-    60% {
-        opacity: 0;
-    }
-
-    100% {
-        opacity: 0;
-    }
-}
-
-.input-cursor {
-    animation: blink .6s linear infinite alternate;
-}
-
-#sentence {
+#message {
     color: white;
-} */
+}
 
 span {
     animation: blinker 1s linear infinite;
+    color: white;
 }
 
 @keyframes blinker {
