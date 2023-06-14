@@ -1,20 +1,25 @@
 .typing-container {
-    display: block;
+    display: flex;
     justify-content: center;
     align-items: center;
     background-color: black;
     height: 300px;
     color: white;
-
+    flex-direction: column;
 }
 
 #message-dynamic {
-    color: #e91c24;
+    font-size: 18px;
+    text-align: center;
+    color: red;
 }
 
-span {
-    animation: blinker 1s linear infinite;
-    color: white;
+.cursor {
+    width: 8px;
+    height: 20px;
+    background-color: white;
+    display: inline-block;
+    animation: blink 1s infinite;
 }
 
 @keyframes blinker {

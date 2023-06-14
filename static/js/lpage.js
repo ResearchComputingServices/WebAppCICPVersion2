@@ -1,23 +1,33 @@
 var messageArray = ["Charity Insights Canada Project", "Inform", "Build", "Strengthen"];
 var textPosition = 0;
-var speed = 200;
-
+var speed = 100;
+var speedNew = 200;
+var cursorVisible = true;
 
 typewriter = () => {
-    document.querySelector('#message').innerHTML = messageArray[0].substring(0, textPosition);
-    document.querySelector("#message-dynamic").innerHTML = messageArray[1].substring(0, textPosition) + "<span>\uFF0E</span>" + messageArray[2].substring(0, textPosition) + "<span>\uFF0E</span>" + messageArray[3].substring(0, textPosition) + "<span>\uFF0E</span>" + "<span>\u25ae</span>";
+    if (textPosition < messageArray[0].length) {
+        document.querySelector('#message').innerHTML += messageArray[0][textPosition];
+        textPosition++;
+    } else {
+        if (cursorVisible) {
+            document.querySelector('.cursor').style.opacity = 0;
+            cursorVisible = false;
+        } else {
+            document.querySelector('.cursor').style.opacity = 1;
+            cursorVisible = true;
+        }
+    }
 
-
-    if (textPosition++ != messageArray.length[0])
+    if (textPosition < messageArray[0].length) {
         setTimeout(typewriter, speed);
-    if (textPosition++ != messageArray.length[1])
-        setTimeout(typewriter, speed);
-    if (textPosition++ != messageArray.length[2])
-        setTimeout(typewriter, speed);
-    if (textPosition++ != messageArray.length[3])
-        setTimeout(typewriter, speed);
+    } else if (textPosition === messageArray[0].length) {
+        setTimeout(displayRemainingText, speedNew);
+    }
 }
 
-
+displayRemainingText = () => {
+    var remainingText = messageArray.slice(1).join("<span>\uFF0E</span>");
+    document.querySelector('#message-dynamic').innerHTML = remainingText + "<span>\uFF0E</span>" + "<span class='cursor'></span>";
+}
 
 window.addEventListener("load", typewriter);
