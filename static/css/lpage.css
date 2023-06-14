@@ -5,6 +5,11 @@
     background-color: black;
     height: 300px;
     color: white;
+
+}
+
+#message-dynamic {
+    color: #e91c24;
 }
 
 span {

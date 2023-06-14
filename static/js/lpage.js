@@ -8,7 +8,13 @@ typewriter = () => {
     document.querySelector("#message-dynamic").innerHTML = messageArray[1].substring(0, textPosition) + messageArray[2].substring(0, textPosition) + messageArray[3].substring(0, textPosition) + "<span>\u25ae</span>";
 
 
-    if (textPosition++ != messageArray.length)
+    if (textPosition++ != messageArray.length[0])
+        setTimeout(typewriter, speed);
+    if (textPosition++ != messageArray.length[1])
+        setTimeout(typewriter, speed);
+    if (textPosition++ != messageArray.length[2])
+        setTimeout(typewriter, speed);
+    if (textPosition++ != messageArray.length[3])
         setTimeout(typewriter, speed);
 }
 
