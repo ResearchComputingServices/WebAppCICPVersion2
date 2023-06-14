@@ -8,6 +8,10 @@
 
 }
 
+#message {
+    display: ;
+}
+
 #message-dynamic {
     color: #e91c24;
 }
@@ -21,17 +25,4 @@ span {
     50% {
         opacity: 0;
     }
-}
-
-.dynamic-text {
-    margin-left: 1.3em;
-    line-height: 90px;
-    overflow: hidden;
-}
-
-.dynamic-text li {
-    list-style: none;
-    color: red;
-    position: relative;
-
 }

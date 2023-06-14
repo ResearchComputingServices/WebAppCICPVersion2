@@ -1,6 +1,6 @@
 var messageArray = ["Charity Insights Canada Project", "Inform", "Build", "Strengthen"];
 var textPosition = 0;
-var speed = 100;
+var speed = 50;
 
 
 typewriter = () => {
