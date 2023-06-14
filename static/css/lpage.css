@@ -1,4 +1,4 @@
-.typing-container {
+/* .typing-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,4 +38,14 @@
 
 #sentence {
     color: white;
+} */
+
+span {
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
 }
