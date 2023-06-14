@@ -40,31 +40,8 @@
         <div id="message"></div>
         <div id="message-dynamic"></div>
     </div>
-        
-    <div id="latest-report">Check out the <a href= "{% url 'report_results_EN' %}">Latest Report</a></div>
-    <h3>Explore reports - 
-        <form autocomplete="off"
-          id="myForm"   
-          method="get"
-          action="{% url 'report_results_EN' %}">
-                {% csrf_token %}
-                <form class="ml-md-2" method="get">
-                 {{dateFilter.as_div}}
-                <input class="form-input" type="submit" value="Search"/>
-            </form>
-        </form>
-        
-    </h3>
-    <h3>Explore reports - 
-        
-                <form action="{% url 'themereports' %}" method="get">
-                    {{themeFilter}}
-                    <input class="form-input" type="submit" value="Search"/>
-                </form>
-        
-    </h3>
 
-<div class="container">
+    <div class="container">
         <h2>Check out the <a href="{% url 'report_results_EN' %}">Latest Report</a></h2>
         <h3>Explore reports -
             <form autocomplete="off" id="myForm" method="get" action="{% url 'report_results_EN' %}">
@@ -81,24 +58,8 @@
                 <input class="form-input" type="submit" value="Search"/>
             </form>
         </h3>
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    {% block scripts %}
+        
+        {% block scripts %}
             <script src="https://kit.fontawesome.com/17431f7655.js"
                     crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
