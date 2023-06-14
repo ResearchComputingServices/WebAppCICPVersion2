@@ -27,7 +27,7 @@ typewriter = () => {
 
 displayRemainingText = () => {
     var remainingText = messageArray.slice(1).join("<span>\uFF0E</span>");
-    document.querySelector('#message-dynamic').innerHTML = remainingText + "<span>\uFF0E</span>" + "<span class='cursor'></span>";
+    document.querySelector('#message-dynamic').innerHTML = remainingText + "<span>\uFF0E</span>";
 }
 
 window.addEventListener("load", typewriter);
