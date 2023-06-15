@@ -55,13 +55,16 @@
         <div class="shade">
             <form action="{% url 'themereports' %}" method="get">
                 {% comment %} {{themeFilter}} {% endcomment %}
-                <div class="theme-list">
-                        {% for theme in themeFilter %}
-                          <label>
-                            <input type="checkbox" id="{{ theme.id }}" name="{{ theme.name }}">
-                            <span>{{ theme.name }}</span>
-                          </label>
-                        {% endfor %}
+                <div class="dropdown">
+                    <button class="form-input">Select Themes</button>
+                    <div class="dropdown-content">
+                      {% for theme in themeFilter %}
+                        <label>
+                          <input type="checkbox" id="{{ theme.id }}" name="{{ theme.name }}">
+                          {{ theme.name }}
+                        </label>
+                      {% endfor %}
+                    </div>
                 </div>
                 <input class="form-input" type="submit" value="Search"/>
             </form>
