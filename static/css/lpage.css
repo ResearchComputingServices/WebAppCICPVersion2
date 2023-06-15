@@ -112,7 +112,7 @@
     margin-left: 40%;
 }
 
-.heading-text div strong {
+.heading-text {
     display: flex;
     justify-content: center;
     align-items: center;
