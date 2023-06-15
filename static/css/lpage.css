@@ -112,12 +112,34 @@
     margin-left: 40%;
 }
 
-.checkbox-group {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+@keyframes juggle {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
 }
 
-.checkbox-group label {
-    margin: 5px;
+.animated-text {
+    display: inline-block;
+    animation-name: juggle;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.shadow {
+    text-shadow: 2px 2px 4px rgba(231, 17, 17, 0.897);
+}
+
+#heading-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
