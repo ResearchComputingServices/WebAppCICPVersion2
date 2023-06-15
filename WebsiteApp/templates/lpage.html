@@ -42,7 +42,7 @@
     </div>
 
     <div id="latest-report">To check the Latest Report &nbsp;<a href="{% url 'report_results_EN' %}">Click Here</a></div>
-    <div class="container">
+    <div class="filter-container">
         <div class="shade">
             <form autocomplete="off" id="myForm" method="get" action="{% url 'report_results_EN' %}">
                 {% csrf_token %}
@@ -52,13 +52,21 @@
                 <input class="form-input" type="submit" value="Search"/>
             </form>
         </div>
-        {% comment %} <div class="vertical-line"></div> {% endcomment %}
         <div class="shade">
             <form action="{% url 'themereports' %}" method="get">
-                {{themeFilter}}
+                {% comment %} {{themeFilter}} {% endcomment %}
+                <div class="theme-list">
+            {% for theme in themeFilter %}
+                <li>
+                    <input type="checkbox" id="{{ theme.id }}" name="{{ theme.name }}">
+                    <label for="{{ theme.id }}"><span>{{ theme.name }}</span></label>
+                </li>
+          {% endfor %}
+        </div>
                 <input class="form-input" type="submit" value="Search"/>
             </form>
         </div>
+    </div>
         
         {% block scripts %}
             <script src="https://kit.fontawesome.com/17431f7655.js"
