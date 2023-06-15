@@ -41,9 +41,9 @@
         <div id="message-dynamic"></div>
     </div>
 
-    <div id="latest-report">Check out the <a href="{% url 'report_results_EN' %}">Latest Report</a></div>
+    <div id="latest-report">To check the Latest Report &nbsp;<a href="{% url 'report_results_EN' %}">Click Here</a></div>
     <div class="container">
-        <div>
+        <div class="shade">
             <form autocomplete="off" id="myForm" method="get" action="{% url 'report_results_EN' %}">
                 {% csrf_token %}
                 <div class="ml-md-2">
@@ -52,8 +52,8 @@
                 <input class="form-input" type="submit" value="Search"/>
             </form>
         </div>
-        <div class="vertical-line"></div>
-        <div>
+        {% comment %} <div class="vertical-line"></div> {% endcomment %}
+        <div class="shade">
             <form action="{% url 'themereports' %}" method="get">
                 {{themeFilter}}
                 <input class="form-input" type="submit" value="Search"/>
