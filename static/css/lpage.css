@@ -112,13 +112,10 @@
     margin-left: 40%;
 }
 
-.shadow {
-    text-shadow: 2px 2px 4px rgba(98, 95, 95, 0.897);
-}
-
-#heading-text {
+.heading-text div strong {
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 25px;
+    text-shadow: 2px 2px 4px rgba(98, 95, 95, 0.897);
 }
