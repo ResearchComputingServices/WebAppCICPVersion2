@@ -72,7 +72,8 @@
 }
 
 .container input[type="submit"] {
-    margin-left: 10px;
+    margin-left: 10%;
+
 }
 
 .vertical-line {
@@ -102,7 +103,8 @@
 
 
 .shade form {
-    margin-top: 10px;
+    margin-top: 10%;
+    margin-left: 40%;
 }
 
 .form-input {
@@ -112,17 +114,13 @@
 .theme-list {
     max-height: 120px;
     overflow-y: auto;
-    list-style-type: none;
     padding: 0;
     margin-top: 10px;
 }
 
-.theme-list li {
-    margin-bottom: 5px;
-}
-
 .theme-list label {
     display: block;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
@@ -134,6 +132,7 @@
     padding: 5px 10px;
     background-color: #ffffff;
     color: #000000;
+    border: 1px solid #cccccc;
     border-radius: 5px;
 }
 

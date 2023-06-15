@@ -56,13 +56,13 @@
             <form action="{% url 'themereports' %}" method="get">
                 {% comment %} {{themeFilter}} {% endcomment %}
                 <div class="theme-list">
-            {% for theme in themeFilter %}
-                <li>
-                    <input type="checkbox" id="{{ theme.id }}" name="{{ theme.name }}">
-                    <label for="{{ theme.id }}"><span>{{ theme.name }}</span></label>
-                </li>
-          {% endfor %}
-        </div>
+                        {% for theme in themeFilter %}
+                          <label>
+                            <input type="checkbox" id="{{ theme.id }}" name="{{ theme.name }}">
+                            <span>{{ theme.name }}</span>
+                          </label>
+                        {% endfor %}
+                </div>
                 <input class="form-input" type="submit" value="Search"/>
             </form>
         </div>
