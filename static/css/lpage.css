@@ -112,32 +112,12 @@
     margin-left: 40%;
 }
 
-.dropdown {
-    position: relative;
-    display: inline-block;
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-.dropdown-content {
-    position: absolute;
-    background-color: #ffffff;
-    border: 1px solid #cccccc;
-    border-radius: 5px;
-    padding: 10px;
-    max-height: 120px;
-    overflow-y: auto;
-    display: none;
-    z-index: 1;
-}
-
-.dropdown-content label {
-    display: block;
-    cursor: pointer;
-}
-
-.dropdown-content input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
+.checkbox-group label {
+    margin: 5px;
 }
