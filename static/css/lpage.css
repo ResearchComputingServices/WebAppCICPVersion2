@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.326);
     height: 300px;
     color: white;
     flex-direction: column;
@@ -33,18 +33,23 @@
     }
 }
 
+#latest-report {
+
+    background-color: rgb(164, 158, 158);
+
+
+}
+
 .container {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    background-color: rgb(96, 88, 88);
-    padding: 20px;
+    background-color: rgb(186, 179, 179);
     color: black;
     font-family: Arial, sans-serif;
 }
 
-.container h2,
-.container h3 {
+.container div {
     margin: 0;
 }
 
@@ -61,4 +66,9 @@
 
 .container input[type="submit"] {
     margin-left: 10px;
+}
+
+.vertical-line {
+    width: 2px;
+    background-color: #000;
 }
