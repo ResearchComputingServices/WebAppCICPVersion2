@@ -1,4 +1,4 @@
-.typing-container {
+/* .typing-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,7 +46,7 @@
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.4);
     margin-bottom: 10px;
 
-}
+} */
 
 .filter-container {
     display: flex;
@@ -85,8 +85,8 @@
 .shade {
     flex: 1;
     height: 400px;
-    background-color: #e91c24;
-    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: #3d3d3d;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -118,4 +118,6 @@
     align-items: center;
     font-size: 25px;
     text-shadow: 2px 2px 4px rgba(98, 95, 95, 0.897);
+    height: 200px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
 }

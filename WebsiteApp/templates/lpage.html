@@ -36,17 +36,16 @@
         {% include "navbar.html" %}           
     </div>
 
-    <div class="typing-container">
+    {% comment %} <div class="typing-container">
         <div id="message"></div>
         <div id="message-dynamic"></div>
-    </div>
-
-    <div id="latest-report">To check the Latest Report &nbsp;<a href="{% url 'report_results_EN' %}">Click Here</a></div>
+    </div>      {% endcomment %}
     <div class="heading-text">
         FILTER REPORTS USING A DATE OR THEME    
     </div>
     <div class="filter-container">
         <div class="shade">
+            <div>To check the Latest Report &nbsp;<a href="{% url 'report_results_EN' %}">Click Here</a></div>
             <form autocomplete="off" id="myForm" method="get" action="{% url 'report_results_EN' %}">
                 {% csrf_token %}
                 <div class="ml-md-2">
