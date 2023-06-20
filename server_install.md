@@ -77,7 +77,7 @@ After=network.target
 User=django
 Group=nogroup
 WorkingDirectory=/webapp/WebAppCICPVersion2
-ExecStart=/webapp/WebAppCICPVersion2/cicp_env/bin/gunicorn --access-logfile - --workers 8 --bind 127.0.0.1:8000 WebAppCICPVersion2.wsgi:application
+ExecStart=/webapp/WebAppCICPVersion2/cicp_env/bin/gunicorn --access-logfile - --workers 8 --timeout 300 --bind 127.0.0.1:8000 WebAppCICPVersion2.wsgi:application
    
 [Install]
 WantedBy=multi-user.target
