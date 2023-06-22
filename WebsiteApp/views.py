@@ -5,208 +5,153 @@ from scripts.Utils import *
 from scripts.Controller import HandleFrontEndQuery
 from django.utils.translation import gettext,get_language
 from datetime import datetime, timedelta
+from django.contrib.sessions.backends.db import SessionStore
 
 ##################################################################################################################################
 # Create your views here.
-def report_results_EN(request):
-   
-    # handle the case where the user has specified front end query options
-    if request.GET:
 
+# For testing new code
 
-        print("Insdie request.get")   
+def formInitialization():
 
-        # Create the FrontEndQuery object
-        front_end_query = FrontEndQuery()
-        context = {}
-
-        # Pass the different form filter options
-        form_filter = PrimaryFilterForm(request.GET)
-        province_form_filter = ProvinceFilterForm(request.GET)
-        language_form_filter = LanguageFilterForm(request.GET)
-        org_size_form_filter = OrgsizeFilterForm(request.GET)
-
-
-        context['form_filter'] = form_filter
-        context['province_form_filter'] = province_form_filter
-        context['language_form_filter'] = language_form_filter
-        context['org_size_form_filter'] = org_size_form_filter
-
-        # Date Format - Y%-%m-%d
-        # Type - str
-        user_requested_friday_date = request.GET.get('report_date', None)
-        question_theme = request.GET.getlist('theme')
-      
-              
-        if len(user_requested_friday_date) == 0:
-              print("Inside the theme if block")
-              front_end_query.questionThemes = question_theme
-
-        elif  len(question_theme) == 0:
-            # Date Format - Y%-%m-%d,Type - str,Input - Friday Date selected by the user, Output - Wednesday date that matches the folder created in Media
-            user_response_images_wed_date = get_wed_date(user_requested_friday_date)
-            front_end_query.date = str(user_response_images_wed_date)
-            
-            wednesday_text_date = textdate(str(user_response_images_wed_date),lang=get_language())                
-            friday_text_date = textdate(str(user_requested_friday_date),lang=get_language())
-
-            context['wednesday_date'] = wednesday_text_date
-            context['friday_text_date'] = friday_text_date
-
-        # Get other filter options from the get request
-        location = request.GET.getlist('province')
-        language_preference = request.GET.getlist('language')
-        organization_size = request.GET.getlist('size')
-
-        if user_requested_friday_date == "2022-12-23" or user_requested_friday_date == "2022-12-30" :
-            info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
-            context['info'] = info
-       
-        front_end_query.locations = location
-        front_end_query.languagePreference = language_preference
-        front_end_query.organizationSizes = organization_size
-        front_end_query.qualtricsSurveyID = ''
-        front_end_query.siteLanguage = get_language()
-        
-        if front_end_query:
-            print("Next step is handlefrontend query function")
-            query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
-            print("query_response_imagefilepaths",query_response_imagefilepaths)
-            
-            if len(errors) != 0:
-                context["errors"] = errors
-            
-            if len(query_response_imagefilepaths) != 0:
-                context["image_filepaths"] = query_response_imagefilepaths
-
-        print("context",context)
-        return render(request, 'index.html', context)
-
-    # This handles the case where we need to display the default pages
-    else:
-
-        form_filter = PrimaryFilterForm()
-        province_form_filter = ProvinceFilterForm()
-        language_form_filter = LanguageFilterForm()
-        org_size_form_filter = OrgsizeFilterForm()
-        # For default selection and display of latest report
-
-        # Get the latest Friday date from today
-        default_this_week_friday_date = str(get_fridaydate_from_todays_date(datetime.now()))       
-
-        # Format the date from Y%-%m-%d to respective english and french formats in text
-        friday_text_date = textdate(str(default_this_week_friday_date),lang=get_language())
-
-        # Get the wednesday date to search in the media folder and display on the frontend
-        # based on the Friday date
-        wednesday_date = get_wed_date(default_this_week_friday_date)
-     
-        # Format the date from Y%-%m-%d to respective english and french formats in text
-        wednesday_text_date = textdate(str(wednesday_date),lang=get_language())
-    
-        context = {'form_filter' : form_filter,'province_form_filter': province_form_filter, 'language_form_filter':language_form_filter,'org_size_form_filter' :org_size_form_filter,'friday_text_date' : friday_text_date,'wednesday_date' : wednesday_text_date}
-        
-        # Create the FrontEndQuery object for todays date
-        front_end_query = FrontEndQuery()
-        front_end_query.date = str(wednesday_date) # Pass the wednesday date to select the images from media folder
-        front_end_query.siteLanguage = get_language()
-      
-        if front_end_query:
-                query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)                
-
-                if len(errors) != 0:
-                    context["errors"] = errors
-            
-                if len(query_response_imagefilepaths) != 0:
-                    
-                    context["image_filepaths"] = query_response_imagefilepaths
-       
-        return render(request, 'index.html', context)
-
-
-# Function to render two different pages for theme and date
-def themeOrDate(request,theme,date):
-    
-    front_end_query = FrontEndQuery()
+    frontEndQuery = FrontEndQuery()
     context = {}
 
-    themeFilter = ThemeFilterForm()
-    dateFilter = DateFilterForm()
-    provinceFilter = ProvinceFilterForm()
-    languageFilter = LanguageFilterForm()
-    orgFilter = OrgsizeFilterForm()
-    
-    
-    context['province_form_filter'] = provinceFilter
-    context['language_form_filter'] = languageFilter
-    context['org_size_form_filter'] = orgFilter
+    context['themeFilter'] = ThemeFilterForm()
+    context['dateFilter'] = DateFilterForm()
+    context['province_form_filter'] = ProvinceFilterForm()
+    context['language_form_filter'] = LanguageFilterForm()
+    context['org_size_form_filter'] = OrgsizeFilterForm()
 
-    location = request.GET.getlist('province')
-    language_preference = request.GET.getlist('language')
-    organization_size = request.GET.getlist('size')
-    
-    
+    return context, frontEndQuery
+
+def dateInitialization(latestReport,dateSearchReport):
+
+    if latestReport: 
+        # Get the latest Friday date from today and Format the date from Y%-%m-%d to respective english and french formats in text
+        friday_text_date = textdate(
+            str(get_fridaydate_from_todays_date(datetime.now())), lang=get_language())
+        wednesday_text_date = textdate(str(get_wed_date(
+            str(get_fridaydate_from_todays_date(datetime.now())))), lang=get_language())
+        
+    elif len(dateSearchReport) != 0:
+        friday_text_date = textdate(
+            str(dateSearchReport), lang=get_language())
+        wednesday_text_date = textdate(str(get_wed_date(
+           dateSearchReport)), lang=get_language())
+
+    return friday_text_date,wednesday_text_date
+         
+
+def latest_report(request):
+
+    context, frontEndQuery = formInitialization()
+    friday_text_date, wednesday_text_date = dateInitialization(True,'')
+
+    context['friday_text_date'] = friday_text_date
+    context['wednesday_date'] = wednesday_text_date
+
+    # Pass the wednesday date to select the images from media folder
+    frontEndQuery.date = str(get_wed_date(
+        str(get_fridaydate_from_todays_date(datetime.now()))))
+    frontEndQuery.siteLanguage = get_language()
+
+    if frontEndQuery:
+        query_response_imagefilepaths, query_response_csv, errors = HandleFrontEndQuery(
+            frontEndQuery)
+
+        if len(errors) != 0:
+            context["errors"] = errors
+
+        if len(query_response_imagefilepaths) != 0:
+
+            context["image_filepaths"] = query_response_imagefilepaths
+
+    return render(request, 'index.html', context)
+
+# Function to render two different pages for theme and date
+
+
+def themeOrDate(request, theme, date,filter):
+
+    context, frontEndQuery = formInitialization()
+
     if date is None:
-        context['themeFilter'] = themeFilter
-        if request.GET:
-            front_end_query.questionThemes = request.GET.getlist('theme')
-        else:
-            front_end_query.questionThemes = theme
+        frontEndQuery.questionThemes = theme
 
     elif theme is None:
-        context['dateFilter'] = dateFilter
-        if request.GET:
-             front_end_query.date = str(get_wed_date(request.GET.get('report_date', None)))
-        else:
-             front_end_query.date = str(get_wed_date(date))  
+        selected_date = request.COOKIES.get('selected_date')
+        frontEndQuery.date = str(get_wed_date(selected_date))
 
-    front_end_query.locations = location
-    front_end_query.languagePreference = language_preference
-    front_end_query.organizationSizes = organization_size
-    front_end_query.qualtricsSurveyID = ''
-    front_end_query.siteLanguage = get_language()
-    
-    if front_end_query:
-        query_response_imagefilepaths,query_response_csv,errors = HandleFrontEndQuery(front_end_query)
-        print("query_response_imagefilepaths",query_response_imagefilepaths)
+        friday_text_date, wednesday_text_date = dateInitialization(False,date)
 
-        return query_response_imagefilepaths,query_response_csv,errors
+        context['friday_text_date'] = friday_text_date
+        context['wednesday_date'] = wednesday_text_date
+
+    frontEndQuery.locations = request.GET.getlist('province')
+    frontEndQuery.languagePreference = request.GET.getlist('language')
+    frontEndQuery.organizationSizes = request.GET.getlist('size')
+    frontEndQuery.qualtricsSurveyID = ''
+    frontEndQuery.siteLanguage = get_language()
+
+    if frontEndQuery:
+        query_response_imagefilepaths, query_response_csv, errors = HandleFrontEndQuery(
+            frontEndQuery)
+         
+    return  query_response_imagefilepaths, query_response_csv, errors
         
-        # if len(errors) != 0:
-        #     context["errors"] = errors
-        
-        # if len(query_response_imagefilepaths) != 0:
-        #     context["image_filepaths"] = query_response_imagefilepaths   
-      
-    if date is None:
-        return render(request,'themereports.html')
-    else:
-         return render(request, 'datereports.html')
 
 def landingPageView(request):
 
-    context = {}
-    themeFilter = ThemeFilterForm(request.GET)
-    dateFilter = DateFilterForm(request.GET)
-    context = {'themeFilter': themeFilter ,'dateFilter' : dateFilter}
-    questionTheme = request.GET.getlist('theme')
-    reportDate = request.GET.getlist('report_date')
 
-    if len(questionTheme) != 0 :
-        themeOrDate(request,theme=questionTheme,date=None)
-        return render(request,'themereports.html')
+    context, frontEndQuery = formInitialization() 
+    context['filtered'] = 'filteredReport'
     
-    elif reportDate :
-        themeOrDate(request,theme=None,date=reportDate)
-        return render(request, 'datereports.html')
-     
+   
+    questionTheme = request.GET.getlist('theme')
+    reportDate = request.GET.get('report_date')
+
+
+    if len(questionTheme) != 0:
+        query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request, theme=questionTheme, date=None)
+
+        
+        if len(errors) != 0:
+            context["errors"] = errors
+
+        if len(query_response_imagefilepaths) != 0:
+            context["image_filepaths"] = query_response_imagefilepaths
+
+        response = render(request, 'index.html', context)
+
+        return response
+        
+
+    elif reportDate:
+
+        query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request, None,reportDate,False)
+
+        friday_text_date, wednesday_text_date = dateInitialization(False,reportDate)
+
+        context['friday_text_date'] = friday_text_date
+        context['wednesday_date'] = wednesday_text_date
+        
+        if len(errors) != 0:
+            context["errors"] = errors
+
+        if len(query_response_imagefilepaths) != 0:
+            context["image_filepaths"] = query_response_imagefilepaths
+
+        return render(request, 'index.html', context)
+         
     else:
-        return render(request,'lpage.html',context)
-      
+             
+        return render(request, 'lpage.html', context)
     
 ##################################################################################################################################
 # Calculates Wednesday based on Friday date
 def get_wed_date(fri_date):
+    print(fri_date)
     fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
     wed_date = fri_date + \
                 timedelta(days = -2)
@@ -223,6 +168,7 @@ def textdate(date,lang):
        
     else:
         en_date_text = date.strftime("%d %B, %Y")
+
         return en_date_text
 
 ##################################################################################################################################

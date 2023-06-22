@@ -40,14 +40,15 @@
     </div>
     <div class="filter-container">
         <div class="shade">
-            <div>To check the Latest Report &nbsp;<a href="{% url 'report_results_EN' %}">Click Here</a></div>
-            <form autocomplete="off" id="myForm" method="get" action="{% url 'report_results_EN' %}">
+            <div>To check the Latest Report &nbsp;<a href="{% url 'latest_report' %}">Click Here</a></div>
+            <form autocomplete="off" id="myForm" method="get" action="{% url 'datereports' %}">
                 {% csrf_token %}
-                <div class="ml-md-2">
+                <div class="ml-md-2" id="selected-date">
                     {{dateFilter.as_div}}
                 </div>
                 <input class="form-input" type="submit" value="Search"/>
             </form>
+            
         </div>
         <div class="shade">
             <form action="{% url 'themereports' %}" method="get">

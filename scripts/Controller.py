@@ -9,7 +9,7 @@ warnings.filterwarnings('ignore')
 from scripts.Utils import *
 from scripts.DataVisualizer import DataVisualizerMain
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
-
+import pdb
 ##################################################################################################################################
 # 
 ##################################################################################################################################
@@ -373,7 +373,6 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     # If there are more filters in the query then just a date, new images will need to be generated.
     else: 
         print('QueryType: Full Query')
-         
         responseDict, errorLogs = GetResponseDict(aQuery)
         
         if responseDict.keys() != None:

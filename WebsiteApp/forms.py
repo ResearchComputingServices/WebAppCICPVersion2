@@ -40,12 +40,6 @@ ORGANIZATION_SIZES = [('SMALL',_('Small')),
 
 DateInput = partial(forms.DateInput, {'class': 'dateinput'})
 
-
-class PrimaryFilterForm(forms.Form):
-    report_date = forms.DateField(widget=DateInput(),label=_('Report Date'),required=False)
-    theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,
-                                    label = _('Theme'),required=False)
-
     
 class ProvinceFilterForm(forms.Form):
     province= forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=PROVINCE_CHOICES,

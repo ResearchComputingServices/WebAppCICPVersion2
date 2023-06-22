@@ -31,7 +31,7 @@
     <body>
         <div>
             {% include "navbar.html" %}
-            {% include "sidebar.html" %}
+            {% comment %} {% include "sidebar.html" %} {% endcomment %}
         </div>
         <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span>
         <div id="heading" class="justify-content-center mx-auto">
@@ -46,21 +46,23 @@
                 </h4>
             {% endif %}
         </div>
+        {%if filtered %}
         <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox(event)"></a>
-        <div class="filterbox" id="blackbox">
-            <form method="get">
-                {% csrf_token %}
+            <div class="filterbox" id="blackbox">
+                <form method="get">
+                    {% csrf_token %}
 
-                        <span class="sec-filters">
-                            {{province_form_filter}}
-                            {{language_form_filter}}
-                            {{org_size_form_filter}}
-                        </span>
-                   
-                    <div id="secsearch"><input class="form-input" type="submit" value="{% translate "Search" %}"/></div>
-                
-            </form>
-        </div>
+                            <span class="sec-filters">
+                                {{province_form_filter}}
+                                {{language_form_filter}}
+                                {{org_size_form_filter}}
+                            </span>
+                        
+                        <div id="secsearch"><input class="form-input" type="submit" value="{% translate "Search" %}"/></div>
+                        
+                </form>
+            </div>
+        {% endif %}
         <main class="main-content">
             {% if info %}
                 <div class="container">
@@ -72,7 +74,7 @@
                                 <p class="card-title ">
                                     <p class="card-text text-light">{{ info }}</p>
                                 </p>
-                                <a href="{% url 'report_results_EN' %}" class="btn text-light">{% translate "Try Again" %}</a>
+                                <a href="{% url 'landingPageView' %}" class="btn text-light">{% translate "Try Again" %}</a>
                             </div>
                         </div>
                     </div>
@@ -90,7 +92,7 @@
                                                 <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
                                             {% endfor %}
                                         </p>
-                                        <a href="{% url 'report_results_EN' %}" class="btn text-light">{% translate "Try Again" %}</a>
+                                        <a href="{% url 'landingPageView' %}" class="btn text-light">{% translate "Try Again" %}</a>
                                     </div>
                                 </div>
                             </div>
