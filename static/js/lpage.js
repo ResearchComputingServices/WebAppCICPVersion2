@@ -15,18 +15,20 @@ typewriter = () => {
     }
 }
 
+window.addEventListener("load", function () {
+    typewriter();
 
-window.addEventListener("load", typewriter);
+    // Get the selected date input element
+    const selectedDateInput = document.getElementById('selected-date');
 
-// Get the selected date input element
-const selectedDateInput = document.getElementById('selected-date');
-
-// Add an event listener to the input field to capture changes
-selectedDateInput.addEventListener('change', function () {
-    // Get the selected date value
-    const selectedDate = selectedDateInput.value;
-    // Update the cookie with the selected date
-    document.cookie = `selected_date=${selectedDate}; path=/`;
+    // Add an event listener to the input field to capture changes
+    selectedDateInput.addEventListener('change', function () {
+        // Get the selected date value
+        const selectedDate = selectedDateInput.value;
+        // Update the cookie with the selected date
+        document.cookie = `selected_date=${selectedDate}; path=/`;
+    });
 });
+
 
 
