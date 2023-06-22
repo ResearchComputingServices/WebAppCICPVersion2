@@ -105,6 +105,7 @@ def themeOrDate(request, theme, date):
     return  query_response_imagefilepaths, query_response_csv, errors
         
 
+
 def landingPageView(request):
 
 
@@ -114,6 +115,9 @@ def landingPageView(request):
    
     questionTheme = request.GET.getlist('theme')
     reportDate = request.GET.get('report_date')
+
+    selected_date = request.COOKIES.get('selected_date')
+    context['selected_date'] = selected_date
 
 
     if len(questionTheme) != 0:

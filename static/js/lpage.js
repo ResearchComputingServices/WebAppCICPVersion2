@@ -1,10 +1,10 @@
-var messageArray = ["FILTER REPORTS USING A DATE OR THEME "];
-var textPosition = 0;
-var speed = 100;
-var speedNew = 200;
-var cursorVisible = true;
+const messageArray = ["FILTER REPORTS USING A DATE OR THEME "];
+let textPosition = 0;
+const speed = 100;
+const speedNew = 200;
+const cursorVisible = true;
 
-typewriter = () => {
+const typewriter = () => {
     if (textPosition < messageArray[0].length) {
         document.querySelector('#message').innerHTML += messageArray[0][textPosition];
         textPosition++;
@@ -29,6 +29,3 @@ window.addEventListener("load", function () {
         document.cookie = `selected_date=${selectedDate}; path=/`;
     });
 });
-
-
-
