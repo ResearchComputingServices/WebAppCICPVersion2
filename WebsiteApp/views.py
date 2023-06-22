@@ -80,8 +80,12 @@ def themeOrDate(request, theme, date,filter):
         frontEndQuery.questionThemes = theme
 
     elif theme is None:
-        selected_date = request.COOKIES.get('selected_date')
-        frontEndQuery.date = str(get_wed_date(selected_date))
+        
+        if date is None:
+             selected_date = request.COOKIES.get('selected_date')
+             frontEndQuery.date = str(get_wed_date(selected_date))
+        else:
+            frontEndQuery.date = str(get_wed_date(date))
 
         friday_text_date, wednesday_text_date = dateInitialization(False,date)
 
