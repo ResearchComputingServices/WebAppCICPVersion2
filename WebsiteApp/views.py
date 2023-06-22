@@ -72,7 +72,7 @@ def latest_report(request):
 # Function to render two different pages for theme and date
 
 
-def themeOrDate(request, theme, date,filter):
+def themeOrDate(request, theme, date):
 
     context, frontEndQuery = formInitialization()
 
@@ -133,7 +133,7 @@ def landingPageView(request):
 
     elif reportDate:
 
-        query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request, None,reportDate,False)
+        query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request, None,reportDate)
 
         friday_text_date, wednesday_text_date = dateInitialization(False,reportDate)
 
