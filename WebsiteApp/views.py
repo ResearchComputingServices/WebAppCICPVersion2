@@ -131,7 +131,7 @@ def landingPageView(request):
             context["image_filepaths"] = query_response_imagefilepaths
 
         response = render(request, 'index.html', context)
-
+        response.set_cookie('selected_date',reportDate)
         return response
         
 
@@ -150,6 +150,8 @@ def landingPageView(request):
         if len(query_response_imagefilepaths) != 0:
             context["image_filepaths"] = query_response_imagefilepaths
 
+
+        print(context)
         return render(request, 'index.html', context)
          
     else:
