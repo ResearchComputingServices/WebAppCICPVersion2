@@ -1,4 +1,5 @@
 from django.forms import ValidationError
+from django.http import HttpResponse
 from django.shortcuts import render
 from .forms import *
 from scripts.Utils import *
@@ -75,17 +76,13 @@ def latest_report(request):
 def themeOrDate(request, theme, date):
 
     context, frontEndQuery = formInitialization()
+    print("Inside themeorDate Function",date)
 
     if date is None:
         frontEndQuery.questionThemes = theme
 
     elif theme is None:
-        
-        if date is None:
-             selected_date = request.COOKIES.get('selected_date')
-             frontEndQuery.date = str(get_wed_date(selected_date))
-        else:
-            frontEndQuery.date = str(get_wed_date(date))
+        frontEndQuery.date = str(get_wed_date(date))
 
         friday_text_date, wednesday_text_date = dateInitialization(False,date)
 
@@ -116,9 +113,6 @@ def landingPageView(request):
     questionTheme = request.GET.getlist('theme')
     reportDate = request.GET.get('report_date')
 
-    selected_date = request.COOKIES.get('selected_date')
-    context['selected_date'] = selected_date
-
 
     if len(questionTheme) != 0:
         query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request, theme=questionTheme, date=None)
@@ -131,7 +125,7 @@ def landingPageView(request):
             context["image_filepaths"] = query_response_imagefilepaths
 
         response = render(request, 'index.html', context)
-        response.set_cookie('selected_date',reportDate)
+       
         return response
         
 
@@ -143,6 +137,7 @@ def landingPageView(request):
 
         context['friday_text_date'] = friday_text_date
         context['wednesday_date'] = wednesday_text_date
+        context['reportDate'] = reportDate
         
         if len(errors) != 0:
             context["errors"] = errors
@@ -150,18 +145,27 @@ def landingPageView(request):
         if len(query_response_imagefilepaths) != 0:
             context["image_filepaths"] = query_response_imagefilepaths
 
-
-        print(context)
-        return render(request, 'index.html', context)
+        response = render(request, 'index.html', context)
+        response.set_cookie('selected_date',reportDate)
+        return response
          
     else:
-             
-        return render(request, 'lpage.html', context)
+            print("reportdate inside else block",reportDate)
+            print("questionTheme inside else block",questionTheme)
+            if reportDate == None and len(questionTheme) == 0:
+                return render(request, 'lpage.html', context)
+
+            # elif reportDate is None:
+            #     selected_date = request.COOKIES['selected_date']
+            #     print("selected_date from cookies",selected_date)
+            #     query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request,None,selected_date)
+            #     return HttpResponse("The image filepaths are", query_response_imagefilepaths)
+                
     
 ##################################################################################################################################
 # Calculates Wednesday based on Friday date
 def get_wed_date(fri_date):
-    print(fri_date)
+   
     fri_date = datetime.strptime(fri_date, '%Y-%m-%d')
     wed_date = fri_date + \
                 timedelta(days = -2)
