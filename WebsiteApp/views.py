@@ -89,17 +89,19 @@ def themeOrDate(request, theme, date):
         context['friday_text_date'] = friday_text_date
         context['wednesday_date'] = wednesday_text_date
 
-    frontEndQuery.locations = request.GET.getlist('province')
-    frontEndQuery.languagePreference = request.GET.getlist('language')
-    frontEndQuery.organizationSizes = request.GET.getlist('size')
+    frontEndQuery.locations = context['locations'] = request.GET.getlist('province')
+    frontEndQuery.languagePreference = context['languagePreference'] = request.GET.getlist('language')
+    frontEndQuery.organizationSizes = context['orgSizes'] = request.GET.getlist('size')
     frontEndQuery.qualtricsSurveyID = ''
     frontEndQuery.siteLanguage = get_language()
 
     if frontEndQuery:
         query_response_imagefilepaths, query_response_csv, errors = HandleFrontEndQuery(
             frontEndQuery)
+        
+    print("context after selection is",context)
          
-    return  query_response_imagefilepaths, query_response_csv, errors
+    return  query_response_imagefilepaths, query_response_csv, errors,context
         
 
 
@@ -107,7 +109,7 @@ def landingPageView(request):
 
 
     context, frontEndQuery = formInitialization() 
-    context['filtered'] = 'filteredReport'
+    
     
    
     questionTheme = request.GET.getlist('theme')
@@ -131,10 +133,11 @@ def landingPageView(request):
 
     elif reportDate:
 
-        query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request, None,reportDate)
+        query_response_imagefilepaths, query_response_csv, errors,context = themeOrDate(request, None,reportDate)
 
-        friday_text_date, wednesday_text_date = dateInitialization(False,reportDate)
+        friday_text_date, wednesday_text_date = dateInitialization(False,reportDate) 
 
+        context['filtered'] = 'filteredReport'
         context['friday_text_date'] = friday_text_date
         context['wednesday_date'] = wednesday_text_date
         context['reportDate'] = reportDate
@@ -152,6 +155,7 @@ def landingPageView(request):
     else:
             print("reportdate inside else block",reportDate)
             print("questionTheme inside else block",questionTheme)
+            print("language =",get_language())
             if reportDate == None and len(questionTheme) == 0:
                 return render(request, 'lpage.html', context)
 

@@ -85,7 +85,7 @@ class UserTable(models.Model):
     externalDataReference = models.CharField(max_length=15)
     province = models.CharField(max_length=2)   # BC,AB,SK,MB,ON,QC,NB,NS,NL,PI,YK,NV,NW
     size = models.CharField(max_length=2)       # SM, MD, LG
-    languagePreference = models.CharField(max_length=2)   # EN, FR, BI
+    languagePreference = models.CharField(max_length=2,default='EN')   # EN, FR, BI
     designation = models.CharField(max_length=3) # A = Public (pub), B = Private (prv), C = Charitable (chr)
     locationPolygon = models.CharField(max_length=16)
     urbanRural = models.CharField(max_length=2) # UR/RL

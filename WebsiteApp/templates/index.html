@@ -30,8 +30,7 @@
     </head>
     <body>
         <div>
-            {% include "navbar.html" %}
-            {% comment %} {% include "sidebar.html" %} {% endcomment %}
+            {% include "navbar.html"%}
         </div>
         <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span>
         <div id="heading" class="justify-content-center mx-auto">
@@ -57,7 +56,8 @@
                                 {{language_form_filter}}
                                 {{org_size_form_filter}}
                             </span>
-                        <input type="hidden" name="report_date" value={{reportDate}} />
+                        <input type="hidden"
+                         name="report_date" value={{reportDate}} />
                         <div id="secsearch"><input class="form-input" type="submit" value="{% translate "Search" %}"/></div>
                         
                 </form>
@@ -106,6 +106,7 @@
                 {% endif %}
             {% endif %}
         </main>
+        <div class="loader"></div>
         {% block scripts %}
             <script src="https://kit.fontawesome.com/17431f7655.js"
                     crossorigin="anonymous"></script>

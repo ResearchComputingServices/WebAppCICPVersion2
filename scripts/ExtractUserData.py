@@ -13,12 +13,12 @@ from WebAppCICPVersion2 import settings
 def GetLanguage(langToken):
     lang = None
     
-    if langToken == 'FR-CA':
+    if langToken == 'FR-CA' or langToken == 'FR':
         lang = 'FR'
     elif langToken == 'EN':
         lang = 'EN'
     else:
-        lang = ''
+        lang = 'EN'
     
     return lang
 
@@ -180,6 +180,7 @@ def GetNumber(token):
 # 12    PTE
 # 13    Job Title
 ##################################################################################################################################  
+import pandas as pd
 
 def run(*args):
     
@@ -190,26 +191,29 @@ def run(*args):
     
     userDataFile = open(userDataFilePath, 'r')
     lines = userDataFile.readlines()
+
+    df = pd.read_csv(userDataFilePath,sep='^',header=None)
+    df = df.fillna('')
+    print(df.head())
         
-    for line in lines:        
+    for index,line in df.iterrows(): 
         # Get the tokens from the input line separated by ^ symbol
-        tokens = line.split('^')     
-        language = tokens[0]
-        externalDataReference = tokens[1]
-        province = tokens[2]
-        designation_code = tokens[3]
-        registration_date = tokens[4]
-        sub_category_code = tokens[5]
-        category_code = tokens[6]
-        locationPolygons= tokens[7] 
-        urbanRural = tokens[8]
-        subSample = tokens[9]
-        fte = GetNumber(tokens[10])
-        volunteers = GetNumber(tokens[11])
-        pte = GetNumber(tokens[12])
-        jobTitle = tokens[13] 
+        language = line[0]
+        externalDataReference = line[1]
+        province = line[2]
+        designation_code = line[3]
+        registration_date = line[4]
+        sub_category_code = line[5]
+        category_code = line[6]
+        locationPolygons= line[7] 
+        urbanRural = line[8]
+        subSample = line[9]
+        fte = GetNumber(line[10])
+        volunteers = GetNumber(line[11])
+        pte = GetNumber(line[12])
+        jobTitle = line[13]
         
-        # Create an instance of the user model       
+       # Create an instance of the user model        
         user = UserTable()
         
         # store the tokens in the previously created instance of a user model       

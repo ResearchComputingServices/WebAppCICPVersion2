@@ -15,6 +15,21 @@ const typewriter = () => {
     }
 }
 
+const screenloader = () => {
+    const loader = document.querySelector('.loader');
+
+    loader.classList.add("loader-hidden");
+
+    loader.addEventListener('transitionend', () => {
+        document.removeChild("loader")
+
+    })
+};
+
 window.addEventListener("load", function () {
     typewriter();
+
+    screenloader();
+
+
 });

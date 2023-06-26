@@ -32,3 +32,5 @@ def VisualizeTextGraphicQuestion(   question,
                             numberOfResponses = len(userResponses),
                             isEnglish = isEnglish,
                             saveToDirPath = saveToDirPath)
+
+    

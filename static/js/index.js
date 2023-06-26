@@ -1,3 +1,15 @@
+window.addEventListener("load", () => {
+    const loader = document.querySelector('.loader');
+
+    loader.classList.add("loader-hidden");
+
+    loader.addEventListener('transitionend', () => {
+        document.removeChild("loader")
+
+    })
+}
+
+)
 function toggleblackbox(e) {
 
     e.preventDefault();
@@ -18,3 +30,4 @@ function toggleblackbox(e) {
         myBox.style.display = 'block';
     }
 }
+
