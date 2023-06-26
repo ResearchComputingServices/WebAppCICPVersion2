@@ -118,9 +118,9 @@ def CreatePieChart( responseDict,
             (185/255,44/255,49/255),
             (200/255,200/255,200/255)]
 
-    fig = plt.figure(figsize=(12,12))
-    ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
-    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
+    fig = plt.figure(figsize=(20,20))
+    ax1 = plt.subplot2grid((9, 3), (0, 0), colspan=3, rowspan=9)
+    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 24, 'fontweight': 'medium'})
 
 
     #ax1.pie(values,
@@ -140,14 +140,14 @@ def CreatePieChart( responseDict,
                             #autopct='%1.1f%%',
                             pctdistance=0.8,
                             colors=cmap, 
-                            startangle=-40,
+                            startangle=-90,
                             counterclock=False)
 
     #wedges, texts = ax.pie(data, wedgeprops=dict(width=0.5), startangle=-40, radius = 0.8,colors = cmap)
     kw = dict(arrowprops=dict(arrowstyle="-"),zorder=0, va="center")
 
     for i, p in enumerate(wedges):
-        ang = (p.theta2 - p.theta1) / 2. + p.theta1
+        ang = (p.theta2 - p.theta1) / 2.75 + p.theta1
         y = np.sin(np.deg2rad(ang))
         x = np.cos(np.deg2rad(ang))
         yc = np.arcsin(y) / (np.pi / 2)
@@ -156,11 +156,11 @@ def CreatePieChart( responseDict,
         kw["arrowprops"].update({"connectionstyle": connectionstyle})
         #ax1.annotate(names[i] + ' ' + str(values[i]), xy = (0.5 * x, 0.5 * y), xytext = ((1.0 + (i % 2) * 0.4) * np.sign(x), 1.4 * yc),
                     #horizontalalignment = horizontalalignment, fontsize = 'x-small', **kw)
-        ax1.annotate(str(perc[i]), xy = (0.8 * x, 0.8 * y), xytext = ((1.0 + (i % 2) * 0.4) * np.sign(x), 1.4 * yc),
-                    horizontalalignment = horizontalalignment, fontsize = 'x-small', **kw)
+        ax1.annotate(str(perc[i]), xy = (0.8 * x, 0.8 * y), xytext = ((1.0 + (i % 2) * 0.2) * np.sign(x), 1.4 * yc),
+                    horizontalalignment = horizontalalignment, fontsize = 16, **kw)
 
     plt.subplots_adjust(right=0.8)
-    plt.legend(names, bbox_to_anchor=(1.03 ,1.), loc="upper left")
+    plt.legend(names, bbox_to_anchor=(1.05 ,1.), loc="upper left",fontsize=16)
     
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
@@ -172,7 +172,7 @@ def CreatePieChart( responseDict,
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=20)
     ax3.axis('off')
 
     # save the wordcloud to a file

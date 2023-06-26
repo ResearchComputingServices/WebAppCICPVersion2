@@ -105,14 +105,25 @@ def DataVisualizerMain(responseDict,
             numOfRespondents = len(list(lstOfRespondents.keys()))
             print(numOfRespondents)
 
-            imageFilePath = questionHandleDict[question.questionType](  question = question,
-                                                                        userResponses = responseDict[question],
-                                                                        numOfRespondents = numOfRespondents, 
-                                                                        isEnglish= isEnglish,
-                                                                        saveToDirPath = saveToDirPath) 
+            if (question.questionType != 'RANK_ORDER_QUESTION'):
+                imageFilePath = questionHandleDict[question.questionType](  question = question,
+                                                                            userResponses = responseDict[question],
+                                                                            numOfRespondents = numOfRespondents, 
+                                                                            isEnglish= isEnglish,
+                                                                            saveToDirPath = saveToDirPath)
+                imageFilePathList.append(imageFilePath)
+            else:
+                 imageFilePath1,imageFilePath2 = questionHandleDict[question.questionType](  question = question,
+                                                                            userResponses = responseDict[question],
+                                                                            numOfRespondents = numOfRespondents, 
+                                                                            isEnglish= isEnglish,
+                                                                            saveToDirPath = saveToDirPath)
+                 imageFilePathList.append(imageFilePath1)
+                 imageFilePathList.append(imageFilePath2)
+                 
             e = time.time()
             print(question.questionType,':', e - s)
-            imageFilePathList.append(imageFilePath)
+            
                
     return imageFilePathList
 
