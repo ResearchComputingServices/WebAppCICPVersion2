@@ -29,7 +29,7 @@ const screenloader = () => {
 window.addEventListener("load", function () {
     typewriter();
 
-    screenloader();
+    // screenloader();
 
 
 });
