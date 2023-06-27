@@ -188,6 +188,13 @@ div {
 
 }
 
+.selected-filters {
+    border: 3px solid #e91c24;
+    height: 30px;
+    width: 600px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 /* CSS code for extra small devices */
 @media (max-width: 575.98px) {
 

@@ -99,7 +99,6 @@ def themeOrDate(request, theme, date):
         query_response_imagefilepaths, query_response_csv, errors = HandleFrontEndQuery(
             frontEndQuery)
         
-    print("context after selection is",context)
          
     return  query_response_imagefilepaths, query_response_csv, errors,context
         
@@ -141,6 +140,8 @@ def landingPageView(request):
         context['friday_text_date'] = friday_text_date
         context['wednesday_date'] = wednesday_text_date
         context['reportDate'] = reportDate
+
+        print("context after selection is",context)
         
         if len(errors) != 0:
             context["errors"] = errors
@@ -148,9 +149,8 @@ def landingPageView(request):
         if len(query_response_imagefilepaths) != 0:
             context["image_filepaths"] = query_response_imagefilepaths
 
-        response = render(request, 'index.html', context)
-        response.set_cookie('selected_date',reportDate)
-        return response
+        return render(request, 'index.html', context)
+     
          
     else:
             print("reportdate inside else block",reportDate)
