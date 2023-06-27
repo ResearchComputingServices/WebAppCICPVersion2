@@ -30,12 +30,13 @@ def GetAnnotation(numberOfResponses,reportDate, isEnglish):
     
     if isEnglish:
         annotationText[0] = 'Number of Responses: '+str(numberOfResponses)
-        annotationText[1] = 'Results of survey distributed on : ' + reportDate
-        annotationText[2] = 'Plot Details:'
+        if 'tmpImages' not in reportDate:
+            annotationText[1] = 'Results of survey distributed on : ' + reportDate
+    
     else:
-        annotationText[0] = 'Nombre de Réponses: '+str(numberOfResponses)   
-        annotationText[1] = "Résultats de l'enquête distribués on : " + reportDate
-        annotationText[2] = 'Détails du terrain:'
+        annotationText[0] = 'Nombre de Réponses: '+str(numberOfResponses)
+        if 'tmpImages' not in reportDate:   
+            annotationText[1] = "Résultats de l'enquête distribués on : " + reportDate
 
     return annotationText
 

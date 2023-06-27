@@ -373,6 +373,7 @@ def CreateStackedBarChart(  responseDict,
     ax2.axis('off')
 
     ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    dateText = str(saveToDirPath.split("/")[-1])
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]

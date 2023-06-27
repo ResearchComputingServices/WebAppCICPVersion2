@@ -34,7 +34,7 @@ RANK_ORDER_QUESTION =       'RO'
 TEXT_GRAPHIC_QUESTION =     'DB'
 
 # Question Themes to skip
-QUESTION_THEME_SKIP_LIST = ['Consent','CONSENT','skip','SKIP']
+QUESTION_THEME_SKIP_LIST = ['Consent','CONSENT','skip','SKIP','']
 
 EXTERNAL_REF_KEY = 'ExternalDataReference'
 

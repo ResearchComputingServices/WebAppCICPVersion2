@@ -83,6 +83,7 @@ def DataVisualizerMain(responseDict,
                        saveToDirPath = TMP_FIGURE_FOLDER_PATH):
 
     # make sure the tmp folder for storing the generated images exists
+
     isExist = os.path.exists(saveToDirPath)
     if not isExist:
         os.makedirs(saveToDirPath)
