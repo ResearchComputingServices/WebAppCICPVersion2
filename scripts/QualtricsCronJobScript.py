@@ -11,6 +11,7 @@ from scripts.Controller import GenerateDefaultFigures
 # Main function 
 ##################################################################################################################################
 def HandleReleasedSurvey(currentSurvey, currentDate):
+<<<<<<< HEAD
     # successFlag = False
     successFlag = True
 
@@ -24,6 +25,21 @@ def HandleReleasedSurvey(currentSurvey, currentDate):
     
         # print('ExtractResponsesMain')
         # successFlag = ExtractResponsesMain(aSurvey=currentSurvey)
+=======
+    #successFlag = False
+    successFlag = True
+
+
+    #print('Download data for survey:',currentSurvey.qualtricsSurveyID)
+    #successFlag = FetchDataMain(aSurvey=currentSurvey)
+    
+    if successFlag:
+        #print('ExtractSurveyMain')
+        #successFlag = ExtractSurveyMain(aSurvey=currentSurvey)
+    
+        #print('ExtractResponsesMain')
+        #successFlag = ExtractResponsesMain(aSurvey=currentSurvey)
+>>>>>>> 4c20412049dfe4ad00cf77df68e4f10320425666
     
         print('GenerateDefaultFigures')
         successFlag = GenerateDefaultFigures(aSurvey=currentSurvey) 

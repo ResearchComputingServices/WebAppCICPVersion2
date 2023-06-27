@@ -105,8 +105,9 @@ def DataVisualizerMain(responseDict,
                 lstOfRespondents[r.userID.id] = 1
             numOfRespondents = len(list(lstOfRespondents.keys()))
             print(numOfRespondents)
+            print("type of question",question.questionType)
 
-            if (question.questionType != 'RANK_ORDER_QUESTION'):
+            if (question.questionType != 'RO'):
                 imageFilePath = questionHandleDict[question.questionType](  question = question,
                                                                             userResponses = responseDict[question],
                                                                             numOfRespondents = numOfRespondents, 
@@ -119,6 +120,8 @@ def DataVisualizerMain(responseDict,
                                                                             numOfRespondents = numOfRespondents, 
                                                                             isEnglish= isEnglish,
                                                                             saveToDirPath = saveToDirPath)
+                 print(imageFilePath1)
+                 print(imageFilePath2)
                  imageFilePathList.append(imageFilePath1)
                  imageFilePathList.append(imageFilePath2)
                  

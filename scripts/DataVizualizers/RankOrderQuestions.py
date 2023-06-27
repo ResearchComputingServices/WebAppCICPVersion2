@@ -201,7 +201,7 @@ def CreateRankChart(responseDict,
     df = df.sort_values(by=['total'], ascending=False)
     df = df.reset_index(drop=True)
     df = df[['subQ','total']]
-    print(df)
+    #print(df)
     #####################################################################3   
    
     # define colours to use
