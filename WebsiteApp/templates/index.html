@@ -58,12 +58,12 @@
                             </span>
                         <input type="hidden"
                          name="report_date" value={{reportDate}} />
-                        <div id="secsearch"><input class="form-input" type="submit" value="{% translate "Search" %}"/></div>
+                        <div id="secsearch"><input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/></div>
                         
                 </form>
             </div>
         {% endif %}
-        <main class="main-content">
+        <main class="main-content" id="main">
             {% if info %}
                 <div class="container">
                     <div id="infocard"
@@ -106,7 +106,7 @@
                 {% endif %}
             {% endif %}
         </main>
-        <div class="loader"></div>
+        <div class="loader" id="loader"></div>
         {% block scripts %}
             <script src="https://kit.fontawesome.com/17431f7655.js"
                     crossorigin="anonymous"></script>
