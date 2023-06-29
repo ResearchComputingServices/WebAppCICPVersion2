@@ -76,8 +76,10 @@
 
                         {% endif %}
 
-                        <div id="secsearch"><input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/></div>
-                        
+                        <div id="secsearch">
+                            <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/>
+                            <input type="reset" value={% translate "Reset"%}>
+                        </div>
                 </form>
             </div>
             {% if locations or languagePreference or orgSizes or age %}
