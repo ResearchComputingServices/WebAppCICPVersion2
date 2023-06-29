@@ -14,8 +14,8 @@ def run(*args):
     AddSurvey('SV_8D2MdCYlLUZqu22','2023-01-11')
     AddSurvey('SV_0SqKvaglCv3ophA','2023-01-18')
     AddSurvey('SV_3agBieQhc6t7d2K','2023-01-25')
-    AddSurvey('SV_dhjlzfTnCj7mwT4','2023-02-01') # ERROR
-    AddSurvey('SV_1RnShmHTBkbGhCu','2023-02-08') # ERROR
+    AddSurvey('SV_dhjlzfTnCj7mwT4','2023-02-01') 
+    AddSurvey('SV_1RnShmHTBkbGhCu','2023-02-08') 
     AddSurvey('SV_cSUrXPI6VggGvEq','2023-02-15')
     AddSurvey('SV_42rjmguCfnl7s7s','2023-02-22')
     AddSurvey('SV_6nk4KaDYWIazwSq','2023-03-01')

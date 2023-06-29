@@ -52,23 +52,48 @@
                     {% csrf_token %}
 
                             <span class="sec-filters">
-                                {{province_form_filter}}
-                                {{language_form_filter}}
-                                {{org_size_form_filter}}
+                                <div>
+                                    {{province_form_filter}}
+                                    {{org_size_form_filter}}
+                                </div>
+                                <div id="subfilter">
+                                    {{language_form_filter}}
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    {{age_form_filter}}
+                                </div>
                             </span>
+                            
+
+                        {% if reportDate %}                  
                         <input type="hidden"
                          name="report_date" value={{reportDate}} />
+
+                        {% elif questionTheme %}   
+                        <input type="hidden"
+                         name="theme" value={{questionTheme}} />
+
+                        {% endif %}
+
                         <div id="secsearch"><input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/></div>
                         
                 </form>
             </div>
-           <div class="selected-filters">
-            Filters Selected:
-                <strong>Province:</strong><i>{{locations}}</i>
-                <strong>Language:</strong><i>{{languagePreference}}</i>
-                <strong>Organisation Size:</strong><i>{{orgSizes}}</i>
-           </div>
+            {% if locations or languagePreference or orgSizes or age %}
+                <div class="selected-filters">
+            
+                    Filters Selected:
+                    <strong>Province:</strong><i>{{locations}}</i>
+                    <strong>Language:</strong><i>{{languagePreference}}</i>
+                    <strong>Organisation Size:</strong><i>{{orgSizes}}</i>
+                    <strong>Age:</strong><i>{{age}}</i>
+
+                </div>
+            {% endif %}
         {% endif %}
+       
+        
         <main class="main-content" id="main">
             {% if info %}
                 <div class="container">

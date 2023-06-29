@@ -23,6 +23,7 @@ def formInitialization():
     context['province_form_filter'] = ProvinceFilterForm()
     context['language_form_filter'] = LanguageFilterForm()
     context['org_size_form_filter'] = OrgsizeFilterForm()
+    context['age_form_filter'] = AgeFilterForm()
 
     return context, frontEndQuery
 
@@ -76,7 +77,6 @@ def latest_report(request):
 def themeOrDate(request, theme, date):
 
     context, frontEndQuery = formInitialization()
-    print("Inside themeorDate Function",date)
 
     if date is None:
         frontEndQuery.questionThemes = theme
@@ -92,6 +92,7 @@ def themeOrDate(request, theme, date):
     frontEndQuery.locations = context['locations'] = request.GET.getlist('province')
     frontEndQuery.languagePreference = context['languagePreference'] = request.GET.getlist('language')
     frontEndQuery.organizationSizes = context['orgSizes'] = request.GET.getlist('size')
+    frontEndQuery.age = context['age'] = request.GET.getlist('age')
     frontEndQuery.qualtricsSurveyID = ''
     frontEndQuery.siteLanguage = get_language()
 
@@ -108,15 +109,16 @@ def landingPageView(request):
 
 
     context, frontEndQuery = formInitialization() 
-    
-    
    
     questionTheme = request.GET.getlist('theme')
     reportDate = request.GET.get('report_date')
 
 
     if len(questionTheme) != 0:
-        query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request, theme=questionTheme, date=None)
+        query_response_imagefilepaths, query_response_csv, errors,context = themeOrDate(request, theme=questionTheme, date=None)
+
+        context['filtered'] = 'filteredReport'  
+        context['questionTheme'] = questionTheme[0]
 
         
         if len(errors) != 0:

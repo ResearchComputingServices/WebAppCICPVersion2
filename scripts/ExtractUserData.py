@@ -93,12 +93,18 @@ def GetDate(dateToken):
             if int(dateSplit[0]) <= 12:
                 dateString = dateSplit[2]+'-'+dateSplit[0]+'-'+dateSplit[1]    
             else:
-                dateString = dateSplit[2]+'-'+dateSplit[1]+'-'+dateSplit[0]   
+                dateString = dateSplit[2]+'-'+dateSplit[1]+'-'+dateSplit[0]  
+
+        if int(dateSplit[2]) < 1990 :
+            age = 'OLD'
+        else:
+            age = 'NEW'
     
     else:
         dateString = '1000-01-01'
-    
-    return dateString
+        age = 'NULL'
+
+    return dateString,age
 
 ##################################################################################################################################
 
@@ -163,6 +169,7 @@ def GetNumber(token):
     return num
 
 ##################################################################################################################################
+
 # Main function
 #  TOKENS:
 # 0     Language
@@ -228,7 +235,7 @@ def run(*args):
         user.locationPolygon = GetLocationPolygon(locationPolygons)
         user.urbanRural = GetUrbanRural(urbanRural)
         user.province = GetProvineAcronym(province)
-        user.dateFounded = GetDate(registration_date)
+        user.dateFounded,user.age = GetDate(registration_date)
         user.size = GetSize(fte+pte+volunteers)
 
         user.save()   

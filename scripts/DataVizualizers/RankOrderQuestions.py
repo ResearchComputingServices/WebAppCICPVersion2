@@ -354,7 +354,7 @@ def CreateStackedBarChart(  responseDict,
     #Modified to adjust the plots - Rohan
     plt.subplots_adjust(right=0.8)
     
-    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium'})
+    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium'},pad = 25.0)
     ax1.set_ylabel('')
     ax1.set_xticks([0,25,50,75,100])
 
@@ -373,7 +373,6 @@ def CreateStackedBarChart(  responseDict,
     ax2.axis('off')
 
     ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
-    dateText = str(saveToDirPath.split("/")[-1])
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]

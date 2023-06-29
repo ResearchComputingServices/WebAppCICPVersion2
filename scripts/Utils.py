@@ -165,7 +165,8 @@ class FrontEndQuery:
     locations: List = field(default_factory=lambda: []) 
     organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
-    fieldOfWork: List = field(default_factory=lambda: [])       
+    fieldOfWork: List = field(default_factory=lambda: [])
+    age: List = field(default_factory=lambda: [])        
 
     siteLanguage: str = ''
     
@@ -177,10 +178,25 @@ class FrontEndQuery:
             len(self.locations) == 0 and 
             len(self.organizationSizes) == 0 and
             len(self.fieldOfWork) == 0 and
+            len(self.age) == 0 and
             self.qualtricsSurveyID == ''):
                 isDateOnly = True
         
         return isDateOnly
+    
+    def IsThemeOnly(self):
+        
+        isThemeOnly = False
+        
+        if (len(self.date) == 0 and 
+            len(self.locations) == 0 and 
+            len(self.organizationSizes) == 0 and
+            len(self.fieldOfWork) == 0 and
+            len(self.age) == 0 and
+            len(self.questionThemes) != 0):
+                isThemeOnly = True
+        
+        return isThemeOnly
         
 ##################################################################################################################################
 # This function changes a filepath local to the server to a url

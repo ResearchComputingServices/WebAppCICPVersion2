@@ -1,7 +1,9 @@
+import shutil
 from django.db.models import Q, QuerySet
 import pandas as pd
 
 import uuid
+import os.path
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -9,7 +11,6 @@ warnings.filterwarnings('ignore')
 from scripts.Utils import *
 from scripts.DataVisualizer import DataVisualizerMain
 from InteractiveDB.models import SurveyTable, QuestionTable, ChoiceTable, UserTable, UserResponseTable
-import pdb
 ##################################################################################################################################
 # 
 ##################################################################################################################################
@@ -33,6 +34,13 @@ def GetUserQuerySet(aQuery):
         for lang in aQuery.languagePreference:
             print(lang)
             qObject |= Q(languagePreference=lang) 
+        userQuerySet = userQuerySet.filter(qObject)
+
+    if len(aQuery.age) != 0: 
+        qObject = Q()
+        for age1 in aQuery.age:
+            print("Inside Controller - Age",age1)
+            qObject |= Q(age=age1)
         userQuerySet = userQuerySet.filter(qObject)
     
     if len(aQuery.fieldOfWork) != 0:
@@ -177,23 +185,58 @@ def GenerateDefaultFigures(aSurvey):
 
     aQuery = FrontEndQuery()
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
-    
+
+    themeString = str(aSurvey.surveyTheme)
     dateString =  aSurvey.releaseDate.strftime("%Y-%m-%d")
+
     
-    # Create the ENGLISH Default images
+    # Create the ENGLISH Default images based on date
     saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, dateString)
+   
     aQuery.siteLanguage = ENGLISH
     
-    HandleFrontEndQuery(aQuery=aQuery,
+    listOfImageFilePaths, dataCSVFilePath, errorLogs = HandleFrontEndQuery(aQuery=aQuery,
                         saveToDirPath=saveToDirPath)
+    
+
+    # Each survey has a theme associated with it. Hence, when we create surveys using date,
+    # We also add it to the corresponding theme folder. This avoids dual generation of same images.
+
+    # Create a theme directory based on the survey theme 
+    saveToThemeDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, themeString)
+    os.makedirs(saveToThemeDirPath, exist_ok=True)
+
+
+    # The root can access the folder in media only if we provide the path starting with var folder.
+    if len(listOfImageFilePaths) != 0:
+        for file in listOfImageFilePaths:
+            file = '/var/www/html/'+ file
+            shutil.copy(file,saveToThemeDirPath)
+        print("Copied files to English Theme Folder")
     
     # Create the FRENCH Default images
     saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH, dateString)
     aQuery.siteLanguage = FRENCH   
     
-    HandleFrontEndQuery(aQuery=aQuery,
+    listOfImageFilePaths, dataCSVFilePath, errorLogs = HandleFrontEndQuery(aQuery=aQuery,
                         saveToDirPath=saveToDirPath)
-        
+    
+     # Each survey has a theme associated with it. Hence, when we create surveys using date,
+    # We also add it to the corresponding theme folder. This avoids dual generation of same images.
+
+    # Create a theme directory based on the survey theme 
+    saveToThemeDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH, themeString)
+    os.makedirs(saveToThemeDirPath, exist_ok=True)
+
+
+    # The root can access the folder in media only if we provide the path starting with var folder.
+    if len(listOfImageFilePaths) != 0:
+        for file in listOfImageFilePaths:
+            file = '/var/www/html/'+ file
+            shutil.copy(file,saveToThemeDirPath)
+        print("Copied files to French Theme Folder")
+    
+
     return True
     
 ##################################################################################################################################
@@ -338,6 +381,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('size',aQuery.organizationSizes)
     print('lang',aQuery.languagePreference)
     print('field',aQuery.fieldOfWork)
+    print('age',aQuery.age)
     print('Site Lang:',aQuery.siteLanguage)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     
@@ -368,10 +412,40 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
                         dataCSVFilePath.append(filePath)
                     else:
                         listOfImageFilePaths.append(filePath)   
+    
         else:
-            print("[WARNING]: HandleFrontEndQuery: Folder path doesn't exist:", folderPath)     
+            print("[WARNING]: HandleFrontEndQuery: Folder path for this date doesn't exist:", folderPath) 
+
+    # If only a theme is specified in the query then no new images need to be generated since the default
+    # images created when the survey data was pulled from the qualtrics website fullfills the request.
+
+    elif aQuery.IsThemeOnly():
+
+        print("aQuery.questionThemes[0]",aQuery.questionThemes[0])
+        folderPath = ''
+        if isEnglish:
+            folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, aQuery.questionThemes[0])
+        else:
+            folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH,  aQuery.questionThemes[0])
+        print('FolderPath:', folderPath)
+
+        if os.path.exists(folderPath):
+            for filename in os.listdir(folderPath):
+                if os.path.isfile(os.path.join(folderPath, filename)):
+
+                    filePath = os.path.join(folderPath, filename)
+                                        
+                    if '.csv' in filename:    
+                        dataCSVFilePath.append(filePath)
+                    else:
+                        listOfImageFilePaths.append(filePath)   
+    
+        else:
+            print("[WARNING]: HandleFrontEndQuery: Folder path for this theme doesn't exist:", folderPath)
+  
     # If there are more filters in the query then just a date, new images will need to be generated.
     else: 
+       
         print('QueryType: Full Query')
         responseDict, errorLogs = GetResponseDict(aQuery)
         

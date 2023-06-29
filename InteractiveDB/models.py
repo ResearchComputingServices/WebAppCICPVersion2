@@ -10,9 +10,10 @@ class SurveyTable(models.Model):
     qualtricsSurveyID = models.CharField(max_length=30)
     releaseDate = models.DateField()
     fetchedDate = models.DateField(null=True,blank=True)
+    surveyTheme = models.CharField(max_length=30)
        
     def __str__(self):
-        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate}"
+        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate} surveyTheme: {self.surveyTheme}"
     
 ########################################################################################################################################################
             
@@ -91,6 +92,7 @@ class UserTable(models.Model):
     urbanRural = models.CharField(max_length=2) # UR/RL
 
     dateFounded = models.DateField(null=True, blank=True)
+    age = models.TextField()
 
     domain = models.TextField()
     subDomain = models.TextField()

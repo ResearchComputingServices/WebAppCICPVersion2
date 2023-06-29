@@ -120,7 +120,7 @@ def CreatePieChart( responseDict,
 
     fig = plt.figure(figsize=(20,20))
     ax1 = plt.subplot2grid((9, 3), (0, 0), colspan=3, rowspan=9)
-    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 24, 'fontweight': 'medium'})
+    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 24, 'fontweight': 'medium'},pad=25.0)
 
 
     #ax1.pie(values,

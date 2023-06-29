@@ -36,6 +36,11 @@ ORGANIZATION_SIZES = [('SMALL',_('Small')),
 ('MEDIUM',_('Medium')),
 ('LARGE',_('Large'))]
 
+AGE = [
+    ('OLD',_('Old (Registered before 1990)')),
+    ('NEW',_('New (Registered after 1990)'))
+]
+
 # FIELD_OF_WORK = []
 
 DateInput = partial(forms.DateInput, {'class': 'dateinput'})
@@ -46,17 +51,21 @@ class ProvinceFilterForm(forms.Form):
                                         label=_('Province'),required=False)
 
 class LanguageFilterForm(forms.Form):
-    language = forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=LANGUAGE_CHOICES,
+    language = forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=LANGUAGE_CHOICES,
                                         label = _('Language Preference'),required=False)
 
 class OrgsizeFilterForm(forms.Form):
-    size = forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=ORGANIZATION_SIZES,
+    size = forms.MultipleChoiceField(widget=forms.SelectMultiple(),choices=ORGANIZATION_SIZES,
                                     label=_('Size'),required=False)
+    
+class AgeFilterForm(forms.Form):
+    age = forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=AGE,
+                                        label = _('Age'),required=False)
 
 
  # New Changes for a different theme    
 class ThemeFilterForm(forms.Form):
-    theme= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple,choices=THEME_CHOICES,
+    theme= forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=THEME_CHOICES,
                                     label = _('Theme'),required=False)
     
 class DateFilterForm(forms.Form):
