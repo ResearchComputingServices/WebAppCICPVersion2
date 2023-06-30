@@ -40,13 +40,9 @@
                         <a id="navtext" class="nav-link" aria-current="page" href="#">{% translate "Print Report" %}</a>
                         </button>  
                     </li>
-                    <li class="nav-item active ">
-                        <button class="btn active navbutton" type="button">
-                       <a class="dropdown-item" id="langButton" href="" onClick=changeLang({{request.get_full_path}})>Francias</a>
-                        </button>  
-                    </li>
+                
 
-                    {% comment %} <li class="nav-item active dropdown">
+                    {<li class="nav-item active dropdown">
                         <button class="btn active navbutton" type="button">
                         <a class="nav-link dropdown-toggle"
                            href="#"
@@ -68,7 +64,7 @@
                             {% endfor %}
                         </ul>
                         </button> 
-                    </li> {% endcomment %}
+                    </li>
                 </ul>
             </div>
         </nav>
