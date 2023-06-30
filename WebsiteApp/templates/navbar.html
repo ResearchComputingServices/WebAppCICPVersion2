@@ -58,11 +58,11 @@
                             {% get_current_language as LANGUAGE_CODE %}
                             {% get_available_languages as LANGUAGES %}
                             {% get_language_info_list for LANGUAGES as languages %}
-                            {% comment %} {% for lang in languages %} {% endcomment %}
+                             {% for lang in languages %} 
                                 <li>
                                     <a class="dropdown-item" href="" onClick=changeLang({{request.get_full_path}})>Francias</a>
                                 </li>
-                            {% comment %} {% endfor %} {% endcomment %}
+                             {% endfor %} 
                         </ul> {% endcomment %}
                         </button> 
                     </li>
