@@ -1,0 +1,271 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-06-29 02:03-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "visible"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "bgcolor"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "bordercolor"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "borderwidth"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "thickness"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "autorange"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "range"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "n"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "s"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "w"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "e"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "minor"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "bingroup"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "label"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "arrowlen"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "source"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "target"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "value"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "line.color"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "line.width"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "hoverinfo"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "hovertemplate"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "color"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
+#: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
+#: cicp_env/share/jupyter/labextensions/jupyterlab-plotly/static/478.f7319c49bce7c550ff08.js:2
+#: cicp_env/share/jupyter/nbextensions/jupyterlab-plotly/index.js:2
+msgid "customdata"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/HelpDialog.js:117
+msgid "HelpDialog"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1084
+msgid "CloseAboutDialog"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1182
+msgid "NoOriginalForm"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1200
+msgid "EqSource"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1205
+msgid "Close"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1241
+msgid "ScaleMath"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1255
+msgid "NonZeroScale"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1256
+msgid "PercentScale"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1299
+msgid "SwitchAnyway"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1380
+msgid "LoadURL"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1383
+msgid "BadURL"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/extensions/MathMenu.js:1389
+msgid "BadData"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/jax/input/MathML/jax.js:82
+msgid "UnknownNodeType"
+msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/kaleido/executable/etc/mathjax/jax/input/MathML/jax.js:345
+msgid "CantCreateXMLParser"
+msgstr ""
+
+#: static/js/lpage.js:1
+msgid "FILTER REPORTS USING A DATE OR THEME "
+msgstr "FILTER REPORTS USING A DATE OR THEME"

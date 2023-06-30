@@ -11,7 +11,7 @@
     </head>
     <body>
         <nav class="navbar navbar-light navbar-expand-lg">
-            <a class="navbar-brand" href="https://carleton.ca/cicp-pcpob/">
+            <a class="navbar-brand" href="{% url 'landingPageView' %}">
                 <img src="https://cdn.carleton.ca/theme-framework/img/favicons/favicon.ico"
                      alt="Carleton Shield"
                      width="30"
@@ -40,9 +40,10 @@
                         <a id="navtext" class="nav-link" aria-current="page" href="#">{% translate "Print Report" %}</a>
                         </button>  
                     </li>
+
                     <li class="nav-item active dropdown">
                         <button class="btn active navbutton" type="button">
-                        <a class="nav-link dropdown-toggle"
+                        {% comment %} <a class="nav-link dropdown-toggle"
                            href="#"
                            id="navbarDropdown"
                            role="button"
@@ -50,17 +51,19 @@
                            aria-haspopup="true"
                            aria-expanded="false">
                             {% translate "Language" %}
-                        </a>
-                        <ul class="dropdown-menu"           aria-labelledby="navbarDropdown">
+                        </a> {% endcomment %}
+                        <a class="dropdown-item" href="" onClick=changeLang({{request.get_full_path}})>Francias</a>
+                        
+                        {% comment %} <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
                             {% get_current_language as LANGUAGE_CODE %}
                             {% get_available_languages as LANGUAGES %}
                             {% get_language_info_list for LANGUAGES as languages %}
-                            {% for lang in languages %}
+                            {% comment %} {% for lang in languages %} {% endcomment %}
                                 <li>
-                                    <a class="dropdown-item" href="/{{ lang.code }}/">{{ lang.name_local|capfirst }}</a>
+                                    <a class="dropdown-item" href="" onClick=changeLang({{request.get_full_path}})>Francias</a>
                                 </li>
-                            {% endfor %}
-                        </ul>
+                            {% comment %} {% endfor %} {% endcomment %}
+                        </ul> {% endcomment %}
                         </button> 
                     </li>
                 </ul>

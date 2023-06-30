@@ -40,15 +40,22 @@ def FetchSurveyQuestionsJSON(   surveyID,
 ##################################################################################################################################
 def FetchSurveyTranslationJSON( surveyID,
                                 outputFilePath,
-                                langCode = 'FR-CA'):
+                                langCode = ['FR-CA','FR']):
     # Setting user Parameters   
     apiToken = settings.QUATRICS_API['api_token']
     dataCenter = settings.QUATRICS_API['data_center']
     
-    baseUrl = "https://{0}.qualtrics.com/API/v3/surveys/{1}/translations/{2}".format(dataCenter, surveyID, langCode)
+    baseUrl = "https://{0}.qualtrics.com/API/v3/surveys/{1}/translations/{2}".format(dataCenter, surveyID, langCode[0])
     headers = {"x-api-token": apiToken,}
     
     response = requests.get(baseUrl, headers=headers)
+
+    if response.status_code == 400:
+         baseUrl = "https://{0}.qualtrics.com/API/v3/surveys/{1}/translations/{2}".format(dataCenter, surveyID, langCode[1])
+    headers = {"x-api-token": apiToken,}
+    
+    response = requests.get(baseUrl, headers=headers)
+
 
     # Save the response as a JSON file so we can load it into an object
     jsonFile = open(outputFilePath, 'w+')

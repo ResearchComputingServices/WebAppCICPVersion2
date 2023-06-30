@@ -1,10 +1,13 @@
-function socialMediaFunction() {
-    var x = document.getElementById("myDiv");
-    if (x.style.display === "none") {
-        x.style.display = "block";
+function changeLang(siteUrl) {
+    var link = document.querySelector("a");
+    link.getAttribute("href");
+    if (siteUrl.includes("/en/")) {
+        siteUrl.replace("/en/", "/fr/")
 
-    } else {
-        x.style.display = "none";
-
+        link.setAttribute("href",
+            siteUrl);
+        link.textContent = "English";
     }
+
+
 }

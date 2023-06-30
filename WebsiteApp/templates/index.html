@@ -54,10 +54,20 @@
                             <span class="sec-filters">
                                 <div>
                                     {{province_form_filter}}
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
                                     {{org_size_form_filter}}
                                 </div>
                                 <div id="subfilter">
                                     {{language_form_filter}}
+                                    &nbsp;
+                                    &nbsp;
+                                    &nbsp;
                                     &nbsp;
                                     &nbsp;
                                     &nbsp;
@@ -85,11 +95,11 @@
             {% if locations or languagePreference or orgSizes or age %}
                 <div class="selected-filters">
             
-                    Filters Selected:
-                    <strong>Province:</strong><i>{{locations}}</i>
-                    <strong>Language:</strong><i>{{languagePreference}}</i>
-                    <strong>Organisation Size:</strong><i>{{orgSizes}}</i>
-                    <strong>Age:</strong><i>{{age}}</i>
+                    {% translate "Filters Selected:"%}
+                    <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
+                    <strong>{% translate "Language:"%}</strong><i>{{languagePreference}}</i>
+                    <strong>{% translate "Organisation Size:"%}</strong><i>{{orgSizes}}</i>
+                    <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
 
                 </div>
             {% endif %}

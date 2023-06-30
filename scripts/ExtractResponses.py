@@ -136,6 +136,7 @@ def ExtractMultipleChoiceQuestionResponse(question, userResponsesList):
             choice = GetChoiceEntity(question, responseKey, responseValue)
                                  
             userResponse = GetUserResponse(user, question, choice)
+
                            
             if "TEXT" in responseKey:
                 userResponse.answerTextOriginal = responseValue 
