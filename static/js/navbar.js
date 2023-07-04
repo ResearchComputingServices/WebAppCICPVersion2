@@ -2,6 +2,7 @@ function changeLang(siteLang) {
     var siteUrl = window.location.href;
     var link = document.getElementById("langButton");
     link.getAttribute("href");
+
     if (siteUrl.includes("en")) {
         siteUrl = siteUrl.replace("en", "fr");
         link.setAttribute("href",
@@ -27,7 +28,7 @@ function changeLang(siteLang) {
 
         else {
             if (siteUrl.length > 21) {
-                siteUrl.substring(0, 21) + "/en" + currentUrl.substring(21);
+                siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
             }
             else {
                 siteUrl = siteUrl + "/en/"
