@@ -3,12 +3,12 @@ function changeLang(siteLang) {
     var link = document.getElementById("langButton");
     link.getAttribute("href");
 
-    if (siteUrl.includes("http://134.117.214.42/en/")) {
+    if (siteUrl == "http://134.117.214.42/en/") {
         siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
         link.setAttribute("href",
             siteUrl);
     }
-    else if (siteUrl.includes("http://134.117.214.42/fr/")) {
+    else if (siteUrl == "http://134.117.214.42/fr/") {
 
         siteUrl = siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
         link.setAttribute("href",
