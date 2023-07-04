@@ -20,7 +20,7 @@ function changeLang(siteLang) {
 
     else {
         if (siteLang == 'fr') {
-            if (siteUrl.length > 21) {
+            if (siteUrl.length > 30) {
                 window.alert("case3")
                 siteUrl = siteUrl.substring(0, 21) + "/fr" + siteUrl.substring(21);
                 window.alert(siteUrl)
@@ -34,7 +34,7 @@ function changeLang(siteLang) {
         }
 
         else if (siteLang == 'en') {
-            if (siteUrl.length > 21) {
+            if (siteUrl.length > 30) {
                 window.alert("case5")
                 siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
                 window.alert(siteUrl)
