@@ -8,17 +8,22 @@ function changeLang(siteLang) {
 
             if (siteUrl.includes("http://134.117.214.42/fr/")) {
                 window.alert("case1")
-                siteUrl = siteUrl
+                // siteUrl = siteUrl
                 window.alert(siteUrl)
                 link.setAttribute("href", siteUrl);
+                window.location.href = siteUrl;
+
             }
 
-            else if (siteUrl.includes("http://134.117.214.42/fr/")) {
+            else if (siteUrl.includes("http://134.117.214.42/en/")) {
                 // siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
                 window.alert("case2")
-                siteUrl = siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
-                window.alert(siteUrl)
-                link.setAttribute("href", siteUrl);
+                // siteUrl = siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
+                // link.setAttribute("href", siteUrl);
+                var replacedUrl = siteUrl.replace(/(http:\/\/134\.117\.214\.42)\/en/, "$1/fr");
+                window.alert(replacedUrl)
+                link.setAttribute("href", replacedUrl);
+                window.location.href = replacedUrl;
 
             }
         }
@@ -26,17 +31,22 @@ function changeLang(siteLang) {
 
             if (siteUrl.includes("http://134.117.214.42/fr/")) {
                 window.alert("case3")
-                siteUrl = siteUrl
+                // siteUrl = siteUrl
                 window.alert(siteUrl)
                 link.setAttribute("href", siteUrl);
+                window.location.href = siteUrl;
             }
 
-            else if (siteUrl.includes("http://134.117.214.42/fr/")) {
+            else if (siteUrl.includes("http://134.117.214.42/en/")) {
                 // siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
                 window.alert("case4")
-                siteUrl = siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
-                window.alert(siteUrl)
-                link.setAttribute("href", siteUrl);
+                // siteUrl = siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
+                // window.alert(siteUrl)
+                // link.setAttribute("href", siteUrl);
+                var replacedUrl = siteUrl.replace(/(http:\/\/134\.117\.214\.42)\/en/, "$1/fr");
+                window.alert(replacedUrl)
+                link.setAttribute("href", replacedUrl);
+                window.location.href = replacedUrl;
 
             }
         }
@@ -56,9 +66,13 @@ function changeLang(siteLang) {
             else if (siteUrl.includes("http://134.117.214.42/fr/")) {
                 // siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
                 window.alert("case5")
-                siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
-                window.alert(siteUrl)
-                link.setAttribute("href", siteUrl);
+                // siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
+                // window.alert(siteUrl)
+                // link.setAttribute("href", siteUrl);
+                var replacedUrl = siteUrl.replace(/(http:\/\/134\.117\.214\.42)\/fr/, "$1/en");
+                window.alert(replacedUrl)
+                link.setAttribute("href", replacedUrl);
+                window.location.href = replacedUrl;
 
             }
 
@@ -75,10 +89,13 @@ function changeLang(siteLang) {
 
             else if (siteUrl.includes("http://134.117.214.42/fr/")) {
                 window.alert("case7")
-                siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
-                window.alert(siteUrl)
-                link.setAttribute("href", siteUrl);
-
+                // siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
+                // window.alert(siteUrl)
+                // link.setAttribute("href", siteUrl);
+                var replacedUrl = siteUrl.replace(/(http:\/\/134\.117\.214\.42)\/fr/, "$1/en");
+                window.alert(replacedUrl)
+                link.setAttribute("href", replacedUrl);
+                window.location.href = replacedUrl;
 
             }
 
