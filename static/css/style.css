@@ -432,8 +432,8 @@ div {
     }
 
     div.filterbox {
-        width: 600px;
-        height: 250px;
+        width: 1000px;
+        height: 300px;
         padding: 10px;
         background-color: #131212;
         margin-left: 35%;

@@ -47,7 +47,7 @@
                     {{dateFilter.as_div}}
                 </div>
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                <input type="reset" value={% translate "Reset"%}>
+                <input class="form-input" type="reset" value={% translate "Reset"%}>
             </form>
             
         </div>
@@ -58,7 +58,7 @@
                 {{themeFilter.as_div}}
                 </div>
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                <input type="reset" value={% translate "Reset"%}>
+                <input class="form-input" type="reset" value="{% translate "Reset"%}"/>
             </form>
         </div>
     </div>
@@ -80,8 +80,9 @@
             <script src="{% static 'js/datepicker.js' %}"></script>
             <script src="{% static 'js/index.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>
-            <script src="{% static 'js/lpage.js' %}"></script>
             <script src="{% url 'javascript-catalog' %}"></script>
+            <script src="{% static 'js/lpage.js' %}"></script>
+            
     {% endblock scripts %}
 </body>
 
