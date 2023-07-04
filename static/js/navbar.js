@@ -26,16 +26,13 @@ function changeLang(siteLang) {
 
         }
 
-        else {
-            if (siteLang == 'en') {
-                if (siteUrl.length > 21) {
-                    siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
-                }
-                else {
-                    siteUrl = siteUrl + "/en/"
-                }
+        else if (siteLang == 'en') {
+            if (siteUrl.length > 21) {
+                siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
             }
-
+            else {
+                siteUrl = siteUrl + "/en/"
+            }
         }
 
         link.setAttribute("href", siteUrl);
