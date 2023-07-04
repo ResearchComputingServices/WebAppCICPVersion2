@@ -18,7 +18,7 @@ function changeLang(siteLang) {
     else {
         if (siteLang == 'fr') {
             if (siteUrl.length > 21) {
-                siteUrl = siteUrl = siteUrl.substring(0, 21) + "/fr" + siteUrl.substring(21);
+                siteUrl = siteUrl.substring(0, 21) + "/fr" + siteUrl.substring(21);
             }
             else {
                 siteUrl = siteUrl + "/fr/"
@@ -27,12 +27,15 @@ function changeLang(siteLang) {
         }
 
         else {
-            if (siteUrl.length > 21) {
-                siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
+            if (siteLang == 'en') {
+                if (siteUrl.length > 21) {
+                    siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
+                }
+                else {
+                    siteUrl = siteUrl + "/en/"
+                }
             }
-            else {
-                siteUrl = siteUrl + "/en/"
-            }
+
         }
 
         link.setAttribute("href", siteUrl);
