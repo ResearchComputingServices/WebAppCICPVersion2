@@ -16,8 +16,8 @@ function changeLang(siteLang) {
 
     else {
         if (siteLang == 'fr') {
-            if (length(siteUrl) > 21) {
-                siteUrl = siteUrl.substring(0, 21) + "/fr" + currentUrl.substring(21);
+            if (siteUrl.length > 21) {
+                siteUrl = siteUrl = siteUrl.substring(0, 21) + "/fr" + siteUrl.substring(21);
             }
             else {
                 siteUrl = siteUrl + "/fr/"
@@ -26,13 +26,14 @@ function changeLang(siteLang) {
         }
 
         else {
-            if (length(siteUrl) > 21) {
+            if (siteUrl.length > 21) {
                 siteUrl.substring(0, 21) + "/en" + currentUrl.substring(21);
             }
             else {
                 siteUrl = siteUrl + "/en/"
             }
         }
+
         link.setAttribute("href", siteUrl);
 
     };
