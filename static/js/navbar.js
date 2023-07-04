@@ -107,24 +107,25 @@
 // };
 
 function changeLang(siteLang) {
-    var siteUrl = window.location.href;
-    var link = document.getElementById("langButton");
+  var siteUrl = window.location.href;
+  var link = document.getElementById("langButton");
 
-    var isFrench = siteLang === 'fr';
-    var langSegment = isFrench ? '/fr' : '/en';
+  var isFrench = siteLang === 'fr';
+  var langSegment = isFrench ? '/fr' : '/en';
 
-    var replacedUrl;
+  var replacedUrl;
 
-    if (siteUrl.includes('/en/') && !siteUrl.includes('/token')) {
-        replacedUrl = siteUrl.replace(/\/en\//, langSegment + '/');
-    } else if (siteUrl.includes('/fr/') && !siteUrl.includes('/token')) {
-        replacedUrl = siteUrl.replace(/\/fr\//, langSegment + '/');
-    } else if (!siteUrl.includes('/en/') && !siteUrl.includes('/fr/')) {
-        var langUrlSegment = '/' + langSegment.substring(1);
-        replacedUrl = siteUrl.replace(/\/$/, '') + langUrlSegment + '/';
-    }
+  if (siteUrl.includes('/en/') && !siteUrl.includes('/token')) {
+    replacedUrl = siteUrl.replace(/\/en\//, langSegment + '/');
+  } else if (siteUrl.includes('/fr/') && !siteUrl.includes('/token')) {
+    replacedUrl = siteUrl.replace(/\/fr\//, langSegment + '/');
+  } else {
+    var langUrlSegment = '/' + langSegment.substring(1);
+    replacedUrl = siteUrl.replace(/\/(theme|date)\//, langUrlSegment + '/$1/');
+  }
 
-    link.setAttribute("href", replacedUrl);
-    window.location.replace(replacedUrl);
+  link.setAttribute("href", replacedUrl);
+  window.location.replace(replacedUrl);
 }
+
 
