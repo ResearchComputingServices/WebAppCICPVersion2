@@ -115,15 +115,16 @@ function changeLang(siteLang) {
 
     var replacedUrl;
 
-    if (siteUrl.includes('/en/')) {
-        replacedUrl = siteUrl.replace(/(http:\/\/134\.117\.214\.42)\/en/, "$1" + langSegment);
-    } else if (siteUrl.includes('/fr/')) {
-        replacedUrl = siteUrl.replace(/(http:\/\/134\.117\.214\.42)\/fr/, "$1" + langSegment);
-    } else {
-        var langUrlSegment = '/' + langSegment.substring(1) + '/';
-        replacedUrl = siteUrl.replace(/(http:\/\/134\.117\.214\.42)/, "$1" + langUrlSegment);
+    if (siteUrl.includes('/en/') && !siteUrl.includes('/token')) {
+        replacedUrl = siteUrl.replace(/\/en\//, langSegment + '/');
+    } else if (siteUrl.includes('/fr/') && !siteUrl.includes('/token')) {
+        replacedUrl = siteUrl.replace(/\/fr\//, langSegment + '/');
+    } else if (!siteUrl.includes('/en/') && !siteUrl.includes('/fr/')) {
+        var langUrlSegment = '/' + langSegment.substring(1);
+        replacedUrl = siteUrl.replace(/\/$/, '') + langUrlSegment + '/';
     }
 
     link.setAttribute("href", replacedUrl);
     window.location.replace(replacedUrl);
 }
+
