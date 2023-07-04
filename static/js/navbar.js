@@ -3,49 +3,88 @@ function changeLang(siteLang) {
     var link = document.getElementById("langButton");
     link.getAttribute("href");
 
-    // if (siteUrl.includes("http://134.117.214.42/en/")) {
-    //     window.alert("case1")
-    //     siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
-    //     link.setAttribute("href",
-    //         siteUrl);
-    //     window.alert(siteUrl)
-    // }
-    // else if (siteUrl.includes("http://134.117.214.42/fr/")) {
-    //     window.alert("case2")
-    //     siteUrl = siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
-    //     link.setAttribute("href",
-    //         siteUrl);
-    //     window.alert(siteUrl)
-    // }
-
-
-    if (siteLang == 'fr' && !siteUrl.includes("http://134.117.214.42/fr/")) {
+    if (siteLang == 'fr') {
         if (siteUrl.length > 30) {
-            window.alert("case3")
-            siteUrl = siteUrl.substring(0, 21) + "/fr" + siteUrl.substring(21);
-            window.alert(siteUrl)
+
+            if (siteUrl.includes("http://134.117.214.42/fr/")) {
+                window.alert("case1")
+                window.alert(siteUrl)
+                siteUrl = siteUrl
+                link.setAttribute("href", siteUrl);
+            }
+
+            else if (siteUrl.includes("http://134.117.214.42/fr/")) {
+                // siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
+                window.alert("case2")
+                siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
+                window.alert(siteUrl)
+                link.setAttribute("href", siteUrl);
+
+            }
         }
         else {
-            window.alert("case4")
-            siteUrl = siteUrl + "/fr/"
-            window.alert(siteUrl)
+
+            if (siteUrl.includes("http://134.117.214.42/fr/")) {
+                window.alert("case3")
+                window.alert(siteUrl)
+                siteUrl = siteUrl
+                link.setAttribute("href", siteUrl);
+            }
+
+            else if (siteUrl.includes("http://134.117.214.42/fr/")) {
+                // siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
+                window.alert("case4")
+                siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
+                window.alert(siteUrl)
+                link.setAttribute("href", siteUrl);
+
+            }
         }
 
     }
 
-    else if (siteLang == 'en' && !siteUrl.includes("http://134.117.214.42/en/")) {
+    else if (siteLang == 'en') {
         if (siteUrl.length > 30) {
-            window.alert("case5")
-            siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
-            window.alert(siteUrl)
+
+            if (siteUrl.includes("http://134.117.214.42/en/")) {
+                window.alert("case4")
+                window.alert(siteUrl)
+                siteUrl = siteUrl
+                link.setAttribute("href", siteUrl);
+            }
+
+            else if (siteUrl.includes("http://134.117.214.42/fr/")) {
+                // siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
+                window.alert("case5")
+                siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
+                window.alert(siteUrl)
+                link.setAttribute("href", siteUrl);
+
+            }
+
         }
         else {
-            window.alert("case6")
-            siteUrl = siteUrl + "/en/"
-            window.alert(siteUrl)
+
+            if (siteUrl.includes("http://134.117.214.42/en/")) {
+                window.alert("case6")
+                window.alert(siteUrl)
+                siteUrl = siteUrl
+                link.setAttribute("href", siteUrl);
+
+            }
+
+            else if (siteUrl.includes("http://134.117.214.42/fr/")) {
+                window.alert("case7")
+                window.alert(siteUrl)
+                siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
+                link.setAttribute("href", siteUrl);
+
+
+            }
+
         }
     }
 
-    link.setAttribute("href", siteUrl);
+
 
 };
