@@ -4,45 +4,45 @@ function changeLang(siteLang) {
     link.getAttribute("href");
 
     if (siteUrl == "http://134.117.214.42/en/") {
-        console.log("case1")
+        window.alert("case1")
         siteUrl = siteUrl.replace("http://134.117.214.42/en/", "http://134.117.214.42/fr/");
         link.setAttribute("href",
             siteUrl);
-        console.log(siteUrl)
+        window.alert(siteUrl)
     }
     else if (siteUrl == "http://134.117.214.42/fr/") {
-        console.log("case2")
+        window.alert("case2")
         siteUrl = siteUrl.replace("http://134.117.214.42/fr/", "http://134.117.214.42/en/");
         link.setAttribute("href",
             siteUrl);
-        console.log(siteUrl)
+        window.alert(siteUrl)
     }
 
     else {
         if (siteLang == 'fr') {
             if (siteUrl.length > 21) {
-                console.log("case3")
+                window.alert("case3")
                 siteUrl = siteUrl.substring(0, 21) + "/fr" + siteUrl.substring(21);
-                console.log(siteUrl)
+                window.alert(siteUrl)
             }
             else {
-                console.log("case4")
+                window.alert("case4")
                 siteUrl = siteUrl + "/fr/"
-                console.log(siteUrl)
+                window.alert(siteUrl)
             }
 
         }
 
         else if (siteLang == 'en') {
             if (siteUrl.length > 21) {
-                console.log("case5")
+                window.alert("case5")
                 siteUrl = siteUrl.substring(0, 21) + "/en" + siteUrl.substring(21);
-                console.log(siteUrl)
+                window.alert(siteUrl)
             }
             else {
-                console.log("case6")
+                window.alert("case6")
                 siteUrl = siteUrl + "/en/"
-                console.log(siteUrl)
+                window.alert(siteUrl)
             }
         }
 
