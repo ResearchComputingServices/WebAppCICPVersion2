@@ -47,13 +47,18 @@
                     {{dateFilter.as_div}}
                 </div>
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                <input type="reset" value={% translate "Reset"%}>
             </form>
             
         </div>
         <div class="shade">
             <form action="{% url 'themereports' %}" method="get">
+                {% csrf_token %}
+                <div class="ml-md-2">
                 {{themeFilter.as_div}}
+                </div>
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                <input type="reset" value={% translate "Reset"%}>
             </form>
         </div>
     </div>
