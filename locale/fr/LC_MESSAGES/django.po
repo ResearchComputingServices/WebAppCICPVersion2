@@ -215,10 +215,8 @@ msgid "Click Here"
 msgstr "Cliquez ici"
 
 #: WebsiteApp/templates/navbar.html:35
-#, fuzzy
-#| msgid "Back to CICP"
 msgid "Back to CICP Website"
-msgstr "Retour à PCPOB"
+msgstr "Retour au site Web du PCPOB"
 
 #: WebsiteApp/templates/navbar.html:40
 msgid "Print Report"
