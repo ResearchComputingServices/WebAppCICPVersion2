@@ -35,14 +35,23 @@ window.addEventListener("load", function () {
 });
 
 
-function validateDate() {
-    var dateInput = document.forms["myForm"]["date"].value;
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById("myForm");
+    form.onsubmit = validateDate;
 
-    if (dateInput === "") {
-        alert("Please select a date");
-        return false;
+    function validateDate() {
+        var dateInput = document.forms["myForm"]["date"].value;
+
+        if (dateInput === "") {
+            alert("Please select a date");
+            return false;
+        }
+
+        // Additional validation logic if needed
+
+        return true;  // Submit the form if validation passes
     }
+});
 
-    return true;  // Submit the form if validation passes
-}
+
 
