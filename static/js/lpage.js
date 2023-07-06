@@ -30,23 +30,34 @@ window.addEventListener("load", function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById("myForm");
-    form.onsubmit = validateDate;
+    var dateForm = document.getElementById("dateForm");
+    var themeForm = document.getElementById("themeForm");
 
-    function validateDate(event) {
-        var dateInput = document.forms["myForm"]["report_date"].value;
-        var themeInputs = document.querySelectorAll('input[name="theme"]:checked');
+    dateForm.addEventListener("submit", function (event) {
+        event.preventDefault();  // Prevent the form submission
 
-        if (dateInput === "" && themeInputs.length === 0) {
-            alert("Please select a date and a theme to search.");
-            event.preventDefault();  // Prevent the form submission
-        } else if (dateInput === "") {
+        var dateInput = dateForm.querySelector('input[name="report_date"]').value;
+
+        if (dateInput === "") {
             alert("Please select a date from the calendar to search.");
-            event.preventDefault();  // Prevent the form submission
-        } else if (themeInputs.length === 0) {
-            alert("Please select a theme to search.");
-            event.preventDefault();  // Prevent the form submission
+        } else {
+            // If validation passes, submit the date form
+            dateForm.submit();
         }
-    }
+    });
+
+    themeForm.addEventListener("submit", function (event) {
+        event.preventDefault();  // Prevent the form submission
+
+        var themeInputs = themeForm.querySelectorAll('input[name="theme"]:checked');
+
+        if (themeInputs.length === 0) {
+            alert("Please select a theme to search.");
+        } else {
+            // If validation passes, submit the theme form
+            themeForm.submit();
+        }
+    });
 });
+
 

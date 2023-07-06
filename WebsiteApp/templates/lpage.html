@@ -68,9 +68,9 @@
                 <div class="filter-container">
                     <div class="shade">
                         <div>{% translate "To check the Latest Report" %} &nbsp;<a href="{% url 'latest_report' %}">{% translate "Click Here"%}</a></div>
-                        <form id="myForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
+                        <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
                             {% csrf_token %}
-                            <div class="ml-md-2" id="selected-date" name="date">
+                            <div class="ml-md-2" id="selected-date">
                                 {{dateFilter.as_div}}
                             </div>
                             <input class="form-input" type="submit" value="{% translate "Search" %}"/>
@@ -78,7 +78,7 @@
                         </form>
                     </div>
                     <div class="shade">
-                        <form action="{% url 'themereports' %}" method="get">
+                        <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
                             {% csrf_token %}
                             <div class="ml-md-2">
                             {{themeFilter.as_div}}
