@@ -34,7 +34,7 @@ document.addEventListener('DOMContentLoaded', function () {
     form.onsubmit = validateDate;
 
     function validateDate(event) {
-        var dateInput = document.forms["myForm"]["date"].value;
+        var dateInput = "";
         var themeInputs = document.querySelectorAll('input[name="theme"]:checked');
 
         if (dateInput === "" && themeInputs.length === 0) {
