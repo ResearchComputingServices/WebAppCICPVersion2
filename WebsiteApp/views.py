@@ -169,15 +169,15 @@ def landingPageView(request):
                 return render(request, 'lpage.html', context)
             
 
-            elif reportDate == None:
-                noDateInfo = "Please select a date from the calender to search."
-                context["noDateInfo"] = noDateInfo
-                return render(request, 'lpage.html', context)
+            # elif reportDate == None:
+            #     noDateInfo = "Please select a date from the calender to search."
+            #     context["noDateInfo"] = noDateInfo
+            #     return render(request, 'lpage.html', context)
                
-            elif len(questionTheme) == 0:
-                 noThemeInfo = "Please select a theme to search."
-                 context["noThemeInfo"] = noThemeInfo
-                 return render(request, 'lpage.html', context)
+            # elif len(questionTheme) == 0:
+            #      noThemeInfo = "Please select a theme to search."
+            #      context["noThemeInfo"] = noThemeInfo
+            #      return render(request, 'lpage.html', context)
                 
     
 ##################################################################################################################################
