@@ -36,9 +36,13 @@ window.addEventListener("load", function () {
 
 
 function validateDate() {
-    var selectedDate = document.forms["myForm"]["date"].value;
-    if (selectedDate == None) {
-        alert("Please select a Date")
-    };
+    var dateInput = document.forms["myForm"]["date"].value;
 
-};
+    if (dateInput === "") {
+        alert("Please select a date");
+        return false;
+    }
+
+    return true;  // Submit the form if validation passes
+}
+
