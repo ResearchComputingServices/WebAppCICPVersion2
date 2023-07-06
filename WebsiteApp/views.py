@@ -134,38 +134,50 @@ def landingPageView(request):
 
     elif reportDate:
 
-        query_response_imagefilepaths, query_response_csv, errors,context = themeOrDate(request, None,reportDate)
+        if reportDate == "2022-12-23" or reportDate== "2022-12-30" :
+            info = gettext(" 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳")
+            context['info'] = info
 
-        friday_text_date, wednesday_text_date = dateInitialization(False,reportDate) 
-
-        context['filtered'] = 'filteredReport'
-        context['friday_text_date'] = friday_text_date
-        context['wednesday_date'] = wednesday_text_date
-        context['reportDate'] = reportDate
-
-        print("context after selection is",context)
+            return render(request, 'index.html', context)
         
-        if len(errors) != 0:
-            context["errors"] = errors
+        else:
 
-        if len(query_response_imagefilepaths) != 0:
-            context["image_filepaths"] = query_response_imagefilepaths
+            query_response_imagefilepaths, query_response_csv, errors,context = themeOrDate(request, None,reportDate)
 
-        return render(request, 'index.html', context)
-     
+            friday_text_date, wednesday_text_date = dateInitialization(False,reportDate) 
+
+            context['filtered'] = 'filteredReport'
+            context['friday_text_date'] = friday_text_date
+            context['wednesday_date'] = wednesday_text_date
+            context['reportDate'] = reportDate
+
+            print("context after selection is",context)
+
+            if len(errors) != 0:
+                context["errors"] = errors
+
+            if len(query_response_imagefilepaths) != 0:
+                context["image_filepaths"] = query_response_imagefilepaths
+
+            return render(request, 'index.html', context)
+
          
     else:
-            print("reportdate inside else block",reportDate)
-            print("questionTheme inside else block",questionTheme)
             print("language =",get_language())
+            print(reportDate)
             if reportDate == None and len(questionTheme) == 0:
                 return render(request, 'lpage.html', context)
+            
 
-            # elif reportDate is None:
-            #     selected_date = request.COOKIES['selected_date']
-            #     print("selected_date from cookies",selected_date)
-            #     query_response_imagefilepaths, query_response_csv, errors = themeOrDate(request,None,selected_date)
-            #     return HttpResponse("The image filepaths are", query_response_imagefilepaths)
+            elif reportDate == None:
+                noDateInfo = "Please select a date from the calender to search."
+                context["noDateInfo"] = noDateInfo
+                return render(request, 'lpage.html', context)
+               
+            elif len(questionTheme) == 0:
+                 noThemeInfo = "Please select a theme to search."
+                 context["noThemeInfo"] = noThemeInfo
+                 return render(request, 'lpage.html', context)
                 
     
 ##################################################################################################################################

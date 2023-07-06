@@ -98,3 +98,15 @@
     }
 
 }
+
+#infocard .card-body {
+    background-color: #000000;
+}
+
+#infocard .card-header {
+    background-color: #ea1b22;
+}
+
+#infocard .btn {
+    background-color: #e91c24;
+}
