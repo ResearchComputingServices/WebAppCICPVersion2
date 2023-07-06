@@ -1,4 +1,4 @@
-const messageArray = gettext(["FILTER REPORTS USING A DATE OR THEME "]);
+const messageArray = [gettext("FILTER REPORTS USING A DATE OR THEME")];
 let textPosition = 0;
 const speed = 100;
 const speedNew = 200;
