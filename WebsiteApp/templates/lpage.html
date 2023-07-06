@@ -37,34 +37,6 @@
     </div>
 
     <div class="heading-text" id="message"></div>
-    {% if noDateInfo %}
-                <div class="container">
-                    <div id="infocard"
-                         class="h-100 d-flex align-items-center justify-content-center">
-                        <div class="card text-center">
-                            <div class="card-header text-light">{% translate "Alert!!" %}</div>
-                            <div class="card-body">                               
-                                <p class="card-title ">
-                                    <p class="card-text text-light">{{ noDateInfo }}</p>
-                                </p>                                                               <a href="{% url 'landingPageView' %}" class="btn text-light">{% translate "Try Again" %}</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    {% elif noThemeInfo %}
-                <div class="container">
-                        <div id="infocard" class="h-100 d-flex align-items-center justify-content-center">
-                                <div class="card text-center">
-                                    <div class="card-header text-light">{% translate "Alert!!" %}</div>
-                                        <div class="card-body">                               
-                                            <p class="card-title ">
-                                                <p class="card-text text-light">{{ noThemeInfo }}</p>
-                                            </p>                                                      <a href="{% url 'landingPageView' %}" class="btn text-light">{% translate "Try Again" %}</a>
-                                        </div>
-                                </div>
-                        </div>
-                </div>                                                  
-    {% else %}
                 <div class="filter-container">
                     <div class="shade">
                         <div>{% translate "To check the Latest Report" %} &nbsp;<a href="{% url 'latest_report' %}">{% translate "Click Here"%}</a></div>
@@ -88,7 +60,6 @@
                         </form>
                     </div>
                 </div>
-    {% endif %}
 
             {% block scripts %}
                 <script src="https://kit.fontawesome.com/17431f7655.js"

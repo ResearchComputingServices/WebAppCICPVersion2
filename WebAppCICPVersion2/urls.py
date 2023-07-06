@@ -22,13 +22,23 @@ from django.views.i18n import JavaScriptCatalog
 from WebsiteApp import views
 
 
+# urlpatterns = [
+#     path('admin/', admin.site.urls),
+#     path('interactiveDB/', include('InteractiveDB.urls')),
+#     path('',include('WebsiteApp.urls')),
+# ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +   static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
+# urlpatterns += i18n_patterns(path('',include('WebsiteApp.urls')), prefix_default_language=False)
+# urlpatterns += i18n_patterns(
+#     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+# )
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('interactiveDB/', include('InteractiveDB.urls')),
-    path('',include('WebsiteApp.urls')),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) +   static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-urlpatterns += i18n_patterns(path('',include('WebsiteApp.urls')), prefix_default_language=False)
 urlpatterns += i18n_patterns(
+    path('', include('WebsiteApp.urls')),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 )
