@@ -35,7 +35,7 @@ window.addEventListener("load", function () {
 });
 
 
-formSubmitFunction(); {
+function formSubmitFunction() {
     var selectedDate = document.getElementById("selected - date").value;
     if (selectedDate == None) {
         alert("Please select a Date")
