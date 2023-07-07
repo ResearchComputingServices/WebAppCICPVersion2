@@ -336,12 +336,12 @@ def CreateStackedBarChart(  responseDict,
         
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(14,14))
+    fig = plt.figure(figsize=(16,16))
     #fig = plt.figure(figsize=(20,20))
     
     #Added comment for below line
     #plt.subplots_adjust(left=0.22)
-    ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
+    ax1 = plt.subplot2grid((12, 3), (0, 0), colspan=3, rowspan=9)
    
     # plot data in stack manner of bar type
     df.plot(x='subQ', 
@@ -354,7 +354,7 @@ def CreateStackedBarChart(  responseDict,
     #Modified to adjust the plots - Rohan
     plt.subplots_adjust(right=0.8)
     
-    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium'},pad = 25.0)
+    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 19, 'fontweight': 'medium'},pad = 25.0)
     ax1.set_ylabel('')
     ax1.set_xticks([0,25,50,75,100])
 
