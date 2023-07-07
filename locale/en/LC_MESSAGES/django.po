@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-29 02:55-0400\n"
+"POT-Creation-Date: 2023-07-06 20:11-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,31 +57,31 @@ msgstr "Quebec"
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: WebsiteApp/forms.py:21
+#: WebsiteApp/forms.py:21 WebsiteApp/views.py:123
 msgid "Funding"
 msgstr "Funding"
 
-#: WebsiteApp/forms.py:22
+#: WebsiteApp/forms.py:22 WebsiteApp/views.py:126
 msgid "Governance"
 msgstr "Governance"
 
-#: WebsiteApp/forms.py:23
+#: WebsiteApp/forms.py:23 WebsiteApp/views.py:129
 msgid "Policy"
 msgstr "Policy"
 
-#: WebsiteApp/forms.py:24
+#: WebsiteApp/forms.py:24 WebsiteApp/views.py:132
 msgid "Collaboration"
 msgstr "Collaboration"
 
-#: WebsiteApp/forms.py:25
+#: WebsiteApp/forms.py:25 WebsiteApp/views.py:135
 msgid "Challenges"
 msgstr "Challenges"
 
-#: WebsiteApp/forms.py:26
+#: WebsiteApp/forms.py:26 WebsiteApp/views.py:138
 msgid "EDI"
 msgstr "EDI"
 
-#: WebsiteApp/forms.py:27
+#: WebsiteApp/forms.py:27 WebsiteApp/views.py:141
 msgid "Other"
 msgstr "Other"
 
@@ -118,7 +118,9 @@ msgid "Province"
 msgstr "Province"
 
 #: WebsiteApp/forms.py:55
-msgid "Language Preference"
+#, fuzzy
+#| msgid "Language Preference"
+msgid "Participant Language Preference"
 msgstr "Language Preference"
 
 #: WebsiteApp/forms.py:59
@@ -137,95 +139,113 @@ msgstr "Theme"
 msgid "Report Date"
 msgstr "Report Date"
 
-#: WebsiteApp/templates/index.html:35
+#: WebsiteApp/templates/index.html:32
 msgid "☰ Filters"
 msgstr "☰ Filters"
 
-#: WebsiteApp/templates/index.html:39
+#: WebsiteApp/templates/index.html:36
 msgid "Weekly Survey Distributed -"
 msgstr "Weekly Survey Distributed -"
 
-#: WebsiteApp/templates/index.html:39
+#: WebsiteApp/templates/index.html:36
 #, python-format
 msgid " %(wednesday_date)s"
 msgstr "%(wednesday_date)s"
 
-#: WebsiteApp/templates/index.html:44
+#: WebsiteApp/templates/index.html:41
 msgid "Weekly Survey Published -"
 msgstr "Weekly Survey Published -"
 
-#: WebsiteApp/templates/index.html:44
+#: WebsiteApp/templates/index.html:41
 #, python-format
 msgid "%(friday_text_date)s"
 msgstr "%(friday_text_date)s"
 
-#: WebsiteApp/templates/index.html:90 WebsiteApp/templates/lpage.html:50
-#: WebsiteApp/templates/lpage.html:57 WebsiteApp/templates/sidebar.html:23
+#: WebsiteApp/templates/index.html:46
+#, fuzzy
+#| msgid "Theme"
+msgid "Theme -"
+msgstr "Theme"
+
+#: WebsiteApp/templates/index.html:46
+#, python-format
+msgid ""
+"\n"
+"                %(questionTheme)s"
+msgstr ""
+
+#: WebsiteApp/templates/index.html:93 WebsiteApp/templates/lpage.html:49
+#: WebsiteApp/templates/lpage.html:59 WebsiteApp/templates/sidebar.html:23
 msgid "Search"
 msgstr "Search"
 
-#: WebsiteApp/templates/index.html:91 WebsiteApp/templates/sidebar.html:24
+#: WebsiteApp/templates/index.html:94 WebsiteApp/templates/lpage.html:50
+#: WebsiteApp/templates/lpage.html:60 WebsiteApp/templates/sidebar.html:24
 msgid "Reset"
 msgstr "Reset"
 
-#: WebsiteApp/templates/index.html:98
+#: WebsiteApp/templates/index.html:101
 msgid "Filters Selected:"
-msgstr ""
+msgstr "Filters Selected:"
 
-#: WebsiteApp/templates/index.html:99
+#: WebsiteApp/templates/index.html:102
 #, fuzzy
 #| msgid "Province"
 msgid "Province:"
 msgstr "Province"
 
-#: WebsiteApp/templates/index.html:100
+#: WebsiteApp/templates/index.html:103
 #, fuzzy
 #| msgid "Language"
 msgid "Language:"
 msgstr "Language"
 
-#: WebsiteApp/templates/index.html:101
+#: WebsiteApp/templates/index.html:104
 msgid "Organisation Size:"
-msgstr ""
+msgstr "Organisation Size:"
 
-#: WebsiteApp/templates/index.html:102
+#: WebsiteApp/templates/index.html:105
 msgid "Age:"
-msgstr ""
+msgstr "Age:"
 
-#: WebsiteApp/templates/index.html:115 WebsiteApp/templates/index.html:131
+#: WebsiteApp/templates/index.html:118 WebsiteApp/templates/index.html:134
 msgid "Alert!!"
 msgstr "Alert!!"
 
-#: WebsiteApp/templates/index.html:120 WebsiteApp/templates/index.html:138
+#: WebsiteApp/templates/index.html:123 WebsiteApp/templates/index.html:141
 msgid "Try Again"
 msgstr "Try Again"
 
-#: WebsiteApp/templates/index.html:135
+#: WebsiteApp/templates/index.html:138
 #, python-format
 msgid "%(error)s"
 msgstr ""
 
-#: WebsiteApp/templates/lpage.html:44
+#: WebsiteApp/templates/lpage.html:43
 msgid "To check the Latest Report"
 msgstr "To check the Latest Report"
 
-#: WebsiteApp/templates/lpage.html:44
+#: WebsiteApp/templates/lpage.html:43
 msgid "Click Here"
 msgstr "Click Here"
 
-#: WebsiteApp/templates/navbar.html:35
+#: WebsiteApp/templates/navbar.html:32
 #, fuzzy
 #| msgid "Back to CICP"
 msgid "Back to CICP Website"
-msgstr "Back to CICP"
+msgstr "Back to CICP Website"
 
-#: WebsiteApp/templates/navbar.html:40
+#: WebsiteApp/templates/navbar.html:37
 msgid "Print Report"
 msgstr "Print Report"
 
-#: WebsiteApp/templates/navbar.html:53
+#: WebsiteApp/templates/navbar.html:51
 msgid "Language"
 msgstr "Language"
+
+#: WebsiteApp/views.py:157
+msgid " 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
+msgstr "🥳🥳🥳 HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
 
 #: cicp_env/lib/python3.10/site-packages/click/_termui_impl.py:496
 #, python-brace-format
@@ -1733,6 +1753,3 @@ msgstr ""
 
 #~ msgid "FILTERS"
 #~ msgstr "FILTERS"
-
-#~ msgid " 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
-#~ msgstr "🥳🥳🥳 HAPPY HOLIDAYS - NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"

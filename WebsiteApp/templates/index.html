@@ -41,6 +41,12 @@
                     <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date }}{% endblocktrans %}</center></strong>
                 </h4>
             {% endif %}
+           {% if questionTheme %} 
+            <h4>
+                <strong><center>{% trans "Theme -" %} {% blocktrans %}
+                {{ questionTheme }}{% endblocktrans %}</center></strong>
+            </h4>
+            {% endif %}
         </div>
         {%if filtered %}
         <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox(event)"></a>

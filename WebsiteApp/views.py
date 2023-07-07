@@ -118,8 +118,27 @@ def landingPageView(request):
         query_response_imagefilepaths, query_response_csv, errors,context = themeOrDate(request, theme=questionTheme, date=None)
 
         context['filtered'] = 'filteredReport'  
-        context['questionTheme'] = questionTheme[0]
 
+        if questionTheme[0] == 'FUN':
+            context['questionTheme'] = gettext('Funding')
+            
+        if questionTheme[0] == 'GOV':
+            context['questionTheme'] = gettext('Governance')
+            
+        if questionTheme[0] == 'POL':
+            context['questionTheme'] = gettext('Policy')
+            
+        if questionTheme[0] == 'COL':
+            context['questionTheme'] = gettext('Collaboration')
+            
+        if questionTheme[0] == 'CHA':
+            context['questionTheme'] = gettext('Challenges')
+            
+        if questionTheme[0] == 'EDI':
+            context['questionTheme'] = gettext('EDI')
+
+        if questionTheme[0] == 'OTH':
+            context['questionTheme'] = gettext('Other')
         
         if len(errors) != 0:
             context["errors"] = errors
