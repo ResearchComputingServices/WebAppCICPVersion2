@@ -19,5 +19,5 @@ function changeLang(siteLang) {
   }
   link.setAttribute("href", replacedUrl);
   alert("replacedUrl in window", replacedUrl)
-  window.location.replace(replacedUrl);
+  window.location.href.replace(replacedUrl);
 }
