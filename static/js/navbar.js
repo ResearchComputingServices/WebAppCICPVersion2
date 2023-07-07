@@ -4,6 +4,7 @@ function changeLang(siteLang) {
 
   var isFrench = siteLang === 'fr';
   var langSegment = isFrench ? '/fr/' : '/en/';
+  alert(langSegment)
 
   var replacedUrl;
 
@@ -17,5 +18,6 @@ function changeLang(siteLang) {
     alert(replacedUrl)
   }
   link.setAttribute("href", replacedUrl);
+  alert("replacedUrl in window", replacedUrl)
   window.location.replace(replacedUrl);
 }
