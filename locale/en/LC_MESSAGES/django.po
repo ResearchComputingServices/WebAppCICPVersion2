@@ -121,7 +121,7 @@ msgstr "Province"
 #, fuzzy
 #| msgid "Language Preference"
 msgid "Participant Language Preference"
-msgstr "Language Preference"
+msgstr "Participant Language Preference"
 
 #: WebsiteApp/forms.py:59
 msgid "Size"
@@ -165,7 +165,7 @@ msgstr "%(friday_text_date)s"
 #, fuzzy
 #| msgid "Theme"
 msgid "Theme -"
-msgstr "Theme"
+msgstr "Theme - "
 
 #: WebsiteApp/templates/index.html:46
 #, python-format

@@ -164,9 +164,8 @@ msgstr "%(friday_text_date)s"
 
 #: WebsiteApp/templates/index.html:46
 #, fuzzy
-#| msgid "Theme"
 msgid "Theme -"
-msgstr "Thème"
+msgstr "Thème -"
 
 #: WebsiteApp/templates/index.html:46
 #, python-format

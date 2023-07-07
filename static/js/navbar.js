@@ -8,9 +8,13 @@ function changeLang(siteLang) {
   var replacedUrl;
 
   if (siteUrl.includes('/en/')) {
+    alert("Case1")
     replacedUrl = siteUrl.replace(/\/en\//, langSegment);
+    alert(replacedUrl)
   } else if (siteUrl.includes('/fr/')) {
+    alert("Case2")
     replacedUrl = siteUrl.replace(/\/fr\//, langSegment);
+    alert(replacedUrl)
   }
   link.setAttribute("href", replacedUrl);
   window.location.replace(replacedUrl);
