@@ -52,7 +52,7 @@ class ProvinceFilterForm(forms.Form):
 
 class LanguageFilterForm(forms.Form):
     language = forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=LANGUAGE_CHOICES,
-                                        label = _('Participant Language Preference'),required=False)
+                                        label=_('Participant Language Preference'),required=False)
 
 class OrgsizeFilterForm(forms.Form):
     size = forms.MultipleChoiceField(widget=forms.SelectMultiple(),choices=ORGANIZATION_SIZES,
@@ -60,7 +60,7 @@ class OrgsizeFilterForm(forms.Form):
     
 class AgeFilterForm(forms.Form):
     age = forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=AGE,
-                                        label = _('Age'),required=False)
+                                        label=_('Age'),required=False)
 
 
  # New Changes for a different theme    

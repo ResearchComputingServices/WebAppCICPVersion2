@@ -8,16 +8,16 @@ function changeLang(siteLang) {
 
   var replacedUrl;
 
-  if (siteUrl.includes('/en/')) {
-    alert("Case1")
-    replacedUrl = siteUrl.replace(/\/en\//, langSegment);
-    alert(replacedUrl)
-  } else if (siteUrl.includes('/fr/')) {
-    alert("Case2")
-    replacedUrl = siteUrl.replace(/\/fr\//, langSegment);
-    alert(replacedUrl)
+  if (isFrench) {
+    if (siteUrl.includes('/fr/')) {
+      replacedUrl = siteUrl.replace(/\/fr\//, langSegment);
+    }
+  } else {
+    if (siteUrl.includes('/en/')) {
+      replacedUrl = siteUrl.replace(/\/en\//, langSegment);
+    }
   }
   link.setAttribute("href", replacedUrl);
-  alert("replacedUrl in window", replacedUrl)
-  window.location.href.replace(replacedUrl);
+  alert(replacedUrl)
+  window.location.replace(replacedUrl);
 }
