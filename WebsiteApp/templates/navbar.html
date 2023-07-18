@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     </head>
     <body>
-        <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top">
+        <nav class="navbar navbar-light navbar-expand-lg fixed-top">
         
             <a class="navbar-brand" href="{% url 'landingPageView' %}">
                 <img src="https://cdn.carleton.ca/theme-framework/img/favicons/favicon.ico"
@@ -34,9 +34,9 @@
                     </li>
                     <li class="nav-item active ">
                         <a id="navtext" class="nav-link" aria-current="page" href="#">{% translate "Print Report" %}</a>
-                    </li>
-                    <li class="nav-item active ">
-                        <a class="nav-link" aria-current="page" href="/fr/" id="langButton" onclick="changeLang("fr")">Français</a>
+                    </li>                   
+                    <li class="nav-item active">
+                        <a class="nav-link" aria-current="page" href="/fr/" id="langButton" onclick="changeLang()">Français</a>
                     </li>
                 </ul>
             </div>

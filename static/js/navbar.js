@@ -12,7 +12,6 @@ function changeLang() {
 
   var currentLang = getLanguageFromUrl(siteUrl);
   var targetLang = currentLang === "en" ? "fr" : "en";
-  var altText = targetLang === "en" ? "Francias" : "English";
 
   var langSegment = "/" + currentLang + "/";
   var replacedUrl = siteUrl.replace(langSegment, "/" + targetLang + "/");
@@ -21,8 +20,9 @@ function changeLang() {
     return; // No language segment replacement needed, exit function
   }
 
+  var buttonText = targetLang === "fr" ? "English" : "Français";
   link.setAttribute("href", replacedUrl);
-  link.innerText = altText;
+  link.innerText = buttonText;
   window.location.href = replacedUrl;
 }
 
