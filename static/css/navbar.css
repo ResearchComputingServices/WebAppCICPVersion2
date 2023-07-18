@@ -3,35 +3,11 @@
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-#socialMedia {
-    border: none;
-    cursor: pointer;
-    appearance: none;
-    margin-left: 110px;
-}
-
 #myDiv {
     width: 500px;
     height: min-content
 }
 
-.navbutton {
-    background-color: black;
-}
-
-#navtext {
-    color: white;
-}
-
-/* #navbarDropdown {
-    color: white;
-} */
-
-#langButton {
-    color: white;
-}
-
-.dropdown-item {
-    background-color: black;
-    color: white;
+.nav-link {
+    color: black;
 }

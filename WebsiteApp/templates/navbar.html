@@ -5,9 +5,11 @@
     <head>
         <link rel="stylesheet" href="{% static 'css/navbar.css' %}"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     </head>
     <body>
-        <nav class="navbar navbar-light navbar-expand-lg">
+        <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top">
+        
             <a class="navbar-brand" href="{% url 'landingPageView' %}">
                 <img src="https://cdn.carleton.ca/theme-framework/img/favicons/favicon.ico"
                      alt="Carleton Shield"
@@ -28,46 +30,14 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item active ">                        
-                        <button class="btn active navbutton" type="button">
-                            <a id="navtext" class="nav-link" aria-current="page" href="https://carleton.ca/cicp-pcpob/homepage/all-reports/">{% translate "Back to CICP Website" %}</a>
-                        </button>       
+                            <a id="navtext" class="nav-link" aria-current="page" href="https://carleton.ca/cicp-pcpob/homepage/all-reports/">{% translate "Back to CICP Website" %}</a>  
                     </li>
                     <li class="nav-item active ">
-                        <button class="btn active navbutton" type="button">
                         <a id="navtext" class="nav-link" aria-current="page" href="#">{% translate "Print Report" %}</a>
-                        </button>  
                     </li>
                     <li class="nav-item active ">
-                        <button class="btn active navbutton" type="button">
-                            
                         <a class="nav-link" aria-current="page" href="/fr/" id="langButton" onclick="changeLang("fr")">Français</a>
-                        </button>  
                     </li>
-                
-
-                    {% comment %} <li class="nav-item active dropdown">
-                        <button class="btn active navbutton" type="button">
-                        <a class="nav-link dropdown-toggle"
-                           href="#"
-                           id="navbarDropdown"
-                           role="button"
-                           data-toggle="dropdown"
-                           aria-haspopup="true"
-                           aria-expanded="false">
-                            {% translate "Language" %}
-                        </a>
-                        <ul class="dropdown-menu"  aria-labelledby="navbarDropdown">
-                            {% get_current_language as LANGUAGE_CODE %}
-                            {% get_available_languages as LANGUAGES %}
-                            {% get_language_info_list for LANGUAGES as languages %}
-                            {% for lang in languages %}
-                                <li>
-                                    <a class="dropdown-item" href="/{{ lang.code }}/" id="langButton" onclick="changeLang('{{ lang.code }}')">{{ lang.name_local|capfirst }}</a>
-                                </li>
-                            {% endfor %}
-                        </ul>
-                        </button> 
-                    </li> {% endcomment %}
                 </ul>
             </div>
         </nav>
@@ -76,35 +46,3 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </body>
 </html>
-{% comment %} <li class="nav-item">
-                    <button id="socialMedia" onClick="socialMediaFunction()">
-                        {% comment %} <img src="{% static "webpage_images/social-media.png" %}" alt=""> 
-                        Social Media
-                    </button>
-                    <div id="myDiv">SocialMedia</div>
-</li> {% endcomment %}
-{% comment %} 
-    <div>
-        <ul class="navbar-nav sm-icons">
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.instagram.com/cicp_pcpob/" target="_blank">
-                    <img src='{% static "webpage_images/ig.png" %}'/>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://twitter.com/CICP_PCPOB" target="_blank">
-                    <img src='{% static "webpage_images/twitter.png" %}'/>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://www.linkedin.com/company/cicp-pcpob/?originalSubdomain=ca" target="_blank">
-                    <img src='{% static "webpage_images/linkedin.png" %}'/>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="https://mail.google.com/mail/?view=cm&fs=1&tf=1&to=cicp-pcpob@carleton.ca" target="_blank">
-                    <img src='{% static "webpage_images/mail.png" %}'/>
-                </a>
-            </li>
-        </ul>
-</div> {% endcomment %}
