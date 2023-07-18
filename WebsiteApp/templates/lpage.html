@@ -64,7 +64,7 @@
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img src="{% static 'webpage_images/Date.PNG' %}" alt="Avatar" style="width:300px;height:300px;">
+                            <img class="image" src="{% static 'webpage_images/Date.PNG' %}" alt="Avatar">
                         </div>
                         <div class="flip-card-back">
                             <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
@@ -82,7 +82,7 @@
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img src="{% static 'webpage_images/Report.PNG' %}" alt="Avatar" style="width:300px;height:300px;">
+                            <img class="image" src="{% static 'webpage_images/Report.PNG' %}" alt="Avatar">
                         </div>
                         <div class="flip-card-back">
                             <div>{% translate "To check the Latest Report" %} &nbsp;<a href="{% url 'latest_report' %}">{% translate "Click Here"%}</a></div>
@@ -95,7 +95,7 @@
                   <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img src="{% static 'webpage_images/Theme.PNG' %}" alt="Avatar" style="width: 300px; height: 300px;">
+                            <img class="image" src="{% static 'webpage_images/Theme.PNG' %}" alt="Avatar">
                         </div>
                          <div class="flip-card-back">
                        <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
