@@ -36,7 +36,10 @@
                         <a id="navtext" class="nav-link" aria-current="page" href="#">{% translate "Print Report" %}</a>
                     </li>                   
                     <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="/fr/" id="langButton" onclick="changeLang()">Français</a>
+                        {% comment %} <a class="nav-link" aria-current="page" href="/fr/" id="langButton" onclick="changeLang()">Français</a> {% endcomment %}
+                        <a class="nav-link" aria-current="page" href="#" id="langButton">
+                                    <span data-en="English" data-fr="Français"></span>
+                        </a>
                     </li>
                 </ul>
             </div>
