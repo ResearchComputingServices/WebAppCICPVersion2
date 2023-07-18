@@ -93,7 +93,6 @@ div {
     height: auto;
     max-height: 400px;
     width: 100%;
-    border-style: double;
     object-fit: contain;
 
 }
