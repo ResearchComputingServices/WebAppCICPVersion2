@@ -12,14 +12,7 @@
     }
 }
 
-.filter-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    color: black;
-    font-family: Arial, sans-serif;
-    padding: 2%;
-}
+
 
 .shade {
     flex: 1;
@@ -39,11 +32,6 @@
 
 }
 
-.form-input {
-    margin-top: 10%;
-    margin-left: 40%;
-
-}
 
 .heading-text {
     display: flex;
@@ -114,6 +102,23 @@
     background-color: #e91c24;
 }
 
+.filter-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: black;
+    font-family: Arial, sans-serif;
+    padding: 2%;
+}
+
+.form-input {
+    margin-top: 10%;
+    margin-left: 40%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
 
 .flip-card {
     background-color: transparent;
@@ -158,4 +163,8 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+}
+
+#dateForm #themeForm {
+    display: flex;
 }

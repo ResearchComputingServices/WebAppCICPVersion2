@@ -18,13 +18,14 @@ PROVINCE_CHOICES= [
     ]
 
 THEME_CHOICES = [
-    ('FUN',_('Funding')),
-    ('GOV',_('Governance')),
-    ('POL',_('Policy')),
     ('COL',_('Collaboration')),
+    ('GOV',_('Governance')), 
     ('CHA',_('Challenges')),
+    ('FUN',_('Funding')),
+    ('POL',_('Policy')),
     ('EDI',_('EDI')),
     ('OTH',_('Other'))
+    
 ]
 
 LANGUAGE_CHOICES = [
@@ -66,7 +67,7 @@ class AgeFilterForm(forms.Form):
  # New Changes for a different theme    
 class ThemeFilterForm(forms.Form):
     theme= forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=THEME_CHOICES,
-                                    label = _('Theme'),required=False)
+                                    required=False)
     
 class DateFilterForm(forms.Form):
-    report_date = forms.DateField(widget=DateInput(),label=_('Report Date'),required=False)
+    report_date = forms.DateField(widget=DateInput(),required=False)

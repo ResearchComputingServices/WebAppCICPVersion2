@@ -61,39 +61,10 @@
                 </div> {% endcomment %}
 <div class="filter-container">
 
-                 <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="{% static 'webpage_images/theme.png' %}" alt="Avatar" style="width: 150px; height: 150px;margin-top: 30%;margin-left: 15%;">
-                        </div>
-                         <div class="flip-card-back">
-                       <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
-                            {% csrf_token %}
-                            <div class="ml-md-2">
-                            {{themeFilter.as_div}}
-                            </div>
-                            <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                            <input class="form-input" type="reset" value="{% translate "Reset"%}"/>
-                        </form>
-                        </div>
-                    </div>
-                </div>
-                
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img src="{% static 'webpage_images/new.png' %}" alt="Avatar" style="width:300px;height:300px;">
-                        </div>
-                        <div class="flip-card-back">
-                            <div>{% translate "To check the Latest Report" %} &nbsp;<a href="{% url 'latest_report' %}">{% translate "Click Here"%}</a></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="flip-card">
-                    <div class="flip-card-inner">
-                        <div class="flip-card-front">
-                            <img src="{% static 'webpage_images/date2.jpg' %}" alt="Avatar" style="width:300px;height:300px;">
+                            <img src="{% static 'webpage_images/Date.PNG' %}" alt="Avatar" style="width:300px;height:300px;">
                         </div>
                         <div class="flip-card-back">
                             <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
@@ -104,6 +75,37 @@
                             <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                             <input class="form-input" type="reset" value={% translate "Reset"%}>
                             </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="{% static 'webpage_images/Report.PNG' %}" alt="Avatar" style="width:300px;height:300px;">
+                        </div>
+                        <div class="flip-card-back">
+                            <div>{% translate "To check the Latest Report" %} &nbsp;<a href="{% url 'latest_report' %}">{% translate "Click Here"%}</a></div>
+                        </div>
+                    </div>
+                </div>
+
+                
+
+                  <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src="{% static 'webpage_images/Theme.PNG' %}" alt="Avatar" style="width: 300px; height: 300px;">
+                        </div>
+                         <div class="flip-card-back">
+                       <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
+                            {% csrf_token %}
+                            <div class="ml-md-2">
+                            {{themeFilter.as_div}}
+                            </div>
+                            <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                            <input class="form-input" type="reset" value="{% translate "Reset"%}"/>
+                        </form>
                         </div>
                     </div>
                 </div>
