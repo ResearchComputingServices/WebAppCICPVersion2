@@ -6,7 +6,9 @@ function getLanguageFromUrl(url) {
   return ""; // Default language if no language segment found
 }
 
-function changeLang() {
+function changeLang(event) {
+  event.preventDefault(); // Prevent the default behavior of the anchor
+
   var siteUrl = window.location.href;
   var link = document.getElementById("langButton");
 
@@ -20,10 +22,7 @@ function changeLang() {
     return; // No language segment replacement needed, exit function
   }
 
-  var buttonText = targetLang === "fr" ? "English" : "Français";
-  link.setAttribute("href", replacedUrl);
+  var buttonText = targetLang === "en" ? "Français" : "English";
   link.innerText = buttonText;
-  window.location.href = replacedUrl;
+  window.location.href = replacedUrl; // Navigate to the new language URL
 }
-
-
