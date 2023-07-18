@@ -25,7 +25,6 @@
             <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
                   rel="Stylesheet"
                   type="text/css"/>
-           {% comment %} <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css">  {% endcomment %}
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
             <link rel="stylesheet" href="{% static 'css/lpage.css' %}"/>
         {% endblock styles %}
@@ -36,8 +35,8 @@
         {% include "navbar.html" %}           
     </div>
 
-    <div class="heading-text" id="message"></div>
-                <div class="filter-container">
+     <div class="heading-text" id="message"></div>
+                {% comment %} <div class="filter-container">
                     <div class="shade">
                         <div>{% translate "To check the Latest Report" %} &nbsp;<a href="{% url 'latest_report' %}">{% translate "Click Here"%}</a></div>
                         <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
@@ -58,6 +57,24 @@
                             <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                             <input class="form-input" type="reset" value="{% translate "Reset"%}"/>
                         </form>
+                    </div>
+                </div> {% endcomment %}
+
+                <div class="flip-card">
+                    <div class="flip-card-inner">
+                        <div class="flip-card-front">
+                            <img src= href="{% static 'webpage_images/date.jpg' %}" alt="Avatar" style="width:300px;height:300px;">
+                        </div>
+                        <div class="flip-card-back">
+                            <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
+                            {% csrf_token %}
+                            <div class="ml-md-2" id="selected-date">
+                                {{dateFilter.as_div}}
+                            </div>
+                            <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                            <input class="form-input" type="reset" value={% translate "Reset"%}>
+                        </form>
+                        </div>
                     </div>
                 </div>
 
