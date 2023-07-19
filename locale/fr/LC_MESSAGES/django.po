@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 20:11-0400\n"
+"POT-Creation-Date: 2023-07-19 00:14-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,25 +58,25 @@ msgstr "Québec"
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: WebsiteApp/forms.py:21 WebsiteApp/views.py:123
-msgid "Funding"
-msgstr "Financement"
+#: WebsiteApp/forms.py:21 WebsiteApp/views.py:132
+msgid "Collaboration"
+msgstr "Collaboration"
 
 #: WebsiteApp/forms.py:22 WebsiteApp/views.py:126
 msgid "Governance"
 msgstr "Gouvernance"
 
-#: WebsiteApp/forms.py:23 WebsiteApp/views.py:129
-msgid "Policy"
-msgstr "Politique"
-
-#: WebsiteApp/forms.py:24 WebsiteApp/views.py:132
-msgid "Collaboration"
-msgstr "Collaboration"
-
-#: WebsiteApp/forms.py:25 WebsiteApp/views.py:135
+#: WebsiteApp/forms.py:23 WebsiteApp/views.py:135
 msgid "Challenges"
 msgstr "Défis"
+
+#: WebsiteApp/forms.py:24 WebsiteApp/views.py:123
+msgid "Funding"
+msgstr "Financement"
+
+#: WebsiteApp/forms.py:25 WebsiteApp/views.py:129
+msgid "Policy"
+msgstr "Politique"
 
 #: WebsiteApp/forms.py:26 WebsiteApp/views.py:138
 msgid "EDI"
@@ -86,59 +86,51 @@ msgstr "EDI"
 msgid "Other"
 msgstr "Autre"
 
-#: WebsiteApp/forms.py:31
+#: WebsiteApp/forms.py:32
 msgid "English"
 msgstr "Anglaise"
 
-#: WebsiteApp/forms.py:32
+#: WebsiteApp/forms.py:33
 msgid "French"
 msgstr "Français"
 
-#: WebsiteApp/forms.py:35
+#: WebsiteApp/forms.py:36
 msgid "Small"
 msgstr "Petite"
 
-#: WebsiteApp/forms.py:36
+#: WebsiteApp/forms.py:37
 msgid "Medium"
 msgstr "Moyen"
 
-#: WebsiteApp/forms.py:37
+#: WebsiteApp/forms.py:38
 msgid "Large"
 msgstr "Grand"
 
-#: WebsiteApp/forms.py:40
+#: WebsiteApp/forms.py:41
 msgid "Old (Registered before 1990)"
 msgstr "Ancien (Immatriculé avant 1990)"
 
-#: WebsiteApp/forms.py:41
+#: WebsiteApp/forms.py:42
 msgid "New (Registered after 1990)"
 msgstr "Nouveau (immatriculé après 1990)"
 
-#: WebsiteApp/forms.py:51
+#: WebsiteApp/forms.py:52
 msgid "Province"
 msgstr "Province"
 
-#: WebsiteApp/forms.py:55
+#: WebsiteApp/forms.py:56
 #, fuzzy
 #| msgid "Language Preference"
 msgid "Participant Language Preference"
 msgstr "Préférence de langue"
 
-#: WebsiteApp/forms.py:59
+#: WebsiteApp/forms.py:60
 msgid "Size"
 msgstr "Taille"
 
-#: WebsiteApp/forms.py:63
+#: WebsiteApp/forms.py:64
 msgid "Age"
 msgstr "Âge"
-
-#: WebsiteApp/forms.py:69
-msgid "Theme"
-msgstr "Thème"
-
-#: WebsiteApp/forms.py:72
-msgid "Report Date"
-msgstr "Date du compte rendu"
 
 #: WebsiteApp/templates/index.html:32
 msgid "☰ Filters"
@@ -167,20 +159,13 @@ msgstr "%(friday_text_date)s"
 msgid "Theme -"
 msgstr "Thème -"
 
-#: WebsiteApp/templates/index.html:46
-#, python-format
-msgid ""
-"\n"
-"                %(questionTheme)s"
-msgstr ""
-
-#: WebsiteApp/templates/index.html:93 WebsiteApp/templates/lpage.html:49
-#: WebsiteApp/templates/lpage.html:59 WebsiteApp/templates/sidebar.html:23
+#: WebsiteApp/templates/index.html:93 WebsiteApp/templates/lpage.html:77
+#: WebsiteApp/templates/lpage.html:112 WebsiteApp/templates/sidebar.html:23
 msgid "Search"
 msgstr "Recherche"
 
-#: WebsiteApp/templates/index.html:94 WebsiteApp/templates/lpage.html:50
-#: WebsiteApp/templates/lpage.html:60 WebsiteApp/templates/sidebar.html:24
+#: WebsiteApp/templates/index.html:94 WebsiteApp/templates/lpage.html:78
+#: WebsiteApp/templates/lpage.html:113 WebsiteApp/templates/sidebar.html:24
 msgid "Reset"
 msgstr "Réinitialiser"
 
@@ -221,25 +206,21 @@ msgstr "Essayer à nouveau"
 msgid "%(error)s"
 msgstr "%(error)s"
 
-#: WebsiteApp/templates/lpage.html:43
+#: WebsiteApp/templates/lpage.html:93
 msgid "To check the Latest Report"
 msgstr "Pour vérifier le dernier rapport"
 
-#: WebsiteApp/templates/lpage.html:43
+#: WebsiteApp/templates/lpage.html:93
 msgid "Click Here"
 msgstr "Cliquez ici"
 
-#: WebsiteApp/templates/navbar.html:32
-msgid "Back to CICP Website"
-msgstr "Retour au site Web du PCPOB"
+#: WebsiteApp/templates/navbar.html:33
+msgid "Dashboard Home"
+msgstr "Accueil du tableau de bord"
 
-#: WebsiteApp/templates/navbar.html:37
+#: WebsiteApp/templates/navbar.html:36
 msgid "Print Report"
 msgstr "Imprimer le rapport"
-
-#: WebsiteApp/templates/navbar.html:51
-msgid "Language"
-msgstr "Langue"
 
 #: WebsiteApp/views.py:157
 msgid " 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
@@ -1734,6 +1715,12 @@ msgstr ""
 #: cicp_env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Back to CICP Website"
+#~ msgstr "Retour au site Web du PCPOB"
+
+#~ msgid "Language"
+#~ msgstr "Langue"
 
 #~ msgid "Insufficient survey data, try relaxing search constraints"
 #~ msgstr ""
