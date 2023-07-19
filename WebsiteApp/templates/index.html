@@ -22,6 +22,7 @@
             <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
                   rel="Stylesheet"
                   type="text/css"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
             <link rel="stylesheet" href="{% static 'css/sidebar.css' %}"/>
         {% endblock styles %}
@@ -191,11 +192,14 @@
                     <div id="image-slider" class="splide">
                         <div class="splide__track">
 		                    <ul class="splide__list">
+                                 {% for image_url in image_filepaths %}
 			                        <li class="splide__slide">
-                                         {% for image_url in image_filepaths %}  
-				                                <img src={{ image_url }} alt="Image">
-                                        {% endfor %}
-                                    </li>			 
+                                        
+                                          <img src={{ image_url }} alt="Image">
+                                       
+                                    </li>	
+                                     {% endfor %}
+                               		 
 		                    </ul>
                         </div>
                     </div>
@@ -221,6 +225,7 @@
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
                     integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
                     crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
             <script src="{% static 'js/datepicker.js' %}"></script>
             <script src="{% static 'js/index.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>
