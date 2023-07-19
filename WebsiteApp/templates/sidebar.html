@@ -5,7 +5,7 @@
     <form autocomplete="off"
           id="myForm"   
           method="get"
-          action="{% url 'report_results_EN' %}">
+          action="{% url 'themereports' %}">
         {% csrf_token %}
         <div class="overlay-content">
             <p href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</p>
@@ -16,7 +16,10 @@
                aria-controls="demo_province"
                id="filterText">{% translate "Find Report" %}</a> {% endcomment %}
             <form class="ml-md-2" method="get">
-                {{ form_filter.as_div }}
+                {{province_form_filter}}
+                 {{org_size_form_filter}}
+                 {{language_form_filter}}
+                 {{age_form_filter}}
                 <br/>
                 <br/>
                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
