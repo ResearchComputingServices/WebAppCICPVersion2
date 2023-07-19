@@ -437,7 +437,7 @@ div {
         padding: 10px;
         background-color: #131212;
         margin-left: 35%;
-        display: none;
+        display: flex;
     }
 
     span.sec-filters {

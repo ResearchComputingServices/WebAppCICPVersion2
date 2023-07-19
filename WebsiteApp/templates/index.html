@@ -33,8 +33,7 @@
         
         <div id="sidebar" class="sidebar">
      {%if filtered %}
-        <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox(event)"></a>
-            <div class="filterbox" id="blackbox">
+            <div class="filterbox">
                 <form method="get">
                     {% csrf_token %}
 
