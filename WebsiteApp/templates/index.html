@@ -32,38 +32,34 @@
         </div>
         
         <div id="sidebar" class="sidebar">
-     {%if filtered %}
-            <div class="filterbox">
-                <form method="get">
-                    {% csrf_token %}                   
-                       <div class="form-container">
-    {{province_form_filter.as_div}}
-    {{org_size_form_filter.as_div}}
-    {{language_form_filter.as_div}}
-    {{age_form_filter.as_div}}
-</div>
+            {%if filtered %}
+                <div class="filterbox">
+                    <form method="get">
+                        {% csrf_token %}                   
+                            <div class="form-container">
+                                {{province_form_filter.as_div}}
+                                {{org_size_form_filter.as_div}}
+                                {{language_form_filter.as_div}}
+                                {{age_form_filter.as_div}}
+                            </div>
 
+                            <div id="secsearch">
+                                <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/>
+                                <input type="reset" value={% translate "Reset"%}>
+                            </div>
 
                         {% if reportDate %}                  
-                        <input type="hidden"
-                         name="report_date" value={{reportDate}} />
+                            <input type="hidden" name="report_date" value={{reportDate}} />
 
                         {% elif questionTheme %}   
-                        <input type="hidden"
-                         name="theme" value={{questionTheme}} />
+                            <input type="hidden" name="theme" value={{questionTheme}} />
 
                         {% endif %}
-
-                        <div id="secsearch">
-                            <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/>
-                            <input type="reset" value={% translate "Reset"%}>
-                        </div>
-                </form>
-            </div>
-        {% endif %}
+                    </form>
+                </div>
+            {% endif %}
         </div>
-    </form>
-</div>
+
 
         {% comment %} ------------------------------------------------------------------------------------------ {% endcomment %}
         <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span>

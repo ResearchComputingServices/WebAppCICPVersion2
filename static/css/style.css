@@ -11,16 +11,15 @@
 }
 
 .sidebar {
-    height: 100%;
-    width: 0;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    overflow-x: auto;
-    transition: 0.5s;
     background-color: #0f0e0e;
     color: white;
-    justify-content: center;
+    margin-top: 5%;
+    position: fixed;
+    width: 150px;
+    font-size: 15px;
+    overflow-y: scroll;
+    top: 0;
+    bottom: 0;
 }
 
 /* Adjust the margin or padding as per your requirement */
@@ -409,7 +408,6 @@ div {
         margin-left: 30%;
         max-height: 900px;
         max-width: 500px;
-        /* max-height: 500px; */
     }
 
     .overlay-content {
@@ -439,12 +437,10 @@ div {
     }
 
     div.filterbox {
-        width: 700px;
-        height: 300px;
+
         padding: 10px;
-        background-color: #131212;
         margin-left: 5%;
-        display: flex;
+
     }
 
     .sec-filters {
@@ -453,8 +449,8 @@ div {
     }
 
     #secsearch {
-        margin-left: 35%;
-        margin-top: 5%;
+        margin-left: 10%;
+        margin-top: 10%;
     }
 
     #subfilter {
