@@ -112,8 +112,6 @@
 }
 
 .form-input {
-    margin-top: 10%;
-    margin-left: 40%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -165,12 +163,13 @@
     flex-direction: column;
 }
 
-#dateForm #themeForm {
+.input-class {
     display: flex;
+    margin-left: 30%;
 }
 
-.image {
-    width: 200px;
-    height: 200px;
-    margin-top: 15%;
+/* .image {
+    /* width: 200px;
+    height: 200px; */
+/* margin-top: 15%; 
 }
