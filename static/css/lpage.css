@@ -165,11 +165,18 @@
 
 .input-class {
     display: flex;
+}
+
+.date {
+    margin-left: 10%;
+}
+
+.theme {
     margin-left: 30%;
 }
 
-/* .image {
-    /* width: 200px;
-    height: 200px; */
-/* margin-top: 15%; 
+.image {
+    width: 150px;
+    height: 150px;
+    margin-top: 15%;
 }

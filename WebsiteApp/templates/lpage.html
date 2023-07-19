@@ -64,7 +64,7 @@
                 <div class="flip-card">
                     <div class="flip-card-inner">
                         <div class="flip-card-front">
-                            <img class="image" src="{% static 'webpage_images/calender.png' %}" alt="Avatar">
+                            <img class="image" src="{% static 'webpage_images/calendar.png' %}" alt="Avatar">
                         </div>
                         <div class="flip-card-back">
                             <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
@@ -72,7 +72,7 @@
                             <div class="ml-md-2" id="selected-date">
                                 {{dateFilter.as_div}}
                             </div>
-                            <div class="input-class">
+                            <div class="input-class date">
                                 <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                             <input class="form-input" type="reset" value={% translate "Reset"%}>                
                             </div>
@@ -107,7 +107,7 @@
                             <div class="ml-md-2">
                             {{themeFilter.as_div}}
                             </div>
-                            <div class="input-class">
+                            <div class="input-class theme">
                             <input class="form-input" type="submit" value="{% translate "Search" %}"/>
                             <input class="form-input" type="reset" value="{% translate "Reset"%}"/>
                             </div>
