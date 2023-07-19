@@ -202,12 +202,9 @@ div {
     margin-bottom: 3%;
 }
 
-
-
-
-
-/* position: relative;
-
+.splide__slide img {
+    width: 100%;
+    height: auto;
 }
 
 /* CSS code for extra small devices */
@@ -449,8 +446,7 @@ div {
     }
 
     #secsearch {
-        margin-left: 10%;
-        margin-top: 10%;
+        padding: 10%;
     }
 
     #subfilter {

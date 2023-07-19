@@ -187,11 +187,23 @@
                             </div>
                         </div>
                 {% else %}
-                    <section class="images">
+
+                    <div id="image-slider" class="splide">
+                        <div class="splide__track">
+		                    <ul class="splide__list">
+			                        <li class="splide__slide">
+                                         {% for image_url in image_filepaths %}  
+				                                <img src={{ image_url }} alt="Image">
+                                        {% endfor %}
+                                    </li>			 
+		                    </ul>
+                        </div>
+                    </div>
+                    {% comment %} <section class="images">
                         {% for image_url in image_filepaths %}                                    
                                 <img src={{ image_url }} alt="Image">
                         {% endfor %}
-                    </section>
+                    </section> {% endcomment %}
                 {% endif %}
             {% endif %}
         </main>
