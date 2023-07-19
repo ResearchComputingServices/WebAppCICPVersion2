@@ -35,32 +35,14 @@
      {%if filtered %}
             <div class="filterbox">
                 <form method="get">
-                    {% csrf_token %}
+                    {% csrf_token %}                   
+                       <div class="form-container">
+    {{province_form_filter.as_div}}
+    {{org_size_form_filter.as_div}}
+    {{language_form_filter.as_div}}
+    {{age_form_filter.as_div}}
+</div>
 
-                            <span class="sec-filters">
-                                <div>
-                                    {{province_form_filter}}
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    {{org_size_form_filter}}
-                                </div>
-                                <div id="subfilter">
-                                    {{language_form_filter}}
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    {{age_form_filter}}
-                                </div>
-                            </span>
-                            
 
                         {% if reportDate %}                  
                         <input type="hidden"
@@ -78,17 +60,6 @@
                         </div>
                 </form>
             </div>
-            {% if locations or languagePreference or orgSizes or age %}
-                <div class="selected-filters">
-            
-                    {% translate "Filters Selected:"%}
-                    <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
-                    <strong>{% translate "Language:"%}</strong><i>{{languagePreference}}</i>
-                    <strong>{% translate "Organisation Size:"%}</strong><i>{{orgSizes}}</i>
-                    <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
-
-                </div>
-            {% endif %}
         {% endif %}
         </div>
     </form>
@@ -173,7 +144,17 @@
                 </div>
             {% endif %}
         {% endif %} {% endcomment %}
-       
+       {% if locations or languagePreference or orgSizes or age %}
+                <div class="selected-filters">
+            
+                    {% translate "Filters Selected:"%}
+                    <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
+                    <strong>{% translate "Language:"%}</strong><i>{{languagePreference}}</i>
+                    <strong>{% translate "Organisation Size:"%}</strong><i>{{orgSizes}}</i>
+                    <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
+
+                </div>
+            {% endif %}
         
         <main class="main-content" id="main">
             {% if info %}

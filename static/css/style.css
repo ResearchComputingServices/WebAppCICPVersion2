@@ -23,6 +23,13 @@
     justify-content: center;
 }
 
+/* Adjust the margin or padding as per your requirement */
+.form-container>div {
+    margin-bottom: 10px;
+    /* Adds 10px space between the form elements */
+}
+
+
 .overlay-content {
     position: relative;
     width: 100%;
@@ -436,11 +443,11 @@ div {
         height: 300px;
         padding: 10px;
         background-color: #131212;
-        margin-left: 35%;
+        margin-left: 5%;
         display: flex;
     }
 
-    span.sec-filters {
+    .sec-filters {
         color: #fff;
 
     }

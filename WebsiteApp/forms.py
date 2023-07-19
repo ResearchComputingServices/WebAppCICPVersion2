@@ -48,7 +48,7 @@ DateInput = partial(forms.DateInput, {'class': 'dateinput'})
 
     
 class ProvinceFilterForm(forms.Form):
-    province= forms.MultipleChoiceField(widget=forms.SelectMultiple,choices=PROVINCE_CHOICES,
+    province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=PROVINCE_CHOICES,
                                         label=_('Province'),required=False)
 
 class LanguageFilterForm(forms.Form):
@@ -56,7 +56,7 @@ class LanguageFilterForm(forms.Form):
                                         label=_('Participant Language Preference'),required=False)
 
 class OrgsizeFilterForm(forms.Form):
-    size = forms.MultipleChoiceField(widget=forms.SelectMultiple(),choices=ORGANIZATION_SIZES,
+    size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=ORGANIZATION_SIZES,
                                     label=_('Size'),required=False)
     
 class AgeFilterForm(forms.Form):
