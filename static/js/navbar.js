@@ -56,7 +56,7 @@ function checkParameters(event) {
     window.location.href = url;
   } else {
     // Display an alert
-    alert("URL does not contain 'report_date' or 'theme'.");
+    alert("Please select a Date or Theme to Print.");
     // Prevent default behavior of the link (don't follow the link)
     event.preventDefault();
   }
