@@ -47,7 +47,7 @@ function checkParameters() {
 
 // Function to handle the click event
 function checkParameters(event) {
-  const url = event.target.href;
+  const url = window.location.href;
   const containsReportDate = url.includes("report_date");
   const containsTheme = url.includes("theme");
 
