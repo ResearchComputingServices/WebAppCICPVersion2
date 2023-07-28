@@ -51,14 +51,15 @@ function checkParameters(event) {
   const containsReportDate = url.includes("report_date");
   const containsTheme = url.includes("theme");
 
-  if (containsReportDate || containsTheme) {
+  if (!(containsReportDate || containsTheme)) {
     // Follow the URL defined in urls.py
-    window.location.href = url;
-  } else {
     // Display an alert
     alert("Please select a Date or Theme to Print.");
     // Prevent default behavior of the link (don't follow the link)
     event.preventDefault();
+
+  } else {
+    window.location.href = url;
   }
 }
 
