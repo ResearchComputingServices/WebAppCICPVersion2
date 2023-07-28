@@ -1,0 +1,114 @@
+\chapter{Chapter title}
+
+\lipsum[1]
+
+\section{Section title}
+
+\lipsum[2]
+
+\begin{figure}[htb]\centering
+  \includegraphics[scale=0.7]{example-image-a}
+\caption{Figure caption}
+\label{f1}
+\end{figure}
+
+\lipsum[3-6]
+
+\begin{figure}[htb]
+\begin{minipage}[b]{0.48\textwidth}\centering
+\includegraphics[scale=0.5]{example-image-a}
+\caption{Figure caption}
+\label{f2}
+\end{minipage}
+%%%%%%%%%%%%%%
+\hfill
+%%%%%%%%%%%%%%
+\begin{minipage}[b]{0.48\textwidth}\centering
+\includegraphics[scale=0.5]{example-image-b}
+\caption{Figure caption}
+\label{f3}
+\end{minipage}
+\end{figure}
+
+\lipsum[1]\footnote{\lipsum[2]}
+
+\lipsum[5]
+
+\begin{figure}[htb]
+    \centering
+    \begin{subfigure}[t]{0.48\columnwidth}
+        \centering
+        \includegraphics[width=0.8\columnwidth]{example-image-a}
+\caption{Figure subcaption 4a}\label{f4a}
+    \end{subfigure}%
+~
+    \begin{subfigure}[t]{0.48\columnwidth}
+        \centering
+	    \includegraphics[width=0.8\columnwidth]{example-image-b}
+        \caption{Figure subcaption 4b}        \label{f3b}
+    \end{subfigure}
+\medskip
+
+    \begin{subfigure}[t]{0.48\columnwidth}
+        \centering
+	\includegraphics[width=0.8\columnwidth]{example-image-c}
+    \caption{Figure subcaption 4c}\label{f4c}
+    \end{subfigure}%
+~
+    \begin{subfigure}[t]{0.48\columnwidth}
+        \centering
+	\includegraphics[width=0.8\columnwidth]{example-image}
+    \caption{Figure subcaption 4d}\label{f4d}
+    \end{subfigure}
+\caption{Figure caption 4}\label{f4}
+ \end{figure}
+
+\lipsum[2]
+
+\lipsum[2]
+
+\lipsum[3]
+
+
+
+\section{Section title}
+
+\lipsum[2-4]
+
+\begin{box1}{Title box}
+\lipsum[1]
+\end{box1}
+
+\lipsum[1]
+
+\begin{box1}{}
+\textbf{Whitout Box title.}
+\lipsum[1]
+\end{box1}
+
+\lipsum[1-3]
+
+
+\begin{table}[htb]
+\caption{}
+\label{t2}
+\begin{tblr}{hlines={},
+colspec={Q[1.5,m,l]Q[1,m,c]Q[1,m,c]},
+hline{1,Z} = {3pt,black},
+hline{2} = {1pt,black},
+rows = {abovesep=4pt,belowsep=4pt,font={\small}},
+row{1}={font=\bfseries}
+}
+List& Population N (32,384)& Number of participants recruited
+\\
+Main Sample &14,267 &704\\
+SS1 (Foundations) &936 &65\\
+SS2 (Volunteer-run charities) &16,575& 114\\
+SS3 (Charities in BC) &1,926 &157\\
+SS4 (Geographic regions) &14,266& 734\\
+SS5 (Charities in QC) &4,992 &189\\
+SS6 (International charities) &606 &70\\
+\end{tblr}
+\end{table}
+
+

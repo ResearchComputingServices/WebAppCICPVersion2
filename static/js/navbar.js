@@ -34,3 +34,34 @@ document.getElementById("langButton").addEventListener("click", function (event)
   }
   window.location.href = replacedUrl;
 });
+
+
+function checkParameters() {
+  var windowUrl = window.location.href;
+  if (windowUrl.indexOf("report_date") !== -1 || windowUrl.indexOf("theme") !== -1) {
+
+  }
+  printext = document.getElementById("navtextprint");
+
+}
+
+// Function to handle the click event
+function checkParameters(event) {
+  const url = event.target.href;
+  const containsReportDate = url.includes("report_date");
+  const containsTheme = url.includes("theme");
+
+  if (containsReportDate || containsTheme) {
+    // Follow the URL defined in urls.py
+    window.location.href = url;
+  } else {
+    // Display an alert
+    alert("URL does not contain 'report_date' or 'theme'.");
+    // Prevent default behavior of the link (don't follow the link)
+    event.preventDefault();
+  }
+}
+
+// Add the click event listener to the link
+const myLink = document.getElementById("navtextprint");
+myLink.addEventListener("click", checkParameters);

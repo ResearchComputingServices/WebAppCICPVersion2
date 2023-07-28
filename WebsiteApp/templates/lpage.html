@@ -36,29 +36,6 @@
     </div>
 
      <div class="heading-text" id="message"></div>
-                {% comment %} <div class="filter-container">
-                    <div class="shade">
-                        <div>{% translate "To check the Latest Report" %} &nbsp;<a href="{% url 'latest_report' %}">{% translate "Click Here"%}</a></div>
-                        <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
-                            {% csrf_token %}
-                            <div class="ml-md-2" id="selected-date">
-                                {{dateFilter.as_div}}
-                            </div>
-                            <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                            <input class="form-input" type="reset" value={% translate "Reset"%}>
-                        </form>
-                    </div>
-                    <div class="shade">
-                        <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
-                            {% csrf_token %}
-                            <div class="ml-md-2">
-                            {{themeFilter.as_div}}
-                            </div>
-                            <input class="form-input" type="submit" value="{% translate "Search" %}"/>
-                            <input class="form-input" type="reset" value="{% translate "Reset"%}"/>
-                        </form>
-                    </div>
-                </div> {% endcomment %}
 <div class="filter-container">
 
                 <div class="flip-card">
@@ -73,7 +50,7 @@
                                 {{dateFilter.as_div}}
                             </div>
                             <div class="input-class date">
-                                <input class="form-input" type="submit" value="{% translate "Search" %}"/>
+                                <input class="form-input" type="submit" value="{% translate "Search" %}"/>   
                             <input class="form-input" type="reset" value={% translate "Reset"%}>                
                             </div>
                             

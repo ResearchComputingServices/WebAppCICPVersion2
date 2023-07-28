@@ -2,12 +2,11 @@ from django import forms
 from datetime import datetime
 from functools import partial
 from django.utils.translation import gettext, gettext_lazy as _
-# from django_select2.forms import Select2MultipleWidget,Select2Widget
 
 PROVINCE_CHOICES= [
     ('AB', _('Alberta')),
     ('BC', _('British Columbia')),
-    ('MB', _(' Manitoba')),
+    ('MB', _('Manitoba')),
     ('NB', _('New Brunswick')),
     ('NL',_('Newfoundland and Labrador')),
     ('NS',_('Nova Scotia')),
@@ -38,8 +37,8 @@ ORGANIZATION_SIZES = [('SMALL',_('Small')),
 ('LARGE',_('Large'))]
 
 AGE = [
-    ('OLD',_('Old (Registered before 1990)')),
-    ('NEW',_('New (Registered after 1990)'))
+    ('OLD',_('Registered before 1990')),
+    ('NEW',_('Registered after 1990')),
 ]
 
 # FIELD_OF_WORK = []

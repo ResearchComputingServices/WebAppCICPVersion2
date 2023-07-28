@@ -34,7 +34,9 @@
         
         <div id="sidebar" class="sidebar">
             {%if filtered %}
+           
                 <div class="filterbox">
+                    <p id="filtertext">FILTER THIS REPORT BY</p>
                     <form method="get">
                         {% csrf_token %}                   
                             <div class="form-container">
@@ -82,65 +84,6 @@
             </h4>
             {% endif %}
         </div>
-        {% comment %} {%if filtered %}
-        <a href="#" title="Open Menu" class="menu" id="menuButton" onclick="toggleblackbox(event)"></a>
-            <div class="filterbox" id="blackbox">
-                <form method="get">
-                    {% csrf_token %}
-
-                            <span class="sec-filters">
-                                <div>
-                                    {{province_form_filter}}
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    {{org_size_form_filter}}
-                                </div>
-                                <div id="subfilter">
-                                    {{language_form_filter}}
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    &nbsp;
-                                    {{age_form_filter}}
-                                </div>
-                            </span>
-                            
-
-                        {% if reportDate %}                  
-                        <input type="hidden"
-                         name="report_date" value={{reportDate}} />
-
-                        {% elif questionTheme %}   
-                        <input type="hidden"
-                         name="theme" value={{questionTheme}} />
-
-                        {% endif %}
-
-                        <div id="secsearch">
-                            <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/>
-                            <input type="reset" value={% translate "Reset"%}>
-                        </div>
-                </form>
-            </div>
-            {% if locations or languagePreference or orgSizes or age %}
-                <div class="selected-filters">
-            
-                    {% translate "Filters Selected:"%}
-                    <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
-                    <strong>{% translate "Language:"%}</strong><i>{{languagePreference}}</i>
-                    <strong>{% translate "Organisation Size:"%}</strong><i>{{orgSizes}}</i>
-                    <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
-
-                </div>
-            {% endif %}
-        {% endif %} {% endcomment %}
        {% if locations or languagePreference or orgSizes or age %}
                 <div class="selected-filters">
             
@@ -203,11 +146,6 @@
 		                    </ul>
                         </div>
                     </div>
-                    {% comment %} <section class="images">
-                        {% for image_url in image_filepaths %}                                    
-                                <img src={{ image_url }} alt="Image">
-                        {% endfor %}
-                    </section> {% endcomment %}
                 {% endif %}
             {% endif %}
         </main>

@@ -6,5 +6,6 @@ urlpatterns = [
     path('latestreport',views.latest_report, name='latest_report'),
     path('theme',views.landingPageView, name='themereports'),
     path('date',views.landingPageView, name='datereports'),
+    path('print',views.printReport,name="printreport"),
     
 ]

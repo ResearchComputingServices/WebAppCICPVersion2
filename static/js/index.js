@@ -46,3 +46,11 @@ function showDiv() {
 document.addEventListener('DOMContentLoaded', function () {
     new Splide('#image-slider').mount();
 });
+
+function openNav() {
+    document.getElementById("sidebar").style.width = "100%";
+}
+
+function closeNav() {
+    document.getElementById("sidebar").style.width = "0";
+}

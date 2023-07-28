@@ -6,7 +6,10 @@ from scripts.Utils import *
 from scripts.Controller import HandleFrontEndQuery
 from django.utils.translation import gettext,get_language
 from datetime import datetime, timedelta
-from django.contrib.sessions.backends.db import SessionStore
+from django_tex.shortcuts import render_to_pdf
+from WebAppCICPVersion2 import settings
+
+
 
 ##################################################################################################################################
 # Create your views here.
@@ -79,7 +82,38 @@ def themeOrDate(request, theme, date):
     context, frontEndQuery = formInitialization()
 
     if date is None:
-        frontEndQuery.questionThemes = theme
+       
+
+        if theme[0] == 'Funding':
+            theme[0] = 'FUN'
+            frontEndQuery.questionThemes = theme
+            
+        elif theme[0] == 'Governance':
+            theme[0] = 'GOV'
+            frontEndQuery.questionThemes = theme
+            
+        elif theme[0] ==  'Policy':
+            theme[0] =  'POL'
+            frontEndQuery.questionThemes = theme
+            
+        elif theme[0] == 'Collaboration':
+            theme[0] = 'COL'
+            frontEndQuery.questionThemes = theme
+            
+        elif theme[0] == 'Challenges':
+            theme[0] = 'CHA'
+            frontEndQuery.questionThemes = theme
+            
+        elif theme == 'EDI':
+            theme ='EDI'
+            frontEndQuery.questionThemes = theme
+
+        elif theme == 'Other':
+            theme = 'OTH'
+            frontEndQuery.questionThemes = theme
+        
+        else:
+             frontEndQuery.questionThemes = theme
 
     elif theme is None:
         frontEndQuery.date = str(get_wed_date(date))
@@ -90,6 +124,8 @@ def themeOrDate(request, theme, date):
         context['wednesday_date'] = wednesday_text_date
 
     frontEndQuery.locations = context['locations'] = request.GET.getlist('province')
+
+
     frontEndQuery.languagePreference = context['languagePreference'] = request.GET.getlist('language')
     frontEndQuery.organizationSizes = context['orgSizes'] = request.GET.getlist('size')
     frontEndQuery.age = context['age'] = request.GET.getlist('age')
@@ -117,7 +153,7 @@ def landingPageView(request):
     if len(questionTheme) != 0:
         query_response_imagefilepaths, query_response_csv, errors,context = themeOrDate(request, theme=questionTheme, date=None)
 
-        context['filtered'] = 'filteredReport'  
+        context['filtered'] = 'filteredReport' 
 
         if questionTheme[0] == 'FUN':
             context['questionTheme'] = gettext('Funding')
@@ -146,9 +182,20 @@ def landingPageView(request):
         if len(query_response_imagefilepaths) != 0:
             context["image_filepaths"] = query_response_imagefilepaths
 
-        response = render(request, 'index.html', context)
-       
-        return response
+            # Create a dat file to print the report
+            image_dict = {}
+            for i, filepath in enumerate(query_response_imagefilepaths, 1):
+                            key = f"Figure{i}"
+                            image_dict[key] = settings.BASE_ROOT+filepath
+            datfilepath = settings.BASE_DIR /'WebsiteApp/templates/latexgraphics.dat'
+            try:
+                with open(datfilepath, "w") as f:
+                    for key in image_dict.keys():
+                        f.write(f"{key},{image_dict[key]}\n")
+            except FileNotFoundError:
+                print("Dat file not found")
+
+        return render(request, 'index.html', context)
         
 
     elif reportDate:
@@ -170,24 +217,46 @@ def landingPageView(request):
             context['wednesday_date'] = wednesday_text_date
             context['reportDate'] = reportDate
 
-            print("context after selection is",context)
-
             if len(errors) != 0:
                 context["errors"] = errors
 
             if len(query_response_imagefilepaths) != 0:
                 context["image_filepaths"] = query_response_imagefilepaths
 
-            return render(request, 'index.html', context)
+            # Create a dat file to print the report
+            image_dict = {}
+            for i, filepath in enumerate(query_response_imagefilepaths, 1):
+                            key = f"Figure{i}"
+                            image_dict[key] = settings.BASE_ROOT+filepath
+                            
+            datfilepath = settings.BASE_DIR /'WebsiteApp/templates/latexgraphics.dat'
 
+            try:
+                with open(datfilepath, "w") as f:
+                    for key in image_dict.keys():
+                        f.write(f"{key},{image_dict[key]}\n")
+            except FileNotFoundError:
+                print("Dat file not found")
+
+            return render(request, 'index.html', context)
          
     else:
-            print("language =",get_language())
-            print(reportDate)
             if reportDate == None and len(questionTheme) == 0:
                 return render(request, 'lpage.html', context)
-                
-    
+
+
+def printReport(request):
+
+    template_name = 'main.tex'
+    context = {}
+    # Call render_to_pdf function and capture the output
+    pdf_output = render_to_pdf(request, template_name, context, filename='my_report.pdf')
+
+    # Print the PDF output (This will also show logs generated during the rendering process)
+    print(pdf_output)
+
+    return pdf_output
+
 ##################################################################################################################################
 # Calculates Wednesday based on Friday date
 def get_wed_date(fri_date):
@@ -269,3 +338,6 @@ def get_fridaydate_from_todays_date(todays_date):
                 this_week_friday = todays_date + \
                                 timedelta(days = -2)
                 return(this_week_friday.date())
+        
+
+

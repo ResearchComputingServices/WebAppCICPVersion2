@@ -1,0 +1,64 @@
+\documentclass[a4paper]{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage{datatool, filecontents}
+\usepackage{enumitem} % Load the enumitem package
+\usepackage{xstring} % Load the xstring package for string manipulation
+
+% Set the separator between the columns.
+\DTLsetseparator{,}
+
+% import data
+\DTLloaddb[noheader, keys={thekey,thevalue}]{mydata}{/webapp/WebAppCICPVersion2/WebsiteApp/templates/latexgraphics.dat}
+% Loads mydata.dat with column headers 'thekey' and 'thevalue'
+
+\begin{document}
+
+\pagenumbering{gobble}
+
+\Large
+\begin{center}
+    CICP - PCPOB
+
+    \Large
+    Charity Insights Canada Project | Projet Canada Perspectives Des Organismes De Bienfaisance
+
+    \hspace{10pt}
+
+    \hspace{10pt}
+
+    \normalsize
+    Selected Theme - {}
+
+    \normalsize
+    Selected Date - {}
+\end{center}
+
+\hspace{10pt}   
+
+\section{Report}
+
+% Define a custom list environment without bullets
+\newlist{myfigurelist}{enumerate}{1}
+\setlist[myfigurelist,1]{label=}
+
+\begin{myfigurelist}
+    % Loop through the data dynamically
+    \DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
+        % Extract the caption value by removing the word "Figure" from \mykey
+        \StrDel{\mykey}{Figure}[\mycaption]
+        \item
+        \begin{figure}[ht]
+            \centering
+            % Set the width of the figure to \textwidth for the image to fit within the text area
+            \includesvg[width=\textwidth]{\myvalue}
+            % Use the extracted caption value
+            \caption{\mycaption}
+        \end{figure}
+    }
+\end{myfigurelist}
+
+\end{document}

@@ -213,8 +213,6 @@ div {
 /* CSS code for extra small devices */
 @media (max-width: 575.98px) {
 
-    /* Example CSS rules for extra small devices */
-
     .main-content {
         margin-left: auto;
         width: auto;
@@ -244,7 +242,6 @@ div {
 
 
 }
-
 
 /* CSS code for small devices */
 @media (min-width: 576px) and (max-width: 768px) {
