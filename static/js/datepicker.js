@@ -43,7 +43,6 @@
 // })
 // );
 
-
 $(document).ready(function () {
     var fridayDate = function () {
         var curr = new Date();
@@ -60,12 +59,22 @@ $(document).ready(function () {
         }
     };
 
-    $(".dateinput").datepicker({
+    // Create a hidden input field to hold the selected date value (optional)
+    const hiddenInput = $('<input>').attr({
+        type: 'hidden',
+        name: 'report_date', // Add the name attribute to match your form field
+        value: $.datepicker.formatDate('yy-mm-dd', fridayDate())
+    });
+
+    // Append the hidden input field to the body (optional)
+    $('body').append(hiddenInput);
+
+    // Create the datepicker
+    $("#datepicker").datepicker({
         minDate: new Date("12/07/2022"),
         maxDate: new Date(),
         changeMonth: true,
         changeYear: true,
-        showOn: 'both', // Show calendar on focus and when clicking an icon
         buttonText: 'Date',
         dateFormat: 'yy-mm-dd',
         defaultDate: fridayDate(),
@@ -78,6 +87,12 @@ $(document).ready(function () {
                     date.getDay() == 4 ||
                     date.getDay() == 6 ? false : true
             ];
+        },
+        onSelect: function (dateText) {
+            hiddenInput.val(dateText);
+            // If you want to submit the form automatically when a date is selected
+            // Uncomment the line below
+            // $("form").submit();
         },
     });
 });
