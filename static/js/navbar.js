@@ -36,15 +36,6 @@ document.getElementById("langButton").addEventListener("click", function (event)
 });
 
 
-function checkParameters() {
-  var windowUrl = window.location.href;
-  if (windowUrl.indexOf("report_date") !== -1 || windowUrl.indexOf("theme") !== -1) {
-
-  }
-  printext = document.getElementById("navtextprint");
-
-}
-
 // Function to handle the click event
 function checkParameters(event) {
   const url = window.location.href;
@@ -52,13 +43,13 @@ function checkParameters(event) {
   const containsTheme = url.includes("theme");
 
   if (!(containsReportDate || containsTheme)) {
-    // Follow the URL defined in urls.py
     // Display an alert
     alert("Please select a Date or Theme to Print.");
     // Prevent default behavior of the link (don't follow the link)
     event.preventDefault();
 
   } else {
+    // Follow the URL defined in urls.py
     window.location.href = url;
   }
 }
