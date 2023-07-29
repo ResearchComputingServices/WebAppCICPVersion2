@@ -37,7 +37,7 @@
 
     <div class="heading-text" id="message"></div>
     <div class="filter-container">
-            <div class="flip-card">
+            {% comment %} <div class="flip-card"> {% endcomment %}
                 <div class="card">
                         <h4><b>Select Date</b></h4>
                         <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url         'datereports' %}" required>
@@ -51,15 +51,15 @@
                             </div>
                         </form>
                 </div>
-            </div>
-            <div class="flip-card">
+            {% comment %} </div> {% endcomment %}
+            {% comment %} <div class="flip-card"> {% endcomment %}
                     <div class="card">
                         <h4><b>{% translate "Latest Report" %}</b></h4>
                         <div> &nbsp;<button><a href="{% url 'latest_report' %}">{% translate "View"%}</a></button></div>
                     </div>
-            </div>
+            {% comment %} </div> {% endcomment %}
 
-            <div class="flip-card">
+            {% comment %} <div class="flip-card"> {% endcomment %}
                 <div class="card">
                 <h4><b>Select Theme</b></h4>
                    <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
@@ -73,7 +73,7 @@
                         </div>
                     </form>
                 </div>
-            </div>
+            {% comment %} </div> {% endcomment %}
         </div>
 
             {% block scripts %}

@@ -117,19 +117,21 @@
     border-radius: 5px;
 }
 
-
+/* 
 .flip-card {
     background-color: transparent;
     width: 400px;
     height: 300px;
     perspective: 1000px;
-}
+} */
 
 .card {
     background-color: #e91c24;
     color: white;
     display: flex;
     flex-direction: column;
+    width: 400px;
+    height: 300px;
 }
 
 .input-class {
@@ -149,4 +151,8 @@
     width: 150px;
     height: 150px;
     margin-top: 15%;
+}
+
+h4 {
+    align-items: center;
 }
