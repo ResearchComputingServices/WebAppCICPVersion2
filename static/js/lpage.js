@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 // Define the function to redirect to the latest report URL
-const reportButton = document.getElementById('reportButton');
+const reportButton = document.getElementById('latestreportButton');
 const latestReportURL = reportButton.getAttribute('data-url');
 
 reportButton.addEventListener('click', () => {

@@ -138,6 +138,7 @@
 h5 {
     align-items: center;
     flex-direction: column;
+    display: flex;
     padding: 5%;
     margin: left 25%;
 }
@@ -152,7 +153,8 @@ h5 {
 }
 
 .theme {
-    margin-left: 10%;
+    margin-left: 25%;
+    margin-top:
 }
 
 .image {
@@ -190,4 +192,8 @@ button {
 #id_report_date {
     margin-left: 6%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+#id_theme {
+    margin-left: 6%;
 }
