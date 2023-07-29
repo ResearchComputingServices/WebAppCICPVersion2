@@ -65,8 +65,8 @@ class AgeFilterForm(forms.Form):
 
  # New Changes for a different theme    
 class ThemeFilterForm(forms.Form):
-    theme= forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=THEME_CHOICES,
+    theme= forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=THEME_CHOICES,label='',
                                     required=False)
     
 class DateFilterForm(forms.Form):
-    report_date = forms.DateField(widget=DateInput(),required=False)
+    report_date = forms.DateField(widget=DateInput(),label='',required=False)

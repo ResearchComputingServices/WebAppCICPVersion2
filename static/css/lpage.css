@@ -125,13 +125,21 @@
     perspective: 1000px;
 } */
 
-.card {
-    background-color: #e91c24;
-    color: white;
+.cards {
+    background-color: transparent;
+    color: black;
     display: flex;
     flex-direction: column;
     width: 400px;
     height: 300px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+h5 {
+    align-items: center;
+    flex-direction: column;
+    padding: 5%;
+    margin: left 25%;
 }
 
 .input-class {
@@ -153,6 +161,33 @@
     margin-top: 15%;
 }
 
-h4 {
-    align-items: center;
+button {
+    background-color: #e91c24;
+    border: none;
+    text-align: center;
+    display: inline-block;
+    color: #f7f7f7;
+    padding: 3px 20px;
+    font-size: 10px;
+    margin: 4px 2px;
+    position: absolute;
+    left: 20%;
+}
+
+#latestreportButton {
+
+    padding: 15px 32px;
+    text-align: center;
+    display: inline-block;
+    font-size: 15px;
+    margin: 4px 2px;
+    position: absolute;
+    left: 45%;
+    top: 60%;
+
+}
+
+#id_report_date {
+    margin-left: 6%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }

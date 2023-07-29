@@ -37,10 +37,9 @@
 
     <div class="heading-text" id="message"></div>
     <div class="filter-container">
-            {% comment %} <div class="flip-card"> {% endcomment %}
-                <div class="card">
+                <div class="cards">
                         <h4><b>Select Date</b></h4>
-                        <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url         'datereports' %}" required>
+                        <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
                             {% csrf_token %}
                             <div class="ml-md-2" id="selected-date">
                                 {{dateFilter.as_div}}
@@ -51,16 +50,16 @@
                             </div>
                         </form>
                 </div>
-            {% comment %} </div> {% endcomment %}
-            {% comment %} <div class="flip-card"> {% endcomment %}
-                    <div class="card">
+    
+                <div class="cards">
                         <h4><b>{% translate "Latest Report" %}</b></h4>
-                        <div> &nbsp;<button><a href="{% url 'latest_report' %}">{% translate "View"%}</a></button></div>
-                    </div>
-            {% comment %} </div> {% endcomment %}
+                        {% comment %} <div> &nbsp;<button id ="lreport" onclick="getLatestReport()"><a href="{% url 'latest_report' %}">{% translate "View"%}</a></button></div> {% endcomment %}
+                        <button id="latestreportButton" data-url="{% url 'latest_report' %}">Create Report</button>
+                </div>
+           
 
-            {% comment %} <div class="flip-card"> {% endcomment %}
-                <div class="card">
+         
+                <div class="cards">
                 <h4><b>Select Theme</b></h4>
                    <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
                         {% csrf_token %}
@@ -73,7 +72,7 @@
                         </div>
                     </form>
                 </div>
-            {% comment %} </div> {% endcomment %}
+            
         </div>
 
             {% block scripts %}
