@@ -115,15 +115,9 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #e91c24;
+    color: white;
 }
-
-/* 
-.flip-card {
-    background-color: transparent;
-    width: 400px;
-    height: 300px;
-    perspective: 1000px;
-} */
 
 .cards {
     background-color: transparent;
@@ -150,11 +144,12 @@ h5 {
 
 .date {
     margin-left: 30%;
+    margin-top: 44%;
 }
 
 .theme {
     margin-left: 25%;
-    margin-top:
+    margin-top: 9%;
 }
 
 .image {
