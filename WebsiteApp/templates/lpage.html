@@ -38,7 +38,7 @@
     <div class="heading-text" id="message"></div>
     <div class="filter-container">
                 <div class="cards">
-                        <h4><b>Select Date</b></h4>
+                        <h5><b>Select Date</b></h5>
                         <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
                             {% csrf_token %}
                             <div class="ml-md-2" id="selected-date">
@@ -52,14 +52,14 @@
                 </div>
     
                 <div class="cards">
-                        <h4><b>{% translate "Latest Report" %}</b></h4>
+                        <h5><b>{% translate "Latest Report" %}</b></h5>
                         <button id="latestreportButton" data-url="{% url 'latest_report' %}">View</button>
                 </div>
            
 
          
                 <div class="cards">
-                <h4><b>Select Theme</b></h4>
+                <h5><b>Select Theme</b></h5>
                    <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
                         {% csrf_token %}
                         <div class="ml-md-2">
