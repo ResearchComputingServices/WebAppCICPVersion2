@@ -120,7 +120,7 @@
 }
 
 .cards {
-    background-color: transparent;
+    background-color: #e91c24;
     color: black;
     display: flex;
     flex-direction: column;
@@ -144,11 +144,11 @@ h5 {
 
 .date {
     margin-left: 30%;
-    margin-top: 40%;
+    margin-top: 36%;
 }
 
 .theme {
-    margin-left: 25%;
+    margin-left: 30%;
     margin-top: 1%;
 }
 
@@ -168,27 +168,34 @@ button {
     font-size: 10px;
     margin: 4px 2px;
     position: absolute;
-    left: 20%;
+    left: 23%;
 }
 
 #latestreportButton {
-
+    background-color: #111111;
     padding: 15px 32px;
     text-align: center;
     display: inline-block;
     font-size: 15px;
     margin: 4px 2px;
     position: absolute;
-    left: 45%;
-    top: 60%;
+    left: 38%;
+    top: 52%;
+    width: 300px;
+    height: 200px;
+
 
 }
 
 #id_report_date {
-    margin-left: 6%;
+    margin-left: 14%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
 #id_theme {
     margin-left: 6%;
+}
+
+#latest {
+    background-color: #e91c24
 }
