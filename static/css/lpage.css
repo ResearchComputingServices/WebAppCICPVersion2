@@ -192,3 +192,16 @@ button {
 #id_theme {
     margin-left: 6%;
 }
+
+#selected-date input.dateinput {
+    display: none;
+}
+
+/* Adjust the styling of the calendar container */
+#selected-date .ui-datepicker {
+    display: block;
+    position: absolute;
+    background-color: #e91c24;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
