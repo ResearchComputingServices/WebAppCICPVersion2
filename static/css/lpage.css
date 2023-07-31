@@ -37,7 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
+    font-size: 15px;
     text-shadow: 2px 2px 4px rgb(170 159 159 / 90%);
     height: 200px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
@@ -131,7 +131,7 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 
-h5 {
+h6 {
     align-items: center;
     flex-direction: column;
     display: flex;
@@ -146,7 +146,7 @@ h5 {
 
 .date {
     margin-left: 30%;
-    margin-top: 36%;
+    margin-top: 27%;
 }
 
 .theme {
@@ -166,11 +166,12 @@ button {
     text-align: center;
     display: inline-block;
     color: #f7f7f7;
-    padding: 3px 20px;
-    font-size: 10px;
+    padding: 3.5px 20px;
+    font-size: 5px;
     margin: 4px 2px;
     position: absolute;
     left: 23%;
+    top: 58.5%;
 }
 
 #latestreportButton {
@@ -192,6 +193,7 @@ button {
 #id_report_date {
     margin-left: 14%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin-top: 8%;
 }
 
 #id_theme {
