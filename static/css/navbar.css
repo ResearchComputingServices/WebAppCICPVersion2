@@ -8,7 +8,9 @@
     height: min-content
 }
 
-#navtext {
+#navtext,
+#navtextprint,
+#langButton {
     color: white;
     text-decoration: none;
 }
