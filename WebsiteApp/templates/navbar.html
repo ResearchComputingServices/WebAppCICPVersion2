@@ -8,7 +8,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
     </head>
     <body>
-        <nav class="navbar navbar-light navbar-expand-lg fixed-top">
+        <nav class="navbar navbar-dark navbar-expand-lg fixed-top">
         
             <a class="navbar-brand" href="https://carleton.ca/cicp-pcpob/homepage/all-reports/">
                 <img src="https://cdn.carleton.ca/theme-framework/img/favicons/favicon.ico"
@@ -29,17 +29,17 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active ">                        
-                            <a id="navtext" class="nav-link" aria-current="page" href="{% url 'landingPageView' %}">{% translate "Dashboard Home" %}</a>  
+                    <li class="nav-item">                        
+                            <a id="navtext" aria-current="page" href="{% url 'landingPageView' %}">{% translate "Dashboard Home" %}</a>  
                     </li>
                     <li class="nav-item active ">                        
-                            <a id="navtext" class="nav-link" aria-current="page" href=""{% url 'latest_report' %}"">{% translate "Latest Report" %}</a>  
+                            <a id="navtext" aria-current="page" href="{% url 'latest_report' %}">{% translate "Latest Report" %}</a>  
                     </li>
                     <li class="nav-item active ">
-                        <a id="navtextprint" class="nav-link" aria-current="page" href="{% url 'printreport' %}">{% translate "Print Report" %}</a>
+                        <a id="navtextprint" aria-current="page" href="{% url 'printreport' %}">{% translate "Print Report" %}</a>
                     </li>                   
                     <li class="nav-item active">
-                        <a class="nav-link" aria-current="page" href="#" id="langButton">
+                        <a aria-current="page" href="#" id="langButton">
                                     <span data-en="Anglaise" data-fr="French"></span>
                         </a>
                     </li>

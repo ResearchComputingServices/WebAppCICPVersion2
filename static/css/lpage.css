@@ -106,10 +106,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    color: black;
+    color: white;
     font-family: Arial, sans-serif;
     padding: 2%;
     height: 380px;
+    background-color: black;
 }
 
 .form-input {

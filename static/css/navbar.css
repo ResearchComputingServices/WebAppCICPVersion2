@@ -8,6 +8,7 @@
     height: min-content
 }
 
-.nav-link {
-    color: black;
+#navtext {
+    color: white;
+    text-decoration: none;
 }
