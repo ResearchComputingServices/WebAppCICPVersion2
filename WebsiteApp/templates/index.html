@@ -47,7 +47,7 @@
                             </div>
 
                             <div id="secsearch">
-                                <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="showDiv()"/>
+                                <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="checkFilters()"/>
                                 <input type="reset" value={% translate "Reset"%}>
                             </div>
 
@@ -107,7 +107,7 @@
                                 <p class="card-title ">
                                     <p class="card-text text-light">{{ info }}</p>
                                 </p>
-                                <a href="{% url 'landingPageView' %}" class="btn text-light">{% translate "Try Again" %}</a>
+                                <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
                             </div>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                                                 <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
                                             {% endfor %}
                                         </p>
-                                        <a href="{% url 'landingPageView' %}" class="btn text-light">{% translate "Try Again" %}</a>
+                                        <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
                                     </div>
                                 </div>
                             </div>

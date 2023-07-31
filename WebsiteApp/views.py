@@ -185,15 +185,20 @@ def landingPageView(request):
             context["image_filepaths"] = query_response_imagefilepaths
 
             # Create a dat file to print the report
-            image_dict = {}
+            content_dict = {}
             for i, filepath in enumerate(query_response_imagefilepaths, 1):
                 key = f"Figure{i}"
-                image_dict[key] = settings.BASE_ROOT + filepath
+                content_dict[key] = settings.BASE_ROOT + filepath
+            content_dict['theme'] = context["questionTheme"]
+
+            print(context)
+
             datfilepath = settings.BASE_DIR / "WebsiteApp/templates/latexgraphics.dat"
             try:
+                print(content_dict)
                 with open(datfilepath, "w") as f:
-                    for key in image_dict.keys():
-                        f.write(f"{key},{image_dict[key]}\n")
+                    for key in content_dict.keys():
+                        f.write(f"{key},{content_dict[key]}\n")
             except FileNotFoundError:
                 print("Dat file not found")
 
@@ -231,18 +236,22 @@ def landingPageView(request):
             if len(query_response_imagefilepaths) != 0:
                 context["image_filepaths"] = query_response_imagefilepaths
 
+            print(context)
+
             # Create a dat file to print the report
-            image_dict = {}
+            content_dict = {}
             for i, filepath in enumerate(query_response_imagefilepaths, 1):
                 key = f"Figure{i}"
-                image_dict[key] = settings.BASE_ROOT + filepath
+                content_dict[key] = settings.BASE_ROOT + filepath
+            content_dict['date'] = context["reportDate"]
 
             datfilepath = settings.BASE_DIR / "WebsiteApp/templates/latexgraphics.dat"
 
             try:
+                print(content_dict)
                 with open(datfilepath, "w") as f:
-                    for key in image_dict.keys():
-                        f.write(f"{key},{image_dict[key]}\n")
+                    for key in content_dict.keys():
+                        f.write(f"{key},{content_dict[key]}\n")
             except FileNotFoundError:
                 print("Dat file not found")
 

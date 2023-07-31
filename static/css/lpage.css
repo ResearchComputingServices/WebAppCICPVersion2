@@ -37,13 +37,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 15px;
+    font-size: 20px;
     text-shadow: 2px 2px 4px rgb(170 159 159 / 90%);
     height: 200px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
     background-color: black;
     color: white;
     margin-top: 2%;
+    font-family: monospace;
 }
 
 .loader {
@@ -105,12 +106,10 @@
 .filter-container {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    color: white;
+    color: black;
     font-family: Arial, sans-serif;
-    padding: 2%;
-    height: 380px;
-    background-color: black;
+    padding: 5%;
+    justify-content: center;
 }
 
 .form-input {
@@ -122,8 +121,7 @@
 }
 
 .cards {
-    /* background-color: #e91c24; */
-    color: white;
+    color: black;
     display: flex;
     flex-direction: column;
     width: 400px;
@@ -170,8 +168,8 @@ button {
     font-size: 5px;
     margin: 4px 2px;
     position: absolute;
-    left: 23%;
-    top: 58.5%;
+    left: 42%;
+    top: 63%;
 }
 
 #latestreportButton {

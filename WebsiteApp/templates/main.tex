@@ -1,4 +1,5 @@
 \documentclass[a4paper]{article}
+\usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -31,15 +32,20 @@
     \hspace{10pt}
 
     \normalsize
-    Selected Theme - {}
-
-    \normalsize
-    Selected Date - {}
+    \DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
+        \ifnum\pdfstrcmp{\mykey}{theme}=0
+            Theme/Thème - \myvalue
+        \fi
+    }
+    \DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
+        \ifnum\pdfstrcmp{\mykey}{date}=0
+            Date/Date - \myvalue
+        \fi
+    }
+   
 \end{center}
 
 \hspace{10pt}   
-
-\section{Report}
 
 % Define a custom list environment without bullets
 \newlist{myfigurelist}{enumerate}{1}
@@ -48,16 +54,20 @@
 \begin{myfigurelist}
     % Loop through the data dynamically
     \DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
-        % Extract the caption value by removing the word "Figure" from \mykey
-        \StrDel{\mykey}{Figure}[\mycaption]
-        \item
-        \begin{figure}[ht]
-            \centering
-            % Set the width of the figure to \textwidth for the image to fit within the text area
-            \includesvg[width=\textwidth]{\myvalue}
-            % Use the extracted caption value
-            \caption{\mycaption}
-        \end{figure}
+        % Check if the key contains the word "Figure" and display the figure
+        \IfSubStr{\mykey}{Figure}{
+            % Extract the caption value by removing the word "Figure" from \mykey
+            \StrDel{\mykey}{Figure}[\mycaption]
+            \item
+            \begin{figure}[ht]
+                \centering
+                % Use the extracted caption value
+                {\mycaption}
+                
+                % Place the figure inside the same figure environment
+                \includesvg[width=0.7\textwidth]{\myvalue}
+            \end{figure}
+        }{}
     }
 \end{myfigurelist}
 
