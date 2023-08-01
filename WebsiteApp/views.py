@@ -205,9 +205,10 @@ def landingPageView(request):
         return render(request, "index.html", context)
 
     elif reportDate:
-        if reportDate == "2022-12-23" or reportDate == "2022-12-30":
+        noSurveyDates = ["2022-12-23","2022-12-30","2023-07-28","2023-08-04"]
+        if reportDate in noSurveyDates:
             info = gettext(
-                " 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
+                "🥳🥳🥳 NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
             )
             context["info"] = info
 

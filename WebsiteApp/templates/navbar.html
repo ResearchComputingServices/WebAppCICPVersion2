@@ -27,7 +27,7 @@
                     aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {% comment %} <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">                        
                             <a id="navtext" aria-current="page" href="{% url 'landingPageView' %}">{% translate "Dashboard Home" %}</a>  
@@ -44,7 +44,26 @@
                         </a>
                     </li>
                 </ul>
-            </div>
+            </div> {% endcomment %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mx-auto custom-center">
+        <li class="nav-item">                        
+            <a id="navtext" aria-current="page" href="{% url 'landingPageView' %}">{% translate "Dashboard Home" %}</a>  
+        </li>
+        <li class="nav-item active ">                        
+            <a id="navtext" aria-current="page" href="{% url 'latest_report' %}">{% translate "Latest Report" %}</a>  
+        </li>
+        <li class="nav-item active ">
+            <a id="navtextprint" aria-current="page" href="{% url 'printreport' %}">{% translate "Print Report" %}</a>
+        </li>                   
+        <li class="nav-item active">
+            <a aria-current="page" href="#" id="langButton">
+                <span data-en="Anglaise" data-fr="French"></span>
+            </a>
+        </li>
+    </ul>
+</div>
+
         </nav>
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>

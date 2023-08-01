@@ -16,3 +16,20 @@
     text-decoration: none;
     font-family: monospace;
 }
+
+/* Center the links in the navbar, excluding the langButton */
+ul.custom-center {
+    display: flex;
+    justify-content: center;
+}
+
+/* Add some spacing between the links */
+ul.custom-center li {
+    margin: 0 30px;
+}
+
+/* Align the langButton to the right */
+ul.custom-center li:last-child {
+    margin-right: 0;
+    margin-left: 100px;
+}

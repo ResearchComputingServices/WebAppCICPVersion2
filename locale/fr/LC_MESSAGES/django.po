@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-19 00:14-0400\n"
+"POT-Creation-Date: 2023-08-01 13:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,214 +18,203 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: WebsiteApp/forms.py:8
+#: WebsiteApp/forms.py:7
 msgid "Alberta"
 msgstr "Alberta"
 
-#: WebsiteApp/forms.py:9
+#: WebsiteApp/forms.py:8
 msgid "British Columbia"
 msgstr "Colombie-Britannique"
 
-#: WebsiteApp/forms.py:10
-msgid " Manitoba"
+#: WebsiteApp/forms.py:9
+#, fuzzy
+#| msgid " Manitoba"
+msgid "Manitoba"
 msgstr "Manitoba"
 
-#: WebsiteApp/forms.py:11
+#: WebsiteApp/forms.py:10
 msgid "New Brunswick"
 msgstr "Nouveau-Brunswick"
 
-#: WebsiteApp/forms.py:12
+#: WebsiteApp/forms.py:11
 msgid "Newfoundland and Labrador"
 msgstr "Terre-Neuve-et-Labrador"
 
-#: WebsiteApp/forms.py:13
+#: WebsiteApp/forms.py:12
 msgid "Nova Scotia"
 msgstr "Nouvelle-Écosse"
 
-#: WebsiteApp/forms.py:14
+#: WebsiteApp/forms.py:13
 msgid "Ontario"
 msgstr "Ontario"
 
-#: WebsiteApp/forms.py:15
+#: WebsiteApp/forms.py:14
 msgid "Prince Edward Island"
 msgstr "Île-du-Prince-Édouard"
 
-#: WebsiteApp/forms.py:16
+#: WebsiteApp/forms.py:15
 msgid "Quebec"
 msgstr "Québec"
 
-#: WebsiteApp/forms.py:17
+#: WebsiteApp/forms.py:16
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: WebsiteApp/forms.py:21 WebsiteApp/views.py:132
+#: WebsiteApp/forms.py:20 WebsiteApp/views.py:170
 msgid "Collaboration"
 msgstr "Collaboration"
 
-#: WebsiteApp/forms.py:22 WebsiteApp/views.py:126
+#: WebsiteApp/forms.py:21 WebsiteApp/views.py:164
 msgid "Governance"
 msgstr "Gouvernance"
 
-#: WebsiteApp/forms.py:23 WebsiteApp/views.py:135
+#: WebsiteApp/forms.py:22 WebsiteApp/views.py:173
 msgid "Challenges"
 msgstr "Défis"
 
-#: WebsiteApp/forms.py:24 WebsiteApp/views.py:123
+#: WebsiteApp/forms.py:23 WebsiteApp/views.py:161
 msgid "Funding"
 msgstr "Financement"
 
-#: WebsiteApp/forms.py:25 WebsiteApp/views.py:129
+#: WebsiteApp/forms.py:24 WebsiteApp/views.py:167
 msgid "Policy"
 msgstr "Politique"
 
-#: WebsiteApp/forms.py:26 WebsiteApp/views.py:138
+#: WebsiteApp/forms.py:25 WebsiteApp/views.py:176
 msgid "EDI"
 msgstr "EDI"
 
-#: WebsiteApp/forms.py:27 WebsiteApp/views.py:141
+#: WebsiteApp/forms.py:26 WebsiteApp/views.py:179
 msgid "Other"
 msgstr "Autre"
 
-#: WebsiteApp/forms.py:32
+#: WebsiteApp/forms.py:31
 msgid "English"
 msgstr "Anglaise"
 
-#: WebsiteApp/forms.py:33
+#: WebsiteApp/forms.py:32
 msgid "French"
 msgstr "Français"
 
-#: WebsiteApp/forms.py:36
+#: WebsiteApp/forms.py:35
 msgid "Small"
 msgstr "Petite"
 
-#: WebsiteApp/forms.py:37
+#: WebsiteApp/forms.py:36
 msgid "Medium"
 msgstr "Moyen"
 
-#: WebsiteApp/forms.py:38
+#: WebsiteApp/forms.py:37
 msgid "Large"
 msgstr "Grand"
 
+#: WebsiteApp/forms.py:40
+#, fuzzy
+msgid "Registered before 1990"
+msgstr "Immatriculé avant 1990"
+
 #: WebsiteApp/forms.py:41
-msgid "Old (Registered before 1990)"
-msgstr "Ancien (Immatriculé avant 1990)"
+#, fuzzy
+msgid "Registered after 1990"
+msgstr "Immatriculé après 1990"
 
-#: WebsiteApp/forms.py:42
-msgid "New (Registered after 1990)"
-msgstr "Nouveau (immatriculé après 1990)"
-
-#: WebsiteApp/forms.py:52
+#: WebsiteApp/forms.py:51
 msgid "Province"
 msgstr "Province"
 
-#: WebsiteApp/forms.py:56
-#, fuzzy
-#| msgid "Language Preference"
-msgid "Participant Language Preference"
-msgstr "Préférence de langue"
-
-#: WebsiteApp/forms.py:60
+#: WebsiteApp/forms.py:59
 msgid "Size"
 msgstr "Taille"
 
-#: WebsiteApp/forms.py:64
+#: WebsiteApp/forms.py:63
 msgid "Age"
 msgstr "Âge"
 
-#: WebsiteApp/templates/index.html:32
+#: WebsiteApp/templates/index.html:50 WebsiteApp/templates/lpage.html:51
+#: WebsiteApp/templates/lpage.html:64 WebsiteApp/templates/sidebar.html:26
+msgid "Search"
+msgstr "Recherche"
+
+#: WebsiteApp/templates/index.html:51 WebsiteApp/templates/lpage.html:52
+#: WebsiteApp/templates/lpage.html:65 WebsiteApp/templates/sidebar.html:27
+msgid "Reset"
+msgstr "Réinitialiser"
+
+#: WebsiteApp/templates/index.html:69
 msgid "☰ Filters"
 msgstr "☰ FILTRES"
 
-#: WebsiteApp/templates/index.html:36
+#: WebsiteApp/templates/index.html:73
 msgid "Weekly Survey Distributed -"
 msgstr "Enquête hebdomadaire distribuée -"
 
-#: WebsiteApp/templates/index.html:36
+#: WebsiteApp/templates/index.html:73
 #, python-format
 msgid " %(wednesday_date)s"
 msgstr "%(wednesday_date)s"
 
-#: WebsiteApp/templates/index.html:41
+#: WebsiteApp/templates/index.html:78
 msgid "Weekly Survey Published -"
 msgstr "Enquête hebdomadaire publiée -"
 
-#: WebsiteApp/templates/index.html:41
+#: WebsiteApp/templates/index.html:78
 #, python-format
 msgid "%(friday_text_date)s"
 msgstr "%(friday_text_date)s"
 
-#: WebsiteApp/templates/index.html:46
+#: WebsiteApp/templates/index.html:83
 #, fuzzy
 msgid "Theme -"
 msgstr "Thème -"
 
-#: WebsiteApp/templates/index.html:93 WebsiteApp/templates/lpage.html:77
-#: WebsiteApp/templates/lpage.html:112 WebsiteApp/templates/sidebar.html:23
-msgid "Search"
-msgstr "Recherche"
-
-#: WebsiteApp/templates/index.html:94 WebsiteApp/templates/lpage.html:78
-#: WebsiteApp/templates/lpage.html:113 WebsiteApp/templates/sidebar.html:24
-msgid "Reset"
-msgstr "Réinitialiser"
-
-#: WebsiteApp/templates/index.html:101
+#: WebsiteApp/templates/index.html:91
 msgid "Filters Selected:"
 msgstr "Filtres sélectionnés :"
 
-#: WebsiteApp/templates/index.html:102
+#: WebsiteApp/templates/index.html:93
 #, fuzzy
-#| msgid "Province"
 msgid "Province:"
 msgstr "Province"
 
-#: WebsiteApp/templates/index.html:103
+#: WebsiteApp/templates/index.html:96
 #, fuzzy
-#| msgid "Language"
-msgid "Language:"
-msgstr "Langue"
+msgid "Size:"
+msgstr "Taille"
 
-#: WebsiteApp/templates/index.html:104
-msgid "Organisation Size:"
-msgstr "Taille de l'organisation :"
-
-#: WebsiteApp/templates/index.html:105
+#: WebsiteApp/templates/index.html:99
 msgid "Age:"
 msgstr "Âge:"
 
-#: WebsiteApp/templates/index.html:118 WebsiteApp/templates/index.html:134
+#: WebsiteApp/templates/index.html:110 WebsiteApp/templates/index.html:126
 msgid "Alert!!"
 msgstr "Alerte!!"
 
-#: WebsiteApp/templates/index.html:123 WebsiteApp/templates/index.html:141
-msgid "Try Again"
-msgstr "Essayer à nouveau"
+#: WebsiteApp/templates/index.html:115 WebsiteApp/templates/index.html:133
+msgid "Go back"
+msgstr "Retourner"
 
-#: WebsiteApp/templates/index.html:138
+#: WebsiteApp/templates/index.html:130
 #, python-format
 msgid "%(error)s"
 msgstr "%(error)s"
 
-#: WebsiteApp/templates/lpage.html:93
-msgid "To check the Latest Report"
-msgstr "Pour vérifier le dernier rapport"
-
-#: WebsiteApp/templates/lpage.html:93
-msgid "Click Here"
-msgstr "Cliquez ici"
-
-#: WebsiteApp/templates/navbar.html:33
+#: WebsiteApp/templates/navbar.html:52
 msgid "Dashboard Home"
 msgstr "Accueil du tableau de bord"
 
-#: WebsiteApp/templates/navbar.html:36
+#: WebsiteApp/templates/navbar.html:55
+#, fuzzy
+msgid "Latest Report"
+msgstr "Dernier rapport"
+
+#: WebsiteApp/templates/navbar.html:58
 msgid "Print Report"
 msgstr "Imprimer le rapport"
 
-#: WebsiteApp/views.py:157
-msgid " 🥳🥳🥳 HAPPY HOLIDAYS  NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
-msgstr ""
-" 🥳🥳🥳 JOYEUSES FÊTES - AUCUN RAPPORT PUBLIÉ PENDANT CETTE SEMAINE 🥳🥳🥳"
+#: WebsiteApp/views.py:211
+#, fuzzy
+msgid "🥳🥳🥳 NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
+msgstr " 🥳🥳🥳 AUCUN RAPPORT PUBLIÉ AU COURS DE CETTE SEMAINE 🥳🥳🥳"
 
 #: cicp_env/lib/python3.10/site-packages/click/_termui_impl.py:496
 #, python-brace-format
@@ -1715,6 +1704,24 @@ msgstr ""
 #: cicp_env/lib/python3.10/site-packages/django/views/templates/default_urlconf.html:249
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#: cicp_env/lib/python3.10/site-packages/django_tex/models.py:12
+msgid "Template not found."
+msgstr ""
+
+#, fuzzy
+#~| msgid "Language"
+#~ msgid "Language:"
+#~ msgstr "Langue"
+
+#~ msgid "Organisation Size:"
+#~ msgstr "Taille de l'organisation :"
+
+#~ msgid "Try Again"
+#~ msgstr "Essayer à nouveau"
+
+#~ msgid "Click Here"
+#~ msgstr "Cliquez ici"
 
 #~ msgid "Back to CICP Website"
 #~ msgstr "Retour au site Web du PCPOB"

@@ -30,6 +30,20 @@
     /* Adds 10px space between the form elements */
 }
 
+#filtertext {
+    background-color: white;
+    color: black;
+    display: flex;
+    margin-bottom: 30px;
+    margin-top: 10px;
+    margin-left: -11px;
+    justify-content: center;
+    font-size: large;
+    font-weight: bold;
+    font-family: monospace;
+    box-shadow: 0 4px 8px 0 #E91E63;
+}
+
 
 .overlay-content {
     position: relative;

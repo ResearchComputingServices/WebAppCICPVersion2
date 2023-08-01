@@ -37,7 +37,7 @@
             {%if filtered %}
            
                 <div class="filterbox">
-                    <p id="filtertext">FILTER THIS REPORT BY</p>
+                    <p id="filtertext">{% translate FILTER THIS REPORT BY%}</p>
                     <form method="get">
                         {% csrf_token %}                   
                             <div class="form-container">
@@ -84,17 +84,21 @@
             </h4>
             {% endif %}
         </div>
-       {% if locations or languagePreference or orgSizes or age %}
+    
                 <div class="selected-filters">
             
                     {% translate "Filters Selected:"%}
+                    {% if locations %}
                     <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
-                    <strong>{% translate "Language:"%}</strong><i>{{languagePreference}}</i>
-                    <strong>{% translate "Organisation Size:"%}</strong><i>{{orgSizes}}</i>
+                    {% endif %}
+                    {%if orgSizes %}
+                    <strong>{% translate "Size:"%}</strong><i>{{orgSizes}}</i>
+                    {% endif %}
+                    {% if age %}
                     <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
+                    {% endif %}
 
                 </div>
-            {% endif %}
         
         <main class="main-content" id="main">
             {% if info %}

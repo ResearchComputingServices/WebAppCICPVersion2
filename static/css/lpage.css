@@ -12,27 +12,6 @@
     }
 }
 
-
-/* 
-.shade {
-    flex: 1;
-    height: 400px;
-    background-color: black;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    color: white;
-} */
-
-
-/* .shade form {
-    margin-top: 10%;
-
-} */
-
-
 .heading-text {
     display: flex;
     justify-content: center;
@@ -45,62 +24,6 @@
     color: white;
     margin-top: 2%;
     font-family: monospace;
-}
-
-.loader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f7f9fb;
-    transition: opacity 0.75s, visibility 0.75s;
-
-}
-
-
-.loader-hidden {
-    opacity: 0;
-    visibility: hidden;
-
-}
-
-
-.loader::after {
-    content: '';
-    width: 75px;
-    height: 75px;
-    border: 15px solid #dddddd;
-    border-top-color: #e91c24;
-    border-radius: 50%;
-    animation: loading 0.75s ease infinite;
-}
-
-@keyframes loading {
-
-    from {
-        transform: rotate(0turn);
-    }
-
-    to {
-        transform: rotate(1turn);
-    }
-
-}
-
-#infocard .card-body {
-    background-color: #000000;
-}
-
-#infocard .card-header {
-    background-color: #ea1b22;
-}
-
-#infocard .btn {
-    background-color: #e91c24;
 }
 
 .filter-container {
@@ -154,12 +77,6 @@ h5 {
     margin-top: 1%;
 }
 
-/* .image {
-    width: 150px;
-    height: 150px;
-    margin-top: 15%;
-} */
-
 button {
     background-color: #e91c24;
     border: none;
@@ -175,22 +92,6 @@ button {
     font-family: monospace;
 }
 
-/* #latestreportButton {
-    background-color: #111111;
-    padding: 15px 32px;
-    text-align: center;
-    display: inline-block;
-    font-size: 15px;
-    margin: 4px 2px;
-    position: absolute;
-    left: 38%;
-    top: 52%;
-    width: 300px;
-    height: 200px;
-
-
-} */
-
 #id_report_date {
     margin-left: 14%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -200,10 +101,6 @@ button {
 #id_theme {
     margin-left: 6%;
 }
-
-/* #latest {
-    background-color: #e91c24
-} */
 
 
 #loader {
@@ -228,4 +125,16 @@ button {
     100% {
         transform: rotate(360deg);
     }
+}
+
+#infocard .card-body {
+    background-color: #000000;
+}
+
+#infocard .card-header {
+    background-color: #ea1b22;
+}
+
+#infocard .btn {
+    background-color: #e91c24;
 }
