@@ -1,6 +1,7 @@
 .navbar {
     background-color: #e91c24;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1;
 }
 
 #myDiv {
