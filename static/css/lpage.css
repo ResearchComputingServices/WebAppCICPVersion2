@@ -13,7 +13,7 @@
 }
 
 
-
+/* 
 .shade {
     flex: 1;
     height: 400px;
@@ -24,13 +24,13 @@
     justify-content: center;
     flex-direction: column;
     color: white;
-}
+} */
 
 
-.shade form {
+/* .shade form {
     margin-top: 10%;
 
-}
+} */
 
 
 .heading-text {
@@ -154,11 +154,11 @@ h5 {
     margin-top: 1%;
 }
 
-.image {
+/* .image {
     width: 150px;
     height: 150px;
     margin-top: 15%;
-}
+} */
 
 button {
     background-color: #e91c24;
@@ -175,7 +175,7 @@ button {
     font-family: monospace;
 }
 
-#latestreportButton {
+/* #latestreportButton {
     background-color: #111111;
     padding: 15px 32px;
     text-align: center;
@@ -189,7 +189,7 @@ button {
     height: 200px;
 
 
-}
+} */
 
 #id_report_date {
     margin-left: 14%;
@@ -201,6 +201,31 @@ button {
     margin-left: 6%;
 }
 
-#latest {
+/* #latest {
     background-color: #e91c24
+} */
+
+
+#loader {
+    border: 12px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 12px solid #444444;
+    width: 70px;
+    height: 70px;
+    animation: spin 1s linear infinite;
+}
+
+.center {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
 }

@@ -14,14 +14,29 @@ const typewriter = () => {
     }
 };
 
-const screenloader = () => {
-    const loader = document.querySelector('.loader');
+// const screenloader = () => {
+//     const loader = document.querySelector('.loader');
 
-    loader.classList.add("loader-hidden");
+//     loader.classList.add("loader-hidden");
 
-    loader.addEventListener('transitionend', () => {
-        loader.parentNode.removeChild(loader);
-    });
+//     loader.addEventListener('transitionend', () => {
+//         loader.parentNode.removeChild(loader);
+//     });
+// };
+
+document.onreadystatechange = function () {
+    if (document.readyState !== "complete") {
+        document.querySelector(
+            "body").style.visibility = "hidden";
+        document.querySelector(
+            "#loader").style.visibility = "visible";
+    } else {
+        document.querySelector(
+            "#loader").style.display = "none";
+        document.querySelector(
+
+            "body").style.visibility = "visible";
+    }
 };
 
 window.addEventListener("load", function () {
@@ -59,14 +74,5 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
-
-// Define the function to redirect to the latest report URL
-const reportButton = document.getElementById('latestreportButton');
-const latestReportURL = reportButton.getAttribute('data-url');
-
-reportButton.addEventListener('click', () => {
-    window.location.href = latestReportURL;
-});
-
 
 
