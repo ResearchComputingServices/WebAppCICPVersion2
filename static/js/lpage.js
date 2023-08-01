@@ -25,13 +25,6 @@ document.onreadystatechange = function () {
     }
 };
 
-
-
-window.addEventListener("load", function () {
-    // All page content (including images) has been loaded, do any additional setup here
-    // You can also call your screenloader() function here if needed
-});
-
 document.addEventListener('DOMContentLoaded', function () {
     var dateForm = document.getElementById("dateForm");
     var themeForm = document.getElementById("themeForm");

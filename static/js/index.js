@@ -1,15 +1,13 @@
-window.addEventListener("load", () => {
-    const loader = document.querySelector('.loader');
-
-    loader.classList.add("loader-hidden");
-
-    loader.addEventListener('transitionend', () => {
-        document.removeChild("loader")
-
-    })
-}
-
-)
+document.onreadystatechange = function () {
+    if (document.readyState !== "complete") {
+        document.querySelector("body").style.visibility = "hidden";
+        document.querySelector("#loader").style.visibility = "visible";
+    } else {
+        typewriter();
+        document.querySelector("#loader").style.display = "none";
+        document.querySelector("body").style.visibility = "visible";
+    }
+};
 
 document.addEventListener('DOMContentLoaded', function () {
     new Splide('#image-slider').mount();
