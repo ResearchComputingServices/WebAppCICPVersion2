@@ -22,21 +22,29 @@ function closeNav() {
 }
 
 
-// Function to handle the click event
 function checkFilters(event) {
-    const url = window.location.href;
-    const containsProvince = url.includes("province");
-    const containsSize = url.includes("size");
-    const containsAge = url.includes("age");
+    const form = document.querySelector('form'); // Get the form element
+    const inputs = form.querySelectorAll('input[type="text"], input[type="date"], input[type="checkbox"], select');
 
-    if (!(containsProvince || containsSize || containsAge)) {
+    // Check if any input field is filled
+    const isFormFilled = [...inputs].some(input => {
+        if (input.type === 'checkbox') {
+            return input.checked;
+        } else {
+            return input.value.trim() !== '';
+        }
+    });
+
+    if (!isFormFilled) {
         // Display an alert
-        alert("Please select a filter");
-        // Prevent default behavior of the link (don't follow the link)
+        alert("Please select a filter to search.");
+        // Prevent the form submission
         event.preventDefault();
-
     } else {
-        // Follow the URL defined in urls.py
-        window.location.href = url;
+        // The form is filled, proceed with the search (form submission)
+        // If the form submission is allowed, the default behavior will be followed.
+        form.submit();
     }
 }
+
+
