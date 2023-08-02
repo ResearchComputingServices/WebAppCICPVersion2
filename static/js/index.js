@@ -24,7 +24,7 @@ function closeNav() {
 
 function checkFilters(event) {
     const form = document.querySelector('form'); // Get the form element
-    const inputs = form.querySelectorAll('input[type="text"], input[type="date"], input[type="checkbox"], select');
+    const inputs = form.querySelectorAll('input[type="text"], input[type="date"], input[type="checkbox"],input[type="radio"],select');
 
     // Check if any input field is filled
     const isFormFilled = [...inputs].some(input => {

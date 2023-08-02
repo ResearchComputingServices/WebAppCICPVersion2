@@ -73,6 +73,9 @@ def latest_report(request):
 
         if len(query_response_imagefilepaths) != 0:
             context["image_filepaths"] = query_response_imagefilepaths
+        else:
+            context["info"] = gettext(
+                "NO REPORT PUBLISHED DURING THIS WEEK")
 
     return render(request, "index.html", context)
 
@@ -208,7 +211,7 @@ def landingPageView(request):
         noSurveyDates = ["2022-12-23","2022-12-30","2023-07-28","2023-08-04"]
         if reportDate in noSurveyDates:
             info = gettext(
-                "🥳🥳🥳 NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
+                "NO REPORT PUBLISHED DURING THIS WEEK"
             )
             context["info"] = info
 
@@ -270,10 +273,6 @@ def printReport(request):
     pdf_output = render_to_pdf(
         request, template_name, context, filename="my_report.pdf"
     )
-
-    # Print the PDF output (This will also show logs generated during the rendering process)
-    print(pdf_output)
-
     return pdf_output
 
 
