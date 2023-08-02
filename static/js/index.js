@@ -28,7 +28,7 @@ function checkFilters(event) {
 
     // Check if any input field is filled
     const isFormFilled = [...inputs].some(input => {
-        if (input.type === 'checkbox' || 'radio') {
+        if (input.type === 'checkbox' || input.type === 'radio') {
             return input.checked;
         } else {
             return input.value.trim() !== '';
