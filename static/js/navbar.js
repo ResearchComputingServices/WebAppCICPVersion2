@@ -44,7 +44,7 @@ function checkParameters(event) {
 
   if (!(containsReportDate || containsTheme)) {
     // Display an alert
-    alert("Please select a Date or Theme to Print.");
+    alert(gettext("Please select a Date or Theme to Print."));
     // Prevent default behavior of the link (don't follow the link)
     event.preventDefault();
 

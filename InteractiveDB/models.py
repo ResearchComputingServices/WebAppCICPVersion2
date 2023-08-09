@@ -90,6 +90,7 @@ class UserTable(models.Model):
     designation = models.CharField(max_length=3) # A = Public (pub), B = Private (prv), C = Charitable (chr)
     locationPolygon = models.CharField(max_length=16)
     urbanRural = models.CharField(max_length=2) # UR/RL
+    
 
     dateFounded = models.DateField(null=True, blank=True)
     age = models.TextField()

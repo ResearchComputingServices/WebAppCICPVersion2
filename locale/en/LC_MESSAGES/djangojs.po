@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 18:01-0400\n"
+"POT-Creation-Date: 2023-08-08 11:16-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
 #: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/labextension/static/478.f7319c49bce7c550ff08.js:2
 #: cicp_env/lib/python3.10/site-packages/jupyterlab_plotly/nbextension/index.js:2
 #: cicp_env/lib/python3.10/site-packages/plotly/package_data/plotly.min.js:8
@@ -265,6 +266,22 @@ msgstr ""
 msgid "CantCreateXMLParser"
 msgstr ""
 
+#: static/js/index.js:40
+msgid "Please select a filter to search."
+msgstr "Please select a filter to search."
+
 #: static/js/lpage.js:1
 msgid "FILTER REPORTS USING A DATE OR THEME"
 msgstr "FILTER REPORTS USING A DATE OR THEME"
+
+#: static/js/lpage.js:38
+msgid "Please select a date from the calendar to search."
+msgstr "Please select a date from the calendar to search."
+
+#: static/js/lpage.js:51
+msgid "Please select a theme to search."
+msgstr "Please select a theme to search."
+
+#: static/js/navbar.js:47
+msgid "Please select a Date or Theme to Print."
+msgstr "Please select a Date or Theme to Print."

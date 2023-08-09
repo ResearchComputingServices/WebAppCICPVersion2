@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-06 18:01-0400\n"
+"POT-Creation-Date: 2023-08-08 11:16-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -266,6 +266,22 @@ msgstr ""
 msgid "CantCreateXMLParser"
 msgstr ""
 
+#: static/js/index.js:40
+msgid "Please select a filter to search."
+msgstr "Veuillez sélectionner un filtre à rechercher."
+
 #: static/js/lpage.js:1
 msgid "FILTER REPORTS USING A DATE OR THEME"
 msgstr "FILTRER LES RAPPORTS PAR DATE OU THÈME"
+
+#: static/js/lpage.js:38
+msgid "Please select a date from the calendar to search."
+msgstr "Veuillez sélectionner une date dans le calendrier pour effectuer la recherche."
+
+#: static/js/lpage.js:51
+msgid "Please select a theme to search."
+msgstr "Veuillez sélectionner un thème à rechercher."
+
+#: static/js/navbar.js:47
+msgid "Please select a Date or Theme to Print."
+msgstr "Veuillez sélectionner une date ou un thème à imprimer."

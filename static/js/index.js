@@ -37,7 +37,7 @@ function checkFilters(event) {
 
     if (!isFormFilled) {
         // Display an alert
-        alert("Please select a filter to search.");
+        alert(gettext("Please select a filter to search."));
         // Prevent the form submission
         event.preventDefault();
     } else {

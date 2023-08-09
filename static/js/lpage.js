@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var dateInput = dateForm.querySelector('input[name="report_date"]').value;
 
         if (dateInput === "") {
-            alert("Please select a date from the calendar to search.");
+            alert(gettext("Please select a date from the calendar to search."));
         } else {
             // If validation passes, submit the date form
             dateForm.submit();
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
         var themeInputs = themeForm.querySelectorAll('input[name="theme"]:checked');
 
         if (themeInputs.length === 0) {
-            alert("Please select a theme to search.");
+            alert(gettext("Please select a theme to search."));
         } else {
             // If validation passes, submit the theme form
             themeForm.submit();

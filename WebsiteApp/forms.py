@@ -32,9 +32,9 @@ LANGUAGE_CHOICES = [
     ('FR',_('French'))
 ]
 
-ORGANIZATION_SIZES = [('SMALL',_('Small')),
-('MEDIUM',_('Medium')),
-('LARGE',_('Large'))]
+ORGANIZATION_SIZES = [('SM',_('Small')),
+('MD',_('Medium')),
+('LG',_('Large'))]
 
 AGE = [
     ('OLD',_('Registered before 1990')),

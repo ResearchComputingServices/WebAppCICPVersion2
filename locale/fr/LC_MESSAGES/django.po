@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-01 13:50-0400\n"
+"POT-Creation-Date: 2023-08-08 10:56-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,31 +60,31 @@ msgstr "Québec"
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: WebsiteApp/forms.py:20 WebsiteApp/views.py:170
+#: WebsiteApp/forms.py:20 WebsiteApp/views.py:173
 msgid "Collaboration"
 msgstr "Collaboration"
 
-#: WebsiteApp/forms.py:21 WebsiteApp/views.py:164
+#: WebsiteApp/forms.py:21 WebsiteApp/views.py:167
 msgid "Governance"
 msgstr "Gouvernance"
 
-#: WebsiteApp/forms.py:22 WebsiteApp/views.py:173
+#: WebsiteApp/forms.py:22 WebsiteApp/views.py:176
 msgid "Challenges"
 msgstr "Défis"
 
-#: WebsiteApp/forms.py:23 WebsiteApp/views.py:161
+#: WebsiteApp/forms.py:23 WebsiteApp/views.py:164
 msgid "Funding"
 msgstr "Financement"
 
-#: WebsiteApp/forms.py:24 WebsiteApp/views.py:167
+#: WebsiteApp/forms.py:24 WebsiteApp/views.py:170
 msgid "Policy"
 msgstr "Politique"
 
-#: WebsiteApp/forms.py:25 WebsiteApp/views.py:176
+#: WebsiteApp/forms.py:25 WebsiteApp/views.py:179
 msgid "EDI"
 msgstr "EDI"
 
-#: WebsiteApp/forms.py:26 WebsiteApp/views.py:179
+#: WebsiteApp/forms.py:26 WebsiteApp/views.py:182
 msgid "Other"
 msgstr "Autre"
 
@@ -122,6 +122,10 @@ msgstr "Immatriculé après 1990"
 msgid "Province"
 msgstr "Province"
 
+#: WebsiteApp/forms.py:55
+msgid "Participant Language Preference"
+msgstr ""
+
 #: WebsiteApp/forms.py:59
 msgid "Size"
 msgstr "Taille"
@@ -129,6 +133,10 @@ msgstr "Taille"
 #: WebsiteApp/forms.py:63
 msgid "Age"
 msgstr "Âge"
+
+#: WebsiteApp/templates/index.html:40
+msgid "FILTER THIS REPORT BY"
+msgstr ""
 
 #: WebsiteApp/templates/index.html:50 WebsiteApp/templates/lpage.html:51
 #: WebsiteApp/templates/lpage.html:64 WebsiteApp/templates/sidebar.html:26
@@ -198,6 +206,14 @@ msgstr "Retourner"
 msgid "%(error)s"
 msgstr "%(error)s"
 
+#: WebsiteApp/templates/lpage.html:44
+msgid "Select Date"
+msgstr "Sélectionner une date"
+
+#: WebsiteApp/templates/lpage.html:57
+msgid "Select Theme"
+msgstr "Sélectionne un thème"
+
 #: WebsiteApp/templates/navbar.html:52
 msgid "Dashboard Home"
 msgstr "Accueil du tableau de bord"
@@ -211,9 +227,9 @@ msgstr "Dernier rapport"
 msgid "Print Report"
 msgstr "Imprimer le rapport"
 
-#: WebsiteApp/views.py:211
+#: WebsiteApp/views.py:78 WebsiteApp/views.py:214
 #, fuzzy
-msgid "🥳🥳🥳 NO REPORT PUBLISHED DURING THIS WEEK 🥳🥳🥳"
+msgid "NO REPORT PUBLISHED DURING THIS WEEK"
 msgstr " 🥳🥳🥳 AUCUN RAPPORT PUBLIÉ AU COURS DE CETTE SEMAINE 🥳🥳🥳"
 
 #: cicp_env/lib/python3.10/site-packages/click/_termui_impl.py:496
