@@ -28,8 +28,7 @@ $(document).ready($(function () {
         changeMonth: true,
         changeYear: true,
         showOn: 'both',
-        buttonImage: "/webapp/WebAppCICPVersion2/static/webpage_images/calendar_icon.png",
-        buttonText: 'Date',
+        buttonImage: "webpage_images/calendar_icon.png",
         dateFormat: 'yy-mm-dd',
         defaultDate: fridayDate(),
         beforeShowDay:
