@@ -45,6 +45,7 @@ AGE = [
 
 DateInput = partial(forms.DateInput, {'class': 'dateinput'})
 
+
     
 class ProvinceFilterForm(forms.Form):
     province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=PROVINCE_CHOICES,
@@ -67,6 +68,7 @@ class AgeFilterForm(forms.Form):
 class ThemeFilterForm(forms.Form):
     theme= forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=THEME_CHOICES,label='',
                                     required=False)
-    
+
+
 class DateFilterForm(forms.Form):
     report_date = forms.DateField(widget=DateInput(),label='',required=False)

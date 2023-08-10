@@ -1,5 +1,7 @@
 $(document).ready($(function () {
 
+
+
     var fridayDate = function () {
         var curr;
         curr = new Date();
@@ -25,7 +27,8 @@ $(document).ready($(function () {
         maxDate: new Date(),
         changeMonth: true,
         changeYear: true,
-        showOn: 'button',
+        showOn: 'both',
+        buttonImage: "/webapp/WebAppCICPVersion2/static/webpage_images/calendar_icon.png",
         buttonText: 'Date',
         dateFormat: 'yy-mm-dd',
         defaultDate: fridayDate(),

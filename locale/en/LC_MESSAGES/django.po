@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-08 10:56-0400\n"
+"POT-Creation-Date: 2023-08-10 09:45-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -115,9 +115,8 @@ msgstr "Old (Registered before 1990)"
 
 #: WebsiteApp/forms.py:41
 #, fuzzy
-#| msgid "New (Registered after 1990)"
 msgid "Registered after 1990"
-msgstr "New (Registered after 1990)"
+msgstr "Registered after 1990"
 
 #: WebsiteApp/forms.py:51
 msgid "Province"
@@ -139,7 +138,7 @@ msgstr "Age"
 
 #: WebsiteApp/templates/index.html:40
 msgid "FILTER THIS REPORT BY"
-msgstr ""
+msgstr "FILTER THIS REPORT BY"
 
 #: WebsiteApp/templates/index.html:50 WebsiteApp/templates/lpage.html:51
 #: WebsiteApp/templates/lpage.html:64 WebsiteApp/templates/sidebar.html:26
@@ -213,18 +212,20 @@ msgid "%(error)s"
 msgstr ""
 
 #: WebsiteApp/templates/lpage.html:44
-msgid "Select Date "
-msgstr ""
+#, fuzzy
+msgid "Select Date"
+msgstr "Select Date"
 
 #: WebsiteApp/templates/lpage.html:57
 msgid "Select Theme"
-msgstr ""
+msgstr "Select Theme"
 
 #: WebsiteApp/templates/navbar.html:52
 msgid "Dashboard Home"
 msgstr "Dashboard Home"
 
 #: WebsiteApp/templates/navbar.html:55
+#, fuzzy
 msgid "Latest Report"
 msgstr "Latest Report"
 
@@ -1745,7 +1746,6 @@ msgstr ""
 #~ msgstr "Click Here"
 
 #, fuzzy
-#~| msgid "Back to CICP"
 #~ msgid "Back to CICP Website"
 #~ msgstr "Back to CICP Website"
 
