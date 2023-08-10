@@ -1,4 +1,7 @@
+
+
 $(document).ready($(function () {
+
 
 
 
@@ -28,7 +31,8 @@ $(document).ready($(function () {
         changeMonth: true,
         changeYear: true,
         showOn: 'both',
-        buttonImage: "webpage_images/calendar_icon.png",
+        buttonImage: "static/webpage_images/calendar_icon.png",
+        buttonImageOnly: true,
         dateFormat: 'yy-mm-dd',
         defaultDate: fridayDate(),
         beforeShowDay:
