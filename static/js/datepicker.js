@@ -30,9 +30,9 @@ $(document).ready($(function () {
         maxDate: new Date(),
         changeMonth: true,
         changeYear: true,
-        showOn: 'both',
-        buttonImage: "static/webpage_images/calendar_icon.png",
-        buttonImageOnly: true,
+        // showOn: 'both',
+        // buttonImage: "/static/webpage_images/calendar_icon.png",
+        // buttonImageOnly: true,
         dateFormat: 'yy-mm-dd',
         defaultDate: fridayDate(),
         beforeShowDay:

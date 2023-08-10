@@ -93,7 +93,7 @@ button {
 }
 
 #id_report_date {
-    margin-left: 14%;
+    margin-left: 25%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     margin-top: 8%;
 }
@@ -137,4 +137,10 @@ button {
 
 #infocard .btn {
     background-color: #e91c24;
+}
+
+img.ui-datepicker-trigger {
+    margin-left: 20px;
+    margin-bottom: 6px;
+
 }

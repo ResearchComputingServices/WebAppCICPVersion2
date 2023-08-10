@@ -43,7 +43,7 @@ AGE = [
 
 # FIELD_OF_WORK = []
 
-DateInput = partial(forms.DateInput, {'class': 'dateinput'})
+DateInput = partial(forms.DateInput, {'class': 'dateinput','autocomplete':'off'})
 
 
     
