@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-10 09:45-0400\n"
+"POT-Creation-Date: 2023-08-11 10:53-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -118,19 +118,19 @@ msgstr "Immatriculé avant 1990"
 msgid "Registered after 1990"
 msgstr "Immatriculé après 1990"
 
-#: WebsiteApp/forms.py:51
+#: WebsiteApp/forms.py:52
 msgid "Province"
 msgstr "Province"
 
-#: WebsiteApp/forms.py:55
+#: WebsiteApp/forms.py:56
 msgid "Participant Language Preference"
 msgstr ""
 
-#: WebsiteApp/forms.py:59
+#: WebsiteApp/forms.py:60
 msgid "Size"
 msgstr "Taille"
 
-#: WebsiteApp/forms.py:63
+#: WebsiteApp/forms.py:64
 msgid "Age"
 msgstr "Âge"
 
@@ -207,7 +207,6 @@ msgid "%(error)s"
 msgstr "%(error)s"
 
 #: WebsiteApp/templates/lpage.html:44
-#, fuzzy
 msgid "Select Date"
 msgstr "Sélectionner une date"
 
@@ -220,7 +219,6 @@ msgid "Dashboard Home"
 msgstr "Accueil du tableau de bord"
 
 #: WebsiteApp/templates/navbar.html:55
-#, fuzzy
 msgid "Latest Report"
 msgstr "Dernier rapport"
 
@@ -229,9 +227,8 @@ msgid "Print Report"
 msgstr "Imprimer le rapport"
 
 #: WebsiteApp/views.py:78 WebsiteApp/views.py:214
-#, fuzzy
 msgid "NO REPORT PUBLISHED DURING THIS WEEK"
-msgstr " 🥳🥳🥳 AUCUN RAPPORT PUBLIÉ AU COURS DE CETTE SEMAINE 🥳🥳🥳"
+msgstr "AUCUN RAPPORT PUBLIÉ AU COURS DE CETTE SEMAINE"
 
 #: cicp_env/lib/python3.10/site-packages/click/_termui_impl.py:496
 #, python-brace-format
