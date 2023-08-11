@@ -69,6 +69,8 @@
     color: #e91c24;
     padding: 1em;
     margin-top: 5%;
+    font-family: monospace;
+
 }
 
 
@@ -153,14 +155,13 @@ div {
 .selected-filters {
     height: 30px;
     width: 600px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-family: monospace;
     margin-left: 40%;
-    margin-bottom: 3%;
 }
 
 .splide__slide img {
     width: 50%;
-    height: auto;
+    height: 75%;
     display: block;
     margin-left: 30%;
     margin-right: auto;
