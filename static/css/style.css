@@ -197,23 +197,6 @@ div {
         padding: 0%;
     }
 
-    .filter-container {
-        display: flex;
-        flex-direction: column-reverse;
-        color: black;
-        font-family: monospace;
-        justify-content: center;
-    }
-
-    .heading-text {
-        font-size: 15px;
-    }
-
-    .cards {
-        height: 350px;
-        flex-direction: column;
-    }
-
 
 }
 
@@ -246,23 +229,6 @@ div {
     .sidebar {
         top: 0%;
         padding: 0%;
-    }
-
-    .filter-container {
-        display: flex;
-        flex-direction: column-reverse;
-        color: black;
-        font-family: monospace;
-        justify-content: center;
-    }
-
-    .heading-text {
-        font-size: 15px;
-    }
-
-    .cards {
-        height: 350px;
-        flex-direction: column;
     }
 
 }

@@ -77,21 +77,6 @@ h5 {
     margin-top: 1%;
 }
 
-/* button {
-    background-color: #e91c24;
-    border: none;
-    text-align: center;
-    display: inline-block;
-    color: #f7f7f7;
-    padding: 3.5px 20px;
-    font-size: 5px;
-    margin: 4px 2px;
-    position: absolute;
-    left: 42%;
-    top: 64.5%;
-    font-family: monospace;
-} */
-
 #id_report_date {
     margin-left: 25%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
@@ -143,4 +128,26 @@ img.ui-datepicker-trigger {
     margin-left: 20px;
     margin-bottom: 6px;
 
+}
+
+
+/* CSS code for extra small devices */
+@media (max-width: 575.98px) {
+
+    .filter-container {
+        display: flex;
+        flex-direction: column-reverse;
+        color: black;
+        font-family: monospace;
+        justify-content: center;
+    }
+
+    .heading-text {
+        font-size: 15px;
+    }
+
+    .cards {
+        height: 350px;
+        flex-direction: column;
+    }
 }
