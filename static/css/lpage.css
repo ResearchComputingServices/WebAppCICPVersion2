@@ -51,6 +51,11 @@
     height: 300px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     font-family: monospace;
+    /* Add some margin to create spacing between cards */
+    justify-content: center;
+    /* Center-align contents vertically within the card */
+    align-items: left;
+    /* Center-align contents horizontally within the card */
 }
 
 h5 {
