@@ -145,7 +145,7 @@ h5 {
     /* Update the alignment of input containers */
     .input-class {
         display: flex;
-        flex-direction: column;
+        flex-direction: row;
         /* Stack the buttons vertically */
         align-items: center;
         /* Center-align contents horizontally */
@@ -190,6 +190,11 @@ h5 {
         justify-content: center;
         align-items: center;
         /* Center-align contents horizontally within the card */
+    }
+
+    #id_report_date {
+        margin-left: 0%;
+
     }
 
 
