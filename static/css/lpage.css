@@ -51,11 +51,8 @@
     height: 300px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     font-family: monospace;
-    /* Add some margin to create spacing between cards */
     justify-content: center;
-    /* Center-align contents vertically within the card */
     align-items: left;
-    /* Center-align contents horizontally within the card */
 }
 
 h5 {
@@ -129,12 +126,6 @@ h5 {
     background-color: #e91c24;
 }
 
-img.ui-datepicker-trigger {
-    margin-left: 20px;
-    margin-bottom: 6px;
-
-}
-
 
 /* CSS code for extra small devices */
 @media (max-width: 575.98px) {
@@ -151,9 +142,55 @@ img.ui-datepicker-trigger {
         font-size: 15px;
     }
 
-    .cards {
-        height: 350px;
-        width: 340px;
+    /* Update the alignment of input containers */
+    .input-class {
+        display: flex;
         flex-direction: column;
+        /* Stack the buttons vertically */
+        align-items: center;
+        /* Center-align contents horizontally */
+        margin-top: auto;
+        /* Automatically adjust margin on top for vertical centering */
+        padding: 10px;
+        /* Add padding for better spacing */
     }
+
+    /* Remove specific margins for .date and .theme */
+    .date,
+    .theme {
+        margin: 0;
+        /* Reset margin to default */
+    }
+
+    /* Adjust button styles */
+    .form-input {
+        padding: 8px 15px;
+        /* Adjust padding for button size */
+        font-size: 14px;
+        /* Adjust font size */
+        border: none;
+        background-color: #e91c24;
+        color: white;
+        cursor: pointer;
+        margin: 5px;
+        /* Add margin for button spacing */
+    }
+
+    /* Update the styling for the container */
+    .cards {
+        color: black;
+        display: flex;
+        flex-direction: column;
+        width: 400px;
+        height: auto;
+        /* Allow card height to adjust based on content */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        font-family: monospace;
+        margin: 10px;
+        justify-content: center;
+        align-items: center;
+        /* Center-align contents horizontally within the card */
+    }
+
+
 }
