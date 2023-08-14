@@ -148,7 +148,7 @@ img.ui-datepicker-trigger {
 
     .cards {
         height: 350px;
-        width: 0px;
+        width: 400px;
         flex-direction: column;
     }
 }
