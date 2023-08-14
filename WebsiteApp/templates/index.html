@@ -69,12 +69,12 @@
         <div id="heading" class="justify-content-center mx-auto">
             {% if wednesday_date %}
                 <h4>
-                    <strong><center>{% trans "Weekly Survey Distributed -" %}{% blocktrans %} {{wednesday_date }}{% endblocktrans %}</center></strong>
+                    <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans %} {{wednesday_date}}{% endblocktrans %}</center></strong>
                 </h4>
             {% endif %}
             {% if friday_text_date %}
                 <h4>
-                    <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date }}{% endblocktrans %}</center></strong>
+                    <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date}}{% endblocktrans %}</center></strong>
                 </h4>
             {% endif %}
            {% if questionTheme %} 
@@ -84,7 +84,7 @@
             </h4>
             {% endif %}
         </div>
-    
+                {%if 'latestreport' not in window.location.href %}
                 <div class="selected-filters">
             
                     {% translate "Filters Selected:"%}
@@ -99,6 +99,8 @@
                     {% endif %}
 
                 </div>
+
+                {% endif %}
         
         <main class="main-content" id="main">
             {% if info %}

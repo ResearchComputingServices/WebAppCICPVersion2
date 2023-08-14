@@ -39,5 +39,6 @@ def run(*args):
     AddSurvey('SV_bycpZWVyBjTlmSO','2023-06-28','POL')
     AddSurvey('SV_0xsnw9eASP8WJYW','2023-07-05','CHA')
     AddSurvey('SV_3L4rLLzhPt3qx7g','2023-07-12','CHA')
-    # AddSurvey('SV_5zn42gF56T58USy','2023-07-19','EDI')
+    AddSurvey('SV_5zn42gF56T58USy','2023-07-19','EDI')
+    AddSurvey('SV_9M0uIJ9LMYqpxoq','2023-08-09','FUN')
 

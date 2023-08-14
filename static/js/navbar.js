@@ -41,8 +41,9 @@ function checkParameters(event) {
   const url = window.location.href;
   const containsReportDate = url.includes("report_date");
   const containsTheme = url.includes("theme");
+  const containsLatest = url.includes("latestreport")
 
-  if (!(containsReportDate || containsTheme)) {
+  if (!(containsReportDate || containsTheme || containsLatest)) {
     // Display an alert
     alert(gettext("Please select a Date or Theme to Print."));
     // Prevent default behavior of the link (don't follow the link)
