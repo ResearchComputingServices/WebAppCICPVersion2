@@ -26,6 +26,9 @@ def formInitialization():
     context["language_form_filter"] = LanguageFilterForm()
     context["org_size_form_filter"] = OrgsizeFilterForm()
     context["age_form_filter"] = AgeFilterForm()
+    context["expenditure_form_filter"] = ExpenditureFilterForm()
+    context['region_form_filter'] = RegionFilterForm()
+    context["subsample_form_filter"] = SubsampleFilterForm()
 
     return context, frontEndQuery
 
@@ -158,6 +161,29 @@ def landingPageView(request):
             context,
         ) = themeOrDate(request, theme=questionTheme, date=None)
 
+
+        subfolder_data = []
+
+        for image_path in query_response_imagefilepaths:
+            subfolder, filename = os.path.split(image_path)
+            subfolder = os.path.basename(subfolder)
+            
+            found = False
+            for item in subfolder_data:
+                if item['name'] == subfolder:
+                    item['images'].append(image_path)
+                    found = True
+                    break
+                
+            if not found:
+                subfolder_data.append({'name': subfolder, 'images': [image_path]})
+        
+        print(subfolder_data)
+
+
+# Now you can pass subfolder_data to your template context
+
+
         context["filtered"] = "filteredReport"
 
         if questionTheme[0] == "FUN":
@@ -194,11 +220,10 @@ def landingPageView(request):
                 content_dict[key] = settings.BASE_ROOT + filepath
             content_dict['theme'] = context["questionTheme"]
 
-            print(context)
+        
 
             datfilepath = settings.BASE_DIR / "WebsiteApp/templates/latexgraphics.dat"
             try:
-                print(content_dict)
                 with open(datfilepath, "w") as f:
                     for key in content_dict.keys():
                         f.write(f"{key},{content_dict[key]}\n")

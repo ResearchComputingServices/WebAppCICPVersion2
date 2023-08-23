@@ -185,9 +185,11 @@ def GenerateDefaultFigures(aSurvey):
 
     aQuery = FrontEndQuery()
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
+    aQuery.week = aSurvey.surveyWeek
 
     themeString = str(aSurvey.surveyTheme)
     dateString =  aSurvey.releaseDate.strftime("%Y-%m-%d")
+    weekstring = str(aSurvey.surveyWeek)
 
     
     # Create the ENGLISH Default images based on date
@@ -202,8 +204,10 @@ def GenerateDefaultFigures(aSurvey):
     # Each survey has a theme associated with it. Hence, when we create surveys using date,
     # We also add it to the corresponding theme folder. This avoids dual generation of same images.
 
-    # Create a theme directory based on the survey theme 
+
     saveToThemeDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, themeString)
+
+    saveToThemeDirPath = os.path.join(saveToThemeDirPath, weekstring)
     os.makedirs(saveToThemeDirPath, exist_ok=True)
 
 
@@ -226,6 +230,8 @@ def GenerateDefaultFigures(aSurvey):
 
     # Create a theme directory based on the survey theme 
     saveToThemeDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH, themeString)
+    saveToThemeDirPath = os.path.join(saveToThemeDirPath, weekstring)
+
     os.makedirs(saveToThemeDirPath, exist_ok=True)
 
 
@@ -366,10 +372,21 @@ def GetResponseDict(aQuery, VERBOSE = False):
 # 
 ##################################################################################################################################
 
+# Function to get the data for list of survey weeks based on theme.
+
+def getWeeklySurveys(theme):
+
+    weeklyTheme = SurveyTable.objects.filter(surveyTheme=theme)
+
+    print(weeklyTheme)
+
+
+
+    
 def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
      
-    listOfImageFilePaths = []
-    dataCSVFilePath = []
+    listOfImageFilePaths = listOfImageFilePaths_final = []
+    dataCSVFilePath = dataCSVFilePaths_final = []
     errorLogs = []
     
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
@@ -383,6 +400,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('field',aQuery.fieldOfWork)
     print('age',aQuery.age)
     print('Site Lang:',aQuery.siteLanguage)
+    print('week',aQuery.week)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     
     # Set the language flag depending on the siteLanguage in the query
@@ -420,25 +438,47 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     # images created when the survey data was pulled from the qualtrics website fullfills the request.
 
     elif aQuery.IsThemeOnly():
-
+ 
         print("aQuery.questionThemes[0]",aQuery.questionThemes[0])
         folderPath = ''
         if isEnglish:
             folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, aQuery.questionThemes[0])
+            
         else:
             folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH,  aQuery.questionThemes[0])
-        print('FolderPath:', folderPath)
+
+        # if os.path.exists(folderPath):
+        #     for filename in os.listdir(folderPath):
+        #         if os.path.isfile(os.path.join(folderPath, filename)):
+        #             filePath = os.path.join(folderPath, filename)
+                                        
+        #             if '.csv' in filename:    
+        #                 dataCSVFilePath.append(filePath)
+        #             else:
+        #                 listOfImageFilePaths.append(filePath)
 
         if os.path.exists(folderPath):
-            for filename in os.listdir(folderPath):
-                if os.path.isfile(os.path.join(folderPath, filename)):
+            for subfolder in os.listdir(folderPath):
+                subfolderPath = os.path.join(folderPath, subfolder) 
+                if os.path.isdir(subfolderPath):
+                    dataCSVFilePath = []  # Reset for each subfolder
+                    listOfImageFilePaths = []  # Reset for each subfolder
 
-                    filePath = os.path.join(folderPath, filename)
-                                        
-                    if '.csv' in filename:    
-                        dataCSVFilePath.append(filePath)
-                    else:
-                        listOfImageFilePaths.append(filePath)   
+                    for filename in os.listdir(subfolderPath):
+                        file_path = os.path.join(subfolderPath, filename)
+                        if os.path.isfile(file_path):
+
+                            if '.csv' in filename:
+                                dataCSVFilePath.append(file_path)
+                            else:
+                                listOfImageFilePaths.append(file_path)
+
+
+            # After processing files in the subfolder
+            # You can now append dataCSVFilePath and listOfImageFilePaths to your final lists.
+            # For example:
+            dataCSVFilePaths_final.extend(dataCSVFilePath)
+            listOfImageFilePaths_final.extend(listOfImageFilePaths)
     
         else:
             print("[WARNING]: HandleFrontEndQuery: Folder path for this theme doesn't exist:", folderPath)
@@ -448,6 +488,11 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
        
         print('QueryType: Full Query')
         responseDict, errorLogs = GetResponseDict(aQuery)
+        
+
+        # if len(aQuery.questionThemes[0]) != 0:
+        #     getWeeklySurveys(aQuery.questionThemes[0])
+        
         
         if responseDict.keys() != None:
           

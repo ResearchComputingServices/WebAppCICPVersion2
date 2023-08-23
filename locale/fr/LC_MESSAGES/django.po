@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-11 10:56-0400\n"
+"POT-Creation-Date: 2023-08-15 11:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -131,7 +131,6 @@ msgid "Size"
 msgstr "Taille"
 
 #: WebsiteApp/forms.py:64
-
 msgid "Age"
 msgstr "Âge"
 
@@ -193,36 +192,36 @@ msgstr "Taille"
 msgid "Age:"
 msgstr "Âge:"
 
-#: WebsiteApp/templates/index.html:110 WebsiteApp/templates/index.html:126
+#: WebsiteApp/templates/index.html:112 WebsiteApp/templates/index.html:128
 msgid "Alert!!"
 msgstr "Alerte!!"
 
-#: WebsiteApp/templates/index.html:115 WebsiteApp/templates/index.html:133
+#: WebsiteApp/templates/index.html:117 WebsiteApp/templates/index.html:135
 msgid "Go back"
 msgstr "Retourner"
 
-#: WebsiteApp/templates/index.html:130
+#: WebsiteApp/templates/index.html:132
 #, python-format
 msgid "%(error)s"
 msgstr "%(error)s"
 
 #: WebsiteApp/templates/lpage.html:44
-msgid "Select Date"
-msgstr "Sélectionner une date"
+msgid "Select Report Date"
+msgstr "Sélectionnez la date du rapport"
 
 #: WebsiteApp/templates/lpage.html:57
-msgid "Select Theme"
-msgstr "Sélectionne un thème"
+msgid "Select Weekly Theme"
+msgstr "Sélectionnez le thème hebdomadaire"
 
-#: WebsiteApp/templates/navbar.html:52
+#: WebsiteApp/templates/navbar.html:33
 msgid "Dashboard Home"
 msgstr "Accueil du tableau de bord"
 
-#: WebsiteApp/templates/navbar.html:55
+#: WebsiteApp/templates/navbar.html:36
 msgid "Latest Report"
 msgstr "Dernier rapport"
 
-#: WebsiteApp/templates/navbar.html:58
+#: WebsiteApp/templates/navbar.html:39
 msgid "Print Report"
 msgstr "Imprimer le rapport"
 

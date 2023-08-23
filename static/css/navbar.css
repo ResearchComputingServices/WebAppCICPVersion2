@@ -14,7 +14,7 @@
 #langButton {
     color: white;
     text-decoration: none;
-    font-family: monospace;
+    font-family: Arial;
 }
 
 /* Center the links in the navbar, excluding the langButton */
@@ -35,5 +35,5 @@ ul.custom-center li:last-child {
 }
 
 .navbar-brand {
-    font-family: monospace;
+    font-family: Arial;
 }

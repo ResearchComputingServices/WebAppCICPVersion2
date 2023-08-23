@@ -108,6 +108,21 @@ def GetDate(dateToken):
 
 ##################################################################################################################################
 
+def GetHumanResources(FTE,PTE,volunteers):
+     
+    HRType = 'None'
+    
+    if(FTE > 0 or PTE > 0):
+        HRType = "PD"
+    
+    else:
+        HRType = "VO"   
+    
+    return HRType
+
+##################################################################################################################################
+
+
 def GetSize(numberOfEmployees):
      
     size = 'None'
@@ -170,6 +185,31 @@ def GetNumber(token):
 
 ##################################################################################################################################
 
+def GetExpenditure(expenditure):
+
+    expenditure = expenditure.replace(",","")
+
+    substringList = [',,,','0.0,,,',',,',',',""]
+    
+    if expenditure not in substringList:
+        if float(expenditure) <= 101045:
+            expenditure = "XS"  # Extra Small
+        elif float(expenditure) <= 381824:
+            expenditure = "SM"  # Small
+        elif float(expenditure) <= 860788:
+            expenditure = "MD"  # Medium
+        elif float(expenditure) <= 2155265:
+            expenditure = "LG"  # Large
+        elif float(expenditure) <= 338781069:
+            expenditure = "XL" # Extra Large
+        else:
+            expenditure = "XS" #Make it a zero by adding XS
+    
+
+    return (expenditure)
+
+##################################################################################################################################
+
 # Main function
 #  TOKENS:
 # 0     Language
@@ -186,6 +226,8 @@ def GetNumber(token):
 # 11    Volunteers
 # 12    PTE
 # 13    Job Title
+# 14    Region
+# 15    Expenditure
 ##################################################################################################################################  
 import pandas as pd
 
@@ -199,9 +241,8 @@ def run(*args):
     userDataFile = open(userDataFilePath, 'r')
     lines = userDataFile.readlines()
 
-    df = pd.read_csv(userDataFilePath,sep='^',header=None)
+    df = pd.read_csv(userDataFilePath,sep='^',header=None,encoding='utf-8')
     df = df.fillna('')
-    print(df.head())
         
     for index,line in df.iterrows(): 
         # Get the tokens from the input line separated by ^ symbol
@@ -219,6 +260,8 @@ def run(*args):
         volunteers = GetNumber(line[11])
         pte = GetNumber(line[12])
         jobTitle = line[13]
+        region = line[14]
+        expenditure = GetExpenditure(line[16])
         
        # Create an instance of the user model        
         user = UserTable()
@@ -228,6 +271,8 @@ def run(*args):
         user.subDomain = GetSubDomain(sub_category_code)
         user.subSample = GetSubsample(subSample)
         user.jobTitle = jobTitle
+        user.region = region
+        user.expenditure = expenditure
         
         user.languagePreference = GetLanguage(language)
         user.externalDataReference = externalDataReference
@@ -237,6 +282,7 @@ def run(*args):
         user.province = GetProvineAcronym(province)
         user.dateFounded,user.age = GetDate(registration_date)
         user.size = GetSize(fte+pte+volunteers)
+        user.hrtype = GetHumanResources(fte,pte,volunteers)
 
         user.save()   
                 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-11 10:56-0400\n"
+"POT-Creation-Date: 2023-08-15 11:02-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -196,37 +196,37 @@ msgstr "Size"
 msgid "Age:"
 msgstr "Age:"
 
-#: WebsiteApp/templates/index.html:110 WebsiteApp/templates/index.html:126
+#: WebsiteApp/templates/index.html:112 WebsiteApp/templates/index.html:128
 msgid "Alert!!"
 msgstr "Alert!!"
 
-#: WebsiteApp/templates/index.html:115 WebsiteApp/templates/index.html:133
+#: WebsiteApp/templates/index.html:117 WebsiteApp/templates/index.html:135
 msgid "Go back"
 msgstr "Go back"
 
-#: WebsiteApp/templates/index.html:130
+#: WebsiteApp/templates/index.html:132
 #, python-format
 msgid "%(error)s"
 msgstr ""
 
 #: WebsiteApp/templates/lpage.html:44
-msgid "Select Date"
-msgstr "Select Date"
+msgid "Select Report Date"
+msgstr "Select Report Date"
 
 #: WebsiteApp/templates/lpage.html:57
-msgid "Select Theme"
-msgstr "Select Theme"
+msgid "Select Weekly Theme"
+msgstr "Select Weekly Theme"
 
-#: WebsiteApp/templates/navbar.html:52
+#: WebsiteApp/templates/navbar.html:33
 msgid "Dashboard Home"
 msgstr "Dashboard Home"
 
-#: WebsiteApp/templates/navbar.html:55
+#: WebsiteApp/templates/navbar.html:36
 #, fuzzy
 msgid "Latest Report"
 msgstr "Latest Report"
 
-#: WebsiteApp/templates/navbar.html:58
+#: WebsiteApp/templates/navbar.html:39
 msgid "Print Report"
 msgstr "Print Report"
 

@@ -41,12 +41,39 @@ AGE = [
     ('NEW',_('Registered after 1990')),
 ]
 
-# FIELD_OF_WORK = []
+EXPENDITURE = [
+    ('XS',_('Extra Small (Less than $100,000)')),
+    ('SM',_('Small (Less than $400,000)' )), 
+    ('MD',_('Medium (Between $400,000-$850,000)')),
+    ('LG',_('Large (More than $850,000)')),
+    ('XL',_('Extra Large (More than $2,000,000)')),
+]
+
+REGION = [
+    ('West Coast',_('West Coast')),
+    ('Prairie Provinces',_('Prarie Provinces')),
+    ('Central Canada',_('Central Canada')),
+    ('Atlantic Region',_('Atlantic Region')),
+    ('North',_('North Canada')),
+]
+
+SUBSAMPLE = [
+    ('SS1',_('Sub Sample 1')),
+    ('SS2',_('Sub Sample 2')),
+    ('SS3',_('Sub Sample 3')),
+    ('SS4',_('Sub Sample 4')),
+    ('SS5',_('Sub Sample 5')),
+    ('SS6',_('Sub Sample 6')),
+]
+
+
+HUMANRESOURCES = [
+    ('PD',_('Paid')),
+    ('VOL',_('Volunteer Run'))
+]
 
 DateInput = partial(forms.DateInput, {'class': 'dateinput','autocomplete':'off'})
 
-
-    
 class ProvinceFilterForm(forms.Form):
     province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=PROVINCE_CHOICES,
                                         label=_('Province'),required=False)
@@ -62,9 +89,23 @@ class OrgsizeFilterForm(forms.Form):
 class AgeFilterForm(forms.Form):
     age = forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=AGE,
                                         label=_('Age'),required=False)
+    
+class ExpenditureFilterForm(forms.Form):
+    expenditure = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=EXPENDITURE,
+                                        label=_('Expenditure'),required=False)
+
+class SubsampleFilterForm(forms.Form):
+    subsample = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=SUBSAMPLE,
+                                        label=_('Subsample'),required=False)
+    
+class SubsampleFilterForm(forms.Form):
+    humanresources = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),                choices=HUMANRESOURCES,label=_('Human Resources'),required=False)
+
+class RegionFilterForm(forms.Form):
+    region = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=REGION,label=_('Region'),required=False)
 
 
- # New Changes for a different theme    
+# New Changes for a different theme    
 class ThemeFilterForm(forms.Form):
     theme= forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=THEME_CHOICES,label='',
                                     required=False)

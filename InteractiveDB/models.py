@@ -1,5 +1,6 @@
 from django.db import models
 import pandas as pd
+from djmoney.models.fields import MoneyField
 
 # on_delete defines what to do with the current table if the foreign key is deleted
 
@@ -11,9 +12,11 @@ class SurveyTable(models.Model):
     releaseDate = models.DateField()
     fetchedDate = models.DateField(null=True,blank=True)
     surveyTheme = models.CharField(max_length=30)
+    surveysubTheme = models.CharField(max_length=50)
+    surveyWeek = models.CharField(max_length=50)
        
     def __str__(self):
-        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate} surveyTheme: {self.surveyTheme}"
+        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate} surveyTheme: {self.surveyTheme} surveysubTheme: {self.surveysubTheme}"
     
 ########################################################################################################################################################
             
@@ -85,7 +88,9 @@ class UserTable(models.Model):
     # Fields/Attributes
     externalDataReference = models.CharField(max_length=15)
     province = models.CharField(max_length=2)   # BC,AB,SK,MB,ON,QC,NB,NS,NL,PI,YK,NV,NW
-    size = models.CharField(max_length=2)       # SM, MD, LG
+    size = models.CharField(max_length=2)
+    hrtype = models.CharField(max_length=2,default="VO")       # PD,VO
+
     languagePreference = models.CharField(max_length=2,default='EN')   # EN, FR, BI
     designation = models.CharField(max_length=3) # A = Public (pub), B = Private (prv), C = Charitable (chr)
     locationPolygon = models.CharField(max_length=16)
@@ -99,6 +104,9 @@ class UserTable(models.Model):
     subDomain = models.TextField()
     subSample = models.TextField()
     jobTitle = models.TextField()
+    region = models.TextField()
+    expenditure = models.TextField(default="XS")
+
 
     def __str__(self):
          return f"User: \n id: {self.id}\n ref#: {self.externalDataReference}\n prv: {self.province}\n sz: {self.size}\n lng: {self.languagePreference}"

@@ -40,8 +40,8 @@
     <div class="heading-text" id="message"></div>
     
     <div class="filter-container">
-                <div class="cards">
-                        <h5><b>{% translate "Select Date" %}</b></h5>
+                {% comment %} <div class="cards">
+                        <h5><b>{% translate "Select Report Date" %}</b></h5>
                         <form id="dateForm" name="myForm" onsubmit="return validateDate()"  method="get" action="{% url 'datereports' %}" required>
                             {% csrf_token %}
                             <div class="ml-md-2" id="selected-date">
@@ -54,7 +54,7 @@
                         </form>
                 </div> 
                 <div class="cards">
-                <h5><b>{%translate "Select Theme"%}</b></h5>
+                <h5><b>{%translate "Select Weekly Theme"%}</b></h5>
                    <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
                         {% csrf_token %}
                         <div class="ml-md-2">
@@ -65,7 +65,34 @@
                         <input class="form-input" type="reset" value="{% translate "Reset"%}"/>
                         </div>
                     </form>
-                </div>
+                </div> {% endcomment %}
+                <div class="cards">
+    <h5><b>{% translate "Select Report Date" %}</b></h5>
+    <form id="dateForm" name="myForm" onsubmit="return validateDate()" method="get" action="{% url 'datereports' %}" required>
+        {% csrf_token %}
+        <div class="ml-md-2" id="selected-date">
+            {{dateFilter.as_div}}
+        </div>
+        <div class="input-class date">
+            <input class="form-input" type="submit" value="{% translate "Search" %}" autocomplete="off">
+            <input class="form-input" type="reset" value={% translate "Reset"%}>
+        </div>
+    </form>
+</div>
+<div class="cards">
+    <h5><b>{%translate "Select Weekly Theme"%}</b></h5>
+    <form id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
+        {% csrf_token %}
+        <div class="ml-md-2">
+            {{themeFilter.as_div}}
+        </div>
+        <div class="input-class theme">
+            <input class="form-input" type="submit" value="{% translate "Search" %}">
+            <input class="form-input" type="reset" value="{% translate "Reset"%}">
+        </div>
+    </form>
+</div>
+
             
         </div>
 

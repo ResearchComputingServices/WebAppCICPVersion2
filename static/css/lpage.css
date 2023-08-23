@@ -23,14 +23,14 @@
     background-color: black;
     color: white;
     margin-top: 2%;
-    font-family: monospace;
+    font-family: Arial;
 }
 
 .filter-container {
     display: flex;
     flex-direction: row;
     color: black;
-    font-family: monospace;
+    font-family: Arial;
     padding: 5%;
     justify-content: center;
 }
@@ -50,7 +50,7 @@
     width: 400px;
     height: 300px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    font-family: monospace;
+    font-family: Arial;
     justify-content: center;
     align-items: left;
 }
@@ -61,7 +61,7 @@ h5 {
     display: flex;
     padding: 5%;
     margin: left 25%;
-    font-family: monospace;
+    font-family: Arial;
 }
 
 .input-class {
@@ -80,9 +80,8 @@ h5 {
 }
 
 #id_report_date {
-    margin-left: 25%;
+    margin-left: 6%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin-top: 8%;
 }
 
 #id_theme {
@@ -134,7 +133,7 @@ h5 {
         display: flex;
         flex-direction: column-reverse;
         color: black;
-        font-family: monospace;
+        font-family: Arial;
         justify-content: center;
     }
 
@@ -181,11 +180,11 @@ h5 {
         color: black;
         display: flex;
         flex-direction: column;
-        width: 400px;
+        width: auto;
         height: auto;
         /* Allow card height to adjust based on content */
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-        font-family: monospace;
+        font-family: Arial;
         margin: 10px;
         justify-content: center;
         align-items: center;

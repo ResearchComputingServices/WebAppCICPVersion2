@@ -167,6 +167,7 @@ class FrontEndQuery:
     languagePreference: List = field(default_factory=lambda: []) 
     fieldOfWork: List = field(default_factory=lambda: [])
     age: List = field(default_factory=lambda: [])        
+    # week : List = field(default_factory=lambda: [])        
 
     siteLanguage: str = ''
     
@@ -179,6 +180,7 @@ class FrontEndQuery:
             len(self.organizationSizes) == 0 and
             len(self.fieldOfWork) == 0 and
             len(self.age) == 0 and
+            # len(self.week) == 0 and
             self.qualtricsSurveyID == ''):
                 isDateOnly = True
         
@@ -193,6 +195,7 @@ class FrontEndQuery:
             len(self.organizationSizes) == 0 and
             len(self.fieldOfWork) == 0 and
             len(self.age) == 0 and
+            # len(self.week) == 0 and
             len(self.questionThemes) != 0):
                 isThemeOnly = True
         

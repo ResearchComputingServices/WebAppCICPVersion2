@@ -42,8 +42,11 @@
                         {% csrf_token %}                   
                             <div class="form-container">
                                 {{province_form_filter.as_div}}
-                                {{org_size_form_filter.as_div}}
+                                {% comment %} {{org_size_form_filter.as_div}} {% endcomment %}
                                 {{age_form_filter.as_div}}
+                                {{expenditure_form_filter.as_div}}
+                                {{region_form_filter.as_div}}
+                                {{subsample_form_filter.as_div}}
                             </div>
 
                             <div id="secsearch">
@@ -140,7 +143,7 @@
 
                     <div id="image-slider" class="splide">
                         <div class="splide__track">
-		                    <ul class="splide__list">
+		                    {% comment %} <ul class="splide__list">
                                  {% for image_url in image_filepaths %}
 			                        <li class="splide__slide">
                                         
@@ -149,7 +152,23 @@
                                     </li>	
                                      {% endfor %}
                                		 
-		                    </ul>
+		                    </ul> {% endcomment %}
+                            <div id="subfolder-slider" class="splide">
+    <div class="splide__track">
+        <ul class="splide__list">
+            {% for subfolder in subfolders %}
+                <li class="splide__slide">
+                    <h3>{{ subfolder.name }}</h3>
+                    <ul>
+                        {% for image_url in subfolder.images %}
+                            <li><img src="{{ image_url }}" alt="Image"></li>
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
                         </div>
                     </div>
                 {% endif %}

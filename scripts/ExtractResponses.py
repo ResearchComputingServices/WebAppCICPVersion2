@@ -42,7 +42,9 @@ def GetUserResponse(user = None, question = None, choice = None):
                                                             questionID = question,
                                                             choiceID = choice)
     
-    if len(userResponseQuerySet) == 1:
+    # Priyanka change                                                       
+    if len(userResponseQuerySet) >= 1:
+    # if len(userResponseQuerySet) == 1:
         userResponse = userResponseQuerySet.first()
     elif len(userResponseQuerySet) == 0:
         userResponse = UserResponseTable()
@@ -259,9 +261,10 @@ def ExtractRankOrderQuestionResponse(question, userResponsesList):
             choice = GetChoiceEntity(question, responseKey, responseValue)
             
             userResponse = GetUserResponse(user, question, choice)
-                        
+
+
             if "TEXT" in responseKey:
-                userResponse.answerTextOriginal = responseValue
+                    userResponse.answerTextOriginal = responseValue
             else:
                 userResponse.answerValue = responseValue
             userResponse.save()       
