@@ -279,7 +279,9 @@ def GenerateDataFile(responseDict,
     file = open(filePath, 'w+')
     
     for question in responseDict.keys():
-        questiondDataString = question.GetDataFileString()       
+
+        questiondDataString = question.GetDataFileString()     
+
     
         for userResponse in responseDict[question]:
             userResponseDataString = userResponse.GetDataFileString()
@@ -374,7 +376,7 @@ def GetResponseDict(aQuery, VERBOSE = False):
 
 # Function to get the data for list of survey weeks based on theme.
 
-def getWeeklySurveys(theme):
+def getQuestionLabel():
 
     weeklyTheme = SurveyTable.objects.filter(surveyTheme=theme)
 
@@ -400,7 +402,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('field',aQuery.fieldOfWork)
     print('age',aQuery.age)
     print('Site Lang:',aQuery.siteLanguage)
-    print('week',aQuery.week)
+    # print('week',aQuery.week)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     
     # Set the language flag depending on the siteLanguage in the query
@@ -439,7 +441,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
 
     elif aQuery.IsThemeOnly():
  
-        print("aQuery.questionThemes[0]",aQuery.questionThemes[0])
+        print("Inside Theme Only")
         folderPath = ''
         if isEnglish:
             folderPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_ENGLISH, aQuery.questionThemes[0])
@@ -457,13 +459,11 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
         #             else:
         #                 listOfImageFilePaths.append(filePath)
 
+        #Added by Priyanka
         if os.path.exists(folderPath):
             for subfolder in os.listdir(folderPath):
                 subfolderPath = os.path.join(folderPath, subfolder) 
                 if os.path.isdir(subfolderPath):
-                    dataCSVFilePath = []  # Reset for each subfolder
-                    listOfImageFilePaths = []  # Reset for each subfolder
-
                     for filename in os.listdir(subfolderPath):
                         file_path = os.path.join(subfolderPath, filename)
                         if os.path.isfile(file_path):
@@ -472,14 +472,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
                                 dataCSVFilePath.append(file_path)
                             else:
                                 listOfImageFilePaths.append(file_path)
-
-
-            # After processing files in the subfolder
-            # You can now append dataCSVFilePath and listOfImageFilePaths to your final lists.
-            # For example:
-            dataCSVFilePaths_final.extend(dataCSVFilePath)
-            listOfImageFilePaths_final.extend(listOfImageFilePaths)
-    
+        
         else:
             print("[WARNING]: HandleFrontEndQuery: Folder path for this theme doesn't exist:", folderPath)
   
@@ -487,17 +480,14 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     else: 
        
         print('QueryType: Full Query')
-        responseDict, errorLogs = GetResponseDict(aQuery)
-        
-
-        # if len(aQuery.questionThemes[0]) != 0:
-        #     getWeeklySurveys(aQuery.questionThemes[0])
-        
+        responseDict, errorLogs = GetResponseDict(aQuery)        
         
         if responseDict.keys() != None:
           
             listOfImageFilePaths = DataVisualizerMain(responseDict, isEnglish, saveToDirPath)                                  
             dataCSVFilePath = GenerateDataFile(responseDict, saveToDirPath)
+
+            
     
     listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
     dataCSVFilePath = Local2URLMedia([dataCSVFilePath])    
@@ -505,7 +495,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('Generated Images Location:')
     print(listOfImageFilePaths)
     
-    return listOfImageFilePaths, dataCSVFilePath, errorLogs
+    return sorted(listOfImageFilePaths), dataCSVFilePath, errorLogs
     
 ##################################################################################################################################
 # This function is used to test the controller functions

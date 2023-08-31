@@ -8,6 +8,8 @@ from django.utils.translation import gettext, get_language
 from datetime import datetime, timedelta
 from django_tex.shortcuts import render_to_pdf
 from WebAppCICPVersion2 import settings
+from operator import itemgetter
+
 
 
 ##################################################################################################################################
@@ -167,22 +169,21 @@ def landingPageView(request):
         for image_path in query_response_imagefilepaths:
             subfolder, filename = os.path.split(image_path)
             subfolder = os.path.basename(subfolder)
-            
+
+            if subfolder == 'tmpImages':
+                subfolder,filename = filename.split('Q')
+                
             found = False
             for item in subfolder_data:
                 if item['name'] == subfolder:
                     item['images'].append(image_path)
                     found = True
                     break
-                
+
+            
             if not found:
                 subfolder_data.append({'name': subfolder, 'images': [image_path]})
-        
-        print(subfolder_data)
-
-
-# Now you can pass subfolder_data to your template context
-
+        sorted_subfolder_data = sorted(subfolder_data, key=itemgetter('name')) 
 
         context["filtered"] = "filteredReport"
 
@@ -211,7 +212,8 @@ def landingPageView(request):
             context["errors"] = errors
 
         if len(query_response_imagefilepaths) != 0:
-            context["image_filepaths"] = query_response_imagefilepaths
+            context["image_filepaths"] = sorted_subfolder_data
+            
 
             # Create a dat file to print the report
             content_dict = {}
@@ -264,8 +266,6 @@ def landingPageView(request):
 
             if len(query_response_imagefilepaths) != 0:
                 context["image_filepaths"] = query_response_imagefilepaths
-
-            print(context)
 
             # Create a dat file to print the report
             content_dict = {}

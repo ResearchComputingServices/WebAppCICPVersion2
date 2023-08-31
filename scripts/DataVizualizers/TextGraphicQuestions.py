@@ -29,6 +29,7 @@ def VisualizeTextGraphicQuestion(   question,
 
     return CreateWordCloud( wordCloudText = allResponseText,  
                             title = title,
+                            questionLabel = question.questionLabel,
                             numberOfResponses = len(userResponses),
                             isEnglish = isEnglish,
                             saveToDirPath = saveToDirPath)

@@ -27,7 +27,12 @@ def ExtractQuestionDataFromEnglishJSON(surveyJSON,aSurvey):
         question.questionTextEnglish = CleanText(qDict['questionText'])
         question.parentQuestionID = None
         question.jsonKey = qDictID
-        
+        question.questionLabel = qDict['questionLabel']
+
+        # Added by Priyanka
+        if question.questionLabel == None:
+            continue
+
         # populate the questionTheme field 
         question.questionTheme = ''
         questionLabelField = qDict['questionLabel']
@@ -114,6 +119,11 @@ def ExtractQuestionDataFromFrenchJSON(surveyJSON, aSurvey):
             
             question = QuestionTable.objects.filter(jsonKey = questionJSONKey, surveyID = aSurvey.id).first()
             
+
+            # Added by Priyanka.
+            if question == None:
+                continue
+
             question.questionTextFrench = questionTextFrench
             
             question.save()

@@ -29,7 +29,8 @@ def VisualizeMatrixQuestion(question,
     # only the Parent Matrix question should be included in the list to be visualized
     if question.parentQuestionID != None:
         return
-    
+
+    questionLabel = question.questionLabel
     title = GetGraphicTitle(question, isEnglish)
     
     responseDict= {}
@@ -60,6 +61,7 @@ def VisualizeMatrixQuestion(question,
 
     return CreateStackedBarChart(   finalResponseDicts, 
                                     title,
+                                    questionLabel,
                                     totalResponses,
                                     isEnglish,
                                     saveToDirPath)

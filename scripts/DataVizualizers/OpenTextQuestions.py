@@ -37,6 +37,7 @@ def VisualizeOpenTextQuestion(  question,
     
     return CreateWordCloud( wordCloudText = allResponseText,  
                             title = title,
+                            questionLabel = question.questionLabel,
                             numberOfResponses = len(userResponses),
                             isEnglish = isEnglish,
                             saveToDirPath = saveToDirPath)
@@ -47,6 +48,7 @@ def VisualizeOpenTextQuestion(  question,
 
 def CreateWordCloud(wordCloudText, 
                     title,
+                    questionLabel,
                     numberOfResponses,
                     isEnglish = True,
                     saveToDirPath = TMP_FIGURE_FOLDER_PATH):   
@@ -80,27 +82,37 @@ def CreateWordCloud(wordCloudText,
     # produce the actual wordcloud
     wc.generate(wordCloudText)
     
-    fig = plt.figure(figsize=(8,8))
+    # fig = plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=(16,16))
     ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
-    ax1.set_title(title+'\n',loc='center',wrap=True)
+    # ax1.set_title(title+'\n',loc='center',wrap=True)
+    ax1.set_title(title+'\n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+    'horizontalalignment': 'center'},pad = 100.0,y=0.9)
     ax1.imshow(wc)
     plt.axis('off')
             
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2 = fig.add_axes([0.0, 0.01, 0.15, 0.1], anchor='SW', zorder=1) 
     ax2.imshow(waterMarkImg)
     ax2.axis('off')
 
-    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    ax3 = fig.add_axes([0.75, 0.01, 0.2, 0.1], anchor='SE', zorder=1) 
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
     ax3.axis('off')
 
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    
+    #Added by Priyanka
+    questionLabel = questionLabel.split('_')[1]
+    filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+
+    # filename = +str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)   

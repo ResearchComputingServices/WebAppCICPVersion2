@@ -4,12 +4,13 @@ import plotly.express as px
 from scripts.Utils import *
 from scripts.DataVizualizers.VizUtils import *
 
+
 import matplotlib.pyplot as plt
 import matplotlib.image as image
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 from textwrap import fill
-
+import mplcursors
 ##################################################################################################################################
 #
 ##################################################################################################################################
@@ -25,6 +26,7 @@ def VisualizeRankOrderQuestion( question,
     choiceQuerySet = ChoiceTable.objects.filter(questionID=question.id)
         
     totalResponses = numOfRespondents
+    questionLabel = question.questionLabel
     
     # Create the response dictionary
     responseDict= {}
@@ -141,10 +143,12 @@ def VisualizeRankOrderQuestion( question,
     # send everything to the figure creator
     return CreateStackedBarChart(   finalResponseDicts, 
                                     title,
+                                    questionLabel,
                                     totalResponses,
                                     isEnglish,
                                     saveToDirPath),CreateRankChart(finalResponseDictsall, 
                                                                     title,
+                                                                    questionLabel,
                                                                     totalResponses,
                                                                     isEnglish,
                                                                     saveToDirPath)
@@ -155,12 +159,17 @@ def VisualizeRankOrderQuestion( question,
 
 def CreateRankChart(responseDict,
                             graphicTitle,
+                            questionLabel,
                             numberOfResponses,
                             isEnglish = True,
                             saveToDirPath = TMP_FIGURE_FOLDER_PATH):
         #####################################################################
     # ToDo: move this code block to a separate function
     # Rearrange the incoming data into a format we can plot   
+
+    #Added for testing images - Priyanka. Remove later
+    print("graphicTitle",graphicTitle)
+    print("numberOfResponses",numberOfResponses)
     
     # get col
     columns = ['subQ']
@@ -202,6 +211,7 @@ def CreateRankChart(responseDict,
     df = df.reset_index(drop=True)
     df = df[['subQ','total']]
     #print(df)
+    df.to_csv('/webapp/WebAppCICPVersion2/Data/Rank', index=False)
     #####################################################################3   
    
     # define colours to use
@@ -218,8 +228,7 @@ def CreateRankChart(responseDict,
         
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(14,14))
-    #fig = plt.figure(figsize=(20,20))
+    fig = plt.figure(figsize=(18,18))
     
     #Added comment for below line
     #plt.subplots_adjust(left=0.22)
@@ -236,39 +245,53 @@ def CreateRankChart(responseDict,
             #bbox_to_anchor=(1.05,1))
     
     #Modified to adjust the plots - Rohan
-    plt.subplots_adjust(right=0.8)
+    plt.subplots_adjust(right=0.75)
     
-    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium'})
+    # ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium'})
+    ax1.set_title(graphicTitle+'/n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+ 'horizontalalignment': 'center'},pad = 150.0,y=0.9)
     ax1.set_xticks(df.index)
     ax1.set_xticklabels(df.subQ, rotation=90)
     ax1.set_ylabel('')
+    plt.yticks(fontsize=15)
+    plt.xticks(fontsize=15)
     #ax1.set_xticks([0,25,50,75,100])
 
     #Modified for the labels to display outside - Rohan
-    ax1.legend(bbox_to_anchor=(1.03,1))
+    # ax1.legend(bbox_to_anchor=(1.03,1))
+
+    #Added by Priyanka    
+    ax1.legend(bbox_to_anchor=(1.2,1),fontsize=13)
     
     if isEnglish:
-        ax1.set_xlabel('% of Responses')
+        ax1.set_xlabel('% of Responses',fontsize=15)
     else:
-        ax1.set_xlabel('% de réponses')
+        ax1.set_xlabel('% de réponses',fontsize=15)
        
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2 = fig.add_axes([0.0, 0.01, 0.15, 0.1], anchor='SW', zorder=1) 
     ax2.imshow(waterMarkImg)
     ax2.axis('off')
 
-    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    ax3 = fig.add_axes([0.75, 0.01, 0.2, 0.1], anchor='SE', zorder=1)
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=20)
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
     ax3.axis('off')
 
     # plt.show() 
 
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    #Added by Priyanka
+    questionLabel = questionLabel.split('_')[1]
+    filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+
+
+    # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)   
@@ -277,6 +300,7 @@ def CreateRankChart(responseDict,
 
 def CreateStackedBarChart(  responseDict,
                             graphicTitle,
+                            questionLabel,
                             numberOfResponses,
                             isEnglish = True,
                             saveToDirPath = TMP_FIGURE_FOLDER_PATH):
@@ -284,7 +308,8 @@ def CreateStackedBarChart(  responseDict,
     #####################################################################
     # ToDo: move this code block to a separate function
     # Rearrange the incoming data into a format we can plot   
-    
+
+
     # get col
     columns = ['subQ']
     subQs = []
@@ -300,8 +325,7 @@ def CreateStackedBarChart(  responseDict,
     #Sort to have the labels in order
     columns.sort()
     # create data frame with correct rows
-    df = pd.DataFrame(columns=columns)
-    
+    df = pd.DataFrame(columns=columns)    
     
     # populate elements
     for subQ in responseDict.keys():
@@ -320,24 +344,32 @@ def CreateStackedBarChart(  responseDict,
     for subQ in responseDict.keys():
         for response in responseDict[subQ].keys():
             df.at[subQ, 'subQ'] = WrapText(subQ,15)
-    #####################################################################3   
-   
+
+    df.to_csv('/webapp/WebAppCICPVersion2/Data/StackedBar', index=False)
+    #####################################################################
     # define colours to use
+    # colourMap = [(0/255,0/255,0/255),
+    #             #(233/255,28/255,36/255),
+    #             (45/255,45/255,45/255),
+    #             #(242/255,121/255,126/255),
+    #             (151/255,151/255,151/255),
+    #             (145/255,14/255,19/255),
+    #             (51/255,51/255,51/255),
+    #             (185/255,44/255,49/255)]
+
     colourMap = [(0/255,0/255,0/255),
-                #(233/255,28/255,36/255),
-                (45/255,45/255,45/255),
-                #(242/255,121/255,126/255),
-                (151/255,151/255,151/255),
-                (145/255,14/255,19/255),
-                (51/255,51/255,51/255),
-                (185/255,44/255,49/255)]
+            (45/255,45/255,45/255),
+            (151/255,151/255,151/255),
+            (145/255,14/255,19/255),
+            (51/255,51/255,51/255),
+            (185/255,44/255,49/255)]
 
     cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
         
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(16,16))
-    #fig = plt.figure(figsize=(20,20))
+    fig = plt.figure(figsize=(18,18))
+   
     
     #Added comment for below line
     #plt.subplots_adjust(left=0.22)
@@ -352,37 +384,52 @@ def CreateStackedBarChart(  responseDict,
             #bbox_to_anchor=(1.05,1))
     
     #Modified to adjust the plots - Rohan
-    plt.subplots_adjust(right=0.8)
+    plt.subplots_adjust(right=0.75)
     
-    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 19, 'fontweight': 'medium'},pad = 25.0)
+    # ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 19, 'fontweight': 'medium'},pad = 25.0)
+    # ax1.set_ylabel('')
+    # ax1.set_xticks([0,25,50,75,100])
+
+    ax1.set_title(graphicTitle+'/n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+ 'horizontalalignment': 'center'},pad = 150.0,y=0.85)
     ax1.set_ylabel('')
     ax1.set_xticks([0,25,50,75,100])
+    plt.yticks(fontsize=15)
+    plt.xticks(fontsize=15)
 
     #Modified for the labels to display outside - Rohan
-    ax1.legend(bbox_to_anchor=(1.03,1))
-    
+    # ax1.legend(bbox_to_anchor=(1.03,1),fontsize=16)
+    ax1.legend(bbox_to_anchor=(1,1),fontsize=13)
+
     if isEnglish:
-        ax1.set_xlabel('% of Responses')
+        ax1.set_xlabel('% of Responses',fontsize=15)
     else:
-        ax1.set_xlabel('% de réponses')
+        ax1.set_xlabel('% de réponses',fontsize=15)
        
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2 = fig.add_axes([0.05, 0.2, 0.15, 0.7], anchor='SW', zorder=1)
     ax2.imshow(waterMarkImg)
     ax2.axis('off')
 
-    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=20)
+    ax3 = fig.add_axes([0.75, 0.2, 0.2, 0.7], anchor='SE', zorder=1) 
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
     ax3.axis('off')
 
     # plt.show() 
 
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    #Added by Priyanka
+    questionLabel = questionLabel.split('_')[1]
+    filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+
+
+    # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)   

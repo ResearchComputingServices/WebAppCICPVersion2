@@ -30,6 +30,7 @@ def VisualizeSliderQuestion(question,
    
     if len(choiceQuerySet) == 1:
         filename = VisualizeSingleChoiceSliderQuestion( title=title,
+                                                       questionLabel = question.questionLabel,
                                                         choiceQuerySet=choiceQuerySet,
                                                         userResponses=userResponses,
                                                         numOfRespondents = numOfRespondents,
@@ -37,6 +38,7 @@ def VisualizeSliderQuestion(question,
                                                         saveToDirPath=saveToDirPath)
     else:
         filename = VisualizeMultiChoiceSliderQuestion( title=title,
+                                                       questionLabel = question.questionLabel,
                                                         choiceQuerySet=choiceQuerySet,
                                                         userResponses=userResponses,
                                                         numOfRespondents = numOfRespondents,
@@ -49,6 +51,7 @@ def VisualizeSliderQuestion(question,
 #
 ##################################################################################################################################
 def VisualizeSingleChoiceSliderQuestion(title, 
+                                        questionLabel,
                                         choiceQuerySet,
                                         userResponses,
                                         numOfRespondents,
@@ -59,6 +62,7 @@ def VisualizeSingleChoiceSliderQuestion(title,
     minValue = A_LARGE_NUMBER
     maxValue = -1*A_LARGE_NUMBER
     numberOfResponses = numOfRespondents
+    questionLabel = questionLabel
     for response in userResponses:
         
         if response.answerValue == None or not str(response.answerValue).isnumeric():
@@ -106,6 +110,7 @@ def VisualizeSingleChoiceSliderQuestion(title,
     return CreateVerticleBarChart(  binList = bin,
                                     valueList = value,
                                     graphicTitle=title,
+                                    questionLabel=questionLabel,
                                     numberOfResponses=numberOfResponses,
                                     xMin = minValue,
                                     xMax = maxValue,
@@ -116,7 +121,8 @@ def VisualizeSingleChoiceSliderQuestion(title,
 ##################################################################################################################################
 #
 ##################################################################################################################################
-def VisualizeMultiChoiceSliderQuestion( title, 
+def VisualizeMultiChoiceSliderQuestion( title,
+                                       questionLabel, 
                                         choiceQuerySet,
                                         userResponses,
                                         numOfRespondents,
@@ -158,6 +164,7 @@ def VisualizeMultiChoiceSliderQuestion( title,
             
     return CreateHorizontalBarChart(  responseDict, 
                                     title,
+                                    questionLabel,
                                     totalResponses,  
                                     isEnglish,
                                     saveToDirPath)
@@ -169,6 +176,7 @@ def VisualizeMultiChoiceSliderQuestion( title,
 def CreateVerticleBarChart( binList,
                             valueList,
                             graphicTitle,
+                            questionLabel,
                             numberOfResponses,
                             xMin,
                             xMax,
@@ -178,31 +186,41 @@ def CreateVerticleBarChart( binList,
     
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=(18,18))
     ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
-    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
+    # ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,)
+    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium','horizontalalignment': 'center'})
     ax1.bar( binList, 
             valueList, 
             color = (233/255,28/255,36/255))   
     
-    ax1.set_ylabel('Frequency')
+    ax1.set_ylabel('Frequency',fontsize=15)
     ax1.set_xlim(xMin,xMax)
+    plt.yticks(fontsize=15)
+    plt.xticks(fontsize=15)
         
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2 = fig.add_axes([0.05, 0.1, 0.15, 0.7], anchor='SW', zorder=1)
     ax2.imshow(waterMarkImg)
     ax2.axis('off')
 
-    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    ax3 = fig.add_axes([0.75, 0.1, 0.2, 0.7], anchor='SE', zorder=1) 
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
     ax3.axis('off')
 
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    #Added by Priyanka
+    questionLabel = questionLabel.split('_')[1]
+    filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+
+
+    # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)   
@@ -246,6 +264,7 @@ def DetermineBarColours(values):
 
 def CreateHorizontalBarChart(   responseDict,
                                 graphicTitle,
+                                questionLabel,
                                 numberOfResponses,
                                 isEnglish = True,
                                 saveToDirPath = TMP_FIGURE_FOLDER_PATH):
@@ -295,34 +314,44 @@ def CreateHorizontalBarChart(   responseDict,
         
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(8,8))
+    fig = plt.figure(figsize=(18,18))
     plt.subplots_adjust(left=0.22)
     ax1 = plt.subplot2grid((10, 3), (0, 0), colspan=3, rowspan=9)
-    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
+    # ax1.set_title(graphicTitle+'\n',loc='center',wrap=True)
+    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium','horizontalalignment': 'center'})
     ax1.barh(   names, 
                 values, 
                 color = colourMap)   
-    ax1.set_xlabel(xAxisTitle)
+    ax1.set_xlabel(xAxisTitle,fontsize=15)
     ax1.set_xlim(xMin,xMax)
     ax1.set_xticks(tickValues)
     ax1.set_xticklabels(tickLabels)
-    ax1.set_ylabel('')
+    ax1.set_ylabel('',fontsize=15)
+    plt.yticks(fontsize=15)
+    plt.xticks(fontsize=15)
         
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2 = fig.add_axes([0.05, 0.1, 0.15, 0.7], anchor='SW', zorder=1)
     ax2.imshow(waterMarkImg)
     ax2.axis('off')
 
-    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    ax3 = fig.add_axes([0.75, 0.1, 0.2, 0.7], anchor='SE', zorder=1) 
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right')
+    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
     ax3.axis('off')
 
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    #Added by Priyanka
+    questionLabel = questionLabel.split('_')[1]
+    filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+
+
+    # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)   

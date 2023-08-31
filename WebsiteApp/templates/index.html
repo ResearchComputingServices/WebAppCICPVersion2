@@ -140,37 +140,30 @@
                             </div>
                         </div>
                 {% else %}
-
+                {% if  questionTheme%}
                     <div id="image-slider" class="splide">
-                        <div class="splide__track">
-		                    {% comment %} <ul class="splide__list">
-                                 {% for image_url in image_filepaths %}
-			                        <li class="splide__slide">
-                                        
-                                          <img src={{ image_url }} alt="Image">
-                                       
-                                    </li>	
-                                     {% endfor %}
-                               		 
-		                    </ul> {% endcomment %}
-                            <div id="subfolder-slider" class="splide">
-    <div class="splide__track">
-        <ul class="splide__list">
-            {% for subfolder in subfolders %}
-                <li class="splide__slide">
-                    <h3>{{ subfolder.name }}</h3>
-                    <ul>
-                        {% for image_url in subfolder.images %}
-                            <li><img src="{{ image_url }}" alt="Image"></li>
-                        {% endfor %}
-                    </ul>
-                </li>
-            {% endfor %}
-        </ul>
-    </div>
-</div>
+                         <div class="splide__track">
+                            <ul class="splide__list">
+                                {% for subfolder in image_filepaths %}
+                                    <li class="splide__slide">
+                                        <h4 id="heading">{{ subfolder.name }}</h4>
+                                        <ul>
+                                            {% for image_url in subfolder.images %}
+                                                <li><img src="{{ image_url }}" alt="Image"></li>
+                                            {% endfor %}
+                                        </ul>
+                                    </li>
+                                {% endfor %}
+                            </ul>
                         </div>
                     </div>
+                {% else %}
+                <li class="splide__slide">
+                {% for image_url in image_filepaths %}                                    
+                    <img src={{ image_url }} alt="Image">
+                {% endfor %}
+                 </li>
+                {% endif %}
                 {% endif %}
             {% endif %}
         </main>

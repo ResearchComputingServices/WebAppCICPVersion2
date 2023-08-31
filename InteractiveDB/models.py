@@ -38,6 +38,7 @@ class QuestionTable(models.Model):
     questionTextFrench = models.TextField() 
    
     questionTheme = models.CharField(max_length=30)
+    questionLabel = models.CharField(max_length=30)
    
     jsonKey = models.TextField() # used for matching with french survey file
    
@@ -52,7 +53,8 @@ class QuestionTable(models.Model):
     
         df = pd.DataFrame({ 'QuestionKey' : questionKey,
                             'QuestionText' : questionText,
-                            'QuestionTheme' : questionTheme                       
+                            'QuestionTheme' : questionTheme,                  
+                      
                             }, index=[0])
 
         return df

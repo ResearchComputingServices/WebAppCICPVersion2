@@ -58,7 +58,8 @@ def VisualizeMultipleChoiceQuestion(question,
             responseDict[key] = float(responseDict[key]) / float(totalResponses1)   
        
     return CreatePieChart(  responseDict, 
-                            title, 
+                            title,
+                            question.questionLabel, 
                             totalResponses,
                             isEnglish,
                             saveToDirPath)
@@ -68,6 +69,7 @@ def VisualizeMultipleChoiceQuestion(question,
 ##################################################################################################################################
 def CreatePieChart( responseDict,
                     graphicTitle,
+                    questionLabel,
                     numberOfResponses,
                     isEnglish = True,
                     saveToDirPath = TMP_FIGURE_FOLDER_PATH):
@@ -120,7 +122,10 @@ def CreatePieChart( responseDict,
 
     fig = plt.figure(figsize=(20,20))
     ax1 = plt.subplot2grid((9, 3), (0, 0), colspan=3, rowspan=9)
-    ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 24, 'fontweight': 'medium'},pad=25.0)
+    # ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 24, 'fontweight': 'medium'},pad=25.0)
+
+    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+ 'horizontalalignment': 'center'},pad = 150.0,y=0.9)
 
 
     #ax1.pie(values,
@@ -159,24 +164,31 @@ def CreatePieChart( responseDict,
         ax1.annotate(str(perc[i]), xy = (0.8 * x, 0.8 * y), xytext = ((1.0 + (i % 2) * 0.2) * np.sign(x), 1.4 * yc),
                     horizontalalignment = horizontalalignment, fontsize = 16, **kw)
 
-    plt.subplots_adjust(right=0.8)
-    plt.legend(names, bbox_to_anchor=(1.05 ,1.), loc="upper left",fontsize=16)
+    # plt.subplots_adjust(right=0.8)
+    plt.subplots_adjust(right=0.75)
+    plt.legend(names, bbox_to_anchor=(1.05,1), loc="upper left",fontsize=15)
     
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+    ax2 = fig.add_axes([0.0, 0.01, 0.15, 0.1], anchor='SW', zorder=1) 
     ax2.imshow(waterMarkImg)
     ax2.axis('off')
 
-    ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+    # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
     reportDate = saveToDirPath.split("/")[-1] 
     aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
     annotateText = aText[0]+'\n'+aText[1]
+    ax3 = fig.add_axes([0.75, 0.01, 0.2, 0.1], anchor='SE', zorder=1)
     ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=20)
     ax3.axis('off')
 
     # save the wordcloud to a file
-    filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+    #Added by Priyanka
+    questionLabel = questionLabel.split('_')[1]
+    filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+
+    # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
     figureFilePath = os.path.join(saveToDirPath, filename)
     plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
     plt.close(fig)   
