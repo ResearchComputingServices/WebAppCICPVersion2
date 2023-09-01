@@ -166,6 +166,14 @@ div {
     margin-right: auto;
 }
 
+#dateimage {
+    width: 40%;
+    display: block;
+    margin-left: 16%;
+    margin-right: auto;
+
+}
+
 /* CSS code for extra small devices */
 @media (max-width: 575.98px) {
 

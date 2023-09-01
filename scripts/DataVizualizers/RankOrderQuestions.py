@@ -10,7 +10,7 @@ import matplotlib.image as image
 from matplotlib.colors import LinearSegmentedColormap
 import numpy as np
 from textwrap import fill
-import mplcursors
+import matplotlib.patches as mpatches
 ##################################################################################################################################
 #
 ##################################################################################################################################
@@ -166,10 +166,6 @@ def CreateRankChart(responseDict,
         #####################################################################
     # ToDo: move this code block to a separate function
     # Rearrange the incoming data into a format we can plot   
-
-    #Added for testing images - Priyanka. Remove later
-    print("graphicTitle",graphicTitle)
-    print("numberOfResponses",numberOfResponses)
     
     # get col
     columns = ['subQ']
@@ -211,20 +207,20 @@ def CreateRankChart(responseDict,
     df = df.reset_index(drop=True)
     df = df[['subQ','total']]
     #print(df)
-    df.to_csv('/webapp/WebAppCICPVersion2/Data/Rank', index=False)
+
     #####################################################################3   
    
     # define colours to use
     colourMap = [(0/255,0/255,0/255),
-                #(233/255,28/255,36/255),
-                (45/255,45/255,45/255),
-                #(242/255,121/255,126/255),
-                (151/255,151/255,151/255),
-                (145/255,14/255,19/255),
+                 (233/255,28/255,36/255),
+                 (45/255,45/255,45/255),
+                (242/255,121/255,126/255),
+                 (151/255,151/255,151/255),
+                 (145/255,14/255,19/255),
                 (51/255,51/255,51/255),
                 (185/255,44/255,49/255)]
 
-    cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
+    # cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
         
     # Create the figure which plots the bar chart
     # creating the bar plot
@@ -236,13 +232,15 @@ def CreateRankChart(responseDict,
    
     # plot data in stack manner of bar type
     df.plot.bar(x='subQ', 
-            y='total',
-            #kind='barh', 
+                y='total',            
+            # kind='bar', 
             #stacked=True,
             ax=ax1,
-            colormap=cmap,
-            rot = 0)
-            #bbox_to_anchor=(1.05,1))
+            color=colourMap,
+            rot = 0,
+            legend=False)
+            #bbox_to_anchor=(1.05,1))      
+        
     
     #Modified to adjust the plots - Rohan
     plt.subplots_adjust(right=0.75)
@@ -253,20 +251,23 @@ def CreateRankChart(responseDict,
     ax1.set_xticks(df.index)
     ax1.set_xticklabels(df.subQ, rotation=90)
     ax1.set_ylabel('')
-    plt.yticks(fontsize=15)
+    plt.xlabel(xlabel='')
+    plt.yticks([]) 
     plt.xticks(fontsize=15)
+    # plt.xticks(y_pos, objects,fontsize=15)
     #ax1.set_xticks([0,25,50,75,100])
 
     #Modified for the labels to display outside - Rohan
     # ax1.legend(bbox_to_anchor=(1.03,1))
 
-    #Added by Priyanka    
-    ax1.legend(bbox_to_anchor=(1.2,1),fontsize=13)
+    #Added by Priyanka  
+    legend_handles = [plt.Line2D([0], [0], color=color, linewidth=5, label=label) for label, color in zip(['1','2','3','4','5','6','7','8'], colourMap)]
+    ax1.legend(handles=legend_handles,bbox_to_anchor=(1.2,1),fontsize=13)
     
-    if isEnglish:
-        ax1.set_xlabel('% of Responses',fontsize=15)
-    else:
-        ax1.set_xlabel('% de réponses',fontsize=15)
+    # if isEnglish:
+    #     ax1.set_xlabel('% of Responses',fontsize=15)
+    # else:
+    #     ax1.set_xlabel('% de réponses',fontsize=15)
        
     # Get the watermark image and add it to the figure
     waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
@@ -344,8 +345,6 @@ def CreateStackedBarChart(  responseDict,
     for subQ in responseDict.keys():
         for response in responseDict[subQ].keys():
             df.at[subQ, 'subQ'] = WrapText(subQ,15)
-
-    df.to_csv('/webapp/WebAppCICPVersion2/Data/StackedBar', index=False)
     #####################################################################
     # define colours to use
     # colourMap = [(0/255,0/255,0/255),
