@@ -51,7 +51,7 @@
 
                             <div id="secsearch">
                                 <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="checkFilters()"/>
-                                <input type="reset" value={% translate "Reset"%}>
+                                <input type="reset" value="{% translate "Reset" %}">
                             </div>
 
                         {% if reportDate %}                  
@@ -141,7 +141,7 @@
                         </div>
                 {% else %}
                 {% if  questionTheme%}
-                    <div id="image-slider" class="splide">
+                    {% comment %} <div id="image-slider" class="splide">
                          <div class="splide__track">
                             <ul class="splide__list">
                                 {% for subfolder in image_filepaths %}
@@ -156,7 +156,19 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
+                    <div id="image-pagination">
+  <div id="image-slider" class="splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        <!-- This section will be dynamically populated using JavaScript -->
+      </ul>
+    </div>
+  </div>
+  <div id="pagination-buttons">
+    <!-- Pagination buttons will be added here using JavaScript -->
+  </div>
+</div>
                 {% else %}
                 <li class="splide__slide">
                 {% for image_url in image_filepaths %}                                    

@@ -47,4 +47,50 @@ function checkFilters(event) {
     }
 }
 
+// Assuming you have the total number of subfolders available as 'totalSubfolders'
+// and an array 'subfolderData' containing subfolder information
+
+const itemsPerPage = 1; // Number of images to display per page
+
+// Calculate the total number of pages based on subfolders
+const totalPages = Math.ceil(totalSubfolders / itemsPerPage);
+
+// Function to generate the HTML for the pagination buttons
+function generatePaginationButtons() {
+    const paginationButtons = document.getElementById('pagination-buttons');
+    for (let i = 1; i <= totalPages; i++) {
+        const button = document.createElement('button');
+        button.innerText = i;
+        button.addEventListener('click', () => showPage(i));
+        paginationButtons.appendChild(button);
+    }
+}
+
+// Function to display images for a specific page
+function showPage(pageNumber) {
+    const startIndex = (pageNumber - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+
+    const list = document.querySelector('.splide__list');
+    list.innerHTML = ''; // Clear the list
+
+    for (let i = startIndex; i < endIndex && i < totalSubfolders; i++) {
+        const subfolder = subfolderData[i];
+        const listItem = document.createElement('li');
+        listItem.className = 'splide__slide';
+        listItem.innerHTML = `
+      <h4 id="heading">${subfolder.name}</h4>
+      <ul>
+        ${subfolder.images.map(imageUrl => `<li><img src="${imageUrl}" alt="Image"></li>`).join('')}
+      </ul>
+    `;
+        list.appendChild(listItem);
+    }
+}
+
+// Initialize the pagination
+generatePaginationButtons();
+showPage(1); // Show the first page by default
+
+
 

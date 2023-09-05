@@ -116,15 +116,14 @@ def DataVisualizerMain(responseDict,
                                                                             saveToDirPath = saveToDirPath)
                 imageFilePathList.append(imageFilePath)
             else:
-                 imageFilePath1,imageFilePath2 = questionHandleDict[question.questionType](  question = question,
+                 imageFilePath1 = questionHandleDict[question.questionType](  question = question,
                                                                             userResponses = responseDict[question],
                                                                             numOfRespondents = numOfRespondents, 
                                                                             isEnglish= isEnglish,
                                                                             saveToDirPath = saveToDirPath)
-                 print(imageFilePath1)
-                 print(imageFilePath2)
+                 print(imageFilePath1)                 
                  imageFilePathList.append(imageFilePath1)
-                 imageFilePathList.append(imageFilePath2)
+                 
                  
             e = time.time()
             print(question.questionType,':', e - s)

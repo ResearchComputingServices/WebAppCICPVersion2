@@ -111,20 +111,20 @@ def CreatePieChart( responseDict,
         values.append(otherValue)  
         
     # define colours to use
-    cmap = [(233/255,28/255,36/255),
+    cmap =[(233/255,28/255,36/255),
             (45/255,45/255,45/255),
             (242/255,121/255,126/255),
-            (151/255,151/255,151/255),
+            (245/255,245/255,245/255),
+            (100/255,100/255,100/255),
+            (248/255,185/255,187/255),
             (145/255,14/255,19/255),
-            (51/255,51/255,51/255),
-            (185/255,44/255,49/255),
             (200/255,200/255,200/255)]
 
     fig = plt.figure(figsize=(20,20))
     ax1 = plt.subplot2grid((9, 3), (0, 0), colspan=3, rowspan=9)
     # ax1.set_title(graphicTitle+'\n',loc='center',wrap=True,fontdict={'fontsize': 24, 'fontweight': 'medium'},pad=25.0)
 
-    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+    ax1.set_title(graphicTitle+'\n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
  'horizontalalignment': 'center'},pad = 150.0,y=0.9)
 
 

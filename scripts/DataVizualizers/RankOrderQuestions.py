@@ -141,17 +141,20 @@ def VisualizeRankOrderQuestion( question,
     
     
     # send everything to the figure creator
-    return CreateStackedBarChart(   finalResponseDicts, 
-                                    title,
-                                    questionLabel,
-                                    totalResponses,
-                                    isEnglish,
-                                    saveToDirPath),CreateRankChart(finalResponseDictsall, 
-                                                                    title,
-                                                                    questionLabel,
-                                                                    totalResponses,
-                                                                    isEnglish,
-                                                                    saveToDirPath)
+    # return CreateStackedBarChart(   finalResponseDicts, 
+    #                                 title,
+    #                                 questionLabel,
+    #                                 totalResponses,
+    #                                 isEnglish,
+    #                                 saveToDirPath),CreateRankChart(finalResponseDictsall, 
+    #                                                                 title,
+    #                                                                 questionLabel,
+    #                                                                 totalResponses,
+    #                                                                 isEnglish,
+    #                                                                 saveToDirPath)
+
+    return CreateRankChart(finalResponseDictsall, 
+                            title,                                                                    questionLabel,                                                              totalResponses,                                                             isEnglish,                                                                    saveToDirPath)
     
 ##################################################################################################################################
 #
@@ -211,14 +214,23 @@ def CreateRankChart(responseDict,
     #####################################################################3   
    
     # define colours to use
-    colourMap = [(0/255,0/255,0/255),
-                 (233/255,28/255,36/255),
-                 (45/255,45/255,45/255),
-                (242/255,121/255,126/255),
-                 (151/255,151/255,151/255),
-                 (145/255,14/255,19/255),
-                (51/255,51/255,51/255),
-                (185/255,44/255,49/255)]
+    # colourMap = [(0/255,0/255,0/255),
+    #              (233/255,28/255,36/255),
+    #              (45/255,45/255,45/255),
+    #             (242/255,121/255,126/255),
+    #              (151/255,151/255,151/255),
+    #              (145/255,14/255,19/255),
+    #             (51/255,51/255,51/255),
+    #             (185/255,44/255,49/255)]
+
+    colourMap =[(233/255,28/255,36/255),
+            (45/255,45/255,45/255),
+            (242/255,121/255,126/255),
+            (245/255,245/255,245/255),
+            (100/255,100/255,100/255),
+            (248/255,185/255,187/255),
+            (145/255,14/255,19/255),
+            (200/255,200/255,200/255)]
 
     # cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
         
@@ -261,8 +273,8 @@ def CreateRankChart(responseDict,
     # ax1.legend(bbox_to_anchor=(1.03,1))
 
     #Added by Priyanka  
-    legend_handles = [plt.Line2D([0], [0], color=color, linewidth=5, label=label) for label, color in zip(['1','2','3','4','5','6','7','8'], colourMap)]
-    ax1.legend(handles=legend_handles,bbox_to_anchor=(1.2,1),fontsize=13)
+    legend_handles = [plt.Line2D([0], [0], color=color, linewidth=5, label=label) for label, color in zip(np.arange(1,len(df.subQ)+1), colourMap)]
+    ax1.legend(handles=legend_handles,bbox_to_anchor=(1.2,1),fontsize=15)
     
     # if isEnglish:
     #     ax1.set_xlabel('% of Responses',fontsize=15)
@@ -355,13 +367,21 @@ def CreateStackedBarChart(  responseDict,
     #             (145/255,14/255,19/255),
     #             (51/255,51/255,51/255),
     #             (185/255,44/255,49/255)]
-
-    colourMap = [(0/255,0/255,0/255),
+    colourMap = [(233/255,28/255,36/255),
             (45/255,45/255,45/255),
-            (151/255,151/255,151/255),
+            (242/255,121/255,126/255),
+            (245/255,245/255,245/255),
+            (100/255,100/255,100/255),
+            (248/255,185/255,187/255),
             (145/255,14/255,19/255),
-            (51/255,51/255,51/255),
-            (185/255,44/255,49/255)]
+            (200/255,200/255,200/255)]
+        
+    # colourMap = [(0/255,0/255,0/255),
+    #         (45/255,45/255,45/255),
+    #         (151/255,151/255,151/255),
+    #         (145/255,14/255,19/255),
+    #         (51/255,51/255,51/255),
+    #         (185/255,44/255,49/255)]
 
     cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
         
@@ -389,7 +409,7 @@ def CreateStackedBarChart(  responseDict,
     # ax1.set_ylabel('')
     # ax1.set_xticks([0,25,50,75,100])
 
-    ax1.set_title(graphicTitle+'/n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+    ax1.set_title(graphicTitle+'\n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
  'horizontalalignment': 'center'},pad = 150.0,y=0.85)
     ax1.set_ylabel('')
     ax1.set_xticks([0,25,50,75,100])
