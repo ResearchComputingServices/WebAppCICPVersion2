@@ -73,13 +73,10 @@
 
 }
 
-
 #weekheading {
     margin-left: 10%;
     font-family: Arial;
     color: #5c5555;
-
-
 }
 
 
@@ -184,7 +181,7 @@ div {
 
 #datesubtheme {
     margin-left: 20%;
-    padding: 2%;
+    margin-top: 2%;
     font-family: Arial;
     color: #5c5555;
 }
