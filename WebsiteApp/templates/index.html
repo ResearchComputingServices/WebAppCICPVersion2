@@ -80,6 +80,18 @@
                     <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date}}{% endblocktrans %}</center></strong>
                 </h4>
             {% endif %}
+            {%if YearandWeek %}
+            <h5 id="datesubtheme">
+                <strong><center>
+                {{ YearandWeek }}</center></strong>
+            </h5>
+            {% endif %}
+            {% if subTheme %} 
+            <h5 id="datesubtheme">
+                <strong><center>{% translate "Subtheme -" %}
+                {{ subTheme }}</center></strong>
+            </h5>
+            {% endif %}
            {% if questionTheme %} 
             <h4>
                 <strong><center>{% translate "Theme -" %}
@@ -147,7 +159,7 @@
                                 {% for subfolder in image_filepaths %}
                                     <li class="splide__slide">
                                         <strong><center><h5 id="weekheading">{{ subfolder.fullname }}</h5></center></strong>
-                                        <strong><center><h5 id="weekheading">{{ subfolder.subtheme }}</h5></center></strong>
+                                        <strong><center><h5 id="weekheading">Sub-Theme:{{ subfolder.subtheme }}</h5></center></strong>
                                         <ul>
                                             {% for image_url in subfolder.images %}
                                                 <li><img src="{{ image_url }}" alt="Image"></li>

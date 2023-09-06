@@ -183,7 +183,7 @@ def landingPageView(request):
 
             
             if not found:
-                subfolder_data.append({'name': subfolder, 'images': [image_path],'fullname':subfolder.replace("Y","Year-").replace("W"," Week-"),'subtheme':getWeeklySubTheme(subfolder)})
+                subfolder_data.append({'name': subfolder, 'images': [image_path],'fullname':subfolder.replace("Y","Year-").replace("W"," Week-"),'subtheme':getWeeklySubTheme(subfolder,None)})
         sorted_subfolder_data = sorted(subfolder_data, key=itemgetter('name')) 
 
         context["filtered"] = "filteredReport"
@@ -261,6 +261,9 @@ def landingPageView(request):
             context["friday_text_date"] = friday_text_date
             context["wednesday_date"] = wednesday_text_date
             context["reportDate"] = reportDate
+            context["subTheme"] = getWeeklySubTheme(None,str(get_wed_date(reportDate)))
+            context["YearandWeek"] = getYearandWeek(str(get_wed_date(reportDate)))
+           
 
             if len(errors) != 0:
                 context["errors"] = errors
@@ -373,7 +376,17 @@ def get_fridaydate_from_todays_date(todays_date):
         return this_week_friday.date()
 
 
-def getWeeklySubTheme(surveyWeek):
-    subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubTheme')
+def getWeeklySubTheme(surveyWeek,releaseDate):
+
+    if surveyWeek:
+        subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubTheme')
+    elif releaseDate:
+        subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubTheme')
     print("subTheme inside function",subTheme)
     return subTheme[0]['surveysubTheme']
+
+def getYearandWeek(releaseDate):
+    surveyWeek = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveyWeek')
+    surveyWeek = surveyWeek[0]['surveyWeek']
+    surveyWeek = surveyWeek.replace("Y","Year-").replace("W"," Week-")
+    return surveyWeek
