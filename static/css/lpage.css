@@ -31,7 +31,7 @@
     flex-direction: row;
     color: black;
     font-family: Arial;
-    padding: 5%;
+    padding: 2%;
     justify-content: center;
 }
 
@@ -60,7 +60,6 @@ h5 {
     flex-direction: column;
     display: flex;
     padding: 5%;
-    margin: left 25%;
     font-family: Arial;
 }
 
@@ -71,7 +70,7 @@ h5 {
 
 .date {
     margin-left: 30%;
-    margin-top: 27%;
+    margin-top: 35%;
 }
 
 .theme {

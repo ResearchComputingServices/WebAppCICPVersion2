@@ -74,6 +74,13 @@
 }
 
 
+#weekheading {
+    margin-left: 50%;
+    color: #e91c24;
+    font-family: Arial;
+
+}
+
 
 #errorcard .card-body {
     background-color: #e91c24;

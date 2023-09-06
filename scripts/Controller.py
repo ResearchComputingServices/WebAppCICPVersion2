@@ -186,6 +186,7 @@ def GenerateDefaultFigures(aSurvey):
     aQuery = FrontEndQuery()
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
     aQuery.week = aSurvey.surveyWeek
+    
 
     themeString = str(aSurvey.surveyTheme)
     dateString =  aSurvey.releaseDate.strftime("%Y-%m-%d")
@@ -390,6 +391,8 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     listOfImageFilePaths = listOfImageFilePaths_final = []
     dataCSVFilePath = dataCSVFilePaths_final = []
     errorLogs = []
+
+    
     
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     print('HandleFrontEndQuery') 
@@ -402,6 +405,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('field',aQuery.fieldOfWork)
     print('age',aQuery.age)
     print('Site Lang:',aQuery.siteLanguage)
+    
     # print('week',aQuery.week)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     

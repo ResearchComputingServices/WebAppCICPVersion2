@@ -141,12 +141,13 @@
                         </div>
                 {% else %}
                 {% if  questionTheme%}
-                    {% comment %} <div id="image-slider" class="splide">
+                   <div id="image-slider" class="splide">
                          <div class="splide__track">
                             <ul class="splide__list">
                                 {% for subfolder in image_filepaths %}
                                     <li class="splide__slide">
-                                        <h4 id="heading">{{ subfolder.name }}</h4>
+                                        <h4 id="weekheading">{{ subfolder.name }}</h4>
+                                        
                                         <ul>
                                             {% for image_url in subfolder.images %}
                                                 <li><img src="{{ image_url }}" alt="Image"></li>
@@ -156,19 +157,7 @@
                                 {% endfor %}
                             </ul>
                         </div>
-                    </div> {% endcomment %}
-                    <div id="image-pagination">
-  <div id="image-slider" class="splide">
-    <div class="splide__track">
-      <ul class="splide__list">
-        <!-- This section will be dynamically populated using JavaScript -->
-      </ul>
-    </div>
-  </div>
-  <div id="pagination-buttons">
-    <!-- Pagination buttons will be added here using JavaScript -->
-  </div>
-</div>
+                    </div>
                 {% else %}
                 <li class="splide__slide">
                 {% for image_url in image_filepaths %}                                    

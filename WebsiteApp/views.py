@@ -213,7 +213,7 @@ def landingPageView(request):
 
         if len(query_response_imagefilepaths) != 0:
             context["image_filepaths"] = sorted_subfolder_data
-            
+            print(context["image_filepaths"])
 
             # Create a dat file to print the report
             content_dict = {}
