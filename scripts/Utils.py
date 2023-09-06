@@ -153,10 +153,14 @@ class FrontEndQuery:
     
     # Filter on Survey release data
     date: str = ''
+
+    # This is not a filter but we need this to display subtheme on the webpage
+    subTheme: str = ''
     
     # Filter by survey ID
     # this filter is only used for the default image creation
     qualtricsSurveyID: str = ''
+
     
     # Filter on Question
     questionThemes: List = field(default_factory=lambda: [])  

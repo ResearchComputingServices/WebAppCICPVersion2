@@ -75,7 +75,7 @@
 
 
 #weekheading {
-    margin-left: 50%;
+    margin-left: 10%;
     color: #e91c24;
     font-family: Arial;
 
@@ -169,7 +169,7 @@ div {
 .splide__slide img {
     width: 70%;
     display: block;
-    margin-left: 30%;
+    margin-left: 25%;
     margin-right: auto;
 }
 

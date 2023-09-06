@@ -186,6 +186,7 @@ def GenerateDefaultFigures(aSurvey):
     aQuery = FrontEndQuery()
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
     aQuery.week = aSurvey.surveyWeek
+    aQuery.subTheme = aSurvey.surveysubTheme
     
 
     themeString = str(aSurvey.surveyTheme)
@@ -198,7 +199,7 @@ def GenerateDefaultFigures(aSurvey):
    
     aQuery.siteLanguage = ENGLISH
     
-    listOfImageFilePaths, dataCSVFilePath, errorLogs = HandleFrontEndQuery(aQuery=aQuery,
+    listOfImageFilePaths, dataCSVFilePath, errorLogs= HandleFrontEndQuery(aQuery=aQuery,
                         saveToDirPath=saveToDirPath)
     
 
@@ -223,7 +224,7 @@ def GenerateDefaultFigures(aSurvey):
     saveToDirPath = os.path.join(DEFAULT_FIGURE_FOLDER_PATH_FRENCH, dateString)
     aQuery.siteLanguage = FRENCH   
     
-    listOfImageFilePaths, dataCSVFilePath, errorLogs = HandleFrontEndQuery(aQuery=aQuery,
+    listOfImageFilePaths, dataCSVFilePath, errorLogs= HandleFrontEndQuery(aQuery=aQuery,
                         saveToDirPath=saveToDirPath)
     
      # Each survey has a theme associated with it. Hence, when we create surveys using date,
@@ -375,13 +376,13 @@ def GetResponseDict(aQuery, VERBOSE = False):
 # 
 ##################################################################################################################################
 
-# Function to get the data for list of survey weeks based on theme.
+# # Function to get the data for list of survey weeks based on theme.
 
-def getQuestionLabel():
+# def getQuestionLabel():
 
-    weeklyTheme = SurveyTable.objects.filter(surveyTheme=theme)
+#     weeklyTheme = SurveyTable.objects.filter(surveyTheme=theme)
 
-    print(weeklyTheme)
+#     print(weeklyTheme)
 
 
 
@@ -498,6 +499,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
       
     print('Generated Images Location:')
     print(listOfImageFilePaths)
+ 
     
     return sorted(listOfImageFilePaths), dataCSVFilePath, errorLogs
     
@@ -509,7 +511,7 @@ def run(*arg):
     aQuery = FrontEndQuery()   
     aQuery.qualtricsSurveyID = 'SV_0lJ2ddSC0PnAQPI'#'SV_6mJwD0WeUarScKy'
     aQuery.locations = ''
-    images, data, errorLogs = HandleFrontEndQuery(aQuery) 
+    images, data, errorLogs= HandleFrontEndQuery(aQuery) 
 
     print('~~~~~~~~~~ QUERY ERROR LOG ~~~~~~~~~~')
     for error in errorLogs:

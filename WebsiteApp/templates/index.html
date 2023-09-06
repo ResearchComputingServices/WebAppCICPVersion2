@@ -146,8 +146,8 @@
                             <ul class="splide__list">
                                 {% for subfolder in image_filepaths %}
                                     <li class="splide__slide">
-                                        <h4 id="weekheading">{{ subfolder.name }}</h4>
-                                        
+                                        <strong><center><h5 id="weekheading">{{ subfolder.fullname }}</h5></center></strong>
+                                        <strong><center><h5 id="weekheading">{{ subfolder.subtheme }}</h5></center></strong>
                                         <ul>
                                             {% for image_url in subfolder.images %}
                                                 <li><img src="{{ image_url }}" alt="Image"></li>

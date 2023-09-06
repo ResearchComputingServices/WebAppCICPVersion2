@@ -9,6 +9,7 @@ from datetime import datetime, timedelta
 from django_tex.shortcuts import render_to_pdf
 from WebAppCICPVersion2 import settings
 from operator import itemgetter
+from InteractiveDB.models import SurveyTable
 
 
 
@@ -69,7 +70,7 @@ def latest_report(request):
     frontEndQuery.siteLanguage = get_language()
 
     if frontEndQuery:
-        query_response_imagefilepaths, query_response_csv, errors = HandleFrontEndQuery(
+        query_response_imagefilepaths, query_response_csv, errors,= HandleFrontEndQuery(
             frontEndQuery
         )
 
@@ -142,7 +143,7 @@ def themeOrDate(request, theme, date):
     frontEndQuery.siteLanguage = get_language()
 
     if frontEndQuery:
-        query_response_imagefilepaths, query_response_csv, errors = HandleFrontEndQuery(
+        query_response_imagefilepaths, query_response_csv, errors,= HandleFrontEndQuery(
             frontEndQuery
         )
 
@@ -182,7 +183,7 @@ def landingPageView(request):
 
             
             if not found:
-                subfolder_data.append({'name': subfolder, 'images': [image_path]})
+                subfolder_data.append({'name': subfolder, 'images': [image_path],'fullname':subfolder.replace("Y","Year-").replace("W"," Week-"),'subtheme':getWeeklySubTheme(subfolder)})
         sorted_subfolder_data = sorted(subfolder_data, key=itemgetter('name')) 
 
         context["filtered"] = "filteredReport"
@@ -370,3 +371,9 @@ def get_fridaydate_from_todays_date(todays_date):
         # Present Week Friday
         this_week_friday = todays_date + timedelta(days=-2)
         return this_week_friday.date()
+
+
+def getWeeklySubTheme(surveyWeek):
+    subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubTheme')
+    print("subTheme inside function",subTheme)
+    return subTheme[0]['surveysubTheme']
