@@ -107,7 +107,10 @@ def CreatePieChart( responseDict,
         names = names[:7]
         values = values[:7]
         
-        names.append('other')
+        if isEnglish:
+            names.append('Other')
+        else:
+            names.append('Autre')
         values.append(otherValue)  
         
     # define colours to use

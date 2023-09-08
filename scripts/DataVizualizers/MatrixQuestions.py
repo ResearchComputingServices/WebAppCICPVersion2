@@ -13,6 +13,7 @@ def GetSubQuestionResponseDict(listOfUserResponses):
             subQResponseDict[response] += 1
         else:
             subQResponseDict[response] = 1
+    print("subQResponseDict",subQResponseDict)
     
     return subQResponseDict
 
@@ -39,17 +40,53 @@ def VisualizeMatrixQuestion(question,
     subQuestionsQuerySet = QuestionTable.objects.filter(parentQuestionID=question)
     
     totalResponses = numOfRespondents
+
+ 
     
-    
-    for r in userResponses:
-        subQ = subQuestionsQuerySet.filter(id=r.questionID.id).first()
+    # for r in userResponses:
+    #     subQ = subQuestionsQuerySet.filter(id=r.questionID.id).first()
         
-        if subQ.questionTextEnglish in responseDict.keys():
-            choice = ChoiceTable.objects.filter(questionID=subQ.id, recode = r.answerValue).first()
+    #     if subQ.questionTextEnglish in responseDict.keys():
+    #         choice = ChoiceTable.objects.filter(questionID=subQ.id, recode = r.answerValue).first()
             
-            responseDict[subQ.questionTextEnglish].append(choice.choiceTextEnglish)
+    #         choiceText = choice.choiceTextEnglish
+    #         if not isEnglish:
+    #             choiceText = choice.choiceTextFrench
+
+    #         responseDict[subQ.questionTextEnglish].append(choiceText)
+            
+    #     else:
+    #         print("responseDict.keys()",responseDict.keys())
+    #         responseDict[subQ.questionTextEnglish] = []
+
+    for r in userResponses:
+
+        subQ = subQuestionsQuerySet.filter(id=r.questionID.id).first()        
+
+        questionText = subQ.questionTextEnglish
+        if not isEnglish:
+            questionText = subQ.questionTextFrench       
+
+        if questionText in responseDict.keys():
+
+            choice = ChoiceTable.objects.filter(questionID=subQ.id, recode = r.answerValue).first()            
+
+            choiceText = choice.choiceTextEnglish
+
+            if not isEnglish:
+                choiceText = choice.choiceTextFrench         
+
+            responseDict[questionText].append(choiceText)
+
         else:
-            responseDict[subQ.questionTextEnglish] = []
+            responseDict[questionText] = []
+            choice = ChoiceTable.objects.filter(questionID=subQ.id, recode = r.answerValue).first() 
+            choiceText = choice.choiceTextEnglish
+
+            if not isEnglish:
+                choiceText = choice.choiceTextFrench        
+
+            responseDict[questionText].append(choiceText)
     
     # need to turn the responseDict into a dictionary of dictionarys.
     # first dictionary key value pair is subQustionText:dict_2
