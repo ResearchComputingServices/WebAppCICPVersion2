@@ -1,198 +1,222 @@
 <!DOCTYPE html>
-{% load static %}
-{% load i18n %}
-{% load l10n %}
+{% load static %} {% load i18n %} {% load l10n %}
 <html lang="en">
     <head>
-        <link rel="icon"
-              href="{% static 'webpage_images/favicon.ico' %}"
-              type="image/x-icon"/>
-        <title>
-            {% block title %}
-                CICP-PCPOB
-            {% endblock title %}
-        </title>
+        <link rel="icon" href="{% static 'webpage_images/favicon.ico' %}" type="image/x-icon"/>
+        <title>{% block title %} CICP-PCPOB {% endblock title %}</title>
         <meta charset="UTF-8"/>
         <meta name="description" content="Main Website"/>
         <meta name="keywords" content="HTML, CSS, JavaScript"/>
         <meta name="author" content="Priyanka"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         {% block styles %}
-            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
-            <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css"
-                  rel="Stylesheet"
-                  type="text/css"/>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+            <link rel="Stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/base/jquery-ui.css" type="text/css"/>
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/css/splide.min.css">
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
             <link rel="stylesheet" href="{% static 'css/style.css' %}"/>
             <link rel="stylesheet" href="{% static 'css/sidebar.css' %}"/>
         {% endblock styles %}
     </head>
     <body>
         <div id="loader" class="center"></div>
-        <div>
-            {% include "navbar.html"%}         
+        
+        <div class="row">
+            <div class="col-sm-12 text-white">{% include "navbar.html" %}</div>
         </div>
         
-        <div id="sidebar" class="sidebar">
+        <div class="row">
             {%if filtered %}
-           
-                <div class="filterbox">
-                    <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
-                    <form method="get">
-                        {% csrf_token %}                   
-                            <div class="form-container">
-                                {{province_form_filter.as_div}}
-                                {% comment %} {{org_size_form_filter.as_div}} {% endcomment %}
-                                {{age_form_filter.as_div}}
-                                {{expenditure_form_filter.as_div}}
-                                {{region_form_filter.as_div}}
-                                {{subsample_form_filter.as_div}}
-                            </div>
+            <div class="col-sm-12 col-md-3">
+                <div id="sidebar" class="sidebar d-none d-sm-none d-md-block">
+                        <div class="filterbox">
+                            <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
+                            <form method="get">
+                                {% csrf_token %}                   
+                                    <div class="form-container">
+                                        {{province_form_filter.as_div}}
+                                        {% comment %} {{org_size_form_filter.as_div}} {% endcomment %}
+                                        {{age_form_filter.as_div}}
+                                        {{expenditure_form_filter.as_div}}
+                                        {{region_form_filter.as_div}}
+                                        {{subsample_form_filter.as_div}}
+                                    </div>
 
-                            <div id="secsearch">
-                                <input class="form-input" type="submit" value="{% translate "Search" %}" onclick="checkFilters()"/>
-                                <input type="reset" value="{% translate "Reset" %}">
-                            </div>
+                                    <div id="secsearch">
+                                        <input class="form-input bg-red" type="submit" value="{% translate "Search" %}" onclick="checkFilters()"/>
+                                        <input class="bg-red" type="reset" value="{% translate "Reset" %}">
+                                    </div>
 
-                        {% if reportDate %}                  
-                            <input type="hidden" name="report_date" value={{reportDate}} />
+                                {% if reportDate %}                  
+                                    <input type="hidden" name="report_date" value={{reportDate}} />
 
-                        {% elif questionTheme %}   
-                            <input type="hidden" name="theme" value={{questionTheme}} />
+                                {% elif questionTheme %}   
+                                    <input type="hidden" name="theme" value={{questionTheme}} />
 
-                        {% endif %}
-                    </form>
+                                {% endif %}
+                            </form>
+                        </div>
                 </div>
-            {% endif %}
-        </div>
-
-
-        {% comment %} ------------------------------------------------------------------------------------------ {% endcomment %}
-        <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span>
-        <div id="heading" class="justify-content-center mx-auto">
-            {% if wednesday_date %}
-                <h4>
-                    <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans %} {{wednesday_date}}{% endblocktrans %}</center></strong>
-                </h4>
-            {% endif %}
-            {% if friday_text_date %}
-                <h4>
-                    <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date}}{% endblocktrans %}</center></strong>
-                </h4>
-            {% endif %}
-            {%if YearandWeek %}
-            <h5 id="datesubtheme">
-                <strong><center>
-                {{ YearandWeek }}</center></strong>
-            </h5>
-            {% endif %}
-            {% if subTheme %} 
-            <h5 id="datesubtheme">
-                <strong><center>{% translate "Subtheme -" %}
-                {{ subTheme }}</center></strong>
-            </h5>
-            {% endif %}
-           {% if questionTheme %} 
-            <h4>
-                <strong><center>{% translate "Theme -" %}
-                {{ questionTheme }}</center></strong>
-            </h4>
-            {% endif %}
-        </div>
-                {%if 'latestreport' not in window.location.href %}
-                <div class="selected-filters">
-            
-                    {% translate "Filters Selected:"%}
-                    {% if locations %}
-                    <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
-                    {% endif %}
-                    {%if orgSizes %}
-                    <strong>{% translate "Size:"%}</strong><i>{{orgSizes}}</i>
-                    {% endif %}
-                    {% if age %}
-                    <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
-                    {% endif %}
-
+                <!-- <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span> -->
+            </div>
+            <!-- OFFCANVAS -->
+            <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+                <div class="offcanvas-header">
+                    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
+                <div class="offcanvas-body">
+                    <div id="sidebar" class="sidebar">
+                        <div class="filterbox">
+                            <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
+                            <form method="get">
+                                {% csrf_token %}                   
+                                    <div class="form-container">
+                                        {{province_form_filter.as_div}}
+                                        {% comment %} {{org_size_form_filter.as_div}} {% endcomment %}
+                                        {{age_form_filter.as_div}}
+                                        {{expenditure_form_filter.as_div}}
+                                        {{region_form_filter.as_div}}
+                                        {{subsample_form_filter.as_div}}
+                                    </div>
 
-                {% endif %}
-        
-        <main class="main-content" id="main">
-            {% if info %}
-                <div class="container">
-                    <div id="infocard"
-                         class="h-100 d-flex align-items-center justify-content-center">
-                        <div class="card text-center">
-                            <div class="card-header text-light">{% translate "Alert!!" %}</div>
-                            <div class="card-body">
-                                <p class="card-title ">
-                                    <p class="card-text text-light">{{ info }}</p>
-                                </p>
-                                <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
-                            </div>
+                                    <div id="secsearch">
+                                        <input class="form-input bg-red" type="submit" value="{% translate "Search" %}" onclick="checkFilters()"/>
+                                        <input class="bg-red" type="reset" value="{% translate "Reset" %}">
+                                    </div>
+
+                                {% if reportDate %}                  
+                                    <input type="hidden" name="report_date" value={{reportDate}} />
+
+                                {% elif questionTheme %}   
+                                    <input type="hidden" name="theme" value={{questionTheme}} />
+
+                                {% endif %}
+                            </form>
                         </div>
                     </div>
                 </div>
-            {% else %}
-                {% if errors %}
+            </div>
+            {% endif %}
+
+            <div class="col-sm-12 col-md-9">
+                <!-- OFFCANVAS BUTTON -->
+                {%if filtered %}
+                <button class="btn d-md-none d-sm-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa fa-bars fa-border fa-2x" aria-hidden="true"></i></button>
+                {% endif %}
+                
+                <div id="heading" class="justify-content-center mx-auto">
+                    {% if wednesday_date %}
+                        <h4>
+                            <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans %} {{wednesday_date}}{% endblocktrans %}</center></strong>
+                        </h4>
+                    {% endif %}
+                    {% if friday_text_date %}
+                        <h4>
+                            <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date}}{% endblocktrans %}</center></strong>
+                        </h4>
+                    {% endif %}
+                    {%if YearandWeek %}
+                        <h5 id="datesubtheme">
+                            <strong><center>{{ YearandWeek }}</center></strong>
+                        </h5>
+                    {% endif %}
+                    {% if subTheme %} 
+                        <h5 id="datesubtheme">
+                            <strong><center>{% translate "Subtheme -" %}{{ subTheme }}</center></strong>
+                        </h5>
+                    {% endif %}
+                    {% if questionTheme %} 
+                        <h4>
+                            <strong><center>{% translate "Theme -" %}{{ questionTheme }}</center></strong>
+                        </h4>
+                    {% endif %}
+                </div>
+            
+                {%if 'latestreport' not in window.location.href %}
+                    <div class="selected-filters">
+                        {% translate "Filters Selected:"%}
+                        {% if locations %}
+                        <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
+                        {% endif %}
+                        {%if orgSizes %}
+                        <strong>{% translate "Size:"%}</strong><i>{{orgSizes}}</i>
+                        {% endif %}
+                        {% if age %}
+                        <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
+                        {% endif %}
+                    </div>
+                {% endif %}
+            
+                <main class="container" id="main">
+                    {% if info %}
                         <div class="container">
-                            <div id="errorcard"
-                                 class="d-flex align-items-center justify-content-center h-100">
+                            <div id="infocard" class="h-100 d-flex align-items-center justify-content-center">
                                 <div class="card text-center">
                                     <div class="card-header text-light">{% translate "Alert!!" %}</div>
                                     <div class="card-body">
-                                        <p class="card-text text-light">
-                                            {% for error in errors %}
-                                                <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
-                                            {% endfor %}
+                                        <p class="card-title ">
+                                            <p class="card-text text-light">{{ info }}</p>
                                         </p>
                                         <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                {% else %}
-                {% if  questionTheme%}
-                   <div id="image-slider" class="splide">
-                         <div class="splide__track">
-                            <ul class="splide__list">
-                                {% for subfolder in image_filepaths %}
-                                    <li class="splide__slide">
-                                        <strong><center><h5 id="weekheading">{{ subfolder.fullname }}</h5></center></strong>
-                                        <strong><center><h5 id="weekheading">Sub-Theme:{{ subfolder.subtheme }}</h5></center></strong>
-                                        <ul>
-                                            {% for image_url in subfolder.images %}
-                                                <li><img src="{{ image_url }}" alt="Image"></li>
-                                            {% endfor %}
-                                        </ul>
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                    </div>
-                {% else %}
-                <li class="splide__slide">
-                {% for image_url in image_filepaths %}                                    
-                    <img id="dateimage"src={{ image_url }} alt="Image">
-                {% endfor %}
-                 </li>
-                {% endif %}
-                {% endif %}
-            {% endif %}
-        </main>
+                    {% else %}
+                        {% if errors %}
+                                <div class="container">
+                                    <div id="errorcard"
+                                        class="d-flex align-items-center justify-content-center h-100">
+                                        <div class="card text-center">
+                                            <div class="card-header text-light">{% translate "Alert!!" %}</div>
+                                            <div class="card-body">
+                                                <p class="card-text text-light">
+                                                    {% for error in errors %}
+                                                        <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
+                                                    {% endfor %}
+                                                </p>
+                                                <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        {% else %}
+                        {% if  questionTheme%}
+                        <div id="image-slider" class="splide">
+                                <div class="splide__track">
+                                    <ul class="splide__list">
+                                        {% for subfolder in image_filepaths %}
+                                            <li class="splide__slide">
+                                                <strong><center><h5 id="weekheading">{{ subfolder.fullname }}</h5></center></strong>
+                                                <strong><center><h5 id="weekheading">Sub-Theme:{{ subfolder.subtheme }}</h5></center></strong>
+                                                <ul>
+                                                    {% for image_url in subfolder.images %}
+                                                        <li><img src="{{ image_url }}" alt="Image"></li>
+                                                    {% endfor %}
+                                                </ul>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                        {% else %}
+                        <li class="splide__slide">
+                        {% for image_url in image_filepaths %}                                    
+                            <img id="dateimage"src={{ image_url }} alt="Image">
+                        {% endfor %}
+                        </li>
+                        {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </main>
+            </div>
+        </div>
         {% block scripts %}
-            <script src="https://kit.fontawesome.com/17431f7655.js"
-                    crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/17431f7655.js" crossorigin="anonymous"></script>
             <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-                    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-                    crossorigin="anonymous"></script>
-
-            {% comment %} DatePicker {% endcomment %}
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
-                    integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-                    crossorigin="anonymous"></script>
+            <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
             <script src="{% url 'javascript-catalog' %}"></script>
             <script src="{% static 'js/datepicker.js' %}"></script>

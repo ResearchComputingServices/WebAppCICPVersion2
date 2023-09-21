@@ -22,7 +22,6 @@
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.3);
     background-color: black;
     color: white;
-    margin-top: 2%;
     font-family: Arial;
 }
 
@@ -79,7 +78,6 @@ h5 {
 }
 
 #id_report_date {
-    margin-left: 25%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 }
 

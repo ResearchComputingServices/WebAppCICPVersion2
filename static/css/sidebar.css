@@ -1,5 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Poppins&display=swap');
 
+.sidebar {
+    background-color: #0f0e0e;
+    color: white;
+    padding: 20px 20px 40px 20px;
+    font-size: 15px;
+    overflow-y: auto;
+    font-family: Arial;
+}
+
 #filterText {
     background-color: #e91c24;
     color: #0f0e0e;

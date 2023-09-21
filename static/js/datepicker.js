@@ -1,8 +1,4 @@
 $(document).ready($(function () {
-
-
-
-
     var fridayDate = function () {
         var curr;
         curr = new Date();
