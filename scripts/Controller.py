@@ -23,11 +23,11 @@ def GetUserQuerySet(aQuery):
             qObject |= Q(province=loc) 
         userQuerySet = userQuerySet.filter(qObject)
        
-    if len(aQuery.organizationSizes) != 0: 
-        qObject = Q()
-        for size in aQuery.organizationSizes:
-            qObject |= Q(size=size) 
-        userQuerySet = userQuerySet.filter(qObject)
+    # if len(aQuery.organizationSizes) != 0: 
+    #     qObject = Q()
+    #     for size in aQuery.organizationSizes:
+    #         qObject |= Q(size=size) 
+    #     userQuerySet = userQuerySet.filter(qObject)
     
     if len(aQuery.languagePreference) != 0:        
         qObject = Q()
@@ -186,7 +186,7 @@ def GenerateDefaultFigures(aSurvey):
     aQuery = FrontEndQuery()
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
     aQuery.week = aSurvey.surveyWeek
-    aQuery.subTheme = aSurvey.surveysubTheme
+    aQuery.subTheme = aSurvey.SurveysubThemeEnglish
     
 
     themeString = str(aSurvey.surveyTheme)
@@ -401,7 +401,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('id',aQuery.qualtricsSurveyID)
     print('themes',aQuery.questionThemes)
     print('location',aQuery.locations)
-    print('size',aQuery.organizationSizes)
+    # print('size',aQuery.organizationSizes)
     print('lang',aQuery.languagePreference)
     print('field',aQuery.fieldOfWork)
     print('age',aQuery.age)

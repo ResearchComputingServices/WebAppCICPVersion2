@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-08-15 11:02-0400\n"
+"POT-Creation-Date: 2023-09-14 10:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,31 +60,31 @@ msgstr "Québec"
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: WebsiteApp/forms.py:20 WebsiteApp/views.py:173
+#: WebsiteApp/forms.py:20 WebsiteApp/views.py:211
 msgid "Collaboration"
 msgstr "Collaboration"
 
-#: WebsiteApp/forms.py:21 WebsiteApp/views.py:167
+#: WebsiteApp/forms.py:21 WebsiteApp/views.py:205
 msgid "Governance"
 msgstr "Gouvernance"
 
-#: WebsiteApp/forms.py:22 WebsiteApp/views.py:176
+#: WebsiteApp/forms.py:22 WebsiteApp/views.py:214
 msgid "Challenges"
 msgstr "Défis"
 
-#: WebsiteApp/forms.py:23 WebsiteApp/views.py:164
+#: WebsiteApp/forms.py:23 WebsiteApp/views.py:202
 msgid "Funding"
 msgstr "Financement"
 
-#: WebsiteApp/forms.py:24 WebsiteApp/views.py:170
+#: WebsiteApp/forms.py:24 WebsiteApp/views.py:208
 msgid "Policy"
 msgstr "Politique"
 
-#: WebsiteApp/forms.py:25 WebsiteApp/views.py:179
+#: WebsiteApp/forms.py:25 WebsiteApp/views.py:217
 msgid "EDI"
 msgstr "EDI"
 
-#: WebsiteApp/forms.py:26 WebsiteApp/views.py:182
+#: WebsiteApp/forms.py:26 WebsiteApp/views.py:220
 msgid "Other"
 msgstr "Autre"
 
@@ -109,107 +109,202 @@ msgid "Large"
 msgstr "Grand"
 
 #: WebsiteApp/forms.py:40
-#, fuzzy
 msgid "Registered before 1990"
 msgstr "Immatriculé avant 1990"
 
 #: WebsiteApp/forms.py:41
-#, fuzzy
 msgid "Registered after 1990"
 msgstr "Immatriculé après 1990"
 
-#: WebsiteApp/forms.py:52
+#: WebsiteApp/forms.py:45
+msgid "Extra Small (Less than $100,000)"
+msgstr "Très petit (Moins de 100 000 $)"
+
+#: WebsiteApp/forms.py:46
+msgid "Small (Less than $400,000)"
+msgstr "Petit (Moins de 400 000 $)"
+
+#: WebsiteApp/forms.py:47
+msgid "Medium (Between $400,000-$850,000)"
+msgstr "Moyen (Entre 400 000 $ et 850 000 $)"
+
+#: WebsiteApp/forms.py:48
+msgid "Large (More than $850,000)"
+msgstr "Grand (plus de 850 000 $) "
+
+#: WebsiteApp/forms.py:49
+msgid "Extra Large (More than $2,000,000)"
+msgstr "Très grand (plus de 2 000 000 $)"
+
+#: WebsiteApp/forms.py:53
+msgid "West Coast"
+msgstr "Côte ouest"
+
+#: WebsiteApp/forms.py:54
+msgid "Prarie Provinces"
+msgstr "Provinces des Prairies"
+
+#: WebsiteApp/forms.py:55
+msgid "Central Canada"
+msgstr "Centre du Canada"
+
+#: WebsiteApp/forms.py:56
+msgid "Atlantic Region"
+msgstr "Région de l'Atlantique"
+
+#: WebsiteApp/forms.py:57
+msgid "North Canada"
+msgstr "Nord du Canada"
+
+#: WebsiteApp/forms.py:61
+msgid "Sub Sample 1"
+msgstr "Sous-échantillon 1"
+
+#: WebsiteApp/forms.py:62
+msgid "Sub Sample 2"
+msgstr "Sous-échantillon 2"
+
+#: WebsiteApp/forms.py:63
+msgid "Sub Sample 3"
+msgstr "Sous-échantillon 3"
+
+#: WebsiteApp/forms.py:64
+msgid "Sub Sample 4"
+msgstr "Sous-échantillon 4"
+
+#: WebsiteApp/forms.py:65
+msgid "Sub Sample 5"
+msgstr "Sous-échantillon 5"
+
+#: WebsiteApp/forms.py:66
+msgid "Sub Sample 6"
+msgstr "Sous-échantillon 6"
+
+#: WebsiteApp/forms.py:71
+msgid "Paid"
+msgstr "Payé"
+
+#: WebsiteApp/forms.py:72
+msgid "Volunteer Run"
+msgstr "Course des bénévoles"
+
+#: WebsiteApp/forms.py:79
 msgid "Province"
 msgstr "Province"
 
-#: WebsiteApp/forms.py:56
+#: WebsiteApp/forms.py:83
 msgid "Participant Language Preference"
 msgstr ""
 
-#: WebsiteApp/forms.py:60
+#: WebsiteApp/forms.py:87
 msgid "Size"
 msgstr "Taille"
 
-#: WebsiteApp/forms.py:64
+#: WebsiteApp/forms.py:91
 msgid "Age"
 msgstr "Âge"
 
-#: WebsiteApp/templates/index.html:40
+#: WebsiteApp/forms.py:95
+msgid "Expenditure"
+msgstr "Dépense"
+
+#: WebsiteApp/forms.py:99
+msgid "Subsample"
+msgstr "Sous-échantillon"
+
+#: WebsiteApp/forms.py:102
+msgid "Human Resources"
+msgstr "Ressources Humaines"
+
+#: WebsiteApp/forms.py:105
+msgid "Region"
+msgstr "Région"
+
+#: WebsiteApp/templates/index.html:41
 msgid "FILTER THIS REPORT BY"
 msgstr "FILTRER CE RAPPORT PAR"
 
-#: WebsiteApp/templates/index.html:50 WebsiteApp/templates/lpage.html:51
-#: WebsiteApp/templates/lpage.html:64 WebsiteApp/templates/sidebar.html:26
+#: WebsiteApp/templates/index.html:55 WebsiteApp/templates/lpage.html:78
+#: WebsiteApp/templates/lpage.html:91 WebsiteApp/templates/sidebar.html:26
 msgid "Search"
 msgstr "Recherche"
 
-#: WebsiteApp/templates/index.html:51 WebsiteApp/templates/lpage.html:52
-#: WebsiteApp/templates/lpage.html:65 WebsiteApp/templates/sidebar.html:27
+#: WebsiteApp/templates/index.html:56 WebsiteApp/templates/lpage.html:79
+#: WebsiteApp/templates/lpage.html:92 WebsiteApp/templates/sidebar.html:27
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: WebsiteApp/templates/index.html:69
+#: WebsiteApp/templates/index.html:74
 msgid "☰ Filters"
 msgstr "☰ FILTRES"
 
-#: WebsiteApp/templates/index.html:73
+#: WebsiteApp/templates/index.html:79
 msgid "Weekly Survey Distributed -"
 msgstr "Enquête hebdomadaire distribuée -"
 
-#: WebsiteApp/templates/index.html:73
+#: WebsiteApp/templates/index.html:79
 #, python-format
-msgid " %(wednesday_date)s"
+msgid "%(wednesday_date)s"
 msgstr "%(wednesday_date)s"
 
-#: WebsiteApp/templates/index.html:78
+#: WebsiteApp/templates/index.html:84
 msgid "Weekly Survey Published -"
 msgstr "Enquête hebdomadaire publiée -"
 
-#: WebsiteApp/templates/index.html:78
+#: WebsiteApp/templates/index.html:84
 #, python-format
 msgid "%(friday_text_date)s"
 msgstr "%(friday_text_date)s"
 
-#: WebsiteApp/templates/index.html:83
+#: WebsiteApp/templates/index.html:95
+msgid "Subtheme -"
+msgstr "Sous-thème -"
+
+#: WebsiteApp/templates/index.html:96
+#, python-format
+msgid "%(subTheme)s"
+msgstr "%(subTheme)s"
+
+#: WebsiteApp/templates/index.html:101
 msgid "Theme -"
 msgstr "Thème -"
 
-#: WebsiteApp/templates/index.html:91
+#: WebsiteApp/templates/index.html:109
 msgid "Filters Selected:"
 msgstr "Filtres sélectionnés :"
 
-#: WebsiteApp/templates/index.html:93
+#: WebsiteApp/templates/index.html:111
 #, fuzzy
 msgid "Province:"
 msgstr "Province"
 
-#: WebsiteApp/templates/index.html:96
+#: WebsiteApp/templates/index.html:114
 #, fuzzy
 msgid "Size:"
 msgstr "Taille"
 
-#: WebsiteApp/templates/index.html:99
+#: WebsiteApp/templates/index.html:117
 msgid "Age:"
 msgstr "Âge:"
 
-#: WebsiteApp/templates/index.html:112 WebsiteApp/templates/index.html:128
+#: WebsiteApp/templates/index.html:130 WebsiteApp/templates/index.html:146
 msgid "Alert!!"
 msgstr "Alerte!!"
 
-#: WebsiteApp/templates/index.html:117 WebsiteApp/templates/index.html:135
+#: WebsiteApp/templates/index.html:135 WebsiteApp/templates/index.html:153
 msgid "Go back"
 msgstr "Retourner"
 
-#: WebsiteApp/templates/index.html:132
+#: WebsiteApp/templates/index.html:150
 #, python-format
 msgid "%(error)s"
 msgstr "%(error)s"
 
-#: WebsiteApp/templates/lpage.html:44
+#: WebsiteApp/templates/lpage.html:71
 msgid "Select Report Date"
 msgstr "Sélectionnez la date du rapport"
 
-#: WebsiteApp/templates/lpage.html:57
+#: WebsiteApp/templates/lpage.html:84
 msgid "Select Weekly Theme"
 msgstr "Sélectionnez le thème hebdomadaire"
 
@@ -225,9 +320,17 @@ msgstr "Dernier rapport"
 msgid "Print Report"
 msgstr "Imprimer le rapport"
 
-#: WebsiteApp/views.py:78 WebsiteApp/views.py:214
+#: WebsiteApp/views.py:87 WebsiteApp/views.py:254
 msgid "NO REPORT PUBLISHED DURING THIS WEEK"
 msgstr "AUCUN RAPPORT PUBLIÉ AU COURS DE CETTE SEMAINE"
+
+#: WebsiteApp/views.py:189 WebsiteApp/views.py:418
+msgid "Year-"
+msgstr "Année-"
+
+#: WebsiteApp/views.py:189 WebsiteApp/views.py:418
+msgid "Week-"
+msgstr "Semaine-"
 
 #: cicp_env/lib/python3.10/site-packages/click/_termui_impl.py:496
 #, python-brace-format
@@ -598,11 +701,13 @@ msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
 msgstr ""
 
 #: cicp_env/lib/python3.10/site-packages/django/core/validators.py:389
+#: cicp_env/lib/python3.10/site-packages/djmoney/models/validators.py:51
 #, python-format
 msgid "Ensure this value is less than or equal to %(limit_value)s."
 msgstr ""
 
 #: cicp_env/lib/python3.10/site-packages/django/core/validators.py:398
+#: cicp_env/lib/python3.10/site-packages/djmoney/models/validators.py:43
 #, python-format
 msgid "Ensure this value is greater than or equal to %(limit_value)s."
 msgstr ""
@@ -786,8 +891,10 @@ msgid "“%(value)s” value must be a decimal number."
 msgstr ""
 
 #: cicp_env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1597
+#, fuzzy
+#| msgid "December"
 msgid "Decimal number"
-msgstr ""
+msgstr "Décembre"
 
 #: cicp_env/lib/python3.10/site-packages/django/db/models/fields/__init__.py:1754
 #, python-format
@@ -1269,53 +1376,51 @@ msgstr ""
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:25
 msgid "January"
-msgstr ""
+msgstr "Janvier"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:26
 msgid "February"
-msgstr ""
+msgstr "Février"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:27
-#, fuzzy
-#| msgid "Search"
 msgid "March"
-msgstr "Recherche"
+msgstr "Mars"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:28
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:29
 msgid "May"
-msgstr ""
+msgstr "Peut"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:30
 msgid "June"
-msgstr ""
+msgstr "Juin"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:31
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:32
 msgid "August"
-msgstr ""
+msgstr "Août"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:33
 msgid "September"
-msgstr ""
+msgstr "Septembre"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:34
 msgid "October"
-msgstr ""
+msgstr "Octobre"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:35
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:36
 msgid "December"
-msgstr ""
+msgstr "Décembre"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:39
 msgid "jan"
@@ -1334,8 +1439,10 @@ msgid "apr"
 msgstr ""
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:43
+#, fuzzy
+#| msgid "May"
 msgid "may"
-msgstr ""
+msgstr "Peut"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:44
 msgid "jun"
@@ -1377,30 +1484,38 @@ msgstr ""
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:55
 #, fuzzy
-#| msgid "Search"
+#| msgid "March"
 msgctxt "abbrev. month"
 msgid "March"
-msgstr "Recherche"
+msgstr "Mars"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:56
+#, fuzzy
+#| msgid "April"
 msgctxt "abbrev. month"
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:57
+#, fuzzy
+#| msgid "May"
 msgctxt "abbrev. month"
 msgid "May"
-msgstr ""
+msgstr "Peut"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:58
+#, fuzzy
+#| msgid "June"
 msgctxt "abbrev. month"
 msgid "June"
-msgstr ""
+msgstr "Juin"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:59
+#, fuzzy
+#| msgid "July"
 msgctxt "abbrev. month"
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:60
 msgctxt "abbrev. month"
@@ -1428,66 +1543,88 @@ msgid "Dec."
 msgstr ""
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:67
+#, fuzzy
+#| msgid "January"
 msgctxt "alt. month"
 msgid "January"
-msgstr ""
+msgstr "Janvier"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:68
+#, fuzzy
+#| msgid "February"
 msgctxt "alt. month"
 msgid "February"
-msgstr ""
+msgstr "Février"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:69
 #, fuzzy
-#| msgid "Search"
+#| msgid "March"
 msgctxt "alt. month"
 msgid "March"
-msgstr "Recherche"
+msgstr "Mars"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:70
+#, fuzzy
+#| msgid "April"
 msgctxt "alt. month"
 msgid "April"
-msgstr ""
+msgstr "Avril"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:71
+#, fuzzy
+#| msgid "May"
 msgctxt "alt. month"
 msgid "May"
-msgstr ""
+msgstr "Peut"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:72
+#, fuzzy
+#| msgid "June"
 msgctxt "alt. month"
 msgid "June"
-msgstr ""
+msgstr "Juin"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:73
+#, fuzzy
+#| msgid "July"
 msgctxt "alt. month"
 msgid "July"
-msgstr ""
+msgstr "Juillet"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:74
+#, fuzzy
+#| msgid "August"
 msgctxt "alt. month"
 msgid "August"
-msgstr ""
+msgstr "Août"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:75
+#, fuzzy
+#| msgid "September"
 msgctxt "alt. month"
 msgid "September"
-msgstr ""
+msgstr "Septembre"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:76
+#, fuzzy
+#| msgid "October"
 msgctxt "alt. month"
 msgid "October"
-msgstr ""
+msgstr "Octobre"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:77
+#, fuzzy
+#| msgid "November"
 msgctxt "alt. month"
 msgid "November"
-msgstr ""
+msgstr "November"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/dates.py:78
+#, fuzzy
+#| msgid "December"
 msgctxt "alt. month"
 msgid "December"
-msgstr ""
+msgstr "Décembre"
 
 #: cicp_env/lib/python3.10/site-packages/django/utils/ipv6.py:8
 msgid "This is not a valid IPv6 address."
@@ -1722,8 +1859,42 @@ msgstr ""
 msgid "Template not found."
 msgstr ""
 
+#: cicp_env/lib/python3.10/site-packages/djmoney/contrib/django_rest_framework/fields.py:34
+msgid "{currency!r} is not a valid currency"
+msgstr ""
+
+#~ msgid "Insufficient survey data, try relaxing search constraints"
+#~ msgstr ""
+#~ "Données d'enquête insuffisantes, essayez d'assouplir les contraintes de "
+#~ "recherche"
+
+#~ msgid "Insufficient question data, try relaxing search constraints"
+#~ msgstr ""
+#~ "Données de question insuffisantes, essayez d'assouplir les contraintes de "
+#~ "recherche"
+
+#~ msgid "Insufficient user data, try relaxing search constraints"
+#~ msgstr ""
+#~ "Données utilisateur insuffisantes, essayez d'assouplir les contraintes de "
+#~ "recherche"
+
+#~ msgid "Insufficient question data"
+#~ msgstr "Données de question insuffisantes"
+
 #, fuzzy
-#~| msgid "Language"
+#~| msgid "Subtheme -"
+#~ msgid "Subtheme - "
+#~ msgstr "Sous-thème -"
+
+#, python-format
+#~ msgid "%(subfolder.fullname)s"
+#~ msgstr "%(subfolder.fullname)s"
+
+#, fuzzy, python-format
+#~ msgid "Subtheme -%(subfolder.subtheme)s"
+#~ msgstr "Sous-thème -%(subfolder.subtheme)s"
+
+#, fuzzy
 #~ msgid "Language:"
 #~ msgstr "Langue"
 
@@ -1741,19 +1912,6 @@ msgstr ""
 
 #~ msgid "Language"
 #~ msgstr "Langue"
-
-#~ msgid "Insufficient survey data, try relaxing search constraints"
-#~ msgstr ""
-#~ "Données d'enquête insuffisantes, essayez d'assouplir les contraintes de "
-#~ "recherche"
-
-#~ msgid "Insufficient question data, try relaxing search constraints"
-#~ msgstr ""
-#~ "Données de question insuffisantes, essayez d'assouplir les contraintes de "
-#~ "recherche"
-
-#~ msgid "Insufficient question data"
-#~ msgstr "Données de question insuffisantes"
 
 #~ msgid "Report Results"
 #~ msgstr "Résultats du rapport"

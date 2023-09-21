@@ -167,11 +167,13 @@ class FrontEndQuery:
     
     # Filter on User
     locations: List = field(default_factory=lambda: []) 
-    organizationSizes: List = field(default_factory=lambda: []) 
+    # organizationSizes: List = field(default_factory=lambda: []) 
     languagePreference: List = field(default_factory=lambda: []) 
     fieldOfWork: List = field(default_factory=lambda: [])
     age: List = field(default_factory=lambda: [])        
-    # week : List = field(default_factory=lambda: [])        
+    expenditure : List = field(default_factory=lambda: [])        
+    subsample : List = field(default_factory=lambda: [])    
+    humanresources : List = field(default_factory=lambda: [])    
 
     siteLanguage: str = ''
     
@@ -181,10 +183,12 @@ class FrontEndQuery:
         
         if (len(self.questionThemes) == 0 and 
             len(self.locations) == 0 and 
-            len(self.organizationSizes) == 0 and
+            # len(self.organizationSizes) == 0 and
             len(self.fieldOfWork) == 0 and
             len(self.age) == 0 and
-            # len(self.week) == 0 and
+            len(self.expenditure) == 0 and
+            len(self.subsample) == 0 and
+            len(self.humanresources) == 0 and
             self.qualtricsSurveyID == ''):
                 isDateOnly = True
         
@@ -196,10 +200,12 @@ class FrontEndQuery:
         
         if (len(self.date) == 0 and 
             len(self.locations) == 0 and 
-            len(self.organizationSizes) == 0 and
+            # len(self.organizationSizes) == 0 and
             len(self.fieldOfWork) == 0 and
             len(self.age) == 0 and
-            # len(self.week) == 0 and
+            len(self.expenditure) == 0 and
+            len(self.subsample) == 0 and
+            len(self.humanresources) == 0 and
             len(self.questionThemes) != 0):
                 isThemeOnly = True
         

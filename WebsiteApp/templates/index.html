@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load static %}
+{% load app_tags %}
 {% load i18n %}
 {% load l10n %}
 <html lang="en">
@@ -72,12 +73,13 @@
         <div id="heading" class="justify-content-center mx-auto">
             {% if wednesday_date %}
                 <h4>
-                    <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans %} {{wednesday_date}}{% endblocktrans %}</center></strong>
+                    
+                    <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans with wednesday_date|template_trans as wednesday_date %}{{ wednesday_date }}{% endblocktrans %}</center></strong>
                 </h4>
             {% endif %}
             {% if friday_text_date %}
                 <h4>
-                    <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date}}{% endblocktrans %}</center></strong>
+                    <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans with friday_text_date|template_trans as friday_text_date %}{{ friday_text_date }}{% endblocktrans %}</center></strong>
                 </h4>
             {% endif %}
             {%if YearandWeek %}
@@ -89,7 +91,7 @@
             {% if subTheme %} 
             <h5 id="datesubtheme">
                 <strong><center>{% translate "Subtheme -" %}
-                {{ subTheme }}</center></strong>
+                {% blocktrans %}{{ subTheme }}{% endblocktrans %}</center></strong>
             </h5>
             {% endif %}
            {% if questionTheme %} 
@@ -143,7 +145,7 @@
                                     <div class="card-body">
                                         <p class="card-text text-light">
                                             {% for error in errors %}
-                                                <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
+                                                {% blocktrans with error|template_trans as error %}{{ error }}{% endblocktrans %}
                                             {% endfor %}
                                         </p>
                                         <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
@@ -159,7 +161,7 @@
                                 {% for subfolder in image_filepaths %}
                                     <li class="splide__slide">
                                         <strong><center><h5 id="weekheading">{{ subfolder.fullname }}</h5></center></strong>
-                                        <strong><center><h5 id="weekheading">Sub-Theme:{{ subfolder.subtheme }}</h5></center></strong>
+                                        <strong><center><h5 id="weekheading">Subtheme -{{ subfolder.subtheme }}</h5></center></strong>
                                         <ul>
                                             {% for image_url in subfolder.images %}
                                                 <li><img src="{{ image_url }}" alt="Image"></li>

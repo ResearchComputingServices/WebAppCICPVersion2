@@ -12,11 +12,12 @@ class SurveyTable(models.Model):
     releaseDate = models.DateField()
     fetchedDate = models.DateField(null=True,blank=True)
     surveyTheme = models.CharField(max_length=30)
-    surveysubTheme = models.CharField(max_length=50)
+    surveysubThemeEnglish = models.CharField(max_length=150)
+    surveysubThemeFrench = models.CharField(max_length=150)
     surveyWeek = models.CharField(max_length=50)
        
     def __str__(self):
-        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate} surveyTheme: {self.surveyTheme} surveysubTheme: {self.surveysubTheme}"
+        return f"id: {self.id} surveyID: {self.qualtricsSurveyID} releaseDate: {self.releaseDate} surveyTheme: {self.surveyTheme} surveysubThemeEnglish: {self.surveysubThemeEnglish} surveysubThemeFrench: {self.surveysubThemeFrench}"
     
 ########################################################################################################################################################
             

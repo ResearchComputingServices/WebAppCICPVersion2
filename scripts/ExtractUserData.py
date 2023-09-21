@@ -186,24 +186,19 @@ def GetNumber(token):
 ##################################################################################################################################
 
 def GetExpenditure(expenditure):
-
-    expenditure = expenditure.replace(",","")
-
-    substringList = [',,,','0.0,,,',',,',',',""]
     
-    if expenditure not in substringList:
-        if float(expenditure) <= 101045:
-            expenditure = "XS"  # Extra Small
-        elif float(expenditure) <= 381824:
-            expenditure = "SM"  # Small
-        elif float(expenditure) <= 860788:
-            expenditure = "MD"  # Medium
-        elif float(expenditure) <= 2155265:
-            expenditure = "LG"  # Large
-        elif float(expenditure) <= 338781069:
-            expenditure = "XL" # Extra Large
-        else:
-            expenditure = "XS" #Make it a zero by adding XS
+    if float(expenditure) <= 101045:
+        expenditure = "XS"  # Extra Small
+    elif float(expenditure) <= 381824:
+        expenditure = "SM"  # Small
+    elif float(expenditure) <= 860788:
+        expenditure = "MD"  # Medium
+    elif float(expenditure) <= 2155265:
+        expenditure = "LG"  # Large
+    elif float(expenditure) <= 338781069:
+        expenditure = "XL" # Extra Large
+    else:
+        expenditure = "XS" #Make it a zero by adding XS
     
 
     return (expenditure)
@@ -243,6 +238,7 @@ def run(*args):
 
     df = pd.read_csv(userDataFilePath,sep='^',header=None,encoding='utf-8')
     df = df.fillna('')
+    print(df.head())
         
     for index,line in df.iterrows(): 
         # Get the tokens from the input line separated by ^ symbol
@@ -261,7 +257,7 @@ def run(*args):
         pte = GetNumber(line[12])
         jobTitle = line[13]
         region = line[14]
-        expenditure = GetExpenditure(line[16])
+        expenditure = GetExpenditure(line[15])
         
        # Create an instance of the user model        
         user = UserTable()
