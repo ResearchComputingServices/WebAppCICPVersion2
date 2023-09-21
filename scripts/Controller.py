@@ -186,7 +186,7 @@ def GenerateDefaultFigures(aSurvey):
     aQuery = FrontEndQuery()
     aQuery.qualtricsSurveyID = aSurvey.qualtricsSurveyID
     aQuery.week = aSurvey.surveyWeek
-    aQuery.subTheme = aSurvey.SurveysubThemeEnglish
+    aQuery.subTheme = aSurvey.surveysubThemeEnglish
     
 
     themeString = str(aSurvey.surveyTheme)

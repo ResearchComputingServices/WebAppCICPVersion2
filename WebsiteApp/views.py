@@ -396,7 +396,6 @@ def get_fridaydate_from_todays_date(todays_date):
 def getWeeklySubTheme(surveyWeek,releaseDate,language):
 
     if surveyWeek:
-        surveyWeek = surveyWeek.replace("Y1","Y01")
         if language == 'fr':
             subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeFrench')
             subtheme = subTheme[0]['surveysubThemeFrench']
