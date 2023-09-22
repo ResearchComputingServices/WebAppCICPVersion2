@@ -11,3 +11,4 @@ token
 media/
 WebAppCICPVersion2/settings.py
 InteractiveDB/migrations/
+.DS_Store

@@ -1,6 +1,6 @@
 from django.db import models
 import pandas as pd
-from djmoney.models.fields import MoneyField
+# from djmoney.models.fields import MoneyField
 
 # on_delete defines what to do with the current table if the foreign key is deleted
 
