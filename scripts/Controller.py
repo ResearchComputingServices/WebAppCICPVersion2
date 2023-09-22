@@ -216,7 +216,7 @@ def GenerateDefaultFigures(aSurvey):
     # The root can access the folder in media only if we provide the path starting with var folder.
     if len(listOfImageFilePaths) != 0:
         for file in listOfImageFilePaths:
-            file = '/Users/jaspalsingh/Work/git/WebAppCICPVersion2/var/www/html/'+ file
+            file = '/var/www/html/'+ file
             shutil.copy(file,saveToThemeDirPath)
         print("Copied files to English Theme Folder")
     
@@ -240,7 +240,7 @@ def GenerateDefaultFigures(aSurvey):
     # The root can access the folder in media only if we provide the path starting with var folder.
     if len(listOfImageFilePaths) != 0:
         for file in listOfImageFilePaths:
-            file = '/Users/jaspalsingh/Work/git/WebAppCICPVersion2/var/www/html/'+ file
+            file = '/var/www/html/'+ file
             shutil.copy(file,saveToThemeDirPath)
         print("Copied files to French Theme Folder")
     
