@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-{% load static %} {% load i18n %} {% load l10n %}
+{% load static %} {% load app_tags %} {% load i18n %} {% load l10n %}
 <html lang="en">
     <head>
         <link rel="icon" href="{% static 'webpage_images/favicon.ico' %}" type="image/x-icon"/>
@@ -21,51 +21,54 @@
     <body>
         <div id="loader" class="center"></div>
         
-        <div class="row">
+        <!-- <div class="row">
             <div class="col-sm-12 text-white">{% include "navbar.html" %}</div>
-        </div>
+        </div> -->
+        <header>
+            {% include "navbar.html" %}
+        </header>
         
+        <div class="container-fluid">
         <div class="row">
             {%if filtered %}
-            <div class="col-sm-12 col-md-3">
-                <div id="sidebar" class="sidebar d-none d-sm-none d-md-block">
-                        <div class="filterbox">
-                            <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
-                            <form method="get">
-                                {% csrf_token %}                   
-                                    <div class="form-container">
-                                        {{province_form_filter.as_div}}
-                                        {% comment %} {{org_size_form_filter.as_div}} {% endcomment %}
-                                        {{age_form_filter.as_div}}
-                                        {{expenditure_form_filter.as_div}}
-                                        {{region_form_filter.as_div}}
-                                        {{subsample_form_filter.as_div}}
-                                    </div>
+            <nav id="sidebar1" class="col-md-3 d-none d-sm-none d-md-block sidebar collapse">
+                <div class="filterbox">
+                    <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
+                    <form method="get">
+                        {% csrf_token %}                   
+                            <div class="form-container">
+                                {{province_form_filter.as_div}}
+                                {% comment %} {{org_size_form_filter.as_div}} {% endcomment %}
+                                {{age_form_filter.as_div}}
+                                {{expenditure_form_filter.as_div}}
+                                {{region_form_filter.as_div}}
+                                {{subsample_form_filter.as_div}}
+                            </div>
 
-                                    <div id="secsearch">
-                                        <input class="form-input bg-red" type="submit" value="{% translate "Search" %}" onclick="checkFilters()"/>
-                                        <input class="bg-red" type="reset" value="{% translate "Reset" %}">
-                                    </div>
+                            <div id="secsearch">
+                                <input class="form-input bg-red" type="submit" value="{% translate "Search" %}" onclick="checkFilters()"/>
+                                <input class="bg-red" type="reset" value="{% translate "Reset" %}">
+                            </div>
 
-                                {% if reportDate %}                  
-                                    <input type="hidden" name="report_date" value={{reportDate}} />
+                        {% if reportDate %}                  
+                            <input type="hidden" name="report_date" value={{reportDate}} />
 
-                                {% elif questionTheme %}   
-                                    <input type="hidden" name="theme" value={{questionTheme}} />
+                        {% elif questionTheme %}   
+                            <input type="hidden" name="theme" value={{questionTheme}} />
 
-                                {% endif %}
-                            </form>
-                        </div>
+                        {% endif %}
+                    </form>
                 </div>
-                <!-- <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span> -->
-            </div>
-            <!-- OFFCANVAS -->
+            </nav>
+            <!-- <span class="sidebar-toggle" onclick="openNav()">{% translate "☰ Filters" %}</span> -->
+            
+            <!-- OFFCANVAS START-->
             <div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
                 <div class="offcanvas-header">
                     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div class="offcanvas-body">
-                    <div id="sidebar" class="sidebar">
+                    <div id="sidebar2" class="sidebar">
                         <div class="filterbox">
                             <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
                             <form method="get">
@@ -96,23 +99,24 @@
                     </div>
                 </div>
             </div>
+            <!-- OFFCANVAS END-->
             {% endif %}
 
-            <div class="col-sm-12 col-md-9">
+            <main class="col-md-9 ms-sm-auto px-md-4">
                 <!-- OFFCANVAS BUTTON -->
                 {%if filtered %}
                 <button class="btn d-md-none d-sm-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa fa-bars fa-border fa-2x" aria-hidden="true"></i></button>
                 {% endif %}
                 
-                <div id="heading" class="justify-content-center mx-auto">
+                <div id="heading" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
                     {% if wednesday_date %}
                         <h4>
-                            <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans %} {{wednesday_date}}{% endblocktrans %}</center></strong>
+                            <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans with wednesday_date|template_trans as wednesday_date %}{{ wednesday_date }}{% endblocktrans %}</center></strong>
                         </h4>
                     {% endif %}
                     {% if friday_text_date %}
                         <h4>
-                            <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans %}{{friday_text_date}}{% endblocktrans %}</center></strong>
+                            <strong><center>{% trans "Weekly Survey Published -" %} {% blocktrans with friday_text_date|template_trans as friday_text_date %}{{ friday_text_date }}{% endblocktrans %}</center></strong>
                         </h4>
                     {% endif %}
                     {%if YearandWeek %}
@@ -122,7 +126,7 @@
                     {% endif %}
                     {% if subTheme %} 
                         <h5 id="datesubtheme">
-                            <strong><center>{% translate "Subtheme -" %}{{ subTheme }}</center></strong>
+                            <strong><center>{% translate "Subtheme -" %} {% blocktrans %}{{ subTheme }}{% endblocktrans %}</center></strong>
                         </h5>
                     {% endif %}
                     {% if questionTheme %} 
@@ -147,7 +151,7 @@
                     </div>
                 {% endif %}
             
-                <main class="container" id="main">
+                <div class="" id="main">
                     {% if info %}
                         <div class="container">
                             <div id="infocard" class="h-100 d-flex align-items-center justify-content-center">
@@ -163,60 +167,63 @@
                             </div>
                         </div>
                     {% else %}
-                        {% if errors %}
-                                <div class="container">
-                                    <div id="errorcard"
-                                        class="d-flex align-items-center justify-content-center h-100">
-                                        <div class="card text-center">
-                                            <div class="card-header text-light">{% translate "Alert!!" %}</div>
-                                            <div class="card-body">
-                                                <p class="card-text text-light">
-                                                    {% for error in errors %}
-                                                        <p class="card-text">{% blocktrans %}{{ error }}{% endblocktrans %}</p>
-                                                    {% endfor %}
-                                                </p>
-                                                <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
-                                            </div>
-                                        </div>
+                    {% if errors %}
+                        <div class="container">
+                            <div id="errorcard"
+                                class="d-flex align-items-center justify-content-center h-100">
+                                <div class="card text-center">
+                                    <div class="card-header text-light">{% translate "Alert!!" %}</div>
+                                    <div class="card-body">
+                                        <p class="card-text text-light">
+                                            {% for error in errors %}
+                                                {% blocktrans with error|template_trans as error %}{{ error }}{% endblocktrans %}
+                                            {% endfor %}
+                                        </p>
+                                        <button onclick="history.back()" class="btn text-light">{% translate "Go back" %}</button>
                                     </div>
                                 </div>
-                        {% else %}
-                        {% if  questionTheme%}
-                        <div id="image-slider" class="splide">
-                                <div class="splide__track">
-                                    <ul class="splide__list">
-                                        {% for subfolder in image_filepaths %}
-                                            <li class="splide__slide">
-                                                <strong><center><h5 id="weekheading">{{ subfolder.fullname }}</h5></center></strong>
-                                                <strong><center><h5 id="weekheading">Sub-Theme:{{ subfolder.subtheme }}</h5></center></strong>
-                                                <ul>
-                                                    {% for image_url in subfolder.images %}
-                                                        <li><img src="{{ image_url }}" alt="Image"></li>
-                                                    {% endfor %}
-                                                </ul>
-                                            </li>
-                                        {% endfor %}
-                                    </ul>
-                                </div>
                             </div>
-                        {% else %}
-                        <li class="splide__slide">
-                        {% for image_url in image_filepaths %}                                    
-                            <img id="dateimage"src={{ image_url }} alt="Image">
-                        {% endfor %}
-                        </li>
-                        {% endif %}
-                        {% endif %}
+                        </div>
+                    {% else %}
+                    {% if  questionTheme%}
+                        <div class="row">
+                            {% for subfolder in image_filepaths %}
+                                <div class="row">
+                                    <div class="d-flex justify-content-center"><h5 id="weekheading">{{ subfolder.fullname }}</h5></div>
+                                    <div class="d-flex justify-content-center"><h5 id="weekheading">Subtheme:{{ subfolder.subtheme }}</h5></div>
+                                    {% for image_url in subfolder.images %}
+                                    <div class="col-md-6">
+                                        <div class="card border-dark mb-4 p-2">
+                                            <img src="{{ image_url }}" alt="Image">
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% else %}
+                        <div class="row">
+                            {% for image_url in image_filepaths %}
+                                <div class="col-md-4">
+                                    <div class="card border-dark mb-4 p-2">
+                                        <img src="{{ image_url }}" alt="Image">
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
                     {% endif %}
-                </main>
-            </div>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </main>
+        </div>
         </div>
         {% block scripts %}
             <script src="https://kit.fontawesome.com/17431f7655.js" crossorigin="anonymous"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
             <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
             <script src="https://cdn.jsdelivr.net/npm/@splidejs/splide@4.1.4/dist/js/splide.min.js"></script>
             <script src="{% url 'javascript-catalog' %}"></script>
             <script src="{% static 'js/datepicker.js' %}"></script>
