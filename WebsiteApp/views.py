@@ -10,6 +10,7 @@ from django_tex.shortcuts import render_to_pdf
 from WebAppCICPVersion2 import settings
 from operator import itemgetter
 from InteractiveDB.models import SurveyTable
+from django.utils.translation import activate, deactivate
 
 
 
@@ -27,11 +28,12 @@ def formInitialization():
     context["dateFilter"] = DateFilterForm()
     context["province_form_filter"] = ProvinceFilterForm()
     context["language_form_filter"] = LanguageFilterForm()
-    context["org_size_form_filter"] = OrgsizeFilterForm()
+    # context["org_size_form_filter"] = OrgsizeFilterForm()
     context["age_form_filter"] = AgeFilterForm()
     context["expenditure_form_filter"] = ExpenditureFilterForm()
     context['region_form_filter'] = RegionFilterForm()
     context["subsample_form_filter"] = SubsampleFilterForm()
+    context['human_resources_form_filter'] = HumanResourcesFilterForm()
 
     return context, frontEndQuery
 
@@ -57,16 +59,18 @@ def dateInitialization(latestReport, dateSearchReport):
 
 
 def latest_report(request):
+
+    latestDate = str(get_wed_date(str(get_fridaydate_from_todays_date(datetime.now()))))
     context, frontEndQuery = formInitialization()
     friday_text_date, wednesday_text_date = dateInitialization(True, "")
 
     context["friday_text_date"] = friday_text_date
     context["wednesday_date"] = wednesday_text_date
+    context["subTheme"] = getWeeklySubTheme(None,str(get_wed_date(latestDate)))
+    context["YearandWeek"] = getYearandWeek(str(get_wed_date(latestDate)))
 
     # Pass the wednesday date to select the images from media folder
-    frontEndQuery.date = str(
-        get_wed_date(str(get_fridaydate_from_todays_date(datetime.now())))
-    )
+    frontEndQuery.date = latestDate
     frontEndQuery.siteLanguage = get_language()
 
     if frontEndQuery:
@@ -137,8 +141,12 @@ def themeOrDate(request, theme, date):
     frontEndQuery.languagePreference = context[
         "languagePreference"
     ] = request.GET.getlist("language")
-    frontEndQuery.organizationSizes = context["orgSizes"] = request.GET.getlist("size")
+    # frontEndQuery.organizationSizes = context["orgSizes"] = request.GET.getlist("size")
     frontEndQuery.age = context["age"] = request.GET.getlist("age")
+    frontEndQuery.expenditure = context["expenditure"] = request.GET.getlist("expenditure")
+    frontEndQuery.subsample = context["subsample"] = request.GET.getlist("subsample")
+    frontEndQuery.humanresources = context["humanresources"] = request.GET.getlist("humanresources")
+
     frontEndQuery.qualtricsSurveyID = ""
     frontEndQuery.siteLanguage = get_language()
 
@@ -183,7 +191,14 @@ def landingPageView(request):
 
             
             if not found:
-                subfolder_data.append({'name': subfolder, 'images': [image_path],'fullname':subfolder.replace("Y","Year-").replace("W"," Week-"),'subtheme':getWeeklySubTheme(subfolder,None)})
+                subfolderFullName = subfolder.replace("Y",gettext("Year-")).replace("W",gettext("Week-"))
+                subfolder_data.append({
+                    'name': subfolder, 
+                    'images': [image_path],
+                    'fullname':subfolderFullName,
+                    'subtheme':getWeeklySubTheme(subfolder,None,get_language())
+                    })
+                
         sorted_subfolder_data = sorted(subfolder_data, key=itemgetter('name')) 
 
         context["filtered"] = "filteredReport"
@@ -233,9 +248,11 @@ def landingPageView(request):
             except FileNotFoundError:
                 print("Dat file not found")
 
+
         return render(request, "index.html", context)
 
     elif reportDate:
+
         noSurveyDates = ["2022-12-23","2022-12-30","2023-07-28","2023-08-04"]
         if reportDate in noSurveyDates:
             info = gettext(
@@ -261,7 +278,7 @@ def landingPageView(request):
             context["friday_text_date"] = friday_text_date
             context["wednesday_date"] = wednesday_text_date
             context["reportDate"] = reportDate
-            context["subTheme"] = getWeeklySubTheme(None,str(get_wed_date(reportDate)))
+            context["subTheme"] = getWeeklySubTheme(None,str(get_wed_date(reportDate)),get_language())
             context["YearandWeek"] = getYearandWeek(str(get_wed_date(reportDate)))
            
 
@@ -318,7 +335,7 @@ def textdate(date, lang):
     date = datetime.strptime(date, "%Y-%m-%d")
 
     if lang == "fr":
-        fr_date_text = date.strftime("%b %d, %Y")
+        fr_date_text = date.strftime("%d %B, %Y")
         return fr_date_text
 
     else:
@@ -376,17 +393,30 @@ def get_fridaydate_from_todays_date(todays_date):
         return this_week_friday.date()
 
 
-def getWeeklySubTheme(surveyWeek,releaseDate):
+def getWeeklySubTheme(surveyWeek,releaseDate,language):
 
     if surveyWeek:
-        subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubTheme')
+        if language == 'fr':
+            subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeFrench')
+            subtheme = subTheme[0]['surveysubThemeFrench']
+        else:
+            subTheme= SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeEnglish')
+            subtheme = subTheme[0]['surveysubThemeEnglish']
+
+
     elif releaseDate:
-        subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubTheme')
-    print("subTheme inside function",subTheme)
-    return subTheme[0]['surveysubTheme']
+
+        if language == 'fr':
+            subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubThemeFrench')
+            subtheme = subTheme[0]['surveysubThemeFrench']
+        else:
+            subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubThemeEnglish')
+            subtheme = subTheme[0]['surveysubThemeEnglish']        
+
+    return subtheme
 
 def getYearandWeek(releaseDate):
     surveyWeek = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveyWeek')
     surveyWeek = surveyWeek[0]['surveyWeek']
-    surveyWeek = surveyWeek.replace("Y","Year-").replace("W"," Week-")
+    surveyWeek = surveyWeek.replace("Y",gettext("Year-")).replace("W",gettext("Week-"))
     return surveyWeek

@@ -98,11 +98,12 @@ class SubsampleFilterForm(forms.Form):
     subsample = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=SUBSAMPLE,
                                         label=_('Subsample'),required=False)
     
-class SubsampleFilterForm(forms.Form):
+class HumanResourcesFilterForm(forms.Form):
     humanresources = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),                choices=HUMANRESOURCES,label=_('Human Resources'),required=False)
 
 class RegionFilterForm(forms.Form):
     region = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=REGION,label=_('Region'),required=False)
+
 
 
 # New Changes for a different theme    

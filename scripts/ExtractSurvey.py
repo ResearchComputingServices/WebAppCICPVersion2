@@ -136,6 +136,10 @@ def ExtractQuestionDataFromFrenchJSON(surveyJSON, aSurvey):
             choiceTextFrench = CleanText(frenchSurveyTextDict[key])
             
             question = QuestionTable.objects.filter(jsonKey = questionJSONKey, surveyID = aSurvey.id).first()
+
+            # Added by Priyanka.
+            if question == None:
+                continue
             
             if question.questionType != MATRIX_QUESTION:
                 choice = ChoiceTable.objects.filter(questionID = question.id, recode = recode).first()           
