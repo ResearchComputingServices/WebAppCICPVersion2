@@ -12,9 +12,7 @@ def GetSubQuestionResponseDict(listOfUserResponses):
         if response in subQResponseDict.keys():
             subQResponseDict[response] += 1
         else:
-            subQResponseDict[response] = 1
-    print("subQResponseDict",subQResponseDict)
-    
+            subQResponseDict[response] = 1    
     return subQResponseDict
 
 ##################################################################################################################################
@@ -41,8 +39,6 @@ def VisualizeMatrixQuestion(question,
     
     totalResponses = numOfRespondents
 
- 
-    
     # for r in userResponses:
     #     subQ = subQuestionsQuerySet.filter(id=r.questionID.id).first()
         

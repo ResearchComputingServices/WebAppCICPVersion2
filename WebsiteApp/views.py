@@ -66,8 +66,8 @@ def latest_report(request):
 
     context["friday_text_date"] = friday_text_date
     context["wednesday_date"] = wednesday_text_date
-    context["subTheme"] = getWeeklySubTheme(None,str(get_wed_date(latestDate)))
-    context["YearandWeek"] = getYearandWeek(str(get_wed_date(latestDate)))
+    context["subTheme"] = getWeeklySubTheme(None,latestDate,get_language())
+    context["YearandWeek"] = getYearandWeek(latestDate)
 
     # Pass the wednesday date to select the images from media folder
     frontEndQuery.date = latestDate
@@ -184,11 +184,13 @@ def landingPageView(request):
                 
             found = False
             for item in subfolder_data:
+                if len(subfolder) == 4:
+                    subfolder = subfolder.replace("W","W0")
                 if item['name'] == subfolder:
                     item['images'].append(image_path)
                     found = True
                     break
-
+            
             
             if not found:
                 subfolderFullName = subfolder.replace("Y",gettext("Year-")).replace("W",gettext("Week-"))
@@ -394,7 +396,7 @@ def get_fridaydate_from_todays_date(todays_date):
 
 
 def getWeeklySubTheme(surveyWeek,releaseDate,language):
-
+    
     if surveyWeek:
         if language == 'fr':
             subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeFrench')
