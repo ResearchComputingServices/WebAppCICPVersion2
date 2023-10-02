@@ -55,59 +55,65 @@
 
     <div class="row">
       <div class="col-md-12 col-lg-2 mt-4"></div>
-      <div class="col-md-12 col-lg-3 mt-4">
-        <div class="cards">
-          <div class="card-header bg-red">
-            <h5 class="card-title"><b>{% translate "Select Report Date" %}</b></h5>
-          </div>
-          <div class="card-body mt-4 mb-2">
-            <form
-              id="dateForm"
-              name="myForm"
-              onsubmit="return validateDate()"
-              method="get"
-              action="{% url 'datereports' %}"
-              required
-            >
-              {% csrf_token %}
-              <div class="input-group ml-10" id="selected-date">
-                <span class="input-group-text"><i class="fa fa-calendar fa-border" aria-hidden="true"></i></span>
-                {{dateFilter.as_div}}
+
+      <div class="col-md-12 col-lg-3 m-4">
+        <div class="card text-center">
+          <form class="row" id="dateForm" name="myForm" onsubmit="return validateDate()" method="get" action="{% url 'datereports' %}" required>
+            
+            <div class="col-12">
+              <div class="card-header bg-red">
+                <h5 class="card-title"><b>{% translate "Select Report Date" %}</b></h5>
               </div>
-              <div class="input-class date">
+            </div>
+            
+            <div class="col-12 mt-10 mt-10 mb-10" id="selected-date">
+              {% csrf_token %}
+              <!-- <span class="input-group-text"><i class="fa fa-calendar fa-border" aria-hidden="true"></i></span> -->
+              {{dateFilter.as_div}}
+            </div>
+            
+            <div class="col-12">
+              <div class="card-footer">
                 <input class="form-input" type="submit" value={% translate "Search" %} /> 
                 <input class="form-input" type="reset" value={% translate "Reset" %} />
               </div>
-            </form>
-          </div>
+            </div>
+          
+          </form>
         </div>
       </div>
-      <div class="col-md-12 col-lg-2 mt-4"></div>
-      <div class="col-md-12 col-lg-3 mt-4">
-        <div class="cards">
-          <div class="card-header bg-red">
-            <h5 class="card-title"><b>{%translate "Select Weekly Theme"%}</b></h5>
-          </div>
-          <div class="card-body mt-4 mb-2">
-            <form
-              id="themeForm"
-              name="theme"
-              action="{% url 'themereports' %}"
-              method="get"
-              onsubmit="return validateDate()"
-              required
-            >
-              {% csrf_token %}
-              <div class="ml-lg-2">{{themeFilter.as_div}}</div>
-              <div class="input-class theme">
+
+      <div class="col-md-12 col-lg-1 mt-4"></div>
+
+      <div class="col-md-12 col-lg-3 m-4">
+        <div class="card">
+          <form class="row" id="themeForm" name="theme" action="{% url 'themereports' %}" method="get" onsubmit="return validateDate()" required>
+          
+            <div class="col-12">
+              <div class="card-header bg-red">
+                <h5 class="card-title"><b>{%translate "Select Weekly Theme"%}</b></h5>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="card-body mt-4 mb-4">
+                {% csrf_token %}
+                <div class="ml-lg-2">{{themeFilter.as_div}}</div>
+              </div>
+            </div>
+
+            <div class="col-12">
+              <div class="card-footer text-center">
                 <input class="form-input" type="submit" value={% translate "Search" %} /> 
                 <input class="form-input" type="reset" value={% translate "Reset" %} />
               </div>
-            </form>
-          </div>
+            </div>
+
+          </form>
         </div>
       </div>
-      <div class="col-md-2 mt-4"></div>
+
+      <div class="col-md-12 mt-4"></div>
     </div>
 
     {% block scripts %}
