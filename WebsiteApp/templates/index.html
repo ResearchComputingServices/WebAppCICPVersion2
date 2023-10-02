@@ -102,13 +102,18 @@
             <!-- OFFCANVAS END-->
             {% endif %}
 
-            <main class="col-md-9 ms-sm-auto px-md-4">
+            {%if filtered %}
+            <main class="col-md-9 px-md-4">
+            {% else %}
+            <div class="col-md-2 px-md-4"></div>
+            <main class="col-md-8 px-md-4">
+            {% endif %}
                 <!-- OFFCANVAS BUTTON -->
                 {%if filtered %}
                 <button class="btn d-md-none d-sm-block" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling"><i class="fa fa-bars fa-border fa-2x" aria-hidden="true"></i></button>
                 {% endif %}
                 
-                <div id="heading" class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <div id="heading" class="">
                     {% if wednesday_date %}
                         <h4>
                             <strong><center>{% trans "Weekly Survey Distributed -" %} {% blocktrans with wednesday_date|template_trans as wednesday_date %}{{ wednesday_date }}{% endblocktrans %}</center></strong>
@@ -190,24 +195,40 @@
                     {% else %}
                     {% if  questionTheme%}
                         <div class="row">
-                            {% for subfolder in image_filepaths %}
-                                <div class="col-sm-12 col-md-6">
-                                    <div class="d-flex justify-content-center"><h5 id="weekheading">{{ subfolder.fullname }}</h5></div>
-                                    <div class="d-flex justify-content-center"><h5 id="weekheading">Subtheme:{{ subfolder.subtheme }}</h5></div>
-                                    {% for image_url in subfolder.images %}
-                                    <div class="col-md-12">
-                                        <div class="card border-dark mb-4 p-2">
-                                            <img src="{{ image_url }}" alt="Image">
-                                        </div>
-                                    </div>
+                            
+                            <div class="row">
+                                <ul class="nav nav-tabs" id="themeTab" role="tablist">
+                                    {% for subfolder in image_filepaths %}
+                                    <li class="nav-item" role="presentation">
+                                      <button class="nav-link" id="{{ subfolder.fullname }}-tab" data-bs-toggle="tab" data-bs-target="#{{ subfolder.fullname }}" type="button" role="tab" aria-controls="{{ subfolder.fullname }}" aria-selected="false">{{ subfolder.fullname }}</button>
+                                    </li>
                                     {% endfor %}
+                                </ul>
+                                <div class="tab-content" id="themeTabContent">
+                                    <div class="col-sm-12 col-md-12"></div>
+                                    {% for subfolder in image_filepaths %}
+                                    
+                                        <div class="tab-pane fade" id="{{ subfolder.fullname }}" role="tabpanel" aria-labelledby="{{ subfolder.fullname }}-tab">
+                                            <div class="d-flex justify-content-center"><h5 id="weekheading">{{ subfolder.fullname }}</h5></div>
+                                            <div class="d-flex justify-content-center"><h5 id="weekheading">Subtheme:{{ subfolder.subtheme }}</h5></div>
+                                            {% for image_url in subfolder.images %}
+                                            <div class="col-md-12">
+                                                <div class="card border-dark mb-4 p-2">
+                                                    <img src="{{ image_url }}" alt="Image">
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    
+                                    {% endfor %}
+                                    </div>
                                 </div>
-                            {% endfor %}
+                            </div>
                         </div>
                     {% else %}
                         <div class="row">
                             {% for image_url in image_filepaths %}
-                                <div class="col-md-6">
+                                <div class="col-md-12">
                                     <div class="card border-dark mb-4 p-2">
                                         <img src="{{ image_url }}" alt="Image">
                                     </div>
@@ -218,7 +239,12 @@
                     {% endif %}
                     {% endif %}
                 </div>
+            {%if filtered %}
             </main>
+            {% else %}
+            <div class="col-md-2 px-md-4"></div>
+            </main>
+            {% endif %}
         </div>
         </div>
         {% block scripts %}

@@ -152,8 +152,6 @@ div {
 }
 
 #datesubtheme {
-    margin-left: 20%;
-    margin-top: 2%;
     font-family: Arial;
     color: #5c5555;
 }
@@ -165,4 +163,8 @@ div {
 
 .ml-25 {
     margin-left: 20%;
+}
+
+.ml-10 {
+    margin-left: 10%;
 }
