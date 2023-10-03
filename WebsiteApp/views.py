@@ -17,8 +17,6 @@ from django.utils.translation import activate, deactivate
 ##################################################################################################################################
 # Create your views here.
 
-# For testing new code
-
 
 def formInitialization():
     frontEndQuery = FrontEndQuery()
@@ -135,15 +133,13 @@ def themeOrDate(request, theme, date):
 
         context["friday_text_date"] = friday_text_date
         context["wednesday_date"] = wednesday_text_date
-
+    province_choices = ProvinceFilterForm().fields['province'].choices
+    print(province_choices)
     frontEndQuery.locations = context["locations"] = request.GET.getlist("province")
-
-    frontEndQuery.languagePreference = context[
-        "languagePreference"
-    ] = request.GET.getlist("language")
-    # frontEndQuery.organizationSizes = context["orgSizes"] = request.GET.getlist("size")
+    frontEndQuery.languagePreference = context["languagePreference"] = request.GET.getlist("language")
     frontEndQuery.age = context["age"] = request.GET.getlist("age")
     frontEndQuery.expenditure = context["expenditure"] = request.GET.getlist("expenditure")
+    frontEndQuery.region = context["region"] = request.GET.getlist("region")
     frontEndQuery.subsample = context["subsample"] = request.GET.getlist("subsample")
     frontEndQuery.humanresources = context["humanresources"] = request.GET.getlist("humanresources")
 
@@ -396,29 +392,38 @@ def get_fridaydate_from_todays_date(todays_date):
 
 
 def getWeeklySubTheme(surveyWeek,releaseDate,language):
-    
-    if surveyWeek:
-        if language == 'fr':
-            subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeFrench')
-            subtheme = subTheme[0]['surveysubThemeFrench']
-        else:
-            subTheme= SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeEnglish')
-            subtheme = subTheme[0]['surveysubThemeEnglish']
+    try:
+        if surveyWeek:
+            if language == 'fr':
+                subTheme = SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeFrench')
+                subtheme = subTheme[0]['surveysubThemeFrench']
+            else:
+                subTheme= SurveyTable.objects.filter(surveyWeek=surveyWeek).values('surveysubThemeEnglish')
+                subtheme = subTheme[0]['surveysubThemeEnglish']
 
 
-    elif releaseDate:
+        elif releaseDate:
 
-        if language == 'fr':
-            subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubThemeFrench')
-            subtheme = subTheme[0]['surveysubThemeFrench']
-        else:
-            subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubThemeEnglish')
-            subtheme = subTheme[0]['surveysubThemeEnglish']        
+            if language == 'fr':
+                subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubThemeFrench')
+                subtheme = subTheme[0]['surveysubThemeFrench']
+            else:
+                subTheme = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveysubThemeEnglish')
+                subtheme = subTheme[0]['surveysubThemeEnglish']        
 
-    return subtheme
+        return subtheme
+    except Exception as e:
+        # Handle any exceptions here and return an error message
+        error_message = "Unavailable"
+        return error_message
 
 def getYearandWeek(releaseDate):
-    surveyWeek = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveyWeek')
-    surveyWeek = surveyWeek[0]['surveyWeek']
-    surveyWeek = surveyWeek.replace("Y",gettext("Year-")).replace("W",gettext("Week-"))
-    return surveyWeek
+    try:
+        surveyWeek = SurveyTable.objects.filter(releaseDate=releaseDate).values('surveyWeek')
+        surveyWeek = surveyWeek[0]['surveyWeek']
+        surveyWeek = surveyWeek.replace("Y",gettext("Year-")).replace("W",gettext("Week-"))
+        return surveyWeek
+    except Exception as e:
+        # Handle any exceptions here and return an error message
+        error_message = "Report not yet generated for this date."
+        return error_message

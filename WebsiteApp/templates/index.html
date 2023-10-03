@@ -42,7 +42,8 @@
                                 {{age_form_filter.as_div}}
                                 {{expenditure_form_filter.as_div}}
                                 {{region_form_filter.as_div}}
-                                {{subsample_form_filter.as_div}}
+                                {% comment %} {{subsample_form_filter.as_div}} {% endcomment %}
+                                {{human_resources_form_filter.as_div}}
                             </div>
 
                             <div id="secsearch">
@@ -140,24 +141,24 @@
                         </h4>
                     {% endif %}
                 </div>
-            
-                {%if 'latestreport' not in window.location.href %}
-                    <div class="selected-filters">
+                <div class="selected-filters">
                         {% translate "Filters Selected:"%}
                         {% if locations %}
                         <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
                         {% endif %}
                         {%if orgSizes %}
-                        <strong>{% translate "Size:"%}</strong><i>{{orgSizes}}</i>
+                        <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
                         {% endif %}
                         {% if expenditure %}
                         <strong>{% translate "Expenditure:"%}</strong><i>{{expenditure}}</i>
                         {% endif %}
-                        {% if expenditure %}
-                        <strong>{% translate "Expenditure:"%}</strong><i>{{expenditure}}</i>
+                        {% if region %}
+                        <strong>{% translate "Region:"%}</strong><i>{{region}}</i>
                         {% endif %}
-                    </div>
-                {% endif %}
+                        {% if humanresources %}
+                        <strong>{% translate "Human Resources:"%}</strong><i>{{humanresources}}</i>
+                        {% endif %}
+                </div>
             
                 <div class="" id="main">
                     {% if info %}

@@ -172,6 +172,7 @@ class FrontEndQuery:
     fieldOfWork: List = field(default_factory=lambda: [])
     age: List = field(default_factory=lambda: [])        
     expenditure : List = field(default_factory=lambda: [])        
+    region : List = field(default_factory=lambda: [])        
     subsample : List = field(default_factory=lambda: [])    
     humanresources : List = field(default_factory=lambda: [])    
 
@@ -188,6 +189,7 @@ class FrontEndQuery:
             len(self.age) == 0 and
             len(self.expenditure) == 0 and
             len(self.subsample) == 0 and
+            len(self.region) == 0 and
             len(self.humanresources) == 0 and
             self.qualtricsSurveyID == ''):
                 isDateOnly = True
@@ -205,6 +207,7 @@ class FrontEndQuery:
             len(self.age) == 0 and
             len(self.expenditure) == 0 and
             len(self.subsample) == 0 and
+            len(self.region) == 0 and
             len(self.humanresources) == 0 and
             len(self.questionThemes) != 0):
                 isThemeOnly = True

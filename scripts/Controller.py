@@ -43,6 +43,34 @@ def GetUserQuerySet(aQuery):
             qObject |= Q(age=age1)
         userQuerySet = userQuerySet.filter(qObject)
     
+    if len(aQuery.subsample) != 0: 
+        qObject = Q()
+        for subsample in aQuery.subsample:
+            print("Inside Controller - subsample",subsample)
+            qObject |= Q(subSample=subsample)
+        userQuerySet = userQuerySet.filter(qObject)
+    
+    if len(aQuery.expenditure) != 0:  
+        qObject = Q()
+        for expenditure in aQuery.expenditure:
+            print("Inside Controller - Expenditure",expenditure)
+            qObject |= Q(expenditure=expenditure)
+        userQuerySet = userQuerySet.filter(qObject)
+    
+    if len(aQuery.region) != 0: 
+        qObject = Q()
+        for region in aQuery.region:
+            print("Inside Controller - region",region)
+            qObject |= Q(region=region)
+        userQuerySet = userQuerySet.filter(qObject)
+
+    if len(aQuery.humanresources) != 0: 
+        qObject = Q()
+        for humanresources in aQuery.humanresources:
+            print("Inside Controller - humanresources",humanresources)
+            qObject |= Q(hrtype=humanresources)
+        userQuerySet = userQuerySet.filter(qObject)
+    
     if len(aQuery.fieldOfWork) != 0:
         qObject = Q()
         for work in aQuery.fieldOfWork:
@@ -405,7 +433,11 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('lang',aQuery.languagePreference)
     print('field',aQuery.fieldOfWork)
     print('age',aQuery.age)
+    print('region',aQuery.region)
+    print('expenditure',aQuery.expenditure)
     print('Site Lang:',aQuery.siteLanguage)
+    print('Human Resources:',aQuery.humanresources)
+    print('Subsample',aQuery.subsample)
     
     # print('week',aQuery.week)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
