@@ -165,6 +165,14 @@ div {
     margin-left: 20%;
 }
 
-.ml-10 {
-    margin-left: 10%;
+.ml-5 {
+    margin-left: 5%;
+}
+
+.mt-10 {
+    margin-top: 15%;
+}
+
+.mb-10 {
+    margin-bottom: 15%;
 }

@@ -42,7 +42,7 @@
     color: white;
 }
 
-.cards {
+/* .cards {
     color: black;
     display: flex;
     flex-direction: column;
@@ -52,7 +52,7 @@
     font-family: Arial;
     justify-content: center;
     align-items: left;
-}
+} */
 
 h5 {
     align-items: center;
@@ -174,20 +174,18 @@ h5 {
     }
 
     /* Update the styling for the container */
-    .cards {
+    /* .cards {
         color: black;
         display: flex;
         flex-direction: column;
         width: auto;
         height: auto;
-        /* Allow card height to adjust based on content */
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
         font-family: Arial;
         margin: 10px;
         justify-content: center;
         align-items: center;
-        /* Center-align contents horizontally within the card */
-    }
+    } */
 
     #id_report_date {
         margin-left: 0%;
