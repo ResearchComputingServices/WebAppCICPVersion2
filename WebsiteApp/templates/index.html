@@ -42,7 +42,7 @@
                                 {{age_form_filter.as_div}}
                                 {{expenditure_form_filter.as_div}}
                                 {{region_form_filter.as_div}}
-                                {% comment %} {{subsample_form_filter.as_div}} {% endcomment %}
+                                {{subsample_form_filter.as_div}} 
                                 {{human_resources_form_filter.as_div}}
                             </div>
 
@@ -81,6 +81,7 @@
                                         {{expenditure_form_filter.as_div}}
                                         {{region_form_filter.as_div}}
                                         {{subsample_form_filter.as_div}}
+                                        {{human_resources_form_filter.as_div}}
                                     </div>
 
                                     <div id="secsearch">
@@ -157,6 +158,9 @@
                         {% endif %}
                         {% if humanresources %}
                         <strong>{% translate "Human Resources:"%}</strong><i>{{humanresources}}</i>
+                        {% endif %}
+                        {% if subsample %}
+                        <strong>{% translate "Subsample:"%}</strong><i>{{subsample}}</i>
                         {% endif %}
                 </div>
             

@@ -47,7 +47,8 @@ def GetUserQuerySet(aQuery):
         qObject = Q()
         for subsample in aQuery.subsample:
             print("Inside Controller - subsample",subsample)
-            qObject |= Q(subSample=subsample)
+            subsample=','+subsample
+            qObject |= Q(subSample=subsample)       
         userQuerySet = userQuerySet.filter(qObject)
     
     if len(aQuery.expenditure) != 0:  
@@ -63,6 +64,7 @@ def GetUserQuerySet(aQuery):
             print("Inside Controller - region",region)
             qObject |= Q(region=region)
         userQuerySet = userQuerySet.filter(qObject)
+        
 
     if len(aQuery.humanresources) != 0: 
         qObject = Q()
@@ -141,6 +143,7 @@ def GetUserResponseQuerySet(aQuery, VERBOSE = False):
     
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
+    print("Inside userQuerySet declaration",userQuerySet)
     
     if VERBOSE:
         if surveyQuerySet != None:

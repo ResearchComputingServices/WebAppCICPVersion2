@@ -38,7 +38,6 @@ def formInitialization():
 def mapSelectedFilterChoices(selectedCodes,selectedChoices):
     filterChoiceMapping = dict(selectedChoices)
     selectedNames = [filterChoiceMapping[code] for code in selectedCodes]
-    print("Inside map func",selectedNames)
     return selectedNames
 
 
