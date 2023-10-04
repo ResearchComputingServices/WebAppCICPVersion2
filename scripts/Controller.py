@@ -143,7 +143,6 @@ def GetUserResponseQuerySet(aQuery, VERBOSE = False):
     
     # Get all users that match the query
     userQuerySet = GetUserQuerySet(aQuery)
-    print("Inside userQuerySet declaration",userQuerySet)
     
     if VERBOSE:
         if surveyQuerySet != None:

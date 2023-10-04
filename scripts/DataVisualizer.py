@@ -114,7 +114,11 @@ def DataVisualizerMain(responseDict,
                                                                             numOfRespondents = numOfRespondents, 
                                                                             isEnglish= isEnglish,
                                                                             saveToDirPath = saveToDirPath)
-                imageFilePathList.append(imageFilePath)
+                if type(imageFilePath) == list:
+                    for path in imageFilePath:
+                        imageFilePathList.append(path)
+                else:
+                    imageFilePathList.append(imageFilePath)
             else:
                  imageFilePath1 = questionHandleDict[question.questionType](  question = question,
                                                                             userResponses = responseDict[question],

@@ -258,7 +258,7 @@ def CreateRankChart(responseDict,
     plt.subplots_adjust(right=0.75)
     
     # ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium'})
-    ax1.set_title(graphicTitle+'/n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+    ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
  'horizontalalignment': 'center'},pad = 150.0,y=0.9)
     ax1.set_xticks(df.index)
     ax1.set_xticklabels(df.subQ, rotation=90)
@@ -352,7 +352,9 @@ def CreateStackedBarChart(  responseDict,
     # normalize rows (magic, I dont know how this works)
     df = df.div(df.sum(axis=1), axis=0) 
     df = df.multiply(100)
-    #print(df.head(5))
+    multipleLabelsFigureList = []
+    # df.to_csv("/webapp/WebAppCICPVersion2/Data/StackedBar.csv")
+    # print(df.head(5))
     # change subQ to have the correct names
     for subQ in responseDict.keys():
         for response in responseDict[subQ].keys():
@@ -376,73 +378,74 @@ def CreateStackedBarChart(  responseDict,
     #         (185/255,44/255,49/255)]
 
     cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
-        
+    length = len(df)
+    split = math.ceil(length/4)
+    dfs_list = np.array_split(df, split)
+    questionLabel = questionLabel.split('_')[1]
+    for df in dfs_list:    
     # Create the figure which plots the bar chart
     # creating the bar plot
-    fig = plt.figure(figsize=(18,18))
-   
+        fig = plt.figure(figsize=(18,18))
     
-    #Added comment for below line
-    #plt.subplots_adjust(left=0.22)
-    ax1 = plt.subplot2grid((12, 3), (0, 0), colspan=3, rowspan=9)
-   
-    # plot data in stack manner of bar type
-    df.plot(x='subQ', 
-            kind='barh', 
-            stacked=True,
-            ax=ax1,
-            colormap=cmap)
-            #bbox_to_anchor=(1.05,1))
+        #Added comment for below line
+        #plt.subplots_adjust(left=0.22)
+        ax1 = plt.subplot2grid((15, 2), (1, 0), colspan=3, rowspan=9)
     
-    #Modified to adjust the plots - Rohan
-    plt.subplots_adjust(right=0.75)
+        # plot data in stack manner of bar type
+        df.plot(x='subQ', 
+                kind='barh', 
+                stacked=True,
+                ax=ax1,
+                colormap=cmap)
+                #bbox_to_anchor=(1.05,1))
+
+        #Modified to adjust the plots - Rohan
+        plt.subplots_adjust(right=0.75)
+
+
+        ax1.set_title(graphicTitle+'\n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
+        'horizontalalignment': 'center'},pad = 170.0,y=0.8,x=0.5)
+        ax1.set_ylabel('')
+        ax1.set_xticks([0,25,50,75,100])
+        plt.yticks(fontsize=15)
+        plt.xticks(fontsize=15)
+
+        #Modified for the labels to display outside - Rohan
+        # ax1.legend(bbox_to_anchor=(1.03,1),fontsize=16)
+        ax1.legend(bbox_to_anchor=(1,1),fontsize=13)
+
+        if isEnglish:
+            ax1.set_xlabel('% of Responses',fontsize=15)
+        else:
+            ax1.set_xlabel('% de réponses',fontsize=15)
+
+        # Get the watermark image and add it to the figure
+        waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
+        # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
+        ax2 = fig.add_axes([0.05, 0.2, 0.15, 0.7], anchor='SW', zorder=1)
+        ax2.imshow(waterMarkImg)
+        ax2.axis('off')
+
+        # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
+        reportDate = saveToDirPath.split("/")[-1] 
+        aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
+        annotateText = aText[0]+'\n'+aText[1]
+        ax3 = fig.add_axes([0.75, 0.2, 0.2, 0.7], anchor='SE', zorder=1) 
+        ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
+        ax3.axis('off')
+
+        # plt.show() 
+
+        # save the wordcloud to a file
+        #Added by Priyanka
+        print(questionLabel)        
+        filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+
+
+        # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
+        figureFilePath = os.path.join(saveToDirPath, filename)
+        plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
+        plt.close(fig)
+        multipleLabelsFigureList.append(figureFilePath)   
     
-    # ax1.set_title(graphicTitle,wrap=True,fontdict={'fontsize': 19, 'fontweight': 'medium'},pad = 25.0)
-    # ax1.set_ylabel('')
-    # ax1.set_xticks([0,25,50,75,100])
-
-    ax1.set_title(graphicTitle+'\n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
- 'horizontalalignment': 'center'},pad = 150.0,y=0.85)
-    ax1.set_ylabel('')
-    ax1.set_xticks([0,25,50,75,100])
-    plt.yticks(fontsize=15)
-    plt.xticks(fontsize=15)
-
-    #Modified for the labels to display outside - Rohan
-    # ax1.legend(bbox_to_anchor=(1.03,1),fontsize=16)
-    ax1.legend(bbox_to_anchor=(1,1),fontsize=13)
-
-    if isEnglish:
-        ax1.set_xlabel('% of Responses',fontsize=15)
-    else:
-        ax1.set_xlabel('% de réponses',fontsize=15)
-       
-    # Get the watermark image and add it to the figure
-    waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
-    # ax2 = fig.add_axes([0.,-0.1,0.2,0.2], anchor='NE', zorder=1)
-    ax2 = fig.add_axes([0.05, 0.2, 0.15, 0.7], anchor='SW', zorder=1)
-    ax2.imshow(waterMarkImg)
-    ax2.axis('off')
-
-    # ax3 = fig.add_axes([0.75,0.01,0.25,0.1], anchor='NE', zorder=1)
-    reportDate = saveToDirPath.split("/")[-1] 
-    aText = GetAnnotation(numberOfResponses, reportDate, isEnglish)
-    annotateText = aText[0]+'\n'+aText[1]
-    ax3 = fig.add_axes([0.75, 0.2, 0.2, 0.7], anchor='SE', zorder=1) 
-    ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
-    ax3.axis('off')
-
-    # plt.show() 
-
-    # save the wordcloud to a file
-    #Added by Priyanka
-    questionLabel = questionLabel.split('_')[1]
-    filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
-
-
-    # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
-    figureFilePath = os.path.join(saveToDirPath, filename)
-    plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
-    plt.close(fig)   
-    
-    return figureFilePath
+    return multipleLabelsFigureList
