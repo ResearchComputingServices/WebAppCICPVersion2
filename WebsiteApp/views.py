@@ -35,6 +35,12 @@ def formInitialization():
 
     return context, frontEndQuery
 
+def mapSelectedFilterChoices(selectedCodes,selectedChoices):
+    filterChoiceMapping = dict(selectedChoices)
+    selectedNames = [filterChoiceMapping[code] for code in selectedCodes]
+    print("Inside map func",selectedNames)
+    return selectedNames
+
 
 def dateInitialization(latestReport, dateSearchReport):
     if latestReport:
@@ -133,15 +139,33 @@ def themeOrDate(request, theme, date):
 
         context["friday_text_date"] = friday_text_date
         context["wednesday_date"] = wednesday_text_date
-    province_choices = ProvinceFilterForm().fields['province'].choices
-    print(province_choices)
-    frontEndQuery.locations = context["locations"] = request.GET.getlist("province")
-    frontEndQuery.languagePreference = context["languagePreference"] = request.GET.getlist("language")
-    frontEndQuery.age = context["age"] = request.GET.getlist("age")
-    frontEndQuery.expenditure = context["expenditure"] = request.GET.getlist("expenditure")
-    frontEndQuery.region = context["region"] = request.GET.getlist("region")
-    frontEndQuery.subsample = context["subsample"] = request.GET.getlist("subsample")
-    frontEndQuery.humanresources = context["humanresources"] = request.GET.getlist("humanresources")
+
+    # Get the choice mappings from forms file to display the filters selected and pass them to 
+    # a function to get the names of the choices
+    provinceChoices = ProvinceFilterForm().fields['province'].choices
+    ageChoices = AgeFilterForm().fields['age'].choices
+    expenditureChoices = ExpenditureFilterForm().fields['expenditure'].choices
+    regionChoices = RegionFilterForm().fields['region'].choices
+    subsampleChoices = SubsampleFilterForm().fields['subsample'].choices
+    humanresourcesChoices = HumanResourcesFilterForm().fields['humanresources'].choices
+
+    # Get the selected filters as a list and pass them to frontEndQuery object
+    frontEndQuery.locations = request.GET.getlist("province")
+    frontEndQuery.age = request.GET.getlist("age")
+    frontEndQuery.expenditure = request.GET.getlist("expenditure")
+    frontEndQuery.region = request.GET.getlist("region")
+    frontEndQuery.subsample = request.GET.getlist("subsample")
+    frontEndQuery.humanresources = request.GET.getlist("humanresources")
+    # frontEndQuery.languagePreference = context["languagePreference"] = request.GET.getlist("language")
+
+    # Pass the selected filters along with their choice mappings to the context so that they are displayed like the options on the sidebar
+    context["locations"] =  mapSelectedFilterChoices(request.GET.getlist("province"),provinceChoices)
+    context["age"] = mapSelectedFilterChoices(request.GET.getlist("age"),ageChoices)
+    context["expenditure"] = mapSelectedFilterChoices(request.GET.getlist("expenditure"),expenditureChoices)
+    context["region"] = mapSelectedFilterChoices(request.GET.getlist("region"),regionChoices)
+    context["subsample"] = mapSelectedFilterChoices(request.GET.getlist("subsample"),subsampleChoices)
+    context["humanresources"] = mapSelectedFilterChoices(request.GET.getlist("humanresources"),humanresourcesChoices)
+
 
     frontEndQuery.qualtricsSurveyID = ""
     frontEndQuery.siteLanguage = get_language()

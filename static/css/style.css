@@ -130,10 +130,10 @@ div {
 }
 
 .selected-filters {
-    height: 30px;
-    width: 600px;
+    /* height: 30px;
+    width: 600px; */
     font-family: Arial;
-    margin-left: 40%;
+    /* margin-left: 40%; */
 }
 
 .splide__slide img {
