@@ -222,6 +222,7 @@ def GenerateDefaultFigures(aSurvey):
     themeString = str(aSurvey.surveyTheme)
     dateString =  aSurvey.releaseDate.strftime("%Y-%m-%d")
     weekstring = str(aSurvey.surveyWeek)
+    print("SurveyWeek",aQuery.week)
 
     
     # Create the ENGLISH Default images based on date
@@ -395,6 +396,7 @@ def GetResponseDict(aQuery, VERBOSE = False):
     if userResponseQuerySet != None:
    
         questionList = GetListOfUniqueQuestions(userResponseQuerySet)
+        print("questionList",questionList)
         
         for question in questionList:   
             userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)
@@ -440,7 +442,6 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     print('Site Lang:',aQuery.siteLanguage)
     print('Human Resources:',aQuery.humanresources)
     print('Subsample',aQuery.subsample)
-    
     # print('week',aQuery.week)
     print('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
     
@@ -519,7 +520,7 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     else: 
        
         print('QueryType: Full Query')
-        responseDict, errorLogs = GetResponseDict(aQuery)        
+        responseDict, errorLogs = GetResponseDict(aQuery)
         
         if responseDict.keys() != None:
           
@@ -531,8 +532,8 @@ def HandleFrontEndQuery(aQuery, saveToDirPath = TMP_FIGURE_FOLDER_PATH):
     listOfImageFilePaths = Local2URLMedia(listOfImageFilePaths)
     dataCSVFilePath = Local2URLMedia([dataCSVFilePath])    
       
-    print('Generated Images Location:')
-    print(listOfImageFilePaths)
+    # print('Generated Images Location:')
+    # print(listOfImageFilePaths)
  
     
     return sorted(listOfImageFilePaths), dataCSVFilePath, errorLogs

@@ -114,6 +114,8 @@ def DataVisualizerMain(responseDict,
                                                                             numOfRespondents = numOfRespondents, 
                                                                             isEnglish= isEnglish,
                                                                             saveToDirPath = saveToDirPath)
+                
+                # print("imageFilePath",imageFilePathList)
                 if type(imageFilePath) == list:
                     for path in imageFilePath:
                         imageFilePathList.append(path)

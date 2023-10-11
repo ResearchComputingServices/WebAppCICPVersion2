@@ -42,11 +42,12 @@ AGE = [
 ]
 
 EXPENDITURE = [
-    ('XS',_('Extra Small (Less than $100,000)')),
+    ('XS',_('Extra Small (Less than $150,000)')),
     ('SM',_('Small (Less than $400,000)' )), 
     ('MD',_('Medium (Between $400,000-$850,000)')),
     ('LG',_('Large (More than $850,000)')),
     ('XL',_('Extra Large (More than $2,000,000)')),
+    # ('XXL',_('Super Large (More than $55,800,000)')),
 ]
 
 REGION = [
@@ -58,18 +59,18 @@ REGION = [
 ]
 
 SUBSAMPLE = [
-    ('SS1',_('Sub Sample 1')),
-    ('SS2',_('Sub Sample 2')),
-    ('SS3',_('Sub Sample 3')),
-    ('SS4',_('Sub Sample 4')),
-    ('SS5',_('Sub Sample 5')),
-    ('SS6',_('Sub Sample 6')),
+    ('SS1',_('Foundations')),
+    ('SS2',_('Volunteer-run charities')),
+    ('SS3',_('Charities in BC')),
+    ('SS4',_('Geographic regions')),
+    ('SS5',_('Charities in QC')),
+    ('SS6',_('International charities')),
 ]
 
 
 HUMANRESOURCES = [
-    ('PD',_('Paid')),
-    ('VOL',_('Volunteer Run'))
+    ('PD',_('Paid Employees')),
+    ('VOL',_('Only Volunteer Run'))
 ]
 
 DateInput = partial(forms.DateInput, {'class': 'dateinput','autocomplete':'off'})

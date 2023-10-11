@@ -99,36 +99,38 @@ def latest_report(request):
 def themeOrDate(request, theme, date):
     context, frontEndQuery = formInitialization()
 
+    print("theme",theme)
     if date is None:
-        if theme[0] == "Funding":
+        if theme[0] == 'Funding':
             theme[0] = "FUN"
             frontEndQuery.questionThemes = theme
 
-        elif theme[0] == "Governance":
+        elif theme[0] == 'Governance':
             theme[0] = "GOV"
             frontEndQuery.questionThemes = theme
 
-        elif theme[0] == "Policy":
+        elif theme[0] == 'Policy':
             theme[0] = "POL"
             frontEndQuery.questionThemes = theme
 
-        elif theme[0] == "Collaboration":
+        elif theme[0] == 'Collaboration':
             theme[0] = "COL"
             frontEndQuery.questionThemes = theme
 
-        elif theme[0] == "Challenges":
+        elif theme[0] == 'Challenges':
             theme[0] = "CHA"
             frontEndQuery.questionThemes = theme
 
-        elif theme == "EDI":
-            theme = "EDI"
+        elif theme[0] == 'EDI':
+            theme[0] = "EDI"
             frontEndQuery.questionThemes = theme
 
-        elif theme == "Other":
-            theme = "OTH"
+        elif theme[0] == 'Other':
+            theme[0] = "OTH"   
             frontEndQuery.questionThemes = theme
 
         else:
+            print("Inside Else")
             frontEndQuery.questionThemes = theme
 
     elif theme is None:

@@ -189,6 +189,7 @@ def CreatePieChart( responseDict,
     # save the wordcloud to a file
     #Added by Priyanka
     questionLabel = questionLabel.split('_')[1]
+    # print("questionLabel MC",questionLabel)
     filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
 
     # filename = str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX

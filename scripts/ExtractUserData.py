@@ -187,16 +187,18 @@ def GetNumber(token):
 
 def GetExpenditure(expenditure):
     
-    if float(expenditure) <= 101045:
+    if float(expenditure) <= 145316:
         expenditure = "XS"  # Extra Small
-    elif float(expenditure) <= 381824:
+    elif float(expenditure) <= 384330:
         expenditure = "SM"  # Small
-    elif float(expenditure) <= 860788:
+    elif float(expenditure) <= 819386:
         expenditure = "MD"  # Medium
-    elif float(expenditure) <= 2155265:
+    elif float(expenditure) <= 2177639:
         expenditure = "LG"  # Large
-    elif float(expenditure) <= 338781069:
+    elif float(expenditure) <= 55838038:
         expenditure = "XL" # Extra Large
+    elif float(expenditure) <= 364115081:
+         expenditure = "XXL"  # Super Large
     else:
         expenditure = "XS" #Make it a zero by adding XS
     

@@ -361,26 +361,20 @@ def CreateStackedBarChart(  responseDict,
             df.at[subQ, 'subQ'] = WrapText(subQ,15)
     #####################################################################
     # define colours to use
-    colourMap = [(233/255,28/255,36/255),
-            (45/255,45/255,45/255),
-            (242/255,121/255,126/255),
-            (245/255,245/255,245/255),
-            (100/255,100/255,100/255),
-            (248/255,185/255,187/255),
-            (145/255,14/255,19/255),
-            (200/255,200/255,200/255)]
-        
-    # colourMap = [(0/255,0/255,0/255),
-    #         (45/255,45/255,45/255),
-    #         (151/255,151/255,151/255),
-    #         (145/255,14/255,19/255),
-    #         (51/255,51/255,51/255),
-    #         (185/255,44/255,49/255)]
+    colourMap = [(0/255, 0/255, 0/255), # Black
+    (51/255, 51/255, 51/255),    # Dark Grey
+    (120/255, 120/255, 120/255), #  Grey
+    (188/255, 188/255, 188/255), # Light grey
+    (243/255, 135/255, 140/255), # Light Red
+    (233/255, 28/255, 36/255),  # Red
+    (166/255, 16/255, 22/255),# Dark Red
+    (77/255, 7/255, 10/255) ] #Burgundy
 
     cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
     length = len(df)
     split = math.ceil(length/4)
     dfs_list = np.array_split(df, split)
+    dfs_list.reverse()
     questionLabel = questionLabel.split('_')[1]
     for df in dfs_list:    
     # Create the figure which plots the bar chart
@@ -390,7 +384,9 @@ def CreateStackedBarChart(  responseDict,
         #Added comment for below line
         #plt.subplots_adjust(left=0.22)
         ax1 = plt.subplot2grid((15, 2), (1, 0), colspan=3, rowspan=9)
-    
+
+        # Re-index the rows to make the options appear correct
+        df = df.reindex(index=df.index[::-1])
         # plot data in stack manner of bar type
         df.plot(x='subQ', 
                 kind='barh', 
@@ -437,8 +433,7 @@ def CreateStackedBarChart(  responseDict,
         # plt.show() 
 
         # save the wordcloud to a file
-        #Added by Priyanka
-        print(questionLabel)        
+        #Added by Priyanka     
         filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
 
 
