@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-14 10:30-0400\n"
+"POT-Creation-Date: 2023-10-12 14:50-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -57,31 +57,31 @@ msgstr "Quebec"
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: WebsiteApp/forms.py:20 WebsiteApp/views.py:211
+#: WebsiteApp/forms.py:20 WebsiteApp/views.py:239
 msgid "Collaboration"
 msgstr "Collaboration"
 
-#: WebsiteApp/forms.py:21 WebsiteApp/views.py:205
+#: WebsiteApp/forms.py:21 WebsiteApp/views.py:233
 msgid "Governance"
 msgstr "Governance"
 
-#: WebsiteApp/forms.py:22 WebsiteApp/views.py:214
+#: WebsiteApp/forms.py:22 WebsiteApp/views.py:242
 msgid "Challenges"
 msgstr "Challenges"
 
-#: WebsiteApp/forms.py:23 WebsiteApp/views.py:202
+#: WebsiteApp/forms.py:23 WebsiteApp/views.py:230
 msgid "Funding"
 msgstr "Funding"
 
-#: WebsiteApp/forms.py:24 WebsiteApp/views.py:208
+#: WebsiteApp/forms.py:24 WebsiteApp/views.py:236
 msgid "Policy"
 msgstr "Policy"
 
-#: WebsiteApp/forms.py:25 WebsiteApp/views.py:217
+#: WebsiteApp/forms.py:25 WebsiteApp/views.py:245
 msgid "EDI"
 msgstr "EDI"
 
-#: WebsiteApp/forms.py:26 WebsiteApp/views.py:220
+#: WebsiteApp/forms.py:26 WebsiteApp/views.py:248
 msgid "Other"
 msgstr "Other"
 
@@ -114,7 +114,9 @@ msgid "Registered after 1990"
 msgstr "Registered after 1990"
 
 #: WebsiteApp/forms.py:45
-msgid "Extra Small (Less than $100,000)"
+#, fuzzy
+#| msgid "Extra Small (Less than $100,000)"
+msgid "Extra Small (Less than $150,000)"
 msgstr "Extra Small (Less than $100,000)"
 
 #: WebsiteApp/forms.py:46
@@ -133,201 +135,231 @@ msgstr "Large (More than $850,000)"
 msgid "Extra Large (More than $2,000,000)"
 msgstr "Extra Large (More than $2,000,000)"
 
-#: WebsiteApp/forms.py:53
+#: WebsiteApp/forms.py:54
 msgid "West Coast"
 msgstr "West Coast"
 
-#: WebsiteApp/forms.py:54
+#: WebsiteApp/forms.py:55
 msgid "Prarie Provinces"
 msgstr "Prarie Provinces"
 
-#: WebsiteApp/forms.py:55
+#: WebsiteApp/forms.py:56
 msgid "Central Canada"
 msgstr "Central Canada"
 
-#: WebsiteApp/forms.py:56
+#: WebsiteApp/forms.py:57
 msgid "Atlantic Region"
 msgstr "Atlantic Region"
 
-#: WebsiteApp/forms.py:57
+#: WebsiteApp/forms.py:58
 msgid "North Canada"
 msgstr "North Canada"
 
-#: WebsiteApp/forms.py:61
-msgid "Sub Sample 1"
-msgstr "Sub Sample 1"
-
 #: WebsiteApp/forms.py:62
-msgid "Sub Sample 2"
-msgstr "Sub Sample 2"
+msgid "Foundations"
+msgstr "Foundations"
 
 #: WebsiteApp/forms.py:63
-msgid "Sub Sample 3"
-msgstr "Sub Sample 3"
+#, fuzzy
+msgid "Volunteer-run charities"
+msgstr "Volunteer-run charities"
 
 #: WebsiteApp/forms.py:64
-msgid "Sub Sample 4"
-msgstr "Sub Sample 4"
+msgid "Charities in BC"
+msgstr "Charities in BC"
 
 #: WebsiteApp/forms.py:65
-msgid "Sub Sample 5"
-msgstr "Sub Sample 5"
+msgid "Geographic regions"
+msgstr "Geographic regions"
 
 #: WebsiteApp/forms.py:66
-msgid "Sub Sample 6"
-msgstr "Sub Sample 6"
+msgid "Charities in QC"
+msgstr "Charities in QC"
 
-#: WebsiteApp/forms.py:71
-msgid "Paid"
-msgstr "Paid"
+#: WebsiteApp/forms.py:67
+msgid "International charities"
+msgstr "International charities"
 
 #: WebsiteApp/forms.py:72
-msgid "Volunteer Run"
-msgstr "Volunteer Run"
+msgid "Paid Employees"
+msgstr "Paid Employees"
 
-#: WebsiteApp/forms.py:79
+#: WebsiteApp/forms.py:73
+msgid "Only Volunteer Run"
+msgstr "Only Volunteer Run"
+
+#: WebsiteApp/forms.py:80
 msgid "Province"
 msgstr "Province"
 
-#: WebsiteApp/forms.py:83
+#: WebsiteApp/forms.py:84
 msgid "Participant Language Preference"
 msgstr ""
 
-#: WebsiteApp/forms.py:87
+#: WebsiteApp/forms.py:88
 msgid "Size"
 msgstr "Size"
 
-#: WebsiteApp/forms.py:91
+#: WebsiteApp/forms.py:92
 msgid "Age"
 msgstr "Age"
 
-#: WebsiteApp/forms.py:95
+#: WebsiteApp/forms.py:96
 msgid "Expenditure"
 msgstr "Expenditure"
 
-#: WebsiteApp/forms.py:99
+#: WebsiteApp/forms.py:100
 msgid "Subsample"
 msgstr "Subsample"
 
-#: WebsiteApp/forms.py:102
+#: WebsiteApp/forms.py:103
 msgid "Human Resources"
 msgstr "Human Resources"
 
-#: WebsiteApp/forms.py:105
+#: WebsiteApp/forms.py:106
 msgid "Region"
 msgstr "Region"
 
-#: WebsiteApp/templates/index.html:41
+#: WebsiteApp/templates/index.html:36 WebsiteApp/templates/index.html:75
 msgid "FILTER THIS REPORT BY"
 msgstr "FILTER THIS REPORT BY"
 
-#: WebsiteApp/templates/index.html:55 WebsiteApp/templates/lpage.html:78
-#: WebsiteApp/templates/lpage.html:91 WebsiteApp/templates/sidebar.html:26
+#: WebsiteApp/templates/index.html:51 WebsiteApp/templates/index.html:90
+#: WebsiteApp/templates/lpage.html:77 WebsiteApp/templates/lpage.html:107
 msgid "Search"
 msgstr "Search"
 
-#: WebsiteApp/templates/index.html:56 WebsiteApp/templates/lpage.html:79
-#: WebsiteApp/templates/lpage.html:92 WebsiteApp/templates/sidebar.html:27
+#: WebsiteApp/templates/index.html:52 WebsiteApp/templates/index.html:91
+#: WebsiteApp/templates/lpage.html:78 WebsiteApp/templates/lpage.html:108
+#: WebsiteApp/templates/sidebar.html:33
 msgid "Reset"
 msgstr "Reset"
 
-#: WebsiteApp/templates/index.html:74
+#: WebsiteApp/templates/index.html:65
 msgid "☰ Filters"
 msgstr "☰ Filters"
 
-#: WebsiteApp/templates/index.html:79
+#: WebsiteApp/templates/index.html:123
 msgid "Weekly Survey Distributed -"
 msgstr "Weekly Survey Distributed -"
 
-#: WebsiteApp/templates/index.html:79
+#: WebsiteApp/templates/index.html:123
 #, fuzzy, python-format
 #| msgid " %(wednesday_date)s"
 msgid "%(wednesday_date)s"
 msgstr "%(wednesday_date)s"
 
-#: WebsiteApp/templates/index.html:84
+#: WebsiteApp/templates/index.html:128
 msgid "Weekly Survey Published -"
 msgstr "Weekly Survey Published -"
 
-#: WebsiteApp/templates/index.html:84
+#: WebsiteApp/templates/index.html:128
 #, python-format
 msgid "%(friday_text_date)s"
 msgstr "%(friday_text_date)s"
 
-#: WebsiteApp/templates/index.html:95
+#: WebsiteApp/templates/index.html:138
 msgid "Subtheme -"
 msgstr "Subtheme - "
 
-#: WebsiteApp/templates/index.html:96
+#: WebsiteApp/templates/index.html:138
 #, python-format
 msgid "%(subTheme)s"
 msgstr "%(subTheme)s"
 
-#: WebsiteApp/templates/index.html:101
+#: WebsiteApp/templates/index.html:143
 msgid "Theme -"
 msgstr "Theme - "
 
-#: WebsiteApp/templates/index.html:109
+#: WebsiteApp/templates/index.html:148
 msgid "Filters Selected:"
 msgstr "Filters Selected:"
 
-#: WebsiteApp/templates/index.html:111
+#: WebsiteApp/templates/index.html:150
 msgid "Province:"
 msgstr "Province:"
 
-#: WebsiteApp/templates/index.html:114
-msgid "Size:"
-msgstr "Size:"
-
-#: WebsiteApp/templates/index.html:117
+#: WebsiteApp/templates/index.html:153
 msgid "Age:"
 msgstr "Age:"
 
-#: WebsiteApp/templates/index.html:130 WebsiteApp/templates/index.html:146
+#: WebsiteApp/templates/index.html:156
+#, fuzzy
+#| msgid "Expenditure"
+msgid "Expenditure:"
+msgstr "Expenditure"
+
+#: WebsiteApp/templates/index.html:159
+#, fuzzy
+#| msgid "Region"
+msgid "Region:"
+msgstr "Region"
+
+#: WebsiteApp/templates/index.html:162
+#, fuzzy
+#| msgid "Human Resources"
+msgid "Human Resources:"
+msgstr "Human Resources"
+
+#: WebsiteApp/templates/index.html:165
+#, fuzzy
+#| msgid "Subsample"
+msgid "Subsample:"
+msgstr "Subsample"
+
+#: WebsiteApp/templates/index.html:174 WebsiteApp/templates/index.html:190
 msgid "Alert!!"
 msgstr "Alert!!"
 
-#: WebsiteApp/templates/index.html:135 WebsiteApp/templates/index.html:153
+#: WebsiteApp/templates/index.html:179 WebsiteApp/templates/index.html:197
 msgid "Go back"
 msgstr "Go back"
 
-#: WebsiteApp/templates/index.html:150
+#: WebsiteApp/templates/index.html:194
 #, python-format
 msgid "%(error)s"
 msgstr ""
 
-#: WebsiteApp/templates/lpage.html:71
+#: WebsiteApp/templates/lpage.html:65
 msgid "Select Report Date"
 msgstr "Select Report Date"
 
-#: WebsiteApp/templates/lpage.html:84
+#: WebsiteApp/templates/lpage.html:94
 msgid "Select Weekly Theme"
 msgstr "Select Weekly Theme"
 
-#: WebsiteApp/templates/navbar.html:33
+#: WebsiteApp/templates/navbar.html:36
 msgid "Dashboard Home"
 msgstr "Dashboard Home"
 
-#: WebsiteApp/templates/navbar.html:36
+#: WebsiteApp/templates/navbar.html:46
 #, fuzzy
 msgid "Latest Report"
 msgstr "Latest Report"
 
-#: WebsiteApp/templates/navbar.html:39
+#: WebsiteApp/templates/navbar.html:57
 msgid "Print Report"
 msgstr "Print Report"
 
-#: WebsiteApp/views.py:87 WebsiteApp/views.py:254
+#: WebsiteApp/views.py:91 WebsiteApp/views.py:282
 msgid "NO REPORT PUBLISHED DURING THIS WEEK"
 msgstr "NO REPORT PUBLISHED DURING THIS WEEK"
 
-#: WebsiteApp/views.py:189 WebsiteApp/views.py:418
+#: WebsiteApp/views.py:217 WebsiteApp/views.py:449
 msgid "Year-"
 msgstr "Year-"
 
-#: WebsiteApp/views.py:189 WebsiteApp/views.py:418
+#: WebsiteApp/views.py:217 WebsiteApp/views.py:449
 msgid "Week-"
 msgstr "Week-"
+
+#: WebsiteApp/views.py:442
+msgid "Unavailable"
+msgstr "Unavailable"
+
+#: WebsiteApp/views.py:453
+msgid "Report not yet generated for this date."
+msgstr "Report not yet generated for this date."
 
 #: cicp_env/lib/python3.10/site-packages/click/_termui_impl.py:496
 #, python-brace-format
@@ -1827,6 +1859,30 @@ msgstr ""
 #: cicp_env/lib/python3.10/site-packages/djmoney/contrib/django_rest_framework/fields.py:34
 msgid "{currency!r} is not a valid currency"
 msgstr ""
+
+#~ msgid "Sub Sample 1"
+#~ msgstr "Sub Sample 1"
+
+#~ msgid "Sub Sample 2"
+#~ msgstr "Sub Sample 2"
+
+#~ msgid "Sub Sample 3"
+#~ msgstr "Sub Sample 3"
+
+#~ msgid "Sub Sample 4"
+#~ msgstr "Sub Sample 4"
+
+#~ msgid "Sub Sample 5"
+#~ msgstr "Sub Sample 5"
+
+#~ msgid "Sub Sample 6"
+#~ msgstr "Sub Sample 6"
+
+#~ msgid "Paid"
+#~ msgstr "Paid"
+
+#~ msgid "Size:"
+#~ msgstr "Size:"
 
 #~ msgid "Insufficient survey data, try relaxing search constraints"
 #~ msgstr "Insufficient survey data, try relaxing search constraints"

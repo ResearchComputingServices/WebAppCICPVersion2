@@ -439,7 +439,7 @@ def getWeeklySubTheme(surveyWeek,releaseDate,language):
         return subtheme
     except Exception as e:
         # Handle any exceptions here and return an error message
-        error_message = "Unavailable"
+        error_message = gettext("Unavailable")
         return error_message
 
 def getYearandWeek(releaseDate):
@@ -450,5 +450,5 @@ def getYearandWeek(releaseDate):
         return surveyWeek
     except Exception as e:
         # Handle any exceptions here and return an error message
-        error_message = "Report not yet generated for this date."
+        error_message = gettext("Report not yet generated for this date.")
         return error_message

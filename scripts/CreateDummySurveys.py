@@ -52,3 +52,4 @@ def run(*args):
     AddSurvey('SV_2fB85PBzkIEX8mW','2023-09-13','CHA','Tech and Data Security','Sécurité technologique et des données','Y1W37')
     AddSurvey('SV_8eM0qAI5kTQDpX0','2023-09-20','GOV','Long-term Sustainability','Durabilité à long terme','Y1W38')
     AddSurvey('SV_5vjKtSXRopYShUi','2023-09-27','OTH','Public Perception and Trust','Perception et confiance du public','Y1W39')
+    AddSurvey('SV_0DOdcXIfLGIRQXA','2023-10-04','FUN','Financial Stability and Reserves','Stabilité financière et réserves','Y1W40')
