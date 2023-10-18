@@ -77,33 +77,35 @@ DateInput = partial(forms.DateInput, {'class': 'dateinput','autocomplete':'off'}
 
 class ProvinceFilterForm(forms.Form):
     province= forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=PROVINCE_CHOICES,
-                                        label=_('Province'),required=False)
+                                        label=_('Province'),label_suffix = '',required=False)
 
 class LanguageFilterForm(forms.Form):
     language = forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=LANGUAGE_CHOICES,
-                                        label=_('Participant Language Preference'),required=False)
+                                        label=_('Participant Language Preference'),
+                                        label_suffix = '',
+                                        required=False)
 
 class OrgsizeFilterForm(forms.Form):
     size = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=ORGANIZATION_SIZES,
-                                    label=_('Size'),required=False)
+                                    label=_('Size'),label_suffix = '',required=False)
     
 class AgeFilterForm(forms.Form):
     age = forms.MultipleChoiceField(widget=forms.RadioSelect(),choices=AGE,
-                                        label=_('Age'),required=False)
+                                        label=_('Age'),label_suffix = '',required=False)
     
 class ExpenditureFilterForm(forms.Form):
     expenditure = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=EXPENDITURE,
-                                        label=_('Expenditure'),required=False)
+                                        label=_('Expenditure'),label_suffix = '',required=False)
 
 class SubsampleFilterForm(forms.Form):
     subsample = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=SUBSAMPLE,
-                                        label=_('Subsample'),required=False)
+                                        label=_('Subsample'),label_suffix = '',required=False)
     
 class HumanResourcesFilterForm(forms.Form):
-    humanresources = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),                choices=HUMANRESOURCES,label=_('Human Resources'),required=False)
+    humanresources = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),                choices=HUMANRESOURCES,label=_('Human Resources'),label_suffix = '',required=False)
 
 class RegionFilterForm(forms.Form):
-    region = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=REGION,label=_('Region'),required=False)
+    region = forms.MultipleChoiceField(widget=forms.CheckboxSelectMultiple(),choices=REGION,label=_('Region'),label_suffix = '',required=False)
 
 
 

@@ -7,7 +7,8 @@
     font-size: 15px;
     overflow-y: auto;
     font-family: Arial;
-    z-index: 100; /* behind header */
+    z-index: 100;
+    /* behind header */
 }
 
 #filterText {
@@ -25,4 +26,9 @@
 
 input {
     margin-top: 10px;
+    font-size: larger;
+}
+
+legend {
+    background: #e91c24;
 }

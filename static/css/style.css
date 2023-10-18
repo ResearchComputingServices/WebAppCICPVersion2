@@ -23,6 +23,10 @@
     box-shadow: 0 4px 8px 0 #E91E63;
 }
 
+legend {
+    background: #e91c24;
+}
+
 
 .overlay-content {
     position: relative;
@@ -122,6 +126,7 @@ div {
     right: 0;
     margin: auto;
 }
+
 
 @keyframes spin {
     100% {
