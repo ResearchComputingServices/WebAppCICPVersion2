@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-12 14:50-0400\n"
+"POT-Creation-Date: 2023-10-19 07:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -163,7 +163,6 @@ msgid "Foundations"
 msgstr "Fondations"
 
 #: WebsiteApp/forms.py:63
-#, fuzzy
 msgid "Volunteer-run charities"
 msgstr "Organisations caritatives gérées par des bénévoles"
 
@@ -199,27 +198,27 @@ msgstr "Province"
 msgid "Participant Language Preference"
 msgstr ""
 
-#: WebsiteApp/forms.py:88
+#: WebsiteApp/forms.py:90
 msgid "Size"
 msgstr "Taille"
 
-#: WebsiteApp/forms.py:92
+#: WebsiteApp/forms.py:94
 msgid "Age"
 msgstr "Âge"
 
-#: WebsiteApp/forms.py:96
+#: WebsiteApp/forms.py:98
 msgid "Expenditure"
 msgstr "Dépense"
 
-#: WebsiteApp/forms.py:100
+#: WebsiteApp/forms.py:102
 msgid "Subsample"
 msgstr "Sous-échantillon"
 
-#: WebsiteApp/forms.py:103
+#: WebsiteApp/forms.py:105
 msgid "Human Resources"
 msgstr "Ressources Humaines"
 
-#: WebsiteApp/forms.py:106
+#: WebsiteApp/forms.py:108
 msgid "Region"
 msgstr "Région"
 
@@ -322,6 +321,10 @@ msgstr "Retourner"
 #, python-format
 msgid "%(error)s"
 msgstr "%(error)s"
+
+#: WebsiteApp/templates/lpage.html:52
+msgid "FILTER REPORTS USING A DATE OR THEME"
+msgstr "FILTRER LES RAPPORTS EN UTILISANT UNE DATE OU UN THÈME"
 
 #: WebsiteApp/templates/lpage.html:65
 msgid "Select Report Date"

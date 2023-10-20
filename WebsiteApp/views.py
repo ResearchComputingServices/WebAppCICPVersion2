@@ -316,7 +316,14 @@ def landingPageView(request):
             for i, filepath in enumerate(query_response_imagefilepaths, 1):
                 key = f"Figure{i}"
                 content_dict[key] = settings.BASE_ROOT + filepath
-            content_dict['date'] = context["reportDate"]
+            content_dict['date'] = str(get_wed_date(context["reportDate"]))
+            if "Week" in context["YearandWeek"]:
+                weekNumber = context["YearandWeek"].split("Week-")
+            if "Semaine" in context["YearandWeek"]:
+                weekNumber = context["YearandWeek"].split("Semaine-")
+            if len(weekNumber):
+                content_dict['Week'] = weekNumber[1]
+            content_dict["SubTheme"] = context["subTheme"]
 
             datfilepath = settings.BASE_DIR / "WebsiteApp/templates/latexgraphics.dat"
 

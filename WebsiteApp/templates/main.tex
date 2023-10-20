@@ -1,4 +1,5 @@
 \documentclass[a4paper]{article}
+\usepackage[a4paper, total={7in, 10in}]{geometry}
 \usepackage{algpseudocode}
 \usepackage{amsmath}
 \usepackage{amsfonts}
@@ -8,46 +9,103 @@
 \usepackage{datatool, filecontents}
 \usepackage{enumitem} % Load the enumitem package
 \usepackage{xstring} % Load the xstring package for string manipulation
-
+\usepackage{eso-pic} 
+\usepackage{lipsum}
+\usepackage{multirow}
+\renewcommand{\familydefault}{\sfdefault}
 % Set the separator between the columns.
 \DTLsetseparator{,}
 
-% import data
-\DTLloaddb[noheader, keys={thekey,thevalue}]{mydata}{/webapp/WebAppCICPVersion2/WebsiteApp/templates/latexgraphics.dat}
-% Loads mydata.dat with column headers 'thekey' and 'thevalue'
+% Set the fancy header
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyhead[R]{\thepage}
 
 \begin{document}
+% import data
+% Loads mydata.dat with column headers 'thekey' and 'thevalue'
+\DTLloaddb[noheader, keys={thekey,thevalue}]{mydata}{/webapp/WebAppCICPVersion2/WebsiteApp/templates/latexgraphics.dat}
 
-\pagenumbering{gobble}
+\AddToShipoutPicture*
+    {\put(450,680){\includegraphics[scale=0.4]{/webapp/WebAppCICPVersion2/static/printreport_images/Logo.png}}}
+
+\vspace*{100px}
+\Large
+\begin{flushleft}
+    
+    \large
+   \textbf{CHARITY INSIGHTS CANADA PROJECT \textbf{\textbar}} \\
+\textbf{PROJET CANADA PERSPECTIVES DES ORGANISMES DE BIENFAISANCE}
+
+\Huge
+\vspace{50px}
+\textcolor{red}{\textbf{Report} \textbf{\textbar}  \textbf{Rapport}}
 
 \Large
-\begin{center}
-    CICP - PCPOB
-
-    \Large
-    Charity Insights Canada Project | Projet Canada Perspectives Des Organismes De Bienfaisance
-
-    \hspace{10pt}
-
-    \hspace{10pt}
-
-    \normalsize
-    \DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
-        \ifnum\pdfstrcmp{\mykey}{theme}=0
-            Theme/Thème - \myvalue
+\vspace{25px}
+\DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
+        \ifnum\pdfstrcmp{\mykey}{Week}=0
+        \def\myWeek{\myvalue}
+            \#\textbf{\myvalue:}
         \fi
-    }
-    \DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
+        \ifnum\pdfstrcmp{\mykey}{SubTheme}=0
+            \textbf{\myvalue}
+        \fi}
+
+\vspace{15px}
+\Large
+\DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
         \ifnum\pdfstrcmp{\mykey}{date}=0
-            Date/Date - \myvalue
+         \def\myDate{\myvalue}
+            \textcolor{gray}{Distributed Date/Date de distribution - \myvalue}
         \fi
-    }
+}
+
+
+
+\vspace{15px}
+\Large
+\DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
+     \ifnum\pdfstrcmp{\mykey}{theme}=0
+        \textcolor{gray}{Theme/Thème - \myvalue}
+    \fi
+}
+
+\begin{flushleft}
+\Large
+\underline{\textbf{Project Members | Membres de l'équipe}}
+\end{flushleft}
+\begin{flushleft}
+\begin{tabular}{ c c c } 
+\large
+\multirow{3}{10em}{\textbf{Paloma Raggo}\\{Principal Investigator}\\{Chercheuse principale}} & \large \multirow{3}{15em}{\textbf{Thi Kim Quy Nguyen}\\{Postdoctoral Fellow}\\{Chercheuse postdoctorale}} & \large \multirow{3}{15em}{\textbf{Nicholas Smit-Keding}\\{Research Assistant}\\{Assistant de recherche}} \\ 
+\end{tabular}
+\end{flushleft}
+\begin{flushleft}
+\vspace{20px}
+\begin{tabular}{ c c c } 
+\large\multirow{3}{10em}{\textbf{Susan D. Phillips}\\{Policy Lead}\\{Responsable politique publique}} & \large\multirow{3}{15em}{\textbf{Sai Gouthami Priyanka Raparthi}\\{Data and computing science researcher}\\{Chercheur en données et informatique}} & \large\multirow{3}{15em}{\textbf{Rohan Kumar Reddy Damagatla}\\{Research Assistant}\\{Assistante de recherche}} \\ 
+\end{tabular}
+\end{flushleft}
+
+\begin{flushleft}
+\vspace{50px}
+\begin{tabular}{ c } 
+\large\multirow{3}{10em}{\textbf{Callie Mathieson}\\{Project Manager}\\{Gestionnaire du projet}}
+\end{tabular}
+\end{flushleft}
    
-\end{center}
+\end{flushleft}
+\vspace*{\fill}
+\AddToShipoutPicture*
+    {\put(-10,150){\includegraphics[scale=1.0]{/webapp/WebAppCICPVersion2/static/printreport_images/Sponsors.PNG}}}
+\vspace{140px}
+\small
+Please cite as, citez comme: CICP-PCPOB. (2023). CICP-PCPOB Weekly Report- Rapport Hebdomadaire (No. 1.) Philanthropy and Nonprofit Leadership, Carleton University. https://carleton.ca/cicp-pcpob/homepage/research-data/
 
 \hspace{10pt}   
-
-% Define a custom list environment without bullets
 \newlist{myfigurelist}{enumerate}{1}
 \setlist[myfigurelist,1]{label=}
 
@@ -68,5 +126,5 @@
         }{}
     }
 \end{myfigurelist}
-
 \end{document}
+
