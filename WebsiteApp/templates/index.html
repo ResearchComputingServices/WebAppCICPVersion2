@@ -140,27 +140,61 @@
                         </h4>
                     {% endif %}
                 </div>
-                <div class="selected-filters">
-                        {% translate "Filters Selected:"%}
-                        {% if locations %}
-                        <strong>{% translate "Province:"%}</strong><i>{{locations}}</i>
-                        {% endif %}
-                        {%if orgSizes %}
-                        <strong>{% translate "Age:"%}</strong><i>{{age}}</i>
-                        {% endif %}
-                        {% if expenditure %}
-                        <strong>{% translate "Expenditure:"%}</strong><i>{{expenditure}}</i>
-                        {% endif %}
-                        {% if region %}
-                        <strong>{% translate "Region:"%}</strong><i>{{region}}</i>
-                        {% endif %}
-                        {% if humanresources %}
-                        <strong>{% translate "Human Resources:"%}</strong><i>{{humanresources}}</i>
-                        {% endif %}
-                        {% if subsample %}
-                        <strong>{% translate "Subsample:"%}</strong><i>{{subsample}}</i>
-                        {% endif %}
-                </div>
+
+                {%if filtered %}
+                    <div class="card">
+                        <div class="card-header">
+                            <strong>{% translate "Filters Selected:"%}</strong>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% if locations %}
+                                <li class="list-group-item"> <strong>{% translate "Province:"%}</strong>
+                                    {% for location in locations %}
+                                    <span class="badge rounded-pill bg-danger">{{location}}</span>
+                                    {% endfor %}
+                                </li>
+                                {% endif %}
+                                {%if orgSizes %}
+                                <li class="list-group-item"> <strong>{% translate "Age:"%}</strong>
+                                    {% for ages in age %}
+                                    <span class="badge rounded-pill bg-danger">{{ages}}</span>
+                                    {% endfor %}
+                                </li>
+                                {% endif %}
+                                {% if expenditure %}
+                                <li class="list-group-item"> <strong>{% translate "Expenditure:"%}</strong>
+                                    {% for expenditures in expenditure %}
+                                    <span class="badge rounded-pill bg-danger">{{expenditures}}</span>
+                                    {% endfor %}
+                                </li>
+                                {% endif %}
+                                {% if region %}
+                                <li class="list-group-item"> <strong>{% translate "Region:"%}</strong>
+                                    {% for regions in region %}
+                                    <span class="badge rounded-pill bg-danger">{{regions}}</span>
+                                    {% endfor %}
+                                </li>
+                                {% endif %}
+                                {% if humanresources %}
+                                <li class="list-group-item"> <strong>{% translate "Human Resources:"%}</strong>
+                                    {% for humanresource in humanresources %}
+                                    <span class="badge rounded-pill bg-danger">{{humanresource}}</span>
+                                    {% endfor %}
+                                </li>
+                                {% endif %}
+                                {% if subsample %}
+                                <li class="list-group-item"> <strong>{% translate "Subsample:"%}</strong>
+                                    {% for subsamples in subsample %}
+                                    <span class="badge rounded-pill bg-danger">{{subsamples}}</span>
+                                    {% endfor %}
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+
                 <!-- LOADER -->
                 <div class="col-12 d-flex justify-content-center text-center"><div id="loader"></div></div>
 
