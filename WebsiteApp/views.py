@@ -86,6 +86,31 @@ def latest_report(request):
 
         if len(query_response_imagefilepaths) != 0:
             context["image_filepaths"] = query_response_imagefilepaths
+
+            # Create a dat file to print the report
+            content_dict = {}
+            weekNumber = None
+            for i, filepath in enumerate(query_response_imagefilepaths, 1):
+                key = f"Figure{i}"
+                content_dict[key] = settings.BASE_ROOT + filepath
+            content_dict['date'] = latestDate
+            if "Week" in context["YearandWeek"]:
+                weekNumber = context["YearandWeek"].split("Week-")
+            if "Semaine" in context["YearandWeek"]:
+                weekNumber = context["YearandWeek"].split("Semaine-")
+            if weekNumber:
+                content_dict['Week'] = weekNumber[1]
+            content_dict["SubTheme"] = context["subTheme"]
+
+            datfilepath = settings.BASE_DIR / "WebsiteApp/templates/latexgraphics.dat"
+
+            try:
+                print(content_dict)
+                with open(datfilepath, "w") as f:
+                    for key in content_dict.keys():
+                        f.write(f"{key},{content_dict[key]}\n")
+            except FileNotFoundError:
+                print("Dat file not found")
         else:
             context["info"] = gettext(
                 "NO REPORT PUBLISHED DURING THIS WEEK")
@@ -260,8 +285,6 @@ def landingPageView(request):
                 key = f"Figure{i}"
                 content_dict[key] = settings.BASE_ROOT + filepath
             content_dict['theme'] = context["questionTheme"]
-
-        
 
             datfilepath = settings.BASE_DIR / "WebsiteApp/templates/latexgraphics.dat"
             try:
