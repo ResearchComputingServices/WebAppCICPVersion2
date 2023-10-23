@@ -313,6 +313,7 @@ def landingPageView(request):
 
             # Create a dat file to print the report
             content_dict = {}
+            weekNumber = None
             for i, filepath in enumerate(query_response_imagefilepaths, 1):
                 key = f"Figure{i}"
                 content_dict[key] = settings.BASE_ROOT + filepath
@@ -321,7 +322,7 @@ def landingPageView(request):
                 weekNumber = context["YearandWeek"].split("Week-")
             if "Semaine" in context["YearandWeek"]:
                 weekNumber = context["YearandWeek"].split("Semaine-")
-            if len(weekNumber):
+            if weekNumber:
                 content_dict['Week'] = weekNumber[1]
             content_dict["SubTheme"] = context["subTheme"]
 
