@@ -16,12 +16,12 @@
 
 document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
-        document.querySelector("body").style.visibility = "hidden";
-        document.querySelector("#loader").style.visibility = "visible";
+        document.querySelector("#lmain").style.display = "none";
+        document.querySelector("#loader").style.display = "block";
     } else {
         // typewriter();
         document.querySelector("#loader").style.display = "none";
-        document.querySelector("body").style.visibility = "visible";
+        document.querySelector("#lmain").style.display = "block";
     }
 };
 
