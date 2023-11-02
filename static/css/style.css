@@ -181,3 +181,14 @@ div {
 .mb-10 {
     margin-bottom: 15%;
 }
+
+.nav-tabs .nav-link.active {
+    background-color: #E91C24;
+    color: #FFFFFF;
+}
+
+.nav-tabs .nav-link {
+    background-color: #FFFFFF;
+    color: #E91C24;
+    border-color: rgb(200, 200, 200);
+}
