@@ -22,7 +22,7 @@
         <!-- <div class="row">
             <div class="col-sm-12 text-white">{% include "navbar.html" %}</div>
         </div> -->
-        <header>
+        <header id="iheader">
             {% include "navbar.html" %}
         </header>
         
@@ -32,7 +32,7 @@
             <nav id="sidebar1" class="col-md-3 d-none d-sm-none d-md-block sidebar collapse">
                 <div class="filterbox">
                     <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
-                    <form method="get">
+                    <form onsubmit="showLoader()" method="get">
                         {% csrf_token %}                   
                             <div class="form-container">
                                 {{province_form_filter.as_div}}
@@ -70,7 +70,7 @@
                     <div id="sidebar2" class="sidebar">
                         <div class="filterbox">
                             <p id="filtertext">{% translate "FILTER THIS REPORT BY" %}</p>
-                            <form method="get">
+                            <form onsubmit="showLoader()" method="get">
                                 {% csrf_token %}                   
                                     <div class="form-container">
                                         {{province_form_filter.as_div}}
@@ -142,7 +142,7 @@
                 </div>
 
                 {%if filtered %}
-                    <div class="card">
+                    <div class="card mb-2">
                         <div class="card-header">
                             <strong>{% translate "Filters Selected:"%}</strong>
                         </div>
@@ -196,9 +196,9 @@
                 {% endif %}
 
                 <!-- LOADER -->
-                <div class="col-12 d-flex justify-content-center text-center"><div id="loader"></div></div>
+                <div class="col-12 d-flex justify-content-center text-center"><div id="loader" style="display: none;"></div></div>
 
-                <div class="" id="main">
+                <div class="" id="main" style="display: block;">
                     {% if info %}
                         <div class="container">
                             <div id="infocard" class="h-100 d-flex align-items-center justify-content-center">
@@ -238,15 +238,34 @@
                             <div class="row">
                                 <ul class="nav nav-tabs" id="themeTab" role="tablist">
                                     {% for subfolder in image_filepaths %}
-                                    <li class="nav-item" role="presentation">
-                                      <button class="nav-link" id="{{ subfolder.fullname }}-tab" data-bs-toggle="tab" data-bs-target="#{{ subfolder.fullname }}" type="button" role="tab" aria-controls="{{ subfolder.fullname }}" aria-selected="false">{{ subfolder.fullname }}</button>
-                                    </li>
+                                    {% if forloop.first %}
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link active" id="{{ subfolder.fullname }}-tab" data-bs-toggle="tab" data-bs-target="#{{ subfolder.fullname }}" type="button" role="tab" aria-controls="{{ subfolder.fullname }}" aria-selected="false">{{ subfolder.fullname }}</button>
+                                        </li>
+                                    {% else %}
+                                        <li class="nav-item" role="presentation">
+                                            <button class="nav-link" id="{{ subfolder.fullname }}-tab" data-bs-toggle="tab" data-bs-target="#{{ subfolder.fullname }}" type="button" role="tab" aria-controls="{{ subfolder.fullname }}" aria-selected="false">{{ subfolder.fullname }}</button>
+                                        </li>
+                                    {% endif %}
+
                                     {% endfor %}
                                 </ul>
                                 <div class="tab-content" id="themeTabContent">
                                     <div class="col-sm-12 col-md-12"></div>
                                     {% for subfolder in image_filepaths %}
-                                    
+                                    {% if forloop.first %}
+                                        <div class="tab-pane fade show active" id="{{ subfolder.fullname }}" role="tabpanel" aria-labelledby="{{ subfolder.fullname }}-tab">
+                                            <div class="d-flex justify-content-center"><h5 id="weekheading">{{ subfolder.fullname }}</h5></div>
+                                            <div class="d-flex justify-content-center"><h5 id="weekheading">Subtheme:{{ subfolder.subtheme }}</h5></div>
+                                            {% for image_url in subfolder.images %}
+                                            <div class="col-md-12">
+                                                <div class="card border-dark mb-4 p-2">
+                                                    <img src="{{ image_url }}" alt="Image">
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    {% else %}
                                         <div class="tab-pane fade" id="{{ subfolder.fullname }}" role="tabpanel" aria-labelledby="{{ subfolder.fullname }}-tab">
                                             <div class="d-flex justify-content-center"><h5 id="weekheading">{{ subfolder.fullname }}</h5></div>
                                             <div class="d-flex justify-content-center"><h5 id="weekheading">Subtheme:{{ subfolder.subtheme }}</h5></div>
@@ -258,7 +277,7 @@
                                             </div>
                                             {% endfor %}
                                         </div>
-                                    
+                                    {% endif %}
                                     {% endfor %}
                                     </div>
                                 </div>
@@ -299,6 +318,13 @@
             <script src="{% static 'js/index.js' %}"></script>
             <script src="{% static 'js/navbar.js' %}"></script>
             <script src="{% static 'js/sidebar.js' %}"></script>
+            <script>
+                function showLoader() {
+                    document.getElementById("loader").style.display = "block";
+                    document.getElementById("main").style.display = "none";
+                    document.getElementById("iheader").scrollIntoView({ behavior: "smooth", block: "end", inline: "nearest" });
+                }
+            </script>
         {% endblock scripts %}
     </body>
 </html>

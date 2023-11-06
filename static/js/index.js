@@ -1,15 +1,15 @@
 document.onreadystatechange = function () {
     if (document.readyState !== "complete") {
         document.querySelector("body").style.visibility = "hidden";
-        document.querySelector("#loader").style.visibility = "visible";
+        document.getElementById("loader").style.display = "block";
     } else {
-        document.querySelector("#loader").style.display = "none";
+        document.getElementById("loader").style.display = "none";
         document.querySelector("body").style.visibility = "visible";
     }
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    new Splide('#image-slider').mount();
+    // new Splide('#image-slider').mount();
 });
 
 function openNav() {
@@ -18,9 +18,7 @@ function openNav() {
 
 function closeNav() {
     document.getElementById("sidebar").style.width = "0";
-
 }
-
 
 function checkFilters(event) {
     const form = document.querySelector('form'); // Get the form element
