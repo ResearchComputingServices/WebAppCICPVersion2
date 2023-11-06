@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-10-19 07:27-0400\n"
+"POT-Creation-Date: 2023-11-06 13:45-0500\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,31 +60,31 @@ msgstr "Québec"
 msgid "Saskatchewan"
 msgstr "Saskatchewan"
 
-#: WebsiteApp/forms.py:20 WebsiteApp/views.py:239
+#: WebsiteApp/forms.py:20 WebsiteApp/views.py:264
 msgid "Collaboration"
 msgstr "Collaboration"
 
-#: WebsiteApp/forms.py:21 WebsiteApp/views.py:233
+#: WebsiteApp/forms.py:21 WebsiteApp/views.py:258
 msgid "Governance"
 msgstr "Gouvernance"
 
-#: WebsiteApp/forms.py:22 WebsiteApp/views.py:242
+#: WebsiteApp/forms.py:22 WebsiteApp/views.py:267
 msgid "Challenges"
 msgstr "Défis"
 
-#: WebsiteApp/forms.py:23 WebsiteApp/views.py:230
+#: WebsiteApp/forms.py:23 WebsiteApp/views.py:255
 msgid "Funding"
 msgstr "Financement"
 
-#: WebsiteApp/forms.py:24 WebsiteApp/views.py:236
+#: WebsiteApp/forms.py:24 WebsiteApp/views.py:261
 msgid "Policy"
 msgstr "Politique"
 
-#: WebsiteApp/forms.py:25 WebsiteApp/views.py:245
+#: WebsiteApp/forms.py:25 WebsiteApp/views.py:270
 msgid "EDI"
 msgstr "EDI"
 
-#: WebsiteApp/forms.py:26 WebsiteApp/views.py:248
+#: WebsiteApp/forms.py:26 WebsiteApp/views.py:273
 msgid "Other"
 msgstr "Autre"
 
@@ -117,10 +117,8 @@ msgid "Registered after 1990"
 msgstr "Immatriculé après 1990"
 
 #: WebsiteApp/forms.py:45
-#, fuzzy
-#| msgid "Extra Small (Less than $100,000)"
 msgid "Extra Small (Less than $150,000)"
-msgstr "Très petit (Moins de 100 000 $)"
+msgstr "Très petit (moins de 150 000 $)"
 
 #: WebsiteApp/forms.py:46
 msgid "Small (Less than $400,000)"
@@ -143,7 +141,7 @@ msgid "West Coast"
 msgstr "Côte ouest"
 
 #: WebsiteApp/forms.py:55
-msgid "Prarie Provinces"
+msgid "Prairie Provinces"
 msgstr "Provinces des Prairies"
 
 #: WebsiteApp/forms.py:56
@@ -222,115 +220,115 @@ msgstr "Ressources Humaines"
 msgid "Region"
 msgstr "Région"
 
-#: WebsiteApp/templates/index.html:36 WebsiteApp/templates/index.html:75
+#: WebsiteApp/templates/index.html:34 WebsiteApp/templates/index.html:73
 msgid "FILTER THIS REPORT BY"
 msgstr "FILTRER CE RAPPORT PAR"
 
-#: WebsiteApp/templates/index.html:51 WebsiteApp/templates/index.html:90
-#: WebsiteApp/templates/lpage.html:77 WebsiteApp/templates/lpage.html:107
+#: WebsiteApp/templates/index.html:49 WebsiteApp/templates/index.html:88
+#: WebsiteApp/templates/lpage.html:80 WebsiteApp/templates/lpage.html:110
 msgid "Search"
 msgstr "Recherche"
 
-#: WebsiteApp/templates/index.html:52 WebsiteApp/templates/index.html:91
-#: WebsiteApp/templates/lpage.html:78 WebsiteApp/templates/lpage.html:108
+#: WebsiteApp/templates/index.html:50 WebsiteApp/templates/index.html:89
+#: WebsiteApp/templates/lpage.html:81 WebsiteApp/templates/lpage.html:111
 #: WebsiteApp/templates/sidebar.html:33
 msgid "Reset"
 msgstr "Réinitialiser"
 
-#: WebsiteApp/templates/index.html:65
+#: WebsiteApp/templates/index.html:63
 msgid "☰ Filters"
 msgstr "☰ FILTRES"
 
-#: WebsiteApp/templates/index.html:123
+#: WebsiteApp/templates/index.html:121
 msgid "Weekly Survey Distributed -"
 msgstr "Enquête hebdomadaire distribuée -"
 
-#: WebsiteApp/templates/index.html:123
+#: WebsiteApp/templates/index.html:121
 #, python-format
 msgid "%(wednesday_date)s"
 msgstr "%(wednesday_date)s"
 
-#: WebsiteApp/templates/index.html:128
+#: WebsiteApp/templates/index.html:126
 msgid "Weekly Survey Published -"
 msgstr "Enquête hebdomadaire publiée -"
 
-#: WebsiteApp/templates/index.html:128
+#: WebsiteApp/templates/index.html:126
 #, python-format
 msgid "%(friday_text_date)s"
 msgstr "%(friday_text_date)s"
 
-#: WebsiteApp/templates/index.html:138
+#: WebsiteApp/templates/index.html:136
 msgid "Subtheme -"
 msgstr "Sous-thème -"
 
-#: WebsiteApp/templates/index.html:138
+#: WebsiteApp/templates/index.html:136
 #, python-format
 msgid "%(subTheme)s"
 msgstr "%(subTheme)s"
 
-#: WebsiteApp/templates/index.html:143
+#: WebsiteApp/templates/index.html:141
 msgid "Theme -"
 msgstr "Thème -"
 
-#: WebsiteApp/templates/index.html:148
+#: WebsiteApp/templates/index.html:149
 msgid "Filters Selected:"
 msgstr "Filtres sélectionnés :"
 
-#: WebsiteApp/templates/index.html:150
+#: WebsiteApp/templates/index.html:154
 #, fuzzy
 msgid "Province:"
 msgstr "Province"
 
-#: WebsiteApp/templates/index.html:153
+#: WebsiteApp/templates/index.html:161
 msgid "Age:"
 msgstr "Âge:"
 
-#: WebsiteApp/templates/index.html:156
+#: WebsiteApp/templates/index.html:168
 #, fuzzy
 #| msgid "Expenditure"
 msgid "Expenditure:"
 msgstr "Dépense"
 
-#: WebsiteApp/templates/index.html:159
+#: WebsiteApp/templates/index.html:175
 #, fuzzy
 #| msgid "Region"
 msgid "Region:"
 msgstr "Région"
 
-#: WebsiteApp/templates/index.html:162
+#: WebsiteApp/templates/index.html:182
 #, fuzzy
 #| msgid "Human Resources"
 msgid "Human Resources:"
 msgstr "Ressources Humaines"
 
-#: WebsiteApp/templates/index.html:165
+#: WebsiteApp/templates/index.html:189
 #, fuzzy
 #| msgid "Subsample"
 msgid "Subsample:"
 msgstr "Sous-échantillon"
 
-#: WebsiteApp/templates/index.html:174 WebsiteApp/templates/index.html:190
+#: WebsiteApp/templates/index.html:208 WebsiteApp/templates/index.html:224
 msgid "Alert!!"
 msgstr "Alerte!!"
 
-#: WebsiteApp/templates/index.html:179 WebsiteApp/templates/index.html:197
+#: WebsiteApp/templates/index.html:213 WebsiteApp/templates/index.html:231
 msgid "Go back"
 msgstr "Retourner"
 
-#: WebsiteApp/templates/index.html:194
+#: WebsiteApp/templates/index.html:228
 #, python-format
 msgid "%(error)s"
 msgstr "%(error)s"
 
-#: WebsiteApp/templates/lpage.html:52
+#: WebsiteApp/templates/lpage.html:50
 msgid "FILTER REPORTS USING A DATE OR THEME"
 msgstr "FILTRER LES RAPPORTS EN UTILISANT UNE DATE OU UN THÈME"
 
-#: WebsiteApp/templates/lpage.html:65
+#: WebsiteApp/templates/lpage.html:68
 msgid "Select Report Date"
 msgstr "Sélectionnez la date du rapport"
 
-#: WebsiteApp/templates/lpage.html:94
+#: WebsiteApp/templates/lpage.html:97
 msgid "Select Weekly Theme"
 msgstr "Sélectionnez le thème hebdomadaire"
 
@@ -346,23 +344,23 @@ msgstr "Dernier rapport"
 msgid "Print Report"
 msgstr "Imprimer le rapport"
 
-#: WebsiteApp/views.py:91 WebsiteApp/views.py:282
+#: WebsiteApp/views.py:116 WebsiteApp/views.py:305
 msgid "NO REPORT PUBLISHED DURING THIS WEEK"
 msgstr "AUCUN RAPPORT PUBLIÉ AU COURS DE CETTE SEMAINE"
 
-#: WebsiteApp/views.py:217 WebsiteApp/views.py:449
+#: WebsiteApp/views.py:242 WebsiteApp/views.py:480
 msgid "Year-"
 msgstr "Année-"
 
-#: WebsiteApp/views.py:217 WebsiteApp/views.py:449
+#: WebsiteApp/views.py:242 WebsiteApp/views.py:480
 msgid "Week-"
 msgstr "Semaine-"
 
-#: WebsiteApp/views.py:442
+#: WebsiteApp/views.py:473
 msgid "Unavailable"
 msgstr "Unavailable"
 
-#: WebsiteApp/views.py:453
+#: WebsiteApp/views.py:484
 msgid "Report not yet generated for this date."
 msgstr "Rapport non encore généré pour cette date."
 

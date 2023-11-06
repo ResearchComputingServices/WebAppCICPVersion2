@@ -52,7 +52,7 @@ EXPENDITURE = [
 
 REGION = [
     ('West Coast',_('West Coast')),
-    ('Prairie Provinces',_('Prarie Provinces')),
+    ('Prairie Provinces',_('Prairie Provinces')),
     ('Central Canada',_('Central Canada')),
     ('Atlantic Region',_('Atlantic Region')),
     ('North',_('North Canada')),

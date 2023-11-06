@@ -396,7 +396,6 @@ def GetResponseDict(aQuery, VERBOSE = False):
     if userResponseQuerySet != None:
    
         questionList = GetListOfUniqueQuestions(userResponseQuerySet)
-        print("questionList",questionList)
         
         for question in questionList:   
             userResponseList = GetUserResponsesToQuestion(question, userResponseQuerySet)

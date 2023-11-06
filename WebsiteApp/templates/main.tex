@@ -43,11 +43,12 @@
 \vspace{50px}
 \textcolor{red}{\textbf{Report} \textbf{\textbar}  \textbf{Rapport}}
 
+\newcommand{\myWeek}{}
 \Large
 \vspace{25px}
 \DTLforeach{mydata}{\mykey=thekey, \myvalue=thevalue}{
         \ifnum\pdfstrcmp{\mykey}{Week}=0
-        \def\myWeek{\myvalue}
+        \xdef\myWeek{\myvalue}
             \#\textbf{\myvalue:}
         \fi
         \ifnum\pdfstrcmp{\mykey}{SubTheme}=0
@@ -86,14 +87,14 @@
 \begin{flushleft}
 \vspace{20px}
 \begin{tabular}{ c c c } 
-\large\multirow{3}{10em}{\textbf{Susan D. Phillips}\\{Policy Lead}\\{Responsable politique publique}} & \large\multirow{3}{15em}{\textbf{Sai Gouthami Priyanka Raparthi}\\{Data and computing science researcher}\\{Chercheur en données et informatique}} & \large\multirow{3}{15em}{\textbf{Rohan Kumar Reddy Damagatla}\\{Research Assistant}\\{Assistante de recherche}} \\ 
+\large\multirow{3}{10em}{\textbf{Susan D. Phillips}\\{Policy Lead}\\{Responsable politique publique}} & \large\multirow{3}{15em}{\textbf{Sai Gouthami Priyanka Raparthi}\\{Data and computing science researcher}\\{Chercheuse en données et informatique}} & \large\multirow{3}{15em}{\textbf{Rohan Kumar Reddy Damagatla}\\{Research Assistant}\\{Assistant de recherche}} \\ 
 \end{tabular}
 \end{flushleft}
 
 \begin{flushleft}
 \vspace{50px}
 \begin{tabular}{ c } 
-\large\multirow{3}{10em}{\textbf{Callie Mathieson}\\{Project Manager}\\{Gestionnaire du projet}}
+\large\multirow{3}{10em}{\textbf{Callie Mathieson}\\{Project Manager}\\{Gestionnaire de projet}}
 \end{tabular}
 \end{flushleft}
    
@@ -103,8 +104,7 @@
     {\put(-10,150){\includegraphics[scale=1.0]{/webapp/WebAppCICPVersion2/static/printreport_images/Sponsors.PNG}}}
 \vspace{140px}
 \small
-Please cite as, citez comme: CICP-PCPOB. (2023). CICP-PCPOB Weekly Report- Rapport Hebdomadaire (No. 1.) Philanthropy and Nonprofit Leadership, Carleton University. https://carleton.ca/cicp-pcpob/homepage/research-data/
-
+Please cite as, citez comme: CICP-PCPOB. (2023). CICP-PCPOB Weekly Report- Rapport Hebdomadaire (Year-1) Philanthropy and Nonprofit Leadership, Carleton University. https://carleton.ca/cicp-pcpob/homepage/research-data/
 \hspace{10pt}   
 \newlist{myfigurelist}{enumerate}{1}
 \setlist[myfigurelist,1]{label=}

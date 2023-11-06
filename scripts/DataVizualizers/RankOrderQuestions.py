@@ -1,5 +1,6 @@
 import pandas as pd
 import plotly.express as px
+from icecream import ic
 
 from scripts.Utils import *
 from scripts.DataVizualizers.VizUtils import *
@@ -336,7 +337,9 @@ def CreateStackedBarChart(  responseDict,
                 columns.append(response)
     
     #Sort to have the labels in order
-    columns.sort()
+    # ic(columns)
+    # if columns != None:
+    #     ic(columns.sort())
     # create data frame with correct rows
     df = pd.DataFrame(columns=columns)    
     
@@ -372,7 +375,7 @@ def CreateStackedBarChart(  responseDict,
 
     cmap = LinearSegmentedColormap.from_list('my_colours', colourMap)
     length = len(df)
-    split = math.ceil(length/4)
+    split = math.ceil(length/2)
     dfs_list = np.array_split(df, split)
     dfs_list.reverse()
     questionLabel = questionLabel.split('_')[1]
@@ -388,32 +391,49 @@ def CreateStackedBarChart(  responseDict,
         # Re-index the rows to make the options appear correct
         df = df.reindex(index=df.index[::-1])
         # plot data in stack manner of bar type
-        df.plot(x='subQ', 
-                kind='barh', 
-                stacked=True,
-                ax=ax1,
-                colormap=cmap)
-                #bbox_to_anchor=(1.05,1))
+        # df.plot(x='subQ', 
+        #         kind='barh', 
+        #         stacked=True,
+        #         ax=ax1,
+        #         colormap=cmap)
+        #         #bbox_to_anchor=(1.05,1))
+        bars = df.plot(x='subQ',
+            kind='bar',
+            ax=ax1,
+            colormap=cmap,
+            width=0.7,
+            rot=360,
+            linewidth=3,)
+        for bar in bars.patches:
+            height = bar.get_height()
+            ax1.annotate(f'{height:.2f}%',  # Display the percentage with 2 decimal places
+                     (bar.get_x() + bar.get_width() / 2, height),
+                     ha='center',
+                     va='bottom',
+                     fontsize=10,
+                     )
 
         #Modified to adjust the plots - Rohan
         plt.subplots_adjust(right=0.75)
 
+        #Added by Sai
+        plt.rcParams['font.size'] = 15
 
         ax1.set_title(graphicTitle+'\n',wrap=True,fontdict={'fontsize': 20, 'fontweight': 'medium',
         'horizontalalignment': 'center'},pad = 170.0,y=0.8,x=0.5)
-        ax1.set_ylabel('')
-        ax1.set_xticks([0,25,50,75,100])
-        plt.yticks(fontsize=15)
-        plt.xticks(fontsize=15)
+        # ax1.set_ylabel('')
+        # ax1.set_xticks([0,25,50,75,100])
+        # plt.yticks(fontsize=15)
+        # plt.xticks(fontsize=15)
 
         #Modified for the labels to display outside - Rohan
         # ax1.legend(bbox_to_anchor=(1.03,1),fontsize=16)
         ax1.legend(bbox_to_anchor=(1,1),fontsize=13)
 
         if isEnglish:
-            ax1.set_xlabel('% of Responses',fontsize=15)
+            ax1.set_ylabel('% of Responses',fontsize=15)
         else:
-            ax1.set_xlabel('% de réponses',fontsize=15)
+            ax1.set_ylabel('% de réponses',fontsize=15)
 
         # Get the watermark image and add it to the figure
         waterMarkImg = image.imread(WATERMARK_IMAGE_FILE_PATH)
@@ -430,8 +450,6 @@ def CreateStackedBarChart(  responseDict,
         ax3.annotate(annotateText, xy=(1.,0.),xycoords='axes fraction',horizontalalignment='right',fontsize=15)
         ax3.axis('off')
 
-        # plt.show() 
-
         # save the wordcloud to a file
         #Added by Priyanka     
         filename = questionLabel+'_'+str(uuid.uuid4())+GRAPHIC_FILE_SUFFIX
@@ -441,6 +459,6 @@ def CreateStackedBarChart(  responseDict,
         figureFilePath = os.path.join(saveToDirPath, filename)
         plt.savefig(figureFilePath, format=GRAPHIC_FILE_TYPE)
         plt.close(fig)
-        multipleLabelsFigureList.append(figureFilePath)   
+        multipleLabelsFigureList.append(figureFilePath) 
     
     return multipleLabelsFigureList
